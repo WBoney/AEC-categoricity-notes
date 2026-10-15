@@ -47,7 +47,7 @@ The structural trajectory is
 \text{Unbounded categoricity}\ \Downarrow\
 \text{Controlled Ehrenfeucht--Mostowski presentations}\ \Downarrow\
 \text{Reversal of strong maps on bounded tuples}\ \Downarrow\
-\text{Stable canonical comparison diagrams}\ \Downarrow\
+\text{Stabilized canonical comparison diagrams}\ \Downarrow\
 \text{Amalgamation and bounded-tuple calculus at selected levels}\ \Downarrow\
 \text{Independence, isolation, and finite systems}\ \Downarrow\
 \text{Geometry and classification by bases}\ \Downarrow\
@@ -328,7 +328,96 @@ The canonical diagram is \emph{not} simply a presentation record from the order 
 \section{Further consequences in Section 4}
 \textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
 
-\textbf{Definition 4.4.} Natural diagrams arise by interpreting term lists in sufficiently large order extensions. Placed comparisons over a base $A=\EM(I,\Phi)$ retain the base's support positions. Order amalgamation shows independence from the chosen sufficiently large extension.
+\subsection{Natural and placed diagrams (source Definition 4.4)}
+\begin{definition}[Natural diagram; {\cite[Definition 4.4]{oai-ecc}}]
+Let $I$ be a linear order and let
+$r=((f_j,\bi_j):j\in J)$ be a set-sized labeled term representation,
+where each $f_j$ is a term in the expanded EM language and
+$\bi_j$ is an increasing finite tuple from $I$ of the appropriate
+arity. Write $\ba_r^I=(f_j(\bi_j):j\in J)$ for the corresponding tuple
+in $\EM(I,\Phi)$ (with skeleton elements suppressed from notation).
+Choose an order extension $I\subseteq I'$ of sufficiently large
+categoricity size for the canonical diagram of a tuple of length
+$|J|$ to be defined. Set
+\[
+D_{\mathrm{nat}}(r):=D(\ba_r^{I'};\EM(I',\Phi)).
+\]
+The source asserts that this is independent of the sufficiently
+large order extension.
+\end{definition}
+
+\begin{proposition}[Order-pattern sufficiency for natural diagrams]
+The natural diagram of $r$ depends only on the term labels $f_j$
+and the joint order/equality pattern of all support coordinates
+$\bi_j$. In particular, ambient \emph{slot occupancies} are not
+part of these defining data.
+\end{proposition}
+\begin{proof}
+If two labeled supports have the same joint order/equality pattern,
+their support orders are isomorphic respecting all term coordinates.
+Amalgamate the two ambient linear orders over this isomorphism.
+The resulting order embeddings induce strong EM embeddings and
+identify the evaluated tuples. Extend the amalgam to a sufficiently
+large categoricity order and apply preservation of canonical
+diagrams under strong embeddings.
+\end{proof}
+
+\begin{remark}[Presentation witnesses versus diagrams]
+The preceding construction gives a concrete common strong EM
+extension identifying two tuples when their \emph{chosen labeled
+term presentations} have the same support order pattern.
+Equality of their natural diagrams alone does \emph{not} imply
+that those chosen presentations have isomorphic supports: distinct
+presentation patterns may determine the same canonical diagram.
+At sufficiently large categoricity sizes, equality of canonical
+diagrams is instead implemented by the strong maps of source
+Proposition~4.2. This is why the natural diagram is a
+presentation-independent comparison invariant even though it is
+computed from a chosen EM term representation.
+
+The distinction from Section~3 is also important: classification
+under automorphisms of one fixed $H(\delta)$ requires occupied-slot
+data, whereas here arbitrary order extensions and strong EM
+embeddings suffice, so only the labeled support order pattern is
+needed as a \emph{sufficient input} to compute the natural diagram.
+\end{remark}
+
+\begin{definition}[Placement and placed diagram over a base;
+{\cite[Definition 4.4]{oai-ecc}}]
+Fix $A=\EM(I,\Phi)$, an enumeration $\ba_A$ of its elements,
+and term representations of that enumeration using positions
+in $I$. A \emph{placement} of an additional tuple $\bd$ over $A$
+is a labeled term representation of $\bd$ in an order extension
+$I\subseteq J$, retaining the fixed positions and term
+representations of all parameters in $\ba_A$. The
+\emph{placed comparison diagram} of this placement is
+\[
+D_{\mathrm{pl}}(\bd;\,A,\text{placement})
+:=D_{\mathrm{nat}}(\bd,\ba_A),
+\]
+where the right side uses the combined labeled term representation.
+It is computed in a sufficiently large EM extension, which need
+not have the cardinality of $A$.
+\end{definition}
+
+\begin{remark}[Relative order records and cuts]
+A placement's order-theoretic data may be described by the
+quantifier-free order type of the new support coordinates over
+the fixed skeleton $I$, together with the term labels and the
+information specifying which positions occur in each term.
+Equivalently, record the cuts in $I$ of the new coordinates and
+their mutual order/equality relations (especially for coordinates
+in the same cut). These are cuts of the \emph{skeleton order},
+not necessarily cuts of the underlying structure $A$.
+
+Thus a placement resembles a presentation record with parameters,
+but its \emph{placed diagram} is a \emph{natural diagram with
+parameters}, not a Section~3 strong-orbit presentation record.
+Matching relative labeled order records implies matching placed
+diagrams; the converse is not asserted. Nor do we identify
+placed diagrams with Galois types over arbitrary bases before
+the relevant amalgamation results have been proved.
+\end{remark>
 
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
