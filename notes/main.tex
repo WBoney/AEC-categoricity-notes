@@ -339,6 +339,8 @@ cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
 $\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
 \emph{stabilization of the comparison classes}, not model-theoretic
 stability. 
+\end{proposition}
+
 \begin{proof}[Proof sketch]
 Suppose that noninjective projections occur
 arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
@@ -351,8 +353,6 @@ $B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
 
 
 \end{proof}
-\end{proposition}
-
 \begin{definition}[Canonical comparison diagram; extracted from
 {\cite[Proposition 4.2]{oai-ecc}}]
 Fix an infinite cardinal $\sigma$ and a categoricity cardinal
@@ -476,6 +476,57 @@ diagrams; the converse is not asserted. Nor do we identify
 placed diagrams with Galois types over arbitrary bases before
 the relevant amalgamation results have been proved.
 \end{remark}
+
+\subsection{Back-and-forth and block transpositions}
+\begin{remark}[Source Proposition 4.3: back-and-forth]
+At a closure point $\zeta$ of countable cofinality, write both
+$\zeta$-models as countable increasing unions of bounded sets.
+Alternately extend tuples with matching diagrams, using source
+Proposition~4.2 to obtain strong maps between bounded strong
+submodels. The union of the resulting partial correspondences
+is an isomorphism because atomic information is preserved.
+The argument does not require compatible EM resolutions of
+the two models. At uncountable cofinality there are intermediate
+limit stages, where preservation of a possibly infinite matched
+tuple's diagram needs additional justification.
+\end{remark}
+
+\begin{lemma}[Disjoint block transpositions;
+{\cite[Lemma 4.6]{oai-ecc}}]
+Take two set-sized families of labeled EM terms $r$ and $s$.
+Suppose their joint support has pairwise disjoint convex
+regions, each consisting of two adjacent blocks, one used
+only by $r$ and the other used only by $s$. In each region,
+interchange the two blocks, preserving each block's internal
+order, all term labels and coordinate assignments, and the
+positions outside the regions. The joint natural diagram
+of $(r,s)$ does not change.
+\end{lemma}
+\begin{proof}[Proof sketch]
+Suppose the original and transposed diagrams differ.
+Choose $\sigma$ bounding the two term families and supports,
+and $\chi$ sufficiently large with $\chi^\sigma=\chi$ for
+the orbit bound in source Lemma~4.5. Repeat the exclusive
+blocks along an auxiliary order $L$, with orientations
+chosen so that the diagram of a first-family tuple $d_i$
+with a second-family tuple $e_j$ is the original diagram
+when $i<j$, and the transposed diagram when $i>j$.
+
+Choose $L$ with at most $\chi$ divider positions and more
+than $\chi$ branch positions realizing distinct cuts over
+the dividers. Explicitly, let $\epsilon$ be the least infinite
+cardinal with $2^\epsilon>\chi$ and use the lexicographically
+ordered binary tree $2^{<\epsilon}$, with a divider between
+each pair of successor subtrees and a point for each branch.
+Fix the tuples $e_j$ at divider positions, together with
+the shared support, as parameters (at most $\chi$ of them).
+For distinct branch indices $i,i'$, a divider $j$ separates
+them, and the two diagrams of $(d_i,e_j)$ and
+$(d_{i'},e_j)$ differ. Hence the $d_i$ realize more than
+$\chi$ automorphism orbits over these parameters.
+Embed the construction into a sufficiently large
+categoricity EM presentation, contradicting Lemma~4.5.
+\end{proof}
 
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
