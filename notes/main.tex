@@ -279,16 +279,50 @@ where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref
 $\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
 These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
 
-These projections eventually become bijections. Otherwise, arbitrarily many successive noninjective projections could be selected. At a common larger categoricity cardinal, the separations they witness would yield more than $B_\sigma$ distinct pairs of classes, contradicting the uniform bound.
+More precisely, there is a categoricity cardinal $c_\sigma$ above the
+$\sigma$-tuple reversal threshold such that for every pair of categoricity
+cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
+$\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
+\emph{stabilization of the comparison classes}, not model-theoretic
+stability. To prove it, suppose that noninjective projections occur
+arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
+common categoricity cardinal above them. Each refinement produces a pair
+of classes in the final model agreeing at an earlier stage but distinct
+at a later one. Pairs arising at different stages are distinct, because
+separation persists under further projection. Yet the final class set has
+size at most the infinite cardinal $B_\sigma$, and hence has at most
+$B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
 
-The stabilized class of a tuple is its \emph{canonical comparison diagram} $D(\bar a;M)$. Proposition 4.2 establishes:
+\end{proposition}
+
+\begin{definition}[Canonical comparison diagram; extracted from
+{\cite[Proposition 4.2]{oai-ecc}}]
+Fix an infinite cardinal $\sigma$ and a categoricity cardinal
+$c_\sigma$ beyond the stabilization and reversal thresholds for
+tuples of length at most $\sigma$. For $M\in\K_{\geq c_\sigma}$
+and $\bar a\in M^\gamma$, $\gamma\leq\sigma$, define
+\[
+D_\sigma(\bar a;M)
+ :=[(M_0,\bar a)]_{\equiv^{\leq\sigma}_{c_\sigma}},
+\]
+where $M_0\leq_\K M$ has size $c_\sigma$ and contains $\bar a$.
+Lemma~\ref{lem:small} makes the definition independent of $M_0$.
+Stabilization makes equality of these diagrams independent of the
+chosen sufficiently large categoricity cardinal. Write $D(\bar a;M)$
+when the length bound is understood.
+\end{definition}
+
+Proposition~4.2 of the source manuscript further establishes:
 \begin{enumerate}[label=(\arabic*)]
 \item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
 \item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
-\item At sufficiently large categoricity cardinals, equality of diagrams is implemented by a strong map.
+\item At categoricity cardinals at least the paper's nondecreasing threshold $t(\sigma)$, equality of diagrams is implemented by a strong map.
 \item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
 \end{enumerate}
-\end{proposition}
+The paper chooses $t(\sigma)$ above the stabilization thresholds
+$c_\tau$ for every infinite $\tau\leq\sigma$; no explicit numerical
+formula for $c_\sigma$ is supplied.
+
 The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
 
 \section{Further consequences in Section 4}
