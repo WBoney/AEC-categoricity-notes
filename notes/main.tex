@@ -1,0 +1,342 @@
+\documentclass[11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{enumitem,booktabs,longtable,hyperref,microtype}
+\hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+\newcommand{\K}{\mathbf K}
+\newcommand{\LS}{\operatorname{LS}}
+\newcommand{\EM}{\operatorname{EM}_{\tau}}
+\newcommand{\card}[1]{\lvert #1\rvert}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bb}{\mathbf{b}}
+\newcommand{\bi}{\mathbf{i}}
+\newcommand{\bj}{\mathbf{j}}
+\newcommand{\bd}{\mathbf{d}}
+\newcommand{\bc}{\mathbf{c}}
+\newcommand{\strS}{\operatorname{str}\text{-}S}
+\newcommand{\strtp}{\operatorname{str}\text{-}\operatorname{tp}}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}[definition]{Theorem}
+\newtheorem{lemma}[definition]{Lemma}
+\newtheorem{proposition}[definition]{Proposition}
+\newtheorem{corollary}[definition]{Corollary}
+\theoremstyle{remark}
+\newtheorem{remark}[definition]{Remark}
+
+\title{Working Summary of the Eventual Categoricity Proof\\large Sections 2--4 and a Roadmap for Further Reading}
+\author{Reading notes}
+\date{Revised October 15, 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+These notes summarize our reading of the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture. The detailed analysis so far has focused on Sections 2--4.1; the treatment of the remainder of Section 4 is a high-level outline based on the manuscript. The aim is to isolate the novel structural steps and identify which technical arguments might be compressed in a conceptual exposition. This is a working mathematical summary, not an independent verification of the manuscript's proofs.
+\end{abstract}
+\tableofcontents
+\section{Overall strategy}
+Fix an abstract elementary class $\K$ with $\LS(\K)=\ell$, categorical in unboundedly many cardinals. The qualitative goal is categoricity on a tail of the cardinals; the manuscript also formulates a uniform threshold depending on $\ell$.
+
+The structural trajectory is
+\[
+\begin{gathered}
+\text{Unbounded categoricity}\ \Downarrow\
+\text{Controlled Ehrenfeucht--Mostowski presentations}\ \Downarrow\
+\text{Reversal of strong maps on bounded tuples}\ \Downarrow\
+\text{Stable canonical comparison diagrams}\ \Downarrow\
+\text{Amalgamation and bounded-tuple calculus at selected levels}\ \Downarrow\
+\text{Independence, isolation, and finite systems}\ \Downarrow\
+\text{Geometry and classification by bases}\ \Downarrow\
+\text{Eventual categoricity}.
+\end{gathered}
+\]
+A distinctive feature is that amalgamation, tameness, and a good frame are not taken as initial hypotheses. The proof attempts to obtain the required structure from categoricity.
+
+\section{Section 2: Standard foundations}
+\textbf{Lemmas 2.1 and 2.2.} Elementary preliminaries; candidates for omission from a conceptual account.
+
+\textbf{Lemma 2.5.} Essentially Erd\H{o}s--Rado combinatorics, with applications to extracting uniform presentations.
+
+\textbf{Theorem 2.6.} The standard Ehrenfeucht--Mostowski (EM) model construction for AECs. The paper's ``labels'' can be understood as terms in an expanded language. Fix a vocabulary $\tau\supseteq\tau(\K)$ and an EM template $\Phi$ in $\tau$. The standard notation for the reduct of the EM model to the AEC language is $\EM(I,\Phi)\upharpoonright\tau(\K)$ (or simply $\EM(I,\Phi)$ when the reduct is understood). Order embeddings induce strong embeddings of these reducts, and elements have representations using $\tau$-terms and finitely many positions in $I$. We retain $\Phi$ as a fixed template throughout.
+
+\emph{Compression proposal.} Replace most of Section 2 by a single EM-presentation theorem recording functoriality, finite support, and the cardinality properties used later.
+
+\section{Section 3: Reversal of strong embeddings on bounded tuples}
+\subsection{Special orders and orbit bounds}
+The manuscript constructs orders $\Gamma_\delta$ and $H(\delta)$ (using finitely supported sequences and reverse-lexicographic ordering) to obtain large orders whose short tuples have uniformly controlled automorphism orbits.
+
+\begin{definition}[Order type with slot occupancy]
+For a tuple $\bi\in H(\delta)$, define
+$\operatorname{tp}(\bi;H(\delta))$ to consist of the quantifier-free
+order type of $\bi$, together with assertions recording whether each cut
+determined by $\bi$ is empty or inhabited (its \emph{slot occupancy}).
+\end{definition}
+
+\begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of the same length,
+\[
+\operatorname{tp}(\bi;H(\delta))
+=\operatorname{tp}(\bj;H(\delta))
+\quad\Longleftrightarrow\quad
+\exists h\in\operatorname{Aut}(H(\delta))\;
+\bigl(h(\bi)=\bj\bigr).
+\]
+In particular, these order types classify the automorphism orbits of
+tuples in $H(\delta)$. For bounded tuple lengths the number of such types
+is bounded independently of $\delta$.
+\end{theorem}
+
+\subsection{Presentation records and strong types}
+\begin{definition}[Presentation record]
+Let $\ba\in\operatorname{EM}(H(\delta),\Phi)$, where the EM model is
+considered in the expanded language $\tau(\Phi)$. A
+\emph{presentation record of $(\ba,\operatorname{EM}(H(\delta),\Phi))$}
+consists of a list of $\tau(\Phi)$-terms
+$(f_k:k<\ell(\ba))$ and an order type with slot occupancy
+$\operatorname{tp}(\bi;H(\delta))$ such that
+\[
+\ba=\bigl(f_k(\bi):k<\ell(\ba)\bigr).
+\]
+Here $\bi$ is a common flattened list of skeleton indices containing the finite supports of all coordinates, and each term $f_k$ uses the appropriate finite sublist (or ignores unused variables). Each term $f_k$ is evaluated on the index tuple $\bi$ in the
+expanded EM model. The record is relative to the chosen presentation;
+it is not asserted to be uniquely determined by $\ba$.
+\end{definition}
+
+\begin{definition}[Strong types relative to an EM presentation]
+Fix an infinite cardinal $\theta$ and suppose $\operatorname{cf}(\delta)>\theta$.
+Write $M_\delta=\EM(H(\delta),\Phi)$ for the $\tau(\K)$-reduct,
+with its specified expanded EM presentation understood.
+Every order automorphism $h\in\operatorname{Aut}(H(\delta))$
+induces a uniquely specified automorphism
+$\widehat h=\EM(h,\Phi)\in\operatorname{Aut}(M_\delta)$
+by functoriality, acting on terms by
+\[
+\widehat h\bigl(f(\bi)\bigr)=f\bigl(h(\bi)\bigr).
+\]
+For $\theta$-tuples $\ba,\bb\in M_\delta$, define
+\[
+\ba\equiv^\delta_{\mathrm{str}}\bb
+\quad\Longleftrightarrow\quad
+\exists h\in\operatorname{Aut}(H(\delta))\
+\bigl(\widehat h(\ba)=\bb\bigr).
+\]
+This is an equivalence relation, as the induced maps form a group
+action. Define
+\[
+\strtp(\ba;M_\delta):=[\ba]_{\equiv^\delta_{\mathrm{str}}},
+\qquad
+\strS^\delta:=
+\bigl\{\strtp(\ba;M_\delta):\ba\in M_\delta^\theta\bigr\}.
+\]
+We suppress $\theta$ and $\Phi$ in $\strS^\delta$.
+The induced lift $\widehat h$ is canonical for the fixed EM
+presentation; the definition is \emph{relative to that presentation}
+and need not be intrinsic to an abstract copy of the AEC model.
+In particular, this equivalence can be finer than the full
+automorphism-orbit equivalence of $M_\delta$.
+\end{definition}
+
+\begin{lemma}[Common presentation record implies equal strong type]
+Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
+Then $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+
+\emph{Proof.}
+Choose presentations
+\[
+\ba=(f_k(\bi):k<\theta),\qquad
+\bb=(f_k(\bj):k<\theta)
+\]
+with the same term list and
+$\operatorname{tp}(\bi;H(\delta))
+ =\operatorname{tp}(\bj;H(\delta))$.
+By Theorem~\ref{thm:order-orbits}, since the flattened index lists have length at
+most $\theta<\operatorname{cf}(\delta)$, there is
+$h\in\operatorname{Aut}(H(\delta))$ with $h(\bi)=\bj$.
+Functoriality gives
+\[
+\widehat h(\ba)
+ =\bigl(f_k(h(\bi)):k<\theta\bigr)
+ =\bigl(f_k(\bj):k<\theta\bigr)=\bb.
+\]
+Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.\qed
+\end{lemma}
+
+\emph{Remark.}
+The converse is not asserted: different term presentations, even of
+the same tuple, may give different records. This lemma is the
+direction needed to bound the number of strong types by the number
+of possible records. The manuscript's Lemma~3.6 establishes a
+uniform bound on \emph{full model-automorphism orbits}; the present
+strong types are orbits under the subgroup induced from the index
+order, and the same record bound applies when
+$\operatorname{cf}(\delta)>\theta$.
+
+\begin{definition}[The arrow relation]
+For $p,q\in\strS^\delta$, write
+\[
+p\longrightarrow q
+\quad\Longleftrightarrow\quad
+\begin{gathered}
+\exists\ba\models p\;\exists\bb\models q\;
+\exists f:M_\delta\longrightarrow M_\delta\\
+\text{$f$ a strong embedding of the AEC reduct and }f(\ba)=\bb.
+\end{gathered}
+\]
+This relation is well-defined on the strong types: changes of
+representatives are effected by induced automorphisms, which are
+strong automorphisms of the reduct. It is reflexive and transitive;
+symmetry is the eventual reversal phenomenon discussed below.
+\end{definition}
+
+\paragraph{The strong-map preorder and presentation profiles.}
+At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $\strS^\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
+\[
+p\longrightarrow r
+\]
+if a strong self-embedding of $C_\kappa$ sends a representative of $p$ to a representative of $r$. This relation is reflexive and transitive, but symmetry is not automatic.
+
+The paper names the boundedly many orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
+
+Lemmas 3.7, 3.8, and 3.10 provide order/ordinal bookkeeping; Proposition 3.9 is the important alignment statement allowing small and large presentations to have matching profile data.
+
+\subsection{Eventual reversal}
+\begin{theorem}[Eventual reversal {\cite[Theorem 3.11]{oai-ecc}}]\label{thm:reversal}
+For every infinite cardinal $\theta$ there is a cardinal $b_\K(\theta)$ such that, whenever $\kappa\geq b_\K(\theta)$ is a categoricity cardinal, $M\in\K$ has size $\kappa$, $f:M\to M$ is strong, and $\bar a$ has length at most $\theta$, there is a strong $g:M\to M$ satisfying
+\[
+g(f(a_i))=a_i\qquad\text{for every coordinate }i.
+\]
+Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at sufficiently large categoricity cardinals.
+\end{theorem}
+
+\begin{proof}[Proof sketch] If asymmetry persisted unboundedly, one could choose repeated profiles at separated categoricity sizes, align small submodels with large presentations, and carry out an elimination construction. The resulting categoricity model would omit the ability to reach a chosen orbit, contradicting the presence of that orbit in the unique model.
+\end{proof}
+
+\begin{remark}
+\emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
+\end{remark}
+
+\section{Section 4.1: Canonical diagrams}
+\subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
+Fix an infinite $\theta$ and a categoricity cardinal $\kappa\geq\theta+\LS(\K)$ sufficiently large that Theorem~\ref{thm:reversal} applies to $\theta$-tuples.
+
+\begin{definition}[Comparison at size $\kappa$]
+For $M,N\in\K_\kappa$ and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, write
+\[
+(\ba;M)\equiv^{*,\theta}_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+\exists f:M\longrightarrow N\text{ strong with }f(\ba)=\bb.
+\]
+Under the stated hypotheses this is an equivalence relation: reflexivity and transitivity are immediate. For symmetry, use categoricity to identify $M$ and $N$ with the same $\kappa$-sized model and apply Theorem~\ref{thm:reversal} to the resulting strong self-embedding and the given tuple.
+\end{definition}
+
+\begin{definition}[Comparison in larger models]
+For $M,N\in\K_{\geq\kappa}$ and $\theta$-tuples $\ba\in M$, $\bb\in N$, write
+\[
+(\ba;M)\equiv^\theta_\kappa(\bb;N)
+\]
+if there exist $M_0\preccurlyeq_\K M$, $N_0\preccurlyeq_\K N$ of cardinality $\kappa$, with $\ba\in M_0^\theta$ and $\bb\in N_0^\theta$, such that
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\bb;N_0).
+\]
+\end{definition}
+
+\begin{lemma}[Independence of small submodel {\cite[Lemma 4.1]{oai-ecc}}]\label{lem:small}
+If $M_0,M_1\preccurlyeq_\K M$ have cardinality $\kappa$ and both contain $\ba$, then
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\ba;M_1).
+\]
+Indeed, by downward L\"owenheim--Skolem choose a $\kappa$-sized $M_*\preccurlyeq_\K M$ containing $M_0\cup M_1$. Coherence yields $M_i\preccurlyeq_\K M_*$ for $i=0,1$. The inclusions witness
+$(\ba;M_i)\equiv^{*,\theta}_\kappa(\ba;M_*)$; symmetry and transitivity give the claim.
+\end{lemma}
+
+\begin{corollary}
+The relation $\equiv^\theta_\kappa$ is an equivalence relation on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$, and it is independent of which $\kappa$-sized strong submodels containing the tuples are chosen. For transitivity, replace the two intermediate $\kappa$-submodels inside the middle model by equivalent ones using the lemma, then compose the resulting strong maps at size $\kappa$. The relation is preserved by strong embeddings of the ambient models.
+\end{corollary}
+
+\begin{definition}[Type sets]
+For $\gamma\leq\theta$, set
+\[
+S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ \ba\in M^\gamma\bigr\},
+\qquad
+S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
+\]
+By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
+\end{definition}
+
+\subsection{Stabilization}
+\begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
+For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
+\[
+\pi^{\gamma}_{\lambda\kappa}:S^\gamma_\lambda
+\longrightarrow S^\gamma_\kappa,
+\qquad
+[(M,\bar a)]\longmapsto[(M_0,\bar a)],
+\]
+where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref{lem:small} makes this independent of the choice of $M_0$. Taking the disjoint union gives
+$\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
+These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
+
+These projections eventually become bijections. Otherwise, arbitrarily many successive noninjective projections could be selected. At a common larger categoricity cardinal, the separations they witness would yield more than $B_\sigma$ distinct pairs of classes, contradicting the uniform bound.
+
+The stabilized class of a tuple is its \emph{canonical comparison diagram} $D(\bar a;M)$. Proposition 4.2 establishes:
+\begin{enumerate}[label=(\arabic*)]
+\item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
+\item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
+\item At sufficiently large categoricity cardinals, equality of diagrams is implemented by a strong map.
+\item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
+\end{enumerate}
+\end{proposition}
+The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
+
+\section{Further consequences in Section 4}
+\textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
+
+\textbf{Definition 4.4.} Natural diagrams arise by interpreting term lists in sufficiently large order extensions. Placed comparisons over a base $A=\EM(I,\Phi)$ retain the base's support positions. Order amalgamation shows independence from the chosen sufficiently large extension.
+
+\textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
+\begin{enumerate}[label=(\arabic*)]
+\item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
+\item For bounded tuples $\bar d_i\in B_i$ over a common $\mu$-sized base $A$, an amalgam identifying the tuples exists exactly when their relative diagrams agree on all $X\subseteq A$ of size at most $g(\sigma)$, for the relevant tuple-length bound $\sigma$.
+\item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
+\end{enumerate}
+This is an amalgamation conclusion at selected cardinals, \emph{not} a claim of eventual amalgamation at all sufficiently large cardinals. We have not yet analyzed all the technical steps of Sections 4.2--4.4 in the same depth as Sections 3--4.1.
+
+\section{Questions for the next reading session}
+\begin{enumerate}
+\item Can Theorem 3.11 be isolated as an independent structural theorem for categorical AECs?
+\item Once Theorem 4.11 supplies amalgamation at selected levels, how exactly do comparison diagrams relate to conventional Galois types? In particular, distinguish types of tuples with no parameters from types over a model.
+\item How does the later finite-system and boundary-lifting calculus compare with Shelah--Vasey multidimensional independence and excellence?
+\item Which of the subsequent independence, isolation, and geometry arguments can be translated into standard AEC language without losing content?
+\end{enumerate}
+
+\section{Simplification ledger and Lean-audit milestones}
+\begin{longtable}{@{}p{0.25\textwidth}p{0.66\textwidth}@{}}
+\toprule
+\textbf{Result} & \textbf{Working assessment}\\midrule
+\endhead
+Lemmas 2.1--2.2 & Standard; omit from conceptual account.\\
+Lemma 2.5 & Erd\H{o}s--Rado; compress.\\
+Theorem 2.6 & Standard EM construction and finite-support functoriality.\\
+Theorem 3.5 & Essential order-orbit analysis.\\
+Lemma 3.6 & Standard EM functoriality; beware converse.\\
+Lemmas 3.7--3.10 & Mostly alignment and ordinal bookkeeping; Proposition 3.9 is substantive.\\
+Theorem 3.11 & \textbf{First major new theorem: reversal on bounded tuples.}\\
+Lemma 4.1 & LS/coherence argument once reversal is available.\\
+Proposition 4.2 & \textbf{Second major new theorem: stabilization.}\\
+Proposition 4.3 & Back-and-forth from stabilized diagrams.\\
+Theorem 4.11 & \textbf{Third major milestone: amalgamation at selected levels.}\\
+\bottomrule
+\end{longtable}
+
+The first stage can be compressed into three conceptual assertions:
+\[
+\boxed{\text{Uniform orbit bound}\ \Longrightarrow\ \text{Bounded-tuple reversal}\ \Longrightarrow\ \text{Stable diagrams}.}
+\]
+These also suggest the first nontrivial Lean-verification milestones. Our separate preliminary Lean inspection found foundational AEC definitions and elementary model-existence lemmas in \texttt{lean/OAI/ModelTheory/AbstractElementary/ModelExistence.lean}, but did not establish formal verification of the orbit bound, reversal, or stabilization.
+
+\bibliographystyle{plain}
+\bibliography{references}
+\end{document}
