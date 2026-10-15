@@ -1,0 +1,24 @@
+name: Build PDF
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  latex:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Compile notes
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: main.tex
+          working_directory: notes
+          latexmk_use_xelatex: false
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: categoricity-notes-pdf
+          path: notes/main.pdf
