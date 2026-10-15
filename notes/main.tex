@@ -528,6 +528,45 @@ Embed the construction into a sufficiently large
 categoricity EM presentation, contradicting Lemma~4.5.
 \end{proof}
 
+\begin{remark}[No-order-property interpretation of Lemma 4.6]
+\emph{Interpretive remark, not a separately stated theorem of the source.}
+If swapping exclusive blocks changed a joint natural diagram from
+$p$ to $q\neq p$, the repetition construction in Lemma~4.6
+would yield, for arbitrarily large linear orders $L$, tuples
+$(\bd_i)_{i\in L}$ and $(\be_j)_{j\in L}$ satisfying
+\[
+D(\bd_i,\be_j)=
+\begin{cases}
+p,&i<j,\\
+q,&i>j.
+\end{cases}
+\]
+Thus a failure of block symmetry would witness an
+\emph{order property for canonical diagrams}.
+Lemma~4.5 rules this out by bounding automorphism orbits
+over a small parameter set. The conceptual progression is
+\[
+\text{bounded automorphism orbits}
+\Longrightarrow
+\text{no such diagram order pattern}
+\Longrightarrow
+\text{disjoint-block symmetry}.
+\]
+This resembles the classical stability argument turning
+order-indiscernibles into permutation-indiscernibles.
+It does not say that all order information on an EM skeleton
+is invisible in the reduct: only the specified transpositions
+of disjoint exclusive support blocks are covered.
+
+Ordinary first-order no-order-property is not automatically
+sufficient: the term families and diagrams may have arbitrary
+set-sized length, bounded by $\sigma$, and amalgamation
+has not yet been established. A cardinal-parameterized
+no-canonical-diagram-order-property principle might subsume
+Lemma~4.6, but the exact formulation and its relation to
+Lemma~4.5 remain to be checked.
+\end{remark}
+
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
 \item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
