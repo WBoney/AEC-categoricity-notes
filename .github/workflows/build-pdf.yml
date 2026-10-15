@@ -1,11 +1,13 @@
-name: Build PDF
+name: Build and publish PDF
 on:
   push:
     branches: [main]
   pull_request:
   workflow_dispatch:
+
 permissions:
-  contents: write
+  contents: read
+
 jobs:
   latex:
     runs-on: ubuntu-latest
@@ -16,9 +18,34 @@ jobs:
         with:
           root_file: main.tex
           working_directory: notes
-          latexmk_use_xelatex: false
-      - name: Upload PDF
+      - name: Upload downloadable PDF
         uses: actions/upload-artifact@v4
         with:
           name: categoricity-notes-pdf
           path: notes/main.pdf
+      - name: Prepare Pages site
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          mkdir -p _site
+          cp notes/main.pdf _site/main.pdf
+          printf '<!doctype html><html><head><meta charset="utf-8"><title>AEC categoricity notes</title></head><body><p><a href="main.pdf">Open the latest PDF</a></p></body></html>' > _site/index.html
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    needs: latex
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

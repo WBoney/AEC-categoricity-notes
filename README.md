@@ -8,6 +8,9 @@ Working mathematical notes on the OpenAI manuscript proving Shelah's Eventual Ca
 - [PDF build workflow](.github/workflows/build-pdf.yml)
 
 ## PDF
+
+Once GitHub Pages is configured to use **GitHub Actions** as its deployment source, the latest PDF is available at [Open latest PDF](https://wboney.github.io/AEC-categoricity-notes/main.pdf). This link updates whenever changes are merged to `main` and the build succeeds.
+
 GitHub Actions compiles `notes/main.tex` on pushes to `main` and on pull requests. Open the latest successful [Build PDF workflow run](../../actions/workflows/build-pdf.yml) and download the `categoricity-notes-pdf` artifact. GitHub Actions artifacts are not permanent links and may expire.
 
 ## Editing
