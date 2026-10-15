@@ -494,14 +494,56 @@ tuple's diagram needs additional justification.
 
 \begin{lemma}[Disjoint block transpositions;
 {\cite[Lemma 4.6]{oai-ecc}}]
-Take two set-sized families of labeled EM terms $r$ and $s$.
-Suppose their joint support has pairwise disjoint convex
-regions, each consisting of two adjacent blocks, one used
-only by $r$ and the other used only by $s$. In each region,
-interchange the two blocks, preserving each block's internal
-order, all term labels and coordinate assignments, and the
-positions outside the regions. The joint natural diagram
-of $(r,s)$ does not change.
+Fix a linear order $I$ and a labeled EM presentation
+$M=\EM(I,\Phi)$. Let $\bd,\be$ be (possibly set-sized)
+tuples of elements of $M$, and choose term presentations
+\[
+d_\alpha=t_\alpha(\bar i_\alpha),\qquad
+e_\beta=u_\beta(\bar j_\beta)
+\]
+in the skeleton of $I$. Let $S_d,S_e\subseteq I$ be the
+unions of the skeleton supports of these presentations,
+and put $S=S_d\cup S_e$.
+
+Suppose $(C_j)_{j\in J}$ is a family of pairwise disjoint
+convex subsets of the \emph{joint support order} $S$,
+indexed in increasing order: for $j<j'$ every point of
+$C_j$ precedes every point of $C_{j'}$. Write
+\[
+X_j=C_j\cap S_d,\qquad Y_j=C_j\cap S_e.
+\]
+Assume each region is the concatenation of two blocks,
+either $X_j<Y_j$ or $Y_j<X_j$, and that the blocks are
+\emph{exclusive}:
+\[
+X_j\cap S_e=\varnothing,\qquad
+Y_j\cap S_d=\varnothing.
+\]
+In particular no skeleton coordinate used by both
+families lies in a transposed region. No assumption
+that $X_j$ and $Y_j$ are order-isomorphic is needed.
+
+Construct a new ordered support $S'$ by replacing
+$X_j+Y_j$ with $Y_j+X_j$ (or conversely) for each $j$,
+retaining the internal order of every block and the
+order of all other support positions. Regard the same
+support coordinates as labeled positions in $S'$:
+each occurrence of a coordinate in $t_\alpha$ or
+$u_\beta$ retains its original assignment to that
+coordinate. Thus the first family still uses the
+$X_j$-coordinates and the second still uses the
+$Y_j$-coordinates; \emph{only their relative order
+changes}. Evaluate these same terms in an EM model
+over an order containing $S'$, obtaining tuples
+$\bd'$ and $\be'$. Then
+\[
+D_{\mathrm{nat}}(\bd,\be)
+=
+D_{\mathrm{nat}}(\bd',\be').
+\]
+The new tuples need not live in the original $M$;
+the statement compares their natural diagrams in
+(possibly different) EM presentations.
 \end{lemma}
 \begin{proof}[Proof sketch]
 Suppose the original and transposed diagrams differ.
