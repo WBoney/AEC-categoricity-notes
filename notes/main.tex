@@ -30,13 +30,13 @@
 \theoremstyle{remark}
 \newtheorem{remark}[definition]{Remark}
 
-\title{Working Summary of the Eventual Categoricity Proof\\large Sections 2--4 and a Roadmap for Further Reading}
+\title{Reading Notes on the Eventual Categoricity Proof\\large Canonical Diagrams, EM Presentations, and AEC Technology}
 \author{Reading notes}
-\date{Revised October 15, 2026}
+\date{Working draft, October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-These notes summarize our reading of the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture. The detailed analysis so far has focused on Sections 2--4.1; the treatment of the remainder of Section 4 is a high-level outline based on the manuscript. The aim is to isolate the novel structural steps and identify which technical arguments might be compressed in a conceptual exposition. This is a working mathematical summary, not an independent verification of the manuscript's proofs.
+These notes track the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture, emphasizing connections with standard AEC technology: strong embeddings, Galois types, EM functors, presentation-dependent orbit invariants, and locality of types. We distinguish source statements from derived lemmas and interpretive analogies. Sections 3--4 receive detailed analysis, while Section 5 begins a systematic reformulation of the working scheme. This remains a reading companion, not an independent verification of the full proof.
 \end{abstract}
 \tableofcontents
 \section{Overall strategy}
@@ -57,7 +57,43 @@ The structural trajectory is
 \]
 A distinctive feature is that amalgamation, tameness, and a good frame are not taken as initial hypotheses. The proof attempts to obtain the required structure from categoricity.
 
-\section{Section 2: Standard foundations}
+\subsection*{AEC dictionary and levels of comparison}
+We write $M\leq_\K N$ for the AEC strong-submodel
+relation. A \emph{$\K$-embedding} is a $\tau(\K)$-embedding
+whose image is strong; a mere $\tau(\K)$-embedding need not
+be strong. The fixed EM template $\Phi$ gives a functorial
+construction, after taking reducts to $\tau(\K)$:
+\[
+I\hookrightarrow J\quad\Longrightarrow\quad
+\EM(I,\Phi)\longrightarrow\EM(J,\Phi)
+\]
+by a $\K$-embedding. Skeleton coordinates and expanded-language
+term representations are presentation data.
+
+\begin{remark}[Three distinct notions of type-like data]
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item \emph{Strong EM types} are tuple orbits under
+automorphisms induced by order automorphisms of a fixed
+skeleton $H(\delta)$; order records with term labels
+and slot occupancy supply sufficient witnesses.
+\item \emph{Canonical comparison diagrams} arise by
+stabilizing strong-map comparisons at categoricity sizes.
+For tuples in models at a sufficiently large categoricity
+size, these agree with Galois types over $\emptyset$
+(Lemma~\ref{lem:gtp-reversal}).
+\item \emph{Natural diagrams} compute canonical comparisons
+from labeled EM term representations. \emph{Placed diagrams}
+include fixed parameters from an EM-presented base;
+before amalgamation, they are not automatically Galois
+types over that base.
+\end{enumerate}
+Order records are syntactic witnesses; comparison diagrams
+are semantic equivalence classes. We distinguish results
+stated in the source, consequences proved here, and
+interpretive comparisons to standard AEC technology.
+\end{remark}
+
+\section{Section 2: AEC and EM foundations}
 \textbf{Lemmas 2.1 and 2.2.} Elementary preliminaries; candidates for omission from a conceptual account.
 
 \textbf{Lemma 2.5.} Essentially Erd\H{o}s--Rado combinatorics, with applications to extracting uniform presentations.
@@ -66,7 +102,7 @@ A distinctive feature is that amalgamation, tameness, and a good frame are not t
 
 \emph{Compression proposal.} Replace most of Section 2 by a single EM-presentation theorem recording functoriality, finite support, and the cardinality properties used later.
 
-\section{Section 3: Reversal of strong embeddings on bounded tuples}
+\section{Section 3: EM orbit calculus and reversal}
 \subsection{Special orders and orbit bounds}
 The manuscript constructs orders $\Gamma_\delta$ and $H(\delta)$ (using finitely supported sequences and reverse-lexicographic ordering) to obtain large orders whose short tuples have uniformly controlled automorphism orbits.
 
@@ -144,7 +180,7 @@ automorphism-orbit equivalence of $M_\delta$.
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
 Then $\ba\equiv^\delta_{\mathrm{str}}\bb$.
 
-\emph{Proof.}
+\begin{proof}
 Choose presentations
 \[
 \ba=(f_k(\bi):k<\theta),\qquad
@@ -162,10 +198,11 @@ Functoriality gives
  =\bigl(f_k(h(\bi)):k<\theta\bigr)
  =\bigl(f_k(\bj):k<\theta\bigr)=\bb.
 \]
-Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.\qed
+Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+\end{proof}
 \end{lemma}
 
-\emph{Remark.}
+\begin{remark}[Records and orbit bounds]
 The converse is not asserted: different term presentations, even of
 the same tuple, may give different records. This lemma is the
 direction needed to bound the number of strong types by the number
@@ -174,6 +211,7 @@ uniform bound on \emph{full model-automorphism orbits}; the present
 strong types are orbits under the subgroup induced from the index
 order, and the same record bound applies when
 $\operatorname{cf}(\delta)>\theta$.
+\end{remark}
 
 \begin{definition}[The arrow relation]
 For $p,q\in\strS^\delta$, write
@@ -193,6 +231,9 @@ symmetry is the eventual reversal phenomenon discussed below.
 \end{definition}
 
 \paragraph{The strong-map preorder and presentation profiles.}
+Here the arrow notation is also used for the related but
+\emph{different} orbit space of an AEC model; this does not
+identify fixed-skeleton strong types with all model orbits.
 At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $\strS^\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
 \[
 p\longrightarrow r
@@ -219,18 +260,20 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
 \end{remark}
 
-\section{Section 4.1: Canonical diagrams}
+\section{Section 4.1: Canonical diagrams and Galois types}
 \subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
 Fix an infinite $\theta$ and a categoricity cardinal $\kappa\geq\theta+\LS(\K)$ sufficiently large that Theorem~\ref{thm:reversal} applies to $\theta$-tuples.
 
 \begin{definition}[Galois types over the empty set]
 For pairs $(\ba;M)$ and $(\bb;N)$ of equal tuple length, say
-they are \emph{atomically equivalent} if there are strong embeddings
+they are \emph{directly equivalent by amalgamation} if there are strong embeddings
 $f_0:M\to P$ and $f_1:N\to P$ with $f_0(\ba)=f_1(\bb)$.
 Without assuming amalgamation, define equality of
 $\operatorname{gtp}(\ba/\emptyset;M)$ and
 $\operatorname{gtp}(\bb/\emptyset;N)$ as the equivalence relation
-generated by atomic equivalence (its transitive closure).
+generated by direct equivalence (its transitive closure).
+This is distinct from the atomic diagram of a tuple and
+makes sense without assuming the amalgamation property.
 \end{definition}
 
 \begin{lemma}[Galois-type characterization at a categoricity size]
@@ -247,7 +290,7 @@ are equivalent:
 \]
 \end{lemma}
 \begin{proof}
-A strong map gives atomic equivalence using the identity of its
+A strong map gives direct equivalence using the identity of its
 codomain. Conversely, first suppose that strong maps
 $f_0:M\to P$ and $f_1:N\to P$ identify the tuples.
 Downward L\"owenheim--Skolem and coherence give a strong
@@ -258,10 +301,10 @@ Apply Theorem~\ref{thm:reversal} to the self-embedding
 $h\circ f_1:N\to N$ and $\bb$, obtaining a strong
 $g':N\to N$ with $g'hf_1(\bb)=\bb$.
 Then $g'hf_0:M\to N$ identifies the tuples.
-This proves the claim for atomic equivalence. The strong-map
+This proves the claim for direct equivalence. The strong-map
 relation is an equivalence relation at this categoricity size
 (by the same reversal argument), so it also contains the
-transitive closure of atomic equivalence.
+transitive closure of direct equivalence.
 \end{proof}
 
 \begin{remark}[Scope of the characterization]
@@ -384,7 +427,7 @@ formula for $c_\sigma$ is supplied.
 
 The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
 
-\section{Further consequences in Section 4}
+\section{Section 4.2--4.4: Placement, locality, and amalgamation}
 \textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
 
 \subsection{Natural and placed diagrams (source Definition 4.4)}
