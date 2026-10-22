@@ -30,13 +30,13 @@
 \theoremstyle{remark}
 \newtheorem{remark}[definition]{Remark}
 
-\title{Working Summary of the Eventual Categoricity Proof\\large Sections 2--4 and a Roadmap for Further Reading}
+\title{Reading Notes on the Eventual Categoricity Proof\\large Canonical Diagrams, EM Presentations, and AEC Technology}
 \author{Reading notes}
-\date{Revised October 15, 2026}
+\date{Working draft, October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-These notes summarize our reading of the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture. The detailed analysis so far has focused on Sections 2--4.1; the treatment of the remainder of Section 4 is a high-level outline based on the manuscript. The aim is to isolate the novel structural steps and identify which technical arguments might be compressed in a conceptual exposition. This is a working mathematical summary, not an independent verification of the manuscript's proofs.
+These notes track the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture, emphasizing connections with standard AEC technology: strong embeddings, Galois types, EM functors, presentation-dependent orbit invariants, and locality of types. We distinguish source statements from derived lemmas and interpretive analogies. Sections 3--4 receive detailed analysis, while Section 5 begins a systematic reformulation of the working scheme. This remains a reading companion, not an independent verification of the full proof.
 \end{abstract}
 \tableofcontents
 \section{Overall strategy}
@@ -57,7 +57,43 @@ The structural trajectory is
 \]
 A distinctive feature is that amalgamation, tameness, and a good frame are not taken as initial hypotheses. The proof attempts to obtain the required structure from categoricity.
 
-\section{Section 2: Standard foundations}
+\subsection*{AEC dictionary and levels of comparison}
+We write $M\leq_\K N$ for the AEC strong-submodel
+relation. A \emph{$\K$-embedding} is a $\tau(\K)$-embedding
+whose image is strong; a mere $\tau(\K)$-embedding need not
+be strong. The fixed EM template $\Phi$ gives a functorial
+construction, after taking reducts to $\tau(\K)$:
+\[
+I\hookrightarrow J\quad\Longrightarrow\quad
+\EM(I,\Phi)\longrightarrow\EM(J,\Phi)
+\]
+by a $\K$-embedding. Skeleton coordinates and expanded-language
+term representations are presentation data.
+
+\begin{remark}[Three distinct notions of type-like data]
+\begin{enumerate}[label=(\roman*),leftmargin=*]
+\item \emph{Strong EM types} are tuple orbits under
+automorphisms induced by order automorphisms of a fixed
+skeleton $H(\delta)$; order records with term labels
+and slot occupancy supply sufficient witnesses.
+\item \emph{Canonical comparison diagrams} arise by
+stabilizing strong-map comparisons at categoricity sizes.
+For tuples in models at a sufficiently large categoricity
+size, these agree with Galois types over $\emptyset$
+(Lemma~\ref{lem:gtp-reversal}).
+\item \emph{Natural diagrams} compute canonical comparisons
+from labeled EM term representations. \emph{Placed diagrams}
+include fixed parameters from an EM-presented base;
+before amalgamation, they are not automatically Galois
+types over that base.
+\end{enumerate}
+Order records are syntactic witnesses; comparison diagrams
+are semantic equivalence classes. We distinguish results
+stated in the source, consequences proved here, and
+interpretive comparisons to standard AEC technology.
+\end{remark}
+
+\section{Section 2: AEC and EM foundations}
 \textbf{Lemmas 2.1 and 2.2.} Elementary preliminaries; candidates for omission from a conceptual account.
 
 \textbf{Lemma 2.5.} Essentially Erd\H{o}s--Rado combinatorics, with applications to extracting uniform presentations.
@@ -66,7 +102,7 @@ A distinctive feature is that amalgamation, tameness, and a good frame are not t
 
 \emph{Compression proposal.} Replace most of Section 2 by a single EM-presentation theorem recording functoriality, finite support, and the cardinality properties used later.
 
-\section{Section 3: Reversal of strong embeddings on bounded tuples}
+\section{Section 3: EM orbit calculus and reversal}
 \subsection{Special orders and orbit bounds}
 The manuscript constructs orders $\Gamma_\delta$ and $H(\delta)$ (using finitely supported sequences and reverse-lexicographic ordering) to obtain large orders whose short tuples have uniformly controlled automorphism orbits.
 
@@ -144,7 +180,7 @@ automorphism-orbit equivalence of $M_\delta$.
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
 Then $\ba\equiv^\delta_{\mathrm{str}}\bb$.
 
-\emph{Proof.}
+\begin{proof}
 Choose presentations
 \[
 \ba=(f_k(\bi):k<\theta),\qquad
@@ -162,10 +198,11 @@ Functoriality gives
  =\bigl(f_k(h(\bi)):k<\theta\bigr)
  =\bigl(f_k(\bj):k<\theta\bigr)=\bb.
 \]
-Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.\qed
+Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+\end{proof}
 \end{lemma}
 
-\emph{Remark.}
+\begin{remark}[Records and orbit bounds]
 The converse is not asserted: different term presentations, even of
 the same tuple, may give different records. This lemma is the
 direction needed to bound the number of strong types by the number
@@ -174,6 +211,7 @@ uniform bound on \emph{full model-automorphism orbits}; the present
 strong types are orbits under the subgroup induced from the index
 order, and the same record bound applies when
 $\operatorname{cf}(\delta)>\theta$.
+\end{remark}
 
 \begin{definition}[The arrow relation]
 For $p,q\in\strS^\delta$, write
@@ -193,6 +231,9 @@ symmetry is the eventual reversal phenomenon discussed below.
 \end{definition}
 
 \paragraph{The strong-map preorder and presentation profiles.}
+Here the arrow notation is also used for the related but
+\emph{different} orbit space of an AEC model; this does not
+identify fixed-skeleton strong types with all model orbits.
 At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $\strS^\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
 \[
 p\longrightarrow r
@@ -219,18 +260,20 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
 \end{remark}
 
-\section{Section 4.1: Canonical diagrams}
+\section{Section 4.1: Canonical diagrams and Galois types}
 \subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
 Fix an infinite $\theta$ and a categoricity cardinal $\kappa\geq\theta+\LS(\K)$ sufficiently large that Theorem~\ref{thm:reversal} applies to $\theta$-tuples.
 
 \begin{definition}[Galois types over the empty set]
 For pairs $(\ba;M)$ and $(\bb;N)$ of equal tuple length, say
-they are \emph{atomically equivalent} if there are strong embeddings
+they are \emph{directly equivalent by amalgamation} if there are strong embeddings
 $f_0:M\to P$ and $f_1:N\to P$ with $f_0(\ba)=f_1(\bb)$.
 Without assuming amalgamation, define equality of
 $\operatorname{gtp}(\ba/\emptyset;M)$ and
 $\operatorname{gtp}(\bb/\emptyset;N)$ as the equivalence relation
-generated by atomic equivalence (its transitive closure).
+generated by direct equivalence (its transitive closure).
+This is distinct from the atomic diagram of a tuple and
+makes sense without assuming the amalgamation property.
 \end{definition}
 
 \begin{lemma}[Galois-type characterization at a categoricity size]
@@ -247,7 +290,7 @@ are equivalent:
 \]
 \end{lemma}
 \begin{proof}
-A strong map gives atomic equivalence using the identity of its
+A strong map gives direct equivalence using the identity of its
 codomain. Conversely, first suppose that strong maps
 $f_0:M\to P$ and $f_1:N\to P$ identify the tuples.
 Downward L\"owenheim--Skolem and coherence give a strong
@@ -258,10 +301,10 @@ Apply Theorem~\ref{thm:reversal} to the self-embedding
 $h\circ f_1:N\to N$ and $\bb$, obtaining a strong
 $g':N\to N$ with $g'hf_1(\bb)=\bb$.
 Then $g'hf_0:M\to N$ identifies the tuples.
-This proves the claim for atomic equivalence. The strong-map
+This proves the claim for direct equivalence. The strong-map
 relation is an equivalence relation at this categoricity size
 (by the same reversal argument), so it also contains the
-transitive closure of atomic equivalence.
+transitive closure of direct equivalence.
 \end{proof}
 
 \begin{remark}[Scope of the characterization]
@@ -320,6 +363,20 @@ S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
 \]
 By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
 \end{definition}
+
+\begin{remark}[AEC interpretation of the stabilized classes]
+The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
+strong submodels, even when its ambient models are larger.
+At a sufficiently large categoricity size, its restriction
+to $\K_\kappa$ is exactly equality of Galois types over
+$\emptyset$, where equality is defined through the
+transitive closure of direct amalgamation equivalence.
+This makes $S_\kappa^\gamma$ a \emph{local Galois-type
+space}, not in general the space of Galois types computed
+in arbitrary ambient models. Stabilization of these
+spaces is distinct from the AEC stability property
+bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\end{remark}
 
 \subsection{Stabilization}
 \begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
@@ -384,7 +441,7 @@ formula for $c_\sigma$ is supplied.
 
 The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
 
-\section{Further consequences in Section 4}
+\section{Section 4.2--4.4: Placement, locality, and amalgamation}
 \textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
 
 \subsection{Natural and placed diagrams (source Definition 4.4)}
@@ -476,6 +533,20 @@ Matching relative labeled order records implies matching placed
 diagrams; the converse is not asserted. Nor do we identify
 placed diagrams with Galois types over arbitrary bases before
 the relevant amalgamation results have been proved.
+\end{remark}
+
+\begin{remark}[Relation to types over models]
+For $A=\EM(I,\Phi)$ and a tuple $\bd$ in an EM extension,
+the placed comparison is
+$D_{\mathrm{nat}}(\bd,\ba_A)$, with the enumeration
+of $A$ fixed on both sides. This resembles the usual
+AEC notion $\operatorname{gtp}(\bd/A;N)$, but the
+definition requires neither a monster model nor
+amalgamation over $A$. Matching the labeled relative
+support order pattern is sufficient for equality of
+placed diagrams, not necessary. Conversely, equality
+of placed diagrams need not imply that the two chosen
+presentations have isomorphic labeled support orders.
 \end{remark}
 
 \subsection{Back-and-forth and block transpositions}
@@ -610,6 +681,30 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
+\subsection{Locality and compactness for placed comparisons}
+The source's Proposition~4.8 gives a uniform function
+$g(\sigma)$ with the following \emph{separation} property:
+for a well-ordered EM base $A=\EM(I,\Phi)$, two different
+placed comparisons of a tuple of length at most $\sigma$
+are already distinguished over some
+$X\subseteq A$ of size at most $g(\sigma)$.
+This is tameness-like locality for a specific kind of
+base and a specific comparison invariant, not
+tameness for all Galois types.
+
+Proposition~4.9 gives a complementary \emph{existence}
+principle: a coherent family of possible joint diagrams
+over all $X\in[A]^{\leq\chi}$, for
+$\chi>\ell+\sigma$ with $\chi^\sigma=\chi$,
+is realized by a placement. Together they imply
+uniqueness of the full \emph{diagram} once
+$\chi\geq g(\sigma)$, as recorded next.
+The proof of Proposition~4.9 uses the finite supports
+of EM terms, clusters of support positions within
+cuts, and the block symmetry of Lemma~4.6.
+These are properties of the presentation calculus,
+not an instance of first-order compactness.
+
 \begin{lemma}[Unique compactness for placed comparisons;
 consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 \label{lem:unique-placed-compactness}
@@ -662,6 +757,23 @@ $\chi<\mu$ to lift all bounded diagrams of an
 actual tuple over a base of size $\mu$.
 \end{remark}
 
+\begin{remark}[The role of cofinality in the next step]
+The compactness and uniform-testing propositions are
+formulated for arbitrary infinite well-ordered skeletons.
+In the source, Lemma~4.10 applies them at strong-limit
+cardinals $\mu$ of countable cofinality that are
+strictly closed below themselves under the relevant
+threshold functions $t$ and $g$. The proof of that
+lemma uses cofinally many $\chi<\mu$ with
+$\chi^\sigma=\chi$ (available from the strong-limit
+assumption), whereas countable cofinality is central
+to the later countable exhaustion used for
+amalgamation in Theorem~4.11.
+The weaker cofinality requirements that might suffice
+for Lemma~4.10 alone have not been established as a
+separate source theorem.
+\end{remark}
+
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
 \item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
@@ -669,6 +781,241 @@ actual tuple over a base of size $\mu$.
 \item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
 \end{enumerate}
 This is an amalgamation conclusion at selected cardinals, \emph{not} a claim of eventual amalgamation at all sufficiently large cardinals. We have not yet analyzed all the technical steps of Sections 4.2--4.4 in the same depth as Sections 3--4.1.
+
+\section{Section 5: Working schemes for finite systems}
+\subsection{Systems and their morphisms}
+We make the systems of \cite[Section 5.1]{oai-ecc} precise. Requiring
+internal edge maps to be strong is our explicit convention;
+the source initially says \emph{specified maps} without
+separately requiring their strongness.
+
+\begin{definition}[Model embeddings]
+Let $\tau=\tau(\K)$. A $\tau$-embedding $f:M\to N$ is an
+embedding of $\tau$-structures. A \emph{$\K$-embedding}, equivalently
+a \emph{strong embedding}, is a $\tau$-embedding satisfying
+$f[M]\leq_\K N$.
+\end{definition}
+
+\begin{definition}[Finite shape and system]\label{def:finite-system}
+Fix a finite directed multigraph $G=(V,E,s,t)$, where $s,t:E\to V$.
+A \emph{$G$-system} is
+\[
+\mathcal M=((M_v)_{v\in V},(f_e^\mathcal M)_{e\in E}),
+\]
+where each $M_v\in\K$ and each
+$f_e^\mathcal M:M_{s(e)}\to M_{t(e)}$ is a $\K$-embedding.
+The shape may carry distinguished named sorted lists.
+No intersection-of-images or path-commutativity axiom is implicit.
+\end{definition}
+
+\begin{definition}[System embeddings and isomorphisms]
+A \emph{$\tau$-embedding of systems} $h:\mathcal M\to\mathcal N$
+is a family $h_v:M_v\to N_v$ of $\tau$-embeddings such that
+\[
+h_{t(e)}\circ f_e^\mathcal M=f_e^\mathcal N\circ h_{s(e)}
+\quad(e\in E),
+\]
+preserving all distinguished named lists.
+It is a \emph{$\K$-embedding of systems} if every
+$h_v$ is a $\K$-embedding. An \emph{isomorphism of systems}
+is an invertible system embedding, equivalently a commuting
+family of component isomorphisms onto the whole target vertices.
+\end{definition}
+
+\begin{definition}[Working-scheme arrows]
+An \emph{arrow} is a designated $\K$-embedding of systems,
+possibly satisfying additional conditions on the whole diagram.
+System $\K$-embeddings form a category $\operatorname{Sys}_G(\K)$.
+The scheme arrows select a subcategory on designated objects;
+not every system $\K$-embedding is necessarily an arrow.
+The working package requires that all system isomorphisms
+are arrows and that arrows compose.
+\end{definition}
+
+\begin{definition}[Many-sorted coding and sorted tuples]
+For each $v\in V$, introduce a separate sort $S_v$
+with a copy of the language $\tau$. For each $e:v\to w$,
+include a function symbol $F_e:S_v\to S_w$ interpreted by
+$f_e^\mathcal M$; name distinguished data in their own sorts.
+A \emph{sorted tuple} is $\ba=(a_i)_{i<\gamma}$
+with a specified sort $v_i\in V$ and $a_i\in M_{v_i}$
+for each $i<\gamma$. Its atomic diagram is computed
+in the resulting many-sorted language.
+Coincident underlying elements in different vertices
+are distinct sorted occurrences.
+\end{definition}
+
+\begin{remark}[Structural versus strong information]
+An embedding of many-sorted structures need not be
+a $\K$-embedding of systems: strongness is generally
+not expressible in their atomic structure.
+Even a componentwise strong system embedding need
+not be an arrow of a particular working scheme.
+\end{remark}
+
+\subsection{Eligible levels, presentations, and comparisons}
+\begin{definition}[Eligible levels and bounded lists]
+Fix an unbounded definable class $\mathcal S$ of infinite
+cardinals, the \emph{eligible levels}. A system is at level
+$\mu\in\mathcal S$ if all vertices have size $\mu$.
+A sorted list is \emph{bounded at $\mu$} if its length
+is less than $\mu$. Strict closure under a bound
+$u$ means $u(\theta)<\mu$ for each infinite $\theta<\mu$.
+These conventions follow \cite[Convention 5.1]{oai-ecc}.
+\end{definition}
+
+\begin{definition}[Finite-support presentation template]
+Fix a set of term labels, each of a fixed vertex sort
+and finite arity. A \emph{presentation template} $F$
+assigns a $G$-system $F(I)$ to each eligible well-order $I$.
+Each vertex occurrence has a representation
+\[
+a=t(i_0,\ldots,i_{n-1}),\qquad
+i_0<\cdots<i_{n-1}\text{ in }I,
+\]
+with label $t$ of the appropriate sort.
+Equality, vertex relations and operations, and edge maps
+are evaluated uniformly from term labels and the finite
+order/equality patterns of skeleton coordinates.
+Distinct term representations may yield the same occurrence.
+We separate this presentation data from the functoriality
+and representation axioms imposed below.
+\end{definition}
+
+\begin{definition}[Diagram comparisons]
+For each sorted index sequence
+$\mathbf v=(v_i)_{i<\gamma}$ of length bounded
+at the levels considered, a \emph{diagram comparison}
+is an equivalence relation $\equiv_D^{\mathbf v}$
+on pairs $(\ba;\mathcal M)$, where $\mathcal M$ is
+an eligible system and $\ba$ is a list of those sorts.
+We use the diagram-class notation
+\[
+D(\ba;\mathcal M)=D(\bb;\mathcal N)
+\iff
+(\ba;\mathcal M)\equiv_D^{\mathbf v}(\bb;\mathcal N).
+\]
+No preassigned set of diagram codes is required.
+Invariance under arrows, realization, and characterization
+by isomorphisms are separate working-package axioms.
+\end{definition}
+
+\begin{definition}[Possible joint diagram]
+For a bounded actual sorted list $\ba$ in $\mathcal M$,
+a diagram $q(\bd,\ba)$ is \emph{possible over $\ba$}
+if some eligible system $\mathcal N$ has a joint
+list $(\bd',\ba')$ of bounded length satisfying
+\[
+D(\bd',\ba';\mathcal N)=q,\qquad
+D(\ba';\mathcal N)=D(\ba;\mathcal M).
+\]
+It need not initially be realized with the
+actual parameters $\ba$ fixed in $\mathcal M$.
+\end{definition}
+
+\subsection{Axioms of a working scheme}
+\begin{definition}[Working package;
+{\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
+A \emph{working scheme} consists of eligible
+classes $\mathcal C_\mu$ of level-$\mu$ systems,
+a finite-support template $F$, designated
+system arrows (including mixed-level arrows),
+and the diagram comparisons above, satisfying:
+\begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
+\item \textbf{Structural closure.}
+Arrows include all system isomorphisms, compose,
+and are invariant under isomorphisms.
+If $\mathcal X\subseteq\mathcal Y\subseteq\mathcal Z$
+and both inclusions into $\mathcal Z$ are arrows,
+then $\mathcal X\to\mathcal Y$ is an arrow.
+An increasing nonempty chain of level-$\mu$
+objects with componentwise union of total
+cardinality $\mu$ has its union as an object
+at level $\mu$, with inclusion arrows.
+The union also includes by an arrow into
+any common eligible upper object into which
+all chain members include by arrows.
+
+\item \textbf{Presentations and downward closure.}
+For every eligible well-order $I$ of size $\mu$,
+$F(I)\in\mathcal C_\mu$. Order embeddings
+between eligible well-orders induce arrows,
+including at mixed levels.
+Every level-$\mu$ object is isomorphic
+to some $F(I)$ with $|I|=\mu$.
+For $\nu\leq\mu$ eligible, any set of
+at most $\nu$ vertex occurrences in a
+level-$\mu$ object, together with required
+distinguished data, lies in a level-$\nu$
+subobject whose inclusion is an arrow.
+
+\item \textbf{Diagram invariance and homogeneity.}
+Diagrams include the atomic diagram of the
+entire many-sorted code and respect
+restrictions and reindexing.
+Every arrow, including mixed-level arrows,
+preserves diagrams. For two bounded lists
+at the same level, equality of diagrams
+is equivalent to the existence of a
+system isomorphism identifying the lists.
+At each fixed sorted arity, the number
+of diagrams is bounded by a set independent
+of the eligible level.
+Every possible joint diagram extending the
+diagram of an actual bounded list is realized
+over that very list at its level, whenever
+the joint length is bounded there.
+On represented term lists, diagrams depend
+only on labels and joint order/equality patterns
+of the skeleton positions, even at mixed levels.
+
+\item \textbf{Exhaustion criterion.}
+Compatible diagram matches on increasing
+bounded lists that exhaust the source system
+define an arrow, provided each source
+vertex is exhausted by nested enumerations
+of strong submodels of size below the
+source level, and the image of each such
+enumeration is a strong submodel of the
+corresponding target vertex.
+Any further scheme-specific arrow condition
+must be proved independently in that construction.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Definitions versus hypotheses]
+The presentation and comparison structures above
+are data. Conditions (W1)--(W4) are substantive
+axioms, not consequences of the definitions.
+In particular, the same-level isomorphism
+characterization of diagrams is an assumption,
+rather than a definition of the equivalence relation.
+As in the source, the empty list has one diagram;
+combined with (W3) this makes all objects at
+a fixed eligible level isomorphic.
+The extra obligation on geometric arrows is
+not eliminated by checking componentwise strongness.
+\end{remark}
+
+\begin{remark}[Relation of the working package to AEC machinery]
+A system arrow is a commuting family of $\K$-embeddings,
+possibly with additional global conditions. A many-sorted
+$\tau(\K)$-embedding is weaker: it need not be strong
+on each vertex. The template $F$ generalizes the
+functorial finite-support EM construction from one
+model to a finite diagram of models.
+
+The equivalence relations called \emph{diagrams} in the
+working package are primitive comparison data; the
+axiom identifying diagram equality with an isomorphism
+at a fixed level is a high degree of homogeneity, not
+a formal consequence of the definition. The extension
+axiom plays a role analogous to realizing compatible
+Galois types over a fixed parameter list. These are
+\emph{analogies}: the package does not stipulate that
+its comparisons are Galois types, nor does it
+assume amalgamation for every constituent model.
+\end{remark}
 
 \section{Questions for the next reading session}
 \begin{enumerate}
