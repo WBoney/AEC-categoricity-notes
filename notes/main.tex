@@ -741,13 +741,149 @@ Even a componentwise strong system embedding need
 not be an arrow of a particular working scheme.
 \end{remark}
 
-\subsection{Next: presentations and comparisons}
-The remaining clauses of \cite[Definition 5.2]{oai-ecc}
-specify finite-support presentations, diagram comparisons
-of bounded sorted tuples, and structural, homogeneity,
-and exhaustion axioms. In particular, the assertion
-that equal diagrams are implemented by isomorphisms
-is an axiom rather than a definition.
+\subsection{Eligible levels, presentations, and comparisons}
+\begin{definition}[Eligible levels and bounded lists]
+Fix an unbounded definable class $\mathcal S$ of infinite
+cardinals, the \emph{eligible levels}. A system is at level
+$\mu\in\mathcal S$ if all vertices have size $\mu$.
+A sorted list is \emph{bounded at $\mu$} if its length
+is less than $\mu$. Strict closure under a bound
+$u$ means $u(\theta)<\mu$ for each infinite $\theta<\mu$.
+These conventions follow \cite[Convention 5.1]{oai-ecc}.
+\end{definition}
+
+\begin{definition}[Finite-support presentation template]
+Fix a set of term labels, each of a fixed vertex sort
+and finite arity. A \emph{presentation template} $F$
+assigns a $G$-system $F(I)$ to each eligible well-order $I$.
+Each vertex occurrence has a representation
+\[
+a=t(i_0,\ldots,i_{n-1}),\qquad
+i_0<\cdots<i_{n-1}\text{ in }I,
+\]
+with label $t$ of the appropriate sort.
+Equality, vertex relations and operations, and edge maps
+are evaluated uniformly from term labels and the finite
+order/equality patterns of skeleton coordinates.
+Distinct term representations may yield the same occurrence.
+We separate this presentation data from the functoriality
+and representation axioms imposed below.
+\end{definition}
+
+\begin{definition}[Diagram comparisons]
+For each sorted index sequence
+$\mathbf v=(v_i)_{i<\gamma}$ of length bounded
+at the levels considered, a \emph{diagram comparison}
+is an equivalence relation $\equiv_D^{\mathbf v}$
+on pairs $(\ba;\mathcal M)$, where $\mathcal M$ is
+an eligible system and $\ba$ is a list of those sorts.
+We use the diagram-class notation
+\[
+D(\ba;\mathcal M)=D(\bb;\mathcal N)
+\iff
+(\ba;\mathcal M)\equiv_D^{\mathbf v}(\bb;\mathcal N).
+\]
+No preassigned set of diagram codes is required.
+Invariance under arrows, realization, and characterization
+by isomorphisms are separate working-package axioms.
+\end{definition}
+
+\begin{definition}[Possible joint diagram]
+For a bounded actual sorted list $\ba$ in $\mathcal M$,
+a diagram $q(\bd,\ba)$ is \emph{possible over $\ba$}
+if some eligible system $\mathcal N$ has a joint
+list $(\bd',\ba')$ of bounded length satisfying
+\[
+D(\bd',\ba';\mathcal N)=q,\qquad
+D(\ba';\mathcal N)=D(\ba;\mathcal M).
+\]
+It need not initially be realized with the
+actual parameters $\ba$ fixed in $\mathcal M$.
+\end{definition}
+
+\subsection{Axioms of a working scheme}
+\begin{definition}[Working package;
+{\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
+A \emph{working scheme} consists of eligible
+classes $\mathcal C_\mu$ of level-$\mu$ systems,
+a finite-support template $F$, designated
+system arrows (including mixed-level arrows),
+and the diagram comparisons above, satisfying:
+\begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
+\item \textbf{Structural closure.}
+Arrows include all system isomorphisms, compose,
+and are invariant under isomorphisms.
+If $\mathcal X\subseteq\mathcal Y\subseteq\mathcal Z$
+and both inclusions into $\mathcal Z$ are arrows,
+then $\mathcal X\to\mathcal Y$ is an arrow.
+An increasing nonempty chain of level-$\mu$
+objects with componentwise union of total
+cardinality $\mu$ has its union as an object
+at level $\mu$, with inclusion arrows.
+The union also includes by an arrow into
+any common eligible upper object into which
+all chain members include by arrows.
+
+\item \textbf{Presentations and downward closure.}
+For every eligible well-order $I$ of size $\mu$,
+$F(I)\in\mathcal C_\mu$. Order embeddings
+between eligible well-orders induce arrows,
+including at mixed levels.
+Every level-$\mu$ object is isomorphic
+to some $F(I)$ with $|I|=\mu$.
+For $\nu\leq\mu$ eligible, any set of
+at most $\nu$ vertex occurrences in a
+level-$\mu$ object, together with required
+distinguished data, lies in a level-$\nu$
+subobject whose inclusion is an arrow.
+
+\item \textbf{Diagram invariance and homogeneity.}
+Diagrams include the atomic diagram of the
+entire many-sorted code and respect
+restrictions and reindexing.
+Every arrow, including mixed-level arrows,
+preserves diagrams. For two bounded lists
+at the same level, equality of diagrams
+is equivalent to the existence of a
+system isomorphism identifying the lists.
+At each fixed sorted arity, the number
+of diagrams is bounded by a set independent
+of the eligible level.
+Every possible joint diagram extending the
+diagram of an actual bounded list is realized
+over that very list at its level, whenever
+the joint length is bounded there.
+On represented term lists, diagrams depend
+only on labels and joint order/equality patterns
+of the skeleton positions, even at mixed levels.
+
+\item \textbf{Exhaustion criterion.}
+Compatible diagram matches on increasing
+bounded lists that exhaust the source system
+define an arrow, provided each source
+vertex is exhausted by nested enumerations
+of strong submodels of size below the
+source level, and the image of each such
+enumeration is a strong submodel of the
+corresponding target vertex.
+Any further scheme-specific arrow condition
+must be proved independently in that construction.
+\end{enumerate}
+\end{definition}
+
+\begin{remark}[Definitions versus hypotheses]
+The presentation and comparison structures above
+are data. Conditions (W1)--(W4) are substantive
+axioms, not consequences of the definitions.
+In particular, the same-level isomorphism
+characterization of diagrams is an assumption,
+rather than a definition of the equivalence relation.
+As in the source, the empty list has one diagram;
+combined with (W3) this makes all objects at
+a fixed eligible level isomorphic.
+The extra obligation on geometric arrows is
+not eliminated by checking componentwise strongness.
+\end{remark}
 
 \section{Questions for the next reading session}
 \begin{enumerate}
