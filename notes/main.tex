@@ -610,6 +610,58 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
+\begin{lemma}[Unique compactness for placed comparisons;
+consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
+\label{lem:unique-placed-compactness}
+Let $I$ be an infinite well-order and $A=\EM(I,\Phi)$.
+Fix an infinite cardinal $\sigma$ and choose $\chi$ with
+\[
+\chi>\ell+\sigma,\qquad \chi^\sigma=\chi,
+\qquad \chi\geq g(\sigma),
+\]
+where $\ell$ is the fixed presentation bound and $g$ is
+the uniform testing function of Proposition~4.8.
+For each $X\subseteq A$ of cardinality at most $\chi$,
+suppose a \emph{possible} joint comparison diagram
+$q_X(\bd,X)$ is prescribed for a tuple $\bd$ of length
+at most $\sigma$. Assume that the prescriptions are
+coherent under restriction and that their diagrams
+on the parameter tuples $X$ are the natural diagrams
+of those parameters in $A$.
+
+Then there exists a placement of $\bd$ over the
+fixed skeleton $I$ whose placed comparison restricts
+to $q_X$ for every such $X$. Moreover, \emph{any two}
+placements satisfying all these prescriptions have
+the same full placed comparison over $A$.
+Thus the coherent family has exactly one
+\emph{extension as a comparison diagram}; neither
+the placement nor its realizing tuple is asserted
+to be unique.
+\end{lemma}
+\begin{proof}
+Existence is Proposition~4.9. If two realizing
+placements had different full comparisons,
+Proposition~4.8 would find some $X\subseteq A$
+with $|X|\leq g(\sigma)\leq\chi$ on which their
+joint diagrams differ. Both restrictions equal
+$q_X$, a contradiction.
+\end{proof}
+
+\begin{remark}[Scope of compactness and uniqueness]
+This is a compactness-and-separation principle for
+\emph{placed canonical diagrams over well-ordered
+EM presentations}, not a compactness theorem for
+arbitrary Galois types. The possibility hypothesis
+on each $q_X$ is essential; coherence alone does
+not assert that an arbitrary syntactic prescription
+is a possible joint diagram. The bound $g(\sigma)$
+is independent of $|I|$. In Lemma~4.10 the source
+applies this principle at cofinally many
+$\chi<\mu$ to lift all bounded diagrams of an
+actual tuple over a base of size $\mu$.
+\end{remark}
+
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
 \item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
