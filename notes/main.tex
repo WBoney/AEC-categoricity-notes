@@ -364,6 +364,20 @@ S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
 By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
 \end{definition}
 
+\begin{remark}[AEC interpretation of the stabilized classes]
+The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
+strong submodels, even when its ambient models are larger.
+At a sufficiently large categoricity size, its restriction
+to $\K_\kappa$ is exactly equality of Galois types over
+$\emptyset$, where equality is defined through the
+transitive closure of direct amalgamation equivalence.
+This makes $S_\kappa^\gamma$ a \emph{local Galois-type
+space}, not in general the space of Galois types computed
+in arbitrary ambient models. Stabilization of these
+spaces is distinct from the AEC stability property
+bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\end{remark}
+
 \subsection{Stabilization}
 \begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
 For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
@@ -521,6 +535,20 @@ placed diagrams with Galois types over arbitrary bases before
 the relevant amalgamation results have been proved.
 \end{remark}
 
+\begin{remark}[Relation to types over models]
+For $A=\EM(I,\Phi)$ and a tuple $\bd$ in an EM extension,
+the placed comparison is
+$D_{\mathrm{nat}}(\bd,\ba_A)$, with the enumeration
+of $A$ fixed on both sides. This resembles the usual
+AEC notion $\operatorname{gtp}(\bd/A;N)$, but the
+definition requires neither a monster model nor
+amalgamation over $A$. Matching the labeled relative
+support order pattern is sufficient for equality of
+placed diagrams, not necessary. Conversely, equality
+of placed diagrams need not imply that the two chosen
+presentations have isomorphic labeled support orders.
+\end{remark}
+
 \subsection{Back-and-forth and block transpositions}
 \begin{remark}[Source Proposition 4.3: back-and-forth]
 At a closure point $\zeta$ of countable cofinality, write both
@@ -653,6 +681,30 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
+\subsection{Locality and compactness for placed comparisons}
+The source's Proposition~4.8 gives a uniform function
+$g(\sigma)$ with the following \emph{separation} property:
+for a well-ordered EM base $A=\EM(I,\Phi)$, two different
+placed comparisons of a tuple of length at most $\sigma$
+are already distinguished over some
+$X\subseteq A$ of size at most $g(\sigma)$.
+This is tameness-like locality for a specific kind of
+base and a specific comparison invariant, not
+tameness for all Galois types.
+
+Proposition~4.9 gives a complementary \emph{existence}
+principle: a coherent family of possible joint diagrams
+over all $X\in[A]^{\leq\chi}$, for
+$\chi>\ell+\sigma$ with $\chi^\sigma=\chi$,
+is realized by a placement. Together they imply
+uniqueness of the full \emph{diagram} once
+$\chi\geq g(\sigma)$, as recorded next.
+The proof of Proposition~4.9 uses the finite supports
+of EM terms, clusters of support positions within
+cuts, and the block symmetry of Lemma~4.6.
+These are properties of the presentation calculus,
+not an instance of first-order compactness.
+
 \begin{lemma}[Unique compactness for placed comparisons;
 consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 \label{lem:unique-placed-compactness}
@@ -703,6 +755,23 @@ is independent of $|I|$. In Lemma~4.10 the source
 applies this principle at cofinally many
 $\chi<\mu$ to lift all bounded diagrams of an
 actual tuple over a base of size $\mu$.
+\end{remark}
+
+\begin{remark}[The role of cofinality in the next step]
+The compactness and uniform-testing propositions are
+formulated for arbitrary infinite well-ordered skeletons.
+In the source, Lemma~4.10 applies them at strong-limit
+cardinals $\mu$ of countable cofinality that are
+strictly closed below themselves under the relevant
+threshold functions $t$ and $g$. The proof of that
+lemma uses cofinally many $\chi<\mu$ with
+$\chi^\sigma=\chi$ (available from the strong-limit
+assumption), whereas countable cofinality is central
+to the later countable exhaustion used for
+amalgamation in Theorem~4.11.
+The weaker cofinality requirements that might suffice
+for Lemma~4.10 alone have not been established as a
+separate source theorem.
 \end{remark}
 
 \textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
@@ -926,6 +995,26 @@ combined with (W3) this makes all objects at
 a fixed eligible level isomorphic.
 The extra obligation on geometric arrows is
 not eliminated by checking componentwise strongness.
+\end{remark}
+
+\begin{remark}[Relation of the working package to AEC machinery]
+A system arrow is a commuting family of $\K$-embeddings,
+possibly with additional global conditions. A many-sorted
+$\tau(\K)$-embedding is weaker: it need not be strong
+on each vertex. The template $F$ generalizes the
+functorial finite-support EM construction from one
+model to a finite diagram of models.
+
+The equivalence relations called \emph{diagrams} in the
+working package are primitive comparison data; the
+axiom identifying diagram equality with an isomorphism
+at a fixed level is a high degree of homogeneity, not
+a formal consequence of the definition. The extension
+axiom plays a role analogous to realizing compatible
+Galois types over a fixed parameter list. These are
+\emph{analogies}: the package does not stipulate that
+its comparisons are Galois types, nor does it
+assume amalgamation for every constituent model.
 \end{remark}
 
 \section{Questions for the next reading session}
