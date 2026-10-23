@@ -101,14 +101,62 @@ the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
 defining it, not as an automatic synonym for $D_{\mathrm{nat}}$.
 \end{remark}
 
-\section{Section 2: AEC and EM foundations}
-\textbf{Lemmas 2.1 and 2.2.} Elementary preliminaries; candidates for omission from a conceptual account.
+\section{Types of types}\label{sec:types}
+We organize the arguments of the source's Sections 3--4 by
+the kinds of type that are compared. The class
+$\Kord$ of linear orders with order embeddings
+provides the index-side invariants; the EM functor
+lifts order automorphisms, embeddings, and amalgams
+to $\K$. These give different comparisons of the
+evaluated tuples.
 
-\textbf{Lemma 2.5.} Essentially Erd\H{o}s--Rado combinatorics, with applications to extracting uniform presentations.
+\subsection{Presentation records and order types}\label{sec:records}
+\begin{definition}[Presentation record]\label{def:records}
+Let $I$ be a linear order. For an output ordinal
+$\gamma$, a \emph{presentation record from $I$ in $\tau$}
+is a pair $r=(\bar f,\bi)$, where
+\[
+\bar f=(f_k)_{k<\gamma},\qquad
+\bi=(i_j)_{j<\alpha}
+\]
+is strictly increasing in $I$, and every $f_k$ is
+a $\tau$-term in the variables $(x_j)_{j<\alpha}$
+using only finitely many variables. Discarding
+unused indices gives a canonical support convention.
+The collection $\Rec^\gamma_\tau(I,\Phi)$ of all such
+records of fixed output length $\gamma$ is a set;
+so is $\Rec^{\leq\theta}_\tau(I,\Phi)$ for any
+fixed cardinal $\theta$. The union over all
+possible output ordinals would not be a set.
 
-\textbf{Theorem 2.6.} The standard Ehrenfeucht--Mostowski (EM) model construction for AECs. The paper's ``labels'' can be understood as terms in an expanded language. Fix a vocabulary $\tau\supseteq\tau(\K)$ and an EM template $\Phi$ in $\tau$. The standard notation for the reduct of the EM model to the AEC language is $\EM(I,\Phi)\upharpoonright\tau(\K)$ (or simply $\EM(I,\Phi)$ when the reduct is understood). Order embeddings induce strong embeddings of these reducts, and elements have representations using $\tau$-terms and finitely many positions in $I$. We retain $\Phi$ as a fixed template throughout.
+The \emph{evaluation map} is
+\[
+\operatorname{ev}_I^\gamma:
+\Rec^\gamma_\tau(I,\Phi)\longrightarrow
+\operatorname{EM}_\tau(I,\Phi)^\gamma,\qquad
+(\bar f,\bi)\longmapsto (f_k(\bi))_{k<\gamma}.
+\]
+A record $r$ is a presentation record \emph{of}
+$\ba$ if $\operatorname{ev}_I^\gamma(r)=\ba$.
+Every tuple has one by the EM finite-support
+property, but it need not be unique.
+\end{definition}
 
-\emph{Compression proposal.} Replace most of Section 2 by a single EM-presentation theorem recording functoriality, finite support, and the cardinality properties used later.
+\begin{definition}[Order types]\label{def:ordtypes}
+Let $\bi$ be a sequence from a linear order $I$.
+Its \emph{quantifier-free order type}
+$\operatorname{tp}(\bi;I)$ records all order and
+equality relations among its coordinates.
+The augmented order type
+$\tpstar(\bi;I)$ also records whether each
+strict slot over the distinct coordinates
+of $\bi$ is occupied (including the two end slots).
+For example, where $x<y$ are consecutive
+distinct entries, it records the truth of
+$\exists z\,(x<z<y)$; for infinite tuples this
+also includes cuts not necessarily specified by
+a single pair of consecutive entries.
+\end{definition}
 
 \section{Section 3: EM orbit calculus and reversal}
 \subsection{Special orders and orbit bounds}
