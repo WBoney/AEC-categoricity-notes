@@ -41,7 +41,16 @@
 \begin{document}
 \maketitle
 \begin{abstract}
-These notes track the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture, emphasizing connections with standard AEC technology: strong embeddings, Galois types, EM functors, presentation-dependent orbit invariants, and locality of types. We distinguish source statements from derived lemmas and interpretive analogies. Sections 3--4 receive detailed analysis, while Section 5 begins a systematic reformulation of the working scheme. This remains a reading companion, not an independent verification of the full proof.
+These reading notes reorganize the OpenAI eventual categoricity
+manuscript around a sequence of notions of type: presentation
+records and order types, automorphism orbits, arrow types, Galois
+types, and natural or placed canonical diagrams. We emphasize the
+role of EM functoriality and carefully separate equalities that
+are proved, implications that are only one-way, and analogies
+with existing AEC technology. The final sections record locality,
+compactness, amalgamation at closed levels, and the first
+definitions for finite systems. This is not an independent
+verification of the manuscript.
 \end{abstract}
 \tableofcontents
 \section{Strategy and notation}
@@ -676,7 +685,8 @@ Proposition~4.2. This is why the natural diagram is a
 presentation-independent comparison invariant even though it is
 computed from a chosen EM term representation.
 
-The distinction from Section~3 is also important: classification
+The distinction from automorphism types in Section~\ref{subsec:auto}
+is also important: classification
 under automorphisms of one fixed $H(\delta)$ requires occupied-slot
 data, whereas here arbitrary order extensions and strong EM
 embeddings suffice, so only the labeled support order pattern is
@@ -713,7 +723,7 @@ not necessarily cuts of the underlying structure $A$.
 
 Thus a placement resembles a presentation record with parameters,
 but its \emph{placed diagram} is a \emph{natural diagram with
-parameters}, not a Section~3 strong-orbit presentation record.
+parameters}, not an EM-automorphism orbit presentation record.
 Matching relative labeled order records implies matching placed
 diagrams; the converse is not asserted. Nor do we identify
 placed diagrams with Galois types over arbitrary bases before
