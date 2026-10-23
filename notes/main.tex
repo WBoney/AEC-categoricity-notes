@@ -59,6 +59,22 @@ automorphism orbits, arrow comparisons and Galois types,
 toward locality and compactness for placed comparisons,
 amalgamation at selected cardinals and finite-system geometry.
 
+\[
+\begin{array}{c}
+\text{Categoricity in unboundedly many cardinals}\\[3pt]
+\Downarrow\\[3pt]
+\text{EM orbit bounds and bounded-tuple reversal}\\[3pt]
+\Downarrow\\[3pt]
+\text{Stabilized arrow types / canonical diagrams}\\[3pt]
+\Downarrow\\[3pt]
+\text{Locality and compactness for placed comparisons}\\[3pt]
+\Downarrow\\[3pt]
+\text{Amalgamation at selected closed levels}\\[3pt]
+\Downarrow\\[3pt]
+\text{Finite-system comparisons and geometric analysis}
+\end{array}
+\]
+
 \subsection*{Running notation and translation table}
 \begin{longtable}{@{}p{0.29\textwidth}p{0.62\textwidth}@{}}
 \toprule
@@ -823,7 +839,7 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
-\subsection{Locality and compactness for placed comparisons}
+\subsection{Locality and compactness for placed comparisons}\label{sec:locality}
 The source's Proposition~4.8 gives a uniform function
 $g(\sigma)$ with the following \emph{separation} property:
 for a well-ordered EM base $A=\EM(I,\Phi)$, two different
@@ -837,7 +853,7 @@ tameness for all Galois types.
 Proposition~4.9 gives a complementary \emph{existence}
 principle: a coherent family of possible joint diagrams
 over all $X\in[A]^{\leq\chi}$, for
-$\chi>\ell+\sigma$ with $\chi^\sigma=\chi$,
+$\chi>\lambda_0+\sigma$ with $\chi^\sigma=\chi$,
 is realized by a placement. Together they imply
 uniqueness of the full \emph{diagram} once
 $\chi\geq g(\sigma)$, as recorded next.
@@ -853,10 +869,10 @@ consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 Let $I$ be an infinite well-order and $A=\EM(I,\Phi)$.
 Fix an infinite cardinal $\sigma$ and choose $\chi$ with
 \[
-\chi>\ell+\sigma,\qquad \chi^\sigma=\chi,
+\chi>\lambda_0+\sigma,\qquad \chi^\sigma=\chi,
 \qquad \chi\geq g(\sigma),
 \]
-where $\ell$ is the fixed presentation bound and $g$ is
+where $\lambda_0=\LS(\K)$ is the presentation bound and $g$ is
 the uniform testing function of Proposition~4.8.
 For each $X\subseteq A$ of cardinality at most $\chi$,
 suppose a \emph{possible} joint comparison diagram
@@ -924,7 +940,7 @@ separate source theorem.
 \end{enumerate}
 This is an amalgamation conclusion at selected cardinals, \emph{not} a claim of eventual amalgamation at all sufficiently large cardinals. We have not yet analyzed all the technical steps of Sections 4.2--4.4 in the same depth as Sections 3--4.1.
 
-\section{Section 5: Working schemes for finite systems}
+\section{Finite systems and working schemes}
 \subsection{Systems and their morphisms}
 We make the systems of \cite[Section 5.1]{oai-ecc} precise. Requiring
 internal edge maps to be strong is our explicit convention;
