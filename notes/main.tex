@@ -9,6 +9,13 @@
 \setlength{\parindent}{0pt}
 \newcommand{\K}{\mathbf K}
 \newcommand{\LS}{\operatorname{LS}}
+\newcommand{\atp}{\operatorname{atp}}
+\newcommand{\gtp}{\operatorname{gtp}}
+\newcommand{\auttp}{\operatorname{tp}_{\mathrm{aut}}}
+\newcommand{\EMauttp}{\operatorname{tp}^{\mathrm{EM}}_{\mathrm{aut}}}
+\newcommand{\Kord}{\mathbf K^{\mathrm{or}}}
+\newcommand{\tpstar}{\operatorname{tp}^{*}}
+\newcommand{\Rec}{\operatorname{Rec}}
 \newcommand{\EM}{\operatorname{EM}_{\tau}}
 \newcommand{\card}[1]{\lvert #1\rvert}
 \newcommand{\ba}{\mathbf{a}}
@@ -30,7 +37,7 @@
 \theoremstyle{remark}
 \newtheorem{remark}[definition]{Remark}
 
-\title{Reading Notes on the Eventual Categoricity Proof\\large Canonical Diagrams, EM Presentations, and AEC Technology}
+\title{Types of Types in the Eventual Categoricity Proof\\large AEC and EM Reading Notes}
 \author{Reading notes}
 \date{Working draft, October 2026}
 \begin{document}
@@ -39,58 +46,59 @@
 These notes track the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture, emphasizing connections with standard AEC technology: strong embeddings, Galois types, EM functors, presentation-dependent orbit invariants, and locality of types. We distinguish source statements from derived lemmas and interpretive analogies. Sections 3--4 receive detailed analysis, while Section 5 begins a systematic reformulation of the working scheme. This remains a reading companion, not an independent verification of the full proof.
 \end{abstract}
 \tableofcontents
-\section{Overall strategy}
-Fix an abstract elementary class $\K$ with $\LS(\K)=\ell$, categorical in unboundedly many cardinals. The qualitative goal is categoricity on a tail of the cardinals; the manuscript also formulates a uniform threshold depending on $\ell$.
+\section{Strategy and notation}
+Fix an AEC $(\K,\leq_\K)$ categorical in unboundedly many cardinals.
+Write $\lambda_0=\LS(\K)$; use $\lambda,\kappa,\mu$ for infinite
+cardinals and $\ell(\ba)$ only for the length of a tuple.
+Fix an EM template $\Phi$ in $\tau\supseteq\tau(\K)$.
+Unless otherwise stated, $\EM(I,\Phi)$ denotes its reduct
+to $\tau(\K)$.
 
-The structural trajectory is
-\[
-\begin{gathered}
-\text{Unbounded categoricity}\ \Downarrow\
-\text{Controlled Ehrenfeucht--Mostowski presentations}\ \Downarrow\
-\text{Reversal of strong maps on bounded tuples}\ \Downarrow\
-\text{Stabilized canonical comparison diagrams}\ \Downarrow\
-\text{Amalgamation and bounded-tuple calculus at selected levels}\ \Downarrow\
-\text{Independence, isolation, and finite systems}\ \Downarrow\
-\text{Geometry and classification by bases}\ \Downarrow\
-\text{Eventual categoricity}.
-\end{gathered}
-\]
-A distinctive feature is that amalgamation, tameness, and a good frame are not taken as initial hypotheses. The proof attempts to obtain the required structure from categoricity.
+The argument moves from order types and EM records through
+automorphism orbits, arrow comparisons and Galois types,
+toward locality and compactness for placed comparisons,
+amalgamation at selected cardinals and finite-system geometry.
 
-\subsection*{AEC dictionary and levels of comparison}
-We write $M\leq_\K N$ for the AEC strong-submodel
-relation. A \emph{$\K$-embedding} is a $\tau(\K)$-embedding
-whose image is strong; a mere $\tau(\K)$-embedding need not
-be strong. The fixed EM template $\Phi$ gives a functorial
-construction, after taking reducts to $\tau(\K)$:
-\[
-I\hookrightarrow J\quad\Longrightarrow\quad
-\EM(I,\Phi)\longrightarrow\EM(J,\Phi)
-\]
-by a $\K$-embedding. Skeleton coordinates and expanded-language
-term representations are presentation data.
+\subsection*{Running notation and translation table}
+\begin{longtable}{@{}p{0.29\textwidth}p{0.62\textwidth}@{}}
+\toprule
+Notation & Meaning and reference\\
+\midrule\endhead
+$\lambda_0=\LS(\K)$ & AEC L\"owenheim--Skolem cardinal; replaces
+the source's cardinal $\ell$.\\
+$\ell(\ba)$, $\theta$, $\sigma$ & Tuple length and length bounds
+(Section~\ref{sec:types}).\\
+$\Rec^\gamma_\tau(I,\Phi)$, $\operatorname{ev}_I$ &
+Presentation records and evaluation (Definition~\ref{def:records}).\\
+$\operatorname{tp},\tpstar$ & Quantifier-free order type,
+with and without slot occupancy (Definition~\ref{def:ordtypes}).\\
+$\auttp,\EMauttp$ & Full and order-induced automorphism types
+(Section~\ref{subsec:auto}).\\
+$b_\K(\theta)$ & Eventual reversal threshold
+(Theorem~\ref{thm:reversal}; source Theorem 3.11).\\
+$\equiv_\kappa^{*,\gamma},\equiv_\kappa^\gamma$ &
+Arrow comparisons (Section~\ref{subsec:arrow}).\\
+$S^\gamma_\kappa,\atp_\kappa,\atp$ &
+Arrow types and their stabilized value
+(source Proposition 4.2).\\
+$c_\sigma,t(\sigma)$ & Stabilization and diagram thresholds
+(source Proposition 4.2).\\
+$\gtp,\gtp^{\mathrm{EM}}$ & Ordinary and EM-lifted
+Galois comparisons (Section~\ref{subsec:galois}).\\
+$D_{\mathrm{nat}},D_{\mathrm{pl}}$ & Natural and placed diagrams
+(source Definition 4.4).\\
+$g(\sigma)$ & Uniform testing threshold
+(Section~\ref{sec:locality}; source Proposition 4.8).\\
+\bottomrule
+\end{longtable}
 
-\begin{remark}[Three distinct notions of type-like data]
-\begin{enumerate}[label=(\roman*),leftmargin=*]
-\item \emph{Strong EM types} are tuple orbits under
-automorphisms induced by order automorphisms of a fixed
-skeleton $H(\delta)$; order records with term labels
-and slot occupancy supply sufficient witnesses.
-\item \emph{Canonical comparison diagrams} arise by
-stabilizing strong-map comparisons at categoricity sizes.
-For tuples in models at a sufficiently large categoricity
-size, these agree with Galois types over $\emptyset$
-(Lemma~\ref{lem:gtp-reversal}).
-\item \emph{Natural diagrams} compute canonical comparisons
-from labeled EM term representations. \emph{Placed diagrams}
-include fixed parameters from an EM-presented base;
-before amalgamation, they are not automatically Galois
-types over that base.
-\end{enumerate}
-Order records are syntactic witnesses; comparison diagrams
-are semantic equivalence classes. We distinguish results
-stated in the source, consequences proved here, and
-interpretive comparisons to standard AEC technology.
+\begin{remark}[Notation crosswalk]
+The earlier strong type under skeleton-induced automorphisms
+becomes $\EMauttp$. The earlier canonical diagram is the
+stabilized arrow type $\atp$. The source's stable diagrams
+means \emph{stabilized} rather than stable in
+the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
+defining it, not as an automatic synonym for $D_{\mathrm{nat}}$.
 \end{remark}
 
 \section{Section 2: AEC and EM foundations}
