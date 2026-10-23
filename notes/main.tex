@@ -758,8 +758,6 @@ declared to equal a Galois type over arbitrary $A$.
 \end{remark}
 
 \section{Consequences: order symmetry, locality, and amalgamation}
-\textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
-
 \subsection{Back-and-forth and block transpositions}
 \begin{remark}[Source Proposition 4.3: back-and-forth]
 At a closure point $\zeta$ of countable cofinality, write both
@@ -910,7 +908,10 @@ $\chi>\lambda_0+\sigma$ with $\chi^\sigma=\chi$,
 is realized by a placement. Together they imply
 uniqueness of the full \emph{diagram} once
 $\chi\geq g(\sigma)$, as recorded next.
-The proof of Proposition~4.9 uses the finite supports
+In this notation the placed comparison is
+$D_{\mathrm{pl}}(\bd;A)=\atp(\bd,\ba_A)$,
+computed in a sufficiently large EM presentation. The
+proof of Proposition~4.9 uses the finite supports
 of EM terms, clusters of support positions within
 cuts, and the block symmetry of Lemma~4.6.
 These are properties of the presentation calculus,
@@ -985,13 +986,20 @@ for Lemma~4.10 alone have not been established as a
 separate source theorem.
 \end{remark}
 
-\textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
+\begin{theorem}[Amalgamation at selected levels; {\cite[Theorem 4.11]{oai-ecc}}]\label{thm:amalgamation-closed}
+There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
 \item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
 \item For bounded tuples $\bar d_i\in B_i$ over a common $\mu$-sized base $A$, an amalgam identifying the tuples exists exactly when their relative diagrams agree on all $X\subseteq A$ of size at most $g(\sigma)$, for the relevant tuple-length bound $\sigma$.
 \item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
 \end{enumerate}
-This is an amalgamation conclusion at selected cardinals, \emph{not} a claim of eventual amalgamation at all sufficiently large cardinals. We have not yet analyzed all the technical steps of Sections 4.2--4.4 in the same depth as Sections 3--4.1.
+\end{theorem}
+\begin{remark}[Scope of amalgamation]
+This is amalgamation at selected cardinals, not an assertion
+of eventual amalgamation throughout a tail. The first conclusion
+is distinct from the uniform tameness and compactness of
+placed diagrams established earlier.
+\end{remark}
 
 \section{Finite systems and working schemes}
 \subsection{Systems and their morphisms}
