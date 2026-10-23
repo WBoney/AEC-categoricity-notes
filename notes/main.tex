@@ -25,8 +25,6 @@
 \newcommand{\bd}{\mathbf{d}}
 \newcommand{\be}{\mathbf{e}}
 \newcommand{\bc}{\mathbf{c}}
-\newcommand{\strS}{\operatorname{str}\text{-}S}
-\newcommand{\strtp}{\operatorname{str}\text{-}\operatorname{tp}}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
@@ -188,7 +186,8 @@ the subgroup induced by order automorphisms gives
 the potentially finer $\EMauttp$ defined next.
 \end{definition}
 
-\begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of the same length,
+\begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of length at most $\theta$, where
+$\theta$ is infinite and $\theta<\operatorname{cf}(\delta)$,
 \[
 \tpstar(\bi;H(\delta))
 =\tpstar(\bj;H(\delta))
@@ -268,14 +267,14 @@ the same tuple, may give different records. This lemma is the
 direction needed to bound the number of strong types by the number
 of possible records. The manuscript's Lemma~3.6 establishes a
 uniform bound on \emph{full model-automorphism orbits}; the present
-strong types are orbits under the subgroup induced from the index
+EM-induced types are orbits under the subgroup induced from the index
 order, and the same record bound applies when
 $\operatorname{cf}(\delta)>\theta$.
 \end{remark}
 
 
 \begin{definition}[The arrow relation]
-For $p,q\in\strS^\delta$, write
+For $p,q\inS^{\mathrm{EM,aut}}_\delta$, write
 \[
 p\longrightarrow q
 \quad\Longleftrightarrow\quad
@@ -295,13 +294,13 @@ symmetry is the eventual reversal phenomenon discussed below.
 Here the arrow notation is also used for the related but
 \emph{different} orbit space of an AEC model; this does not
 identify fixed-skeleton strong types with all model orbits.
-At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $\strS^\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
+At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $S^{\mathrm{EM,aut}}_\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
 \[
 p\longrightarrow r
 \]
 if a strong self-embedding of $C_\kappa$ sends a representative of $p$ to a representative of $r$. This relation is reflexive and transitive, but symmetry is not automatic.
 
-The paper names the boundedly many orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
+The paper names the boundedly many full automorphism orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
 
 Lemmas 3.7, 3.8, and 3.10 provide order/ordinal bookkeeping; Proposition 3.9 is the important alignment statement allowing small and large presentations to have matching profile data.
 
@@ -324,6 +323,9 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 
 
 \subsection{Arrow types}\label{subsec:arrow}
+Fix an infinite tuple-length bound $\theta$ and a categoricity
+cardinal $\kappa\geq\lambda_0+\theta$ above the reversal
+threshold $b_\K(\theta)$ in the definitions below.
 The existence of a strong embedding carrying one tuple
 to another is initially directed. The eventual reversal
 theorem makes it an equivalence relation at sufficiently
@@ -703,6 +705,40 @@ of placed diagrams need not imply that the two chosen
 presentations have isomorphic labeled support orders.
 \end{remark}
 
+
+\begin{remark}[Comparisons between the type notions]
+For tuples represented by a common term list $\bar f$,
+the implications proved here can be summarized as
+\[
+\tpstar(\bi;H(\delta))=\tpstar(\bj;H(\delta))
+\Longrightarrow
+\EMauttp(\ba;M_\delta)=\EMauttp(\bb;M_\delta)
+\Longrightarrow
+\auttp(\ba;M_\delta)=\auttp(\bb;M_\delta).
+\]
+The first implication assumes the usual bound
+$\ell(\bi)<\operatorname{cf}(\delta)$.
+For possibly distinct index orders we have
+\[
+\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J)
+\Longrightarrow
+\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
+=\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
+\Longrightarrow
+D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
+\]
+These implications do not assert converses.
+
+At a sufficiently large categoricity cardinal,
+$\atp_\kappa$ on $\kappa$-sized models agrees with
+$\gtp(-/\emptyset;-)$ by Lemma~\ref{lem:gtp-reversal}.
+On larger ambient models, $\atp_\kappa$ compares
+types in small strong submodels and is not automatically
+the ambient Galois type. Similarly, a placed diagram
+over $A=\EM(I,\Phi)$ is an arrow comparison with an
+enumeration of $A$ included as parameters; it is not
+declared to equal a Galois type over arbitrary $A$.
+\end{remark}
 
 \section{Consequences: order symmetry, locality, and amalgamation}
 \textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
