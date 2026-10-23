@@ -307,9 +307,151 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \end{remark}
 
 
-\section{Section 4.1: Canonical diagrams and Galois types}
-\subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
-Fix an infinite $\theta$ and a categoricity cardinal $\kappa\geq\theta+\LS(\K)$ sufficiently large that Theorem~\ref{thm:reversal} applies to $\theta$-tuples.
+\subsection{Arrow types}\label{subsec:arrow}
+The existence of a strong embedding carrying one tuple
+to another is initially directed. The eventual reversal
+theorem makes it an equivalence relation at sufficiently
+large categoricity sizes. Its classes are \emph{arrow types}.
+The stabilized arrow type is precisely what the source
+calls a \emph{canonical comparison diagram}.
+
+\begin{definition}[Comparison at size $\kappa$]
+For $M,N\in\K_\kappa$ and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, write
+\[
+(\ba;M)\equiv^{*,\theta}_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+\exists f:M\longrightarrow N\text{ strong with }f(\ba)=\bb.
+\]
+Under the stated hypotheses this is an equivalence relation: reflexivity and transitivity are immediate. For symmetry, use categoricity to identify $M$ and $N$ with the same $\kappa$-sized model and apply Theorem~\ref{thm:reversal} to the resulting strong self-embedding and the given tuple.
+\end{definition}
+
+\begin{definition}[Comparison in larger models and arrow types]
+For $M,N\in\K_{\geq\kappa}$ and $\theta$-tuples $\ba\in M$, $\bb\in N$, write
+\[
+(\ba;M)\equiv^\theta_\kappa(\bb;N)
+\]
+if there exist $M_0\preccurlyeq_\K M$, $N_0\preccurlyeq_\K N$ of cardinality $\kappa$, with $\ba\in M_0^\theta$ and $\bb\in N_0^\theta$, such that
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\bb;N_0).
+\]
+\par
+For a tuple $\ba\in M^\gamma$, define its
+\emph{arrow type at $\kappa$} by
+\[
+\atp_\kappa(\ba;M):=[(\ba;M)]_{\equiv_\kappa^\gamma}.
+\]
+The parameter $\kappa$ refers to the size of the strong
+submodels used for comparison, not necessarily $|M|$.
+\end{definition}
+
+\begin{lemma}[Independence of small submodel {\cite[Lemma 4.1]{oai-ecc}}]\label{lem:small}
+If $M_0,M_1\preccurlyeq_\K M$ have cardinality $\kappa$ and both contain $\ba$, then
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\ba;M_1).
+\]
+Indeed, by downward L\"owenheim--Skolem choose a $\kappa$-sized $M_*\preccurlyeq_\K M$ containing $M_0\cup M_1$. Coherence yields $M_i\preccurlyeq_\K M_*$ for $i=0,1$. The inclusions witness
+$(\ba;M_i)\equiv^{*,\theta}_\kappa(\ba;M_*)$; symmetry and transitivity give the claim.
+\end{lemma}
+
+\begin{corollary}
+The relation $\equiv^\theta_\kappa$ is an equivalence relation on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$, and it is independent of which $\kappa$-sized strong submodels containing the tuples are chosen. For transitivity, replace the two intermediate $\kappa$-submodels inside the middle model by equivalent ones using the lemma, then compose the resulting strong maps at size $\kappa$. The relation is preserved by strong embeddings of the ambient models.
+\end{corollary}
+
+\begin{definition}[Type sets]
+For $\gamma\leq\theta$, set
+\[
+S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ \ba\in M^\gamma\bigr\},
+\qquad
+S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
+\]
+By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
+\end{definition}
+
+\begin{remark}[AEC interpretation of the stabilized classes]
+The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
+strong submodels, even when its ambient models are larger.
+At a sufficiently large categoricity size, its restriction
+to $\K_\kappa$ is exactly equality of Galois types over
+$\emptyset$, where equality is defined through the
+transitive closure of direct amalgamation equivalence.
+This makes $S_\kappa^\gamma$ a \emph{local Galois-type
+space}, not in general the space of Galois types computed
+in arbitrary ambient models. Stabilization of these
+spaces is distinct from the AEC stability property
+bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\end{remark}
+
+\subsubsection*{Stabilization of arrow types}
+\begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
+For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
+\[
+\pi^{\gamma}_{\lambda\kappa}:S^\gamma_\lambda
+\longrightarrow S^\gamma_\kappa,
+\qquad
+[(M,\bar a)]\longmapsto[(M_0,\bar a)],
+\]
+where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref{lem:small} makes this independent of the choice of $M_0$. Taking the disjoint union gives
+$\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
+These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
+
+More precisely, there is a categoricity cardinal $c_\sigma$ above the
+$\sigma$-tuple reversal threshold such that for every pair of categoricity
+cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
+$\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
+\emph{stabilization of the comparison classes}, not model-theoretic
+stability. 
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Suppose that noninjective projections occur
+arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
+common categoricity cardinal above them. Each refinement produces a pair
+of classes in the final model agreeing at an earlier stage but distinct
+at a later one. Pairs arising at different stages are distinct, because
+separation persists under further projection. Yet the final class set has
+size at most the infinite cardinal $B_\sigma$, and hence has at most
+$B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
+
+
+\end{proof}
+\begin{definition}[Stabilized arrow type (canonical diagram); extracted from
+{\cite[Proposition 4.2]{oai-ecc}}]
+Fix an infinite cardinal $\sigma$ and a categoricity cardinal
+$c_\sigma$ beyond the stabilization and reversal thresholds for
+tuples of length at most $\sigma$. For $M\in\K_{\geq c_\sigma}$
+and $\bar a\in M^\gamma$, $\gamma\leq\sigma$, define
+\[
+\atp(\bar a;M)
+ :=[(M_0,\bar a)]_{\equiv^{\gamma}_{c_\sigma}},
+\]
+where $M_0\leq_\K M$ has size $c_\sigma$ and contains $\bar a$.
+Lemma~\ref{lem:small} makes the definition independent of $M_0$.
+Stabilization makes equality of these diagrams independent of the
+chosen sufficiently large categoricity cardinal. We also write $D_\sigma(\bar a;M)$ or $D(\bar a;M)$
+when quoting the source. Thus the stabilized arrow type
+$\atp$ is precisely its canonical comparison diagram.
+\end{definition}
+
+Proposition~4.2 of the source manuscript further establishes:
+\begin{enumerate}[label=(\arabic*)]
+\item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
+\item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
+\item At categoricity cardinals at least the paper's nondecreasing threshold $t(\sigma)$, equality of diagrams is implemented by a strong map.
+\item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
+\end{enumerate}
+The paper chooses $t(\sigma)$ above the stabilization thresholds
+$c_\tau$ for every infinite $\tau\leq\sigma$; no explicit numerical
+formula for $c_\sigma$ is supplied.
+
+The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
+
+
+\subsection{Galois and EM-lifted comparisons}\label{subsec:galois}
+The standard AEC Galois type is obtained from joint
+embedding of tuples, not directly from the choice
+of a particular EM presentation. Without amalgamation,
+we use the equivalence relation generated by direct
+joint-embedding comparisons.
 
 \begin{definition}[Galois types over the empty set]
 For pairs $(\ba;M)$ and $(\bb;N)$ of equal tuple length, say
@@ -366,127 +508,6 @@ these local classes and, after the projections stabilize,
 $S^\gamma_*$ for their eventual common value, understood
 up to the canonical bijections.
 \end{remark}
-
-\begin{definition}[Comparison at size $\kappa$]
-For $M,N\in\K_\kappa$ and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, write
-\[
-(\ba;M)\equiv^{*,\theta}_\kappa(\bb;N)
-\quad\Longleftrightarrow\quad
-\exists f:M\longrightarrow N\text{ strong with }f(\ba)=\bb.
-\]
-Under the stated hypotheses this is an equivalence relation: reflexivity and transitivity are immediate. For symmetry, use categoricity to identify $M$ and $N$ with the same $\kappa$-sized model and apply Theorem~\ref{thm:reversal} to the resulting strong self-embedding and the given tuple.
-\end{definition}
-
-\begin{definition}[Comparison in larger models]
-For $M,N\in\K_{\geq\kappa}$ and $\theta$-tuples $\ba\in M$, $\bb\in N$, write
-\[
-(\ba;M)\equiv^\theta_\kappa(\bb;N)
-\]
-if there exist $M_0\preccurlyeq_\K M$, $N_0\preccurlyeq_\K N$ of cardinality $\kappa$, with $\ba\in M_0^\theta$ and $\bb\in N_0^\theta$, such that
-\[
-(\ba;M_0)\equiv^{*,\theta}_\kappa(\bb;N_0).
-\]
-\end{definition}
-
-\begin{lemma}[Independence of small submodel {\cite[Lemma 4.1]{oai-ecc}}]\label{lem:small}
-If $M_0,M_1\preccurlyeq_\K M$ have cardinality $\kappa$ and both contain $\ba$, then
-\[
-(\ba;M_0)\equiv^{*,\theta}_\kappa(\ba;M_1).
-\]
-Indeed, by downward L\"owenheim--Skolem choose a $\kappa$-sized $M_*\preccurlyeq_\K M$ containing $M_0\cup M_1$. Coherence yields $M_i\preccurlyeq_\K M_*$ for $i=0,1$. The inclusions witness
-$(\ba;M_i)\equiv^{*,\theta}_\kappa(\ba;M_*)$; symmetry and transitivity give the claim.
-\end{lemma}
-
-\begin{corollary}
-The relation $\equiv^\theta_\kappa$ is an equivalence relation on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$, and it is independent of which $\kappa$-sized strong submodels containing the tuples are chosen. For transitivity, replace the two intermediate $\kappa$-submodels inside the middle model by equivalent ones using the lemma, then compose the resulting strong maps at size $\kappa$. The relation is preserved by strong embeddings of the ambient models.
-\end{corollary}
-
-\begin{definition}[Type sets]
-For $\gamma\leq\theta$, set
-\[
-S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ \ba\in M^\gamma\bigr\},
-\qquad
-S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
-\]
-By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
-\end{definition}
-
-\begin{remark}[AEC interpretation of the stabilized classes]
-The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
-strong submodels, even when its ambient models are larger.
-At a sufficiently large categoricity size, its restriction
-to $\K_\kappa$ is exactly equality of Galois types over
-$\emptyset$, where equality is defined through the
-transitive closure of direct amalgamation equivalence.
-This makes $S_\kappa^\gamma$ a \emph{local Galois-type
-space}, not in general the space of Galois types computed
-in arbitrary ambient models. Stabilization of these
-spaces is distinct from the AEC stability property
-bounding $|\operatorname{gS}(M)|$ over a base model $M$.
-\end{remark}
-
-\subsection{Stabilization}
-\begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
-For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
-\[
-\pi^{\gamma}_{\lambda\kappa}:S^\gamma_\lambda
-\longrightarrow S^\gamma_\kappa,
-\qquad
-[(M,\bar a)]\longmapsto[(M_0,\bar a)],
-\]
-where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref{lem:small} makes this independent of the choice of $M_0$. Taking the disjoint union gives
-$\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
-These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
-
-More precisely, there is a categoricity cardinal $c_\sigma$ above the
-$\sigma$-tuple reversal threshold such that for every pair of categoricity
-cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
-$\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
-\emph{stabilization of the comparison classes}, not model-theoretic
-stability. 
-\end{proposition}
-
-\begin{proof}[Proof sketch]
-Suppose that noninjective projections occur
-arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
-common categoricity cardinal above them. Each refinement produces a pair
-of classes in the final model agreeing at an earlier stage but distinct
-at a later one. Pairs arising at different stages are distinct, because
-separation persists under further projection. Yet the final class set has
-size at most the infinite cardinal $B_\sigma$, and hence has at most
-$B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
-
-
-\end{proof}
-\begin{definition}[Canonical comparison diagram; extracted from
-{\cite[Proposition 4.2]{oai-ecc}}]
-Fix an infinite cardinal $\sigma$ and a categoricity cardinal
-$c_\sigma$ beyond the stabilization and reversal thresholds for
-tuples of length at most $\sigma$. For $M\in\K_{\geq c_\sigma}$
-and $\bar a\in M^\gamma$, $\gamma\leq\sigma$, define
-\[
-D_\sigma(\bar a;M)
- :=[(M_0,\bar a)]_{\equiv^{\leq\sigma}_{c_\sigma}},
-\]
-where $M_0\leq_\K M$ has size $c_\sigma$ and contains $\bar a$.
-Lemma~\ref{lem:small} makes the definition independent of $M_0$.
-Stabilization makes equality of these diagrams independent of the
-chosen sufficiently large categoricity cardinal. Write $D(\bar a;M)$
-when the length bound is understood.
-\end{definition}
-
-Proposition~4.2 of the source manuscript further establishes:
-\begin{enumerate}[label=(\arabic*)]
-\item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
-\item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
-\item At categoricity cardinals at least the paper's nondecreasing threshold $t(\sigma)$, equality of diagrams is implemented by a strong map.
-\item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
-\end{enumerate}
-The paper chooses $t(\sigma)$ above the stabilization thresholds
-$c_\tau$ for every infinite $\tau\leq\sigma$; no explicit numerical
-formula for $c_\sigma$ is supplied.
-
-The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
 
 \section{Section 4.2--4.4: Placement, locality, and amalgamation}
 \textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
