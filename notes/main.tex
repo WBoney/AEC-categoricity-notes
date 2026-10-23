@@ -158,21 +158,24 @@ also includes cuts not necessarily specified by
 a single pair of consecutive entries.
 \end{definition}
 
-\section{Section 3: EM orbit calculus and reversal}
-\subsection{Special orders and orbit bounds}
-The manuscript constructs orders $\Gamma_\delta$ and $H(\delta)$ (using finitely supported sequences and reverse-lexicographic ordering) to obtain large orders whose short tuples have uniformly controlled automorphism orbits.
-
-\begin{definition}[Order type with slot occupancy]
-For a tuple $\bi\in H(\delta)$, define
-$\operatorname{tp}(\bi;H(\delta))$ to consist of the quantifier-free
-order type of $\bi$, together with assertions recording whether each cut
-determined by $\bi$ is empty or inhabited (its \emph{slot occupancy}).
+\subsection{Automorphism types}\label{subsec:auto}
+\begin{definition}[Automorphism orbit type]
+For any structure $M$ and tuple $\ba\in M^\gamma$,
+\[
+\auttp(\ba;M)=[\ba]_{\operatorname{Aut}(M)}
+\]
+is the orbit of $\ba$ under the full automorphism
+group of $M$. This depends on the ambient model.
+It is especially useful in homogeneous structures
+and monster models. For a chosen EM presentation,
+the subgroup induced by order automorphisms gives
+the potentially finer $\EMauttp$ defined next.
 \end{definition}
 
 \begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of the same length,
 \[
-\operatorname{tp}(\bi;H(\delta))
-=\operatorname{tp}(\bj;H(\delta))
+\tpstar(\bi;H(\delta))
+=\tpstar(\bj;H(\delta))
 \quad\Longleftrightarrow\quad
 \exists h\in\operatorname{Aut}(H(\delta))\;
 \bigl(h(\bi)=\bj\bigr).
@@ -182,23 +185,8 @@ tuples in $H(\delta)$. For bounded tuple lengths the number of such types
 is bounded independently of $\delta$.
 \end{theorem}
 
-\subsection{Presentation records and strong types}
-\begin{definition}[Presentation record]
-Let $\ba\in\operatorname{EM}(H(\delta),\Phi)$, where the EM model is
-considered in the expanded language $\tau(\Phi)$. A
-\emph{presentation record of $(\ba,\operatorname{EM}(H(\delta),\Phi))$}
-consists of a list of $\tau(\Phi)$-terms
-$(f_k:k<\ell(\ba))$ and an order type with slot occupancy
-$\operatorname{tp}(\bi;H(\delta))$ such that
-\[
-\ba=\bigl(f_k(\bi):k<\ell(\ba)\bigr).
-\]
-Here $\bi$ is a common flattened list of skeleton indices containing the finite supports of all coordinates, and each term $f_k$ uses the appropriate finite sublist (or ignores unused variables). Each term $f_k$ is evaluated on the index tuple $\bi$ in the
-expanded EM model. The record is relative to the chosen presentation;
-it is not asserted to be uniquely determined by $\ba$.
-\end{definition}
 
-\begin{definition}[Strong types relative to an EM presentation]
+\begin{definition}[EM-induced automorphism types]
 Fix an infinite cardinal $\theta$ and suppose $\operatorname{cf}(\delta)>\theta$.
 Write $M_\delta=\EM(H(\delta),\Phi)$ for the $\tau(\K)$-reduct,
 with its specified expanded EM presentation understood.
@@ -211,7 +199,7 @@ by functoriality, acting on terms by
 \]
 For $\theta$-tuples $\ba,\bb\in M_\delta$, define
 \[
-\ba\equiv^\delta_{\mathrm{str}}\bb
+\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb
 \quad\Longleftrightarrow\quad
 \exists h\in\operatorname{Aut}(H(\delta))\
 \bigl(\widehat h(\ba)=\bb\bigr).
@@ -219,12 +207,12 @@ For $\theta$-tuples $\ba,\bb\in M_\delta$, define
 This is an equivalence relation, as the induced maps form a group
 action. Define
 \[
-\strtp(\ba;M_\delta):=[\ba]_{\equiv^\delta_{\mathrm{str}}},
+\EMauttp(\ba;M_\delta):=[\ba]_{\equiv^{\mathrm{EM}}_{\mathrm{aut}}},
 \qquad
-\strS^\delta:=
-\bigl\{\strtp(\ba;M_\delta):\ba\in M_\delta^\theta\bigr\}.
+S^{\mathrm{EM,aut}}_\delta:=
+\bigl\{\EMauttp(\ba;M_\delta):\ba\in M_\delta^\theta\bigr\}.
 \]
-We suppress $\theta$ and $\Phi$ in $\strS^\delta$.
+We suppress $\theta$ and $\Phi$ in $S^{\mathrm{EM,aut}}_\delta$.
 The induced lift $\widehat h$ is canonical for the fixed EM
 presentation; the definition is \emph{relative to that presentation}
 and need not be intrinsic to an abstract copy of the AEC model.
@@ -234,7 +222,7 @@ automorphism-orbit equivalence of $M_\delta$.
 
 \begin{lemma}[Common presentation record implies equal strong type]
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
-Then $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+Then $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 
 \begin{proof}
 Choose presentations
@@ -243,8 +231,8 @@ Choose presentations
 \bb=(f_k(\bj):k<\theta)
 \]
 with the same term list and
-$\operatorname{tp}(\bi;H(\delta))
- =\operatorname{tp}(\bj;H(\delta))$.
+$\tpstar(\bi;H(\delta))
+ =\tpstar(\bj;H(\delta))$.
 By Theorem~\ref{thm:order-orbits}, since the flattened index lists have length at
 most $\theta<\operatorname{cf}(\delta)$, there is
 $h\in\operatorname{Aut}(H(\delta))$ with $h(\bi)=\bj$.
@@ -254,7 +242,7 @@ Functoriality gives
  =\bigl(f_k(h(\bi)):k<\theta\bigr)
  =\bigl(f_k(\bj):k<\theta\bigr)=\bb.
 \]
-Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+Thus $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 \end{proof}
 \end{lemma}
 
@@ -268,6 +256,7 @@ strong types are orbits under the subgroup induced from the index
 order, and the same record bound applies when
 $\operatorname{cf}(\delta)>\theta$.
 \end{remark}
+
 
 \begin{definition}[The arrow relation]
 For $p,q\in\strS^\delta$, write
@@ -300,7 +289,8 @@ The paper names the boundedly many orbits via maps $G_\kappa$ and assigns orbit 
 
 Lemmas 3.7, 3.8, and 3.10 provide order/ordinal bookkeeping; Proposition 3.9 is the important alignment statement allowing small and large presentations to have matching profile data.
 
-\subsection{Eventual reversal}
+
+\subsubsection*{Eventual reversal}
 \begin{theorem}[Eventual reversal {\cite[Theorem 3.11]{oai-ecc}}]\label{thm:reversal}
 For every infinite cardinal $\theta$ there is a cardinal $b_\K(\theta)$ such that, whenever $\kappa\geq b_\K(\theta)$ is a categoricity cardinal, $M\in\K$ has size $\kappa$, $f:M\to M$ is strong, and $\bar a$ has length at most $\theta$, there is a strong $g:M\to M$ satisfying
 \[
@@ -315,6 +305,7 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \begin{remark}
 \emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
 \end{remark}
+
 
 \section{Section 4.1: Canonical diagrams and Galois types}
 \subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
