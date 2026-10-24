@@ -9,6 +9,13 @@
 \setlength{\parindent}{0pt}
 \newcommand{\K}{\mathbf K}
 \newcommand{\LS}{\operatorname{LS}}
+\newcommand{\atp}{\operatorname{atp}}
+\newcommand{\gtp}{\operatorname{gtp}}
+\newcommand{\auttp}{\operatorname{tp}_{\mathrm{aut}}}
+\newcommand{\EMauttp}{\operatorname{tp}^{\mathrm{EM}}_{\mathrm{aut}}}
+\newcommand{\Kord}{\mathbf K^{\mathrm{or}}}
+\newcommand{\tpstar}{\operatorname{tp}^{*}}
+\newcommand{\Rec}{\operatorname{Rec}}
 \newcommand{\EM}{\operatorname{EM}_{\tau}}
 \newcommand{\card}[1]{\lvert #1\rvert}
 \newcommand{\ba}{\mathbf{a}}
@@ -18,8 +25,6 @@
 \newcommand{\bd}{\mathbf{d}}
 \newcommand{\be}{\mathbf{e}}
 \newcommand{\bc}{\mathbf{c}}
-\newcommand{\strS}{\operatorname{str}\text{-}S}
-\newcommand{\strtp}{\operatorname{str}\text{-}\operatorname{tp}}
 \theoremstyle{definition}
 \newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
@@ -30,93 +35,183 @@
 \theoremstyle{remark}
 \newtheorem{remark}[definition]{Remark}
 
-\title{Reading Notes on the Eventual Categoricity Proof\\large Canonical Diagrams, EM Presentations, and AEC Technology}
+\title{Types of Types in the Eventual Categoricity Proof\\large AEC and EM Reading Notes}
 \author{Reading notes}
 \date{Working draft, October 2026}
 \begin{document}
 \maketitle
 \begin{abstract}
-These notes track the OpenAI manuscript on Shelah's Eventual Categoricity Conjecture, emphasizing connections with standard AEC technology: strong embeddings, Galois types, EM functors, presentation-dependent orbit invariants, and locality of types. We distinguish source statements from derived lemmas and interpretive analogies. Sections 3--4 receive detailed analysis, while Section 5 begins a systematic reformulation of the working scheme. This remains a reading companion, not an independent verification of the full proof.
+These reading notes reorganize the OpenAI eventual categoricity
+manuscript around a sequence of notions of type: presentation
+records and order types, automorphism orbits, arrow types, Galois
+types, and natural or placed canonical diagrams. We emphasize the
+role of EM functoriality and carefully separate equalities that
+are proved, implications that are only one-way, and analogies
+with existing AEC technology. The final sections record locality,
+compactness, amalgamation at closed levels, and the first
+definitions for finite systems. This is not an independent
+verification of the manuscript.
 \end{abstract}
 \tableofcontents
-\section{Overall strategy}
-Fix an abstract elementary class $\K$ with $\LS(\K)=\ell$, categorical in unboundedly many cardinals. The qualitative goal is categoricity on a tail of the cardinals; the manuscript also formulates a uniform threshold depending on $\ell$.
+\section{Strategy and notation}
+Fix an AEC $(\K,\leq_\K)$ categorical in unboundedly many cardinals.
+Write $\lambda_0=\LS(\K)$; use $\lambda,\kappa,\mu$ for infinite
+cardinals and $\ell(\ba)$ only for the length of a tuple.
+Fix an EM template $\Phi$ in $\tau\supseteq\tau(\K)$.
+Unless otherwise stated, $\EM(I,\Phi)$ denotes its reduct
+to $\tau(\K)$.
 
-The structural trajectory is
+The argument moves from order types and EM records through
+automorphism orbits, arrow comparisons and Galois types,
+toward locality and compactness for placed comparisons,
+amalgamation at selected cardinals and finite-system geometry.
+
 \[
-\begin{gathered}
-\text{Unbounded categoricity}\ \Downarrow\
-\text{Controlled Ehrenfeucht--Mostowski presentations}\ \Downarrow\
-\text{Reversal of strong maps on bounded tuples}\ \Downarrow\
-\text{Stabilized canonical comparison diagrams}\ \Downarrow\
-\text{Amalgamation and bounded-tuple calculus at selected levels}\ \Downarrow\
-\text{Independence, isolation, and finite systems}\ \Downarrow\
-\text{Geometry and classification by bases}\ \Downarrow\
-\text{Eventual categoricity}.
-\end{gathered}
+\begin{array}{c}
+\text{Categoricity in unboundedly many cardinals}\\[3pt]
+\Downarrow\\[3pt]
+\text{EM orbit bounds and bounded-tuple reversal}\\[3pt]
+\Downarrow\\[3pt]
+\text{Stabilized arrow types / canonical diagrams}\\[3pt]
+\Downarrow\\[3pt]
+\text{Locality and compactness for placed comparisons}\\[3pt]
+\Downarrow\\[3pt]
+\text{Amalgamation at selected closed levels}\\[3pt]
+\Downarrow\\[3pt]
+\text{Finite-system comparisons and geometric analysis}
+\end{array}
 \]
-A distinctive feature is that amalgamation, tameness, and a good frame are not taken as initial hypotheses. The proof attempts to obtain the required structure from categoricity.
 
-\subsection*{AEC dictionary and levels of comparison}
-We write $M\leq_\K N$ for the AEC strong-submodel
-relation. A \emph{$\K$-embedding} is a $\tau(\K)$-embedding
-whose image is strong; a mere $\tau(\K)$-embedding need not
-be strong. The fixed EM template $\Phi$ gives a functorial
-construction, after taking reducts to $\tau(\K)$:
-\[
-I\hookrightarrow J\quad\Longrightarrow\quad
-\EM(I,\Phi)\longrightarrow\EM(J,\Phi)
-\]
-by a $\K$-embedding. Skeleton coordinates and expanded-language
-term representations are presentation data.
+\subsection*{Running notation and translation table}
+\begin{longtable}{@{}p{0.29\textwidth}p{0.62\textwidth}@{}}
+\toprule
+Notation & Meaning and reference\\
+\midrule\endhead
+$\lambda_0=\LS(\K)$ & AEC L\"owenheim--Skolem cardinal; replaces
+the source's cardinal $\ell$.\\
+$\ell(\ba)$, $\theta$, $\sigma$ & Tuple length and length bounds
+(Section~\ref{sec:types}).\\
+$\Rec^\gamma_\tau(I,\Phi)$, $\operatorname{ev}_I$ &
+Presentation records and evaluation (Definition~\ref{def:records}).\\
+$\operatorname{tp},\tpstar$ & Quantifier-free order type,
+with and without slot occupancy (Definition~\ref{def:ordtypes}).\\
+$\auttp,\EMauttp$ & Full and order-induced automorphism types
+(Section~\ref{subsec:auto}).\\
+$b_\K(\theta)$ & Eventual reversal threshold
+(Theorem~\ref{thm:reversal}; source Theorem 3.11).\\
+$\equiv_\kappa^{*,\gamma},\equiv_\kappa^\gamma$ &
+Arrow comparisons (Section~\ref{subsec:arrow}).\\
+$S^\gamma_\kappa,\atp_\kappa,\atp$ &
+Arrow types and their stabilized value
+(source Proposition 4.2).\\
+$c_\sigma,t(\sigma)$ & Stabilization and diagram thresholds
+(source Proposition 4.2).\\
+$\gtp,\gtp^{\mathrm{EM}}$ & Ordinary and EM-lifted
+Galois comparisons (Section~\ref{subsec:galois}).\\
+$D_{\mathrm{nat}},D_{\mathrm{pl}}$ & Natural and placed diagrams
+(source Definition 4.4).\\
+$g(\sigma)$ & Uniform testing threshold
+(Section~\ref{sec:locality}; source Proposition 4.8).\\
+\bottomrule
+\end{longtable}
 
-\begin{remark}[Three distinct notions of type-like data]
-\begin{enumerate}[label=(\roman*),leftmargin=*]
-\item \emph{Strong EM types} are tuple orbits under
-automorphisms induced by order automorphisms of a fixed
-skeleton $H(\delta)$; order records with term labels
-and slot occupancy supply sufficient witnesses.
-\item \emph{Canonical comparison diagrams} arise by
-stabilizing strong-map comparisons at categoricity sizes.
-For tuples in models at a sufficiently large categoricity
-size, these agree with Galois types over $\emptyset$
-(Lemma~\ref{lem:gtp-reversal}).
-\item \emph{Natural diagrams} compute canonical comparisons
-from labeled EM term representations. \emph{Placed diagrams}
-include fixed parameters from an EM-presented base;
-before amalgamation, they are not automatically Galois
-types over that base.
-\end{enumerate}
-Order records are syntactic witnesses; comparison diagrams
-are semantic equivalence classes. We distinguish results
-stated in the source, consequences proved here, and
-interpretive comparisons to standard AEC technology.
+\begin{remark}[Notation crosswalk]
+The earlier strong type under skeleton-induced automorphisms
+becomes $\EMauttp$. The earlier canonical diagram is the
+stabilized arrow type $\atp$. The source's stable diagrams
+means \emph{stabilized} rather than stable in
+the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
+defining it, not as an automatic synonym for $D_{\mathrm{nat}}$.
 \end{remark}
 
-\section{Section 2: AEC and EM foundations}
-\textbf{Lemmas 2.1 and 2.2.} Elementary preliminaries; candidates for omission from a conceptual account.
+\section{Types of types}\label{sec:types}
+We organize the arguments of the source's Sections 3--4 by
+the kinds of type that are compared. The class
+$\Kord$ of linear orders with order embeddings
+provides the index-side invariants; the EM functor
+lifts order automorphisms, embeddings, and amalgams
+to $\K$. These give different comparisons of the
+evaluated tuples.
 
-\textbf{Lemma 2.5.} Essentially Erd\H{o}s--Rado combinatorics, with applications to extracting uniform presentations.
+\subsection{Presentation records and order types}\label{sec:records}
+\begin{definition}[Presentation record]\label{def:records}
+Let $I$ be a linear order. For an output ordinal
+$\gamma$, a \emph{presentation record from $I$ in $\tau$}
+is a pair $r=(\bar f,\bi)$, where
+\[
+\bar f=(f_k)_{k<\gamma},\qquad
+\bi=(i_j)_{j<\alpha}
+\]
+is strictly increasing in $I$, and every $f_k$ is
+a $\tau$-term in the variables $(x_j)_{j<\alpha}$
+using only finitely many variables. Discarding
+unused indices gives a canonical support convention.
+The collection $\Rec^\gamma_\tau(I,\Phi)$ of all such
+records of fixed output length $\gamma$ is a set;
+so is $\Rec^{\leq\theta}_\tau(I,\Phi)$ for any
+fixed cardinal $\theta$. The union over all
+possible output ordinals would not be a set.
 
-\textbf{Theorem 2.6.} The standard Ehrenfeucht--Mostowski (EM) model construction for AECs. The paper's ``labels'' can be understood as terms in an expanded language. Fix a vocabulary $\tau\supseteq\tau(\K)$ and an EM template $\Phi$ in $\tau$. The standard notation for the reduct of the EM model to the AEC language is $\EM(I,\Phi)\upharpoonright\tau(\K)$ (or simply $\EM(I,\Phi)$ when the reduct is understood). Order embeddings induce strong embeddings of these reducts, and elements have representations using $\tau$-terms and finitely many positions in $I$. We retain $\Phi$ as a fixed template throughout.
-
-\emph{Compression proposal.} Replace most of Section 2 by a single EM-presentation theorem recording functoriality, finite support, and the cardinality properties used later.
-
-\section{Section 3: EM orbit calculus and reversal}
-\subsection{Special orders and orbit bounds}
-The manuscript constructs orders $\Gamma_\delta$ and $H(\delta)$ (using finitely supported sequences and reverse-lexicographic ordering) to obtain large orders whose short tuples have uniformly controlled automorphism orbits.
-
-\begin{definition}[Order type with slot occupancy]
-For a tuple $\bi\in H(\delta)$, define
-$\operatorname{tp}(\bi;H(\delta))$ to consist of the quantifier-free
-order type of $\bi$, together with assertions recording whether each cut
-determined by $\bi$ is empty or inhabited (its \emph{slot occupancy}).
+The \emph{evaluation map} is
+\[
+\operatorname{ev}_I^\gamma:
+\Rec^\gamma_\tau(I,\Phi)\longrightarrow
+\operatorname{EM}_\tau(I,\Phi)^\gamma,\qquad
+(\bar f,\bi)\longmapsto (f_k(\bi))_{k<\gamma}.
+\]
+A record $r$ is a presentation record \emph{of}
+$\ba$ if $\operatorname{ev}_I^\gamma(r)=\ba$.
+Every tuple has one by the EM finite-support
+property, but it need not be unique.
 \end{definition}
 
-\begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of the same length,
+\begin{definition}[Order types]\label{def:ordtypes}
+Let $\bi$ be a sequence from a linear order $I$.
+Its \emph{quantifier-free order type}
+$\operatorname{tp}(\bi;I)$ records all order and
+equality relations among its coordinates.
+The augmented order type
+$\tpstar(\bi;I)$ also records whether each
+strict slot over the distinct coordinates
+of $\bi$ is occupied (including the two end slots).
+For example, where $x<y$ are consecutive
+distinct entries, it records the truth of
+$\exists z\,(x<z<y)$; for infinite tuples this
+also includes cuts not necessarily specified by
+a single pair of consecutive entries.
+\end{definition}
+
+\subsection{Automorphism types}\label{subsec:auto}
+\begin{definition}[Automorphism orbit type]
+For any structure $M$ and tuple $\ba\in M^\gamma$,
 \[
-\operatorname{tp}(\bi;H(\delta))
-=\operatorname{tp}(\bj;H(\delta))
+\auttp(\ba;M)=[\ba]_{\operatorname{Aut}(M)}
+\]
+is the orbit of $\ba$ under the full automorphism
+group of $M$. This depends on the ambient model.
+It is especially useful in homogeneous structures
+and monster models. For a chosen EM presentation,
+the subgroup induced by order automorphisms gives
+the potentially finer $\EMauttp$ defined next.
+\end{definition}
+
+\begin{remark}[The homogeneous skeletons]
+The source constructs
+$\Gamma_\delta=\mathbb Z^{(\delta)}$ and
+$H(\delta)=\mathbb Q^{(\Gamma_\delta)}$,
+using finitely supported sequences and the prescribed
+reverse-lexicographic orders. For infinite limit
+$\delta$ these orders have controlled orbits of
+short tuples; the key invariant is $\tpstar$,
+not merely $\operatorname{tp}$.
+\end{remark}
+
+\begin{theorem}[Order automorphism classification {\cite[Theorem 3.5]{oai-ecc}}]\label{thm:order-orbits} For tuples $\bi,\bj$ of length at most $\theta$, where
+$\delta$ is an infinite limit ordinal,
+$\theta$ is infinite, and $\theta<\operatorname{cf}(\delta)$,
+\[
+\tpstar(\bi;H(\delta))
+=\tpstar(\bj;H(\delta))
 \quad\Longleftrightarrow\quad
 \exists h\in\operatorname{Aut}(H(\delta))\;
 \bigl(h(\bi)=\bj\bigr).
@@ -126,23 +221,8 @@ tuples in $H(\delta)$. For bounded tuple lengths the number of such types
 is bounded independently of $\delta$.
 \end{theorem}
 
-\subsection{Presentation records and strong types}
-\begin{definition}[Presentation record]
-Let $\ba\in\operatorname{EM}(H(\delta),\Phi)$, where the EM model is
-considered in the expanded language $\tau(\Phi)$. A
-\emph{presentation record of $(\ba,\operatorname{EM}(H(\delta),\Phi))$}
-consists of a list of $\tau(\Phi)$-terms
-$(f_k:k<\ell(\ba))$ and an order type with slot occupancy
-$\operatorname{tp}(\bi;H(\delta))$ such that
-\[
-\ba=\bigl(f_k(\bi):k<\ell(\ba)\bigr).
-\]
-Here $\bi$ is a common flattened list of skeleton indices containing the finite supports of all coordinates, and each term $f_k$ uses the appropriate finite sublist (or ignores unused variables). Each term $f_k$ is evaluated on the index tuple $\bi$ in the
-expanded EM model. The record is relative to the chosen presentation;
-it is not asserted to be uniquely determined by $\ba$.
-\end{definition}
 
-\begin{definition}[Strong types relative to an EM presentation]
+\begin{definition}[EM-induced automorphism types]
 Fix an infinite cardinal $\theta$ and suppose $\operatorname{cf}(\delta)>\theta$.
 Write $M_\delta=\EM(H(\delta),\Phi)$ for the $\tau(\K)$-reduct,
 with its specified expanded EM presentation understood.
@@ -155,7 +235,7 @@ by functoriality, acting on terms by
 \]
 For $\theta$-tuples $\ba,\bb\in M_\delta$, define
 \[
-\ba\equiv^\delta_{\mathrm{str}}\bb
+\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb
 \quad\Longleftrightarrow\quad
 \exists h\in\operatorname{Aut}(H(\delta))\
 \bigl(\widehat h(\ba)=\bb\bigr).
@@ -163,12 +243,12 @@ For $\theta$-tuples $\ba,\bb\in M_\delta$, define
 This is an equivalence relation, as the induced maps form a group
 action. Define
 \[
-\strtp(\ba;M_\delta):=[\ba]_{\equiv^\delta_{\mathrm{str}}},
+\EMauttp(\ba;M_\delta):=[\ba]_{\equiv^{\mathrm{EM}}_{\mathrm{aut}}},
 \qquad
-\strS^\delta:=
-\bigl\{\strtp(\ba;M_\delta):\ba\in M_\delta^\theta\bigr\}.
+S^{\mathrm{EM,aut}}_\delta:=
+\bigl\{\EMauttp(\ba;M_\delta):\ba\in M_\delta^\theta\bigr\}.
 \]
-We suppress $\theta$ and $\Phi$ in $\strS^\delta$.
+We suppress $\theta$ and $\Phi$ in $S^{\mathrm{EM,aut}}_\delta$.
 The induced lift $\widehat h$ is canonical for the fixed EM
 presentation; the definition is \emph{relative to that presentation}
 and need not be intrinsic to an abstract copy of the AEC model.
@@ -178,7 +258,7 @@ automorphism-orbit equivalence of $M_\delta$.
 
 \begin{lemma}[Common presentation record implies equal strong type]
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
-Then $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+Then $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 
 \begin{proof}
 Choose presentations
@@ -187,8 +267,8 @@ Choose presentations
 \bb=(f_k(\bj):k<\theta)
 \]
 with the same term list and
-$\operatorname{tp}(\bi;H(\delta))
- =\operatorname{tp}(\bj;H(\delta))$.
+$\tpstar(\bi;H(\delta))
+ =\tpstar(\bj;H(\delta))$.
 By Theorem~\ref{thm:order-orbits}, since the flattened index lists have length at
 most $\theta<\operatorname{cf}(\delta)$, there is
 $h\in\operatorname{Aut}(H(\delta))$ with $h(\bi)=\bj$.
@@ -198,7 +278,7 @@ Functoriality gives
  =\bigl(f_k(h(\bi)):k<\theta\bigr)
  =\bigl(f_k(\bj):k<\theta\bigr)=\bb.
 \]
-Thus $\ba\equiv^\delta_{\mathrm{str}}\bb$.
+Thus $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 \end{proof}
 \end{lemma}
 
@@ -208,13 +288,14 @@ the same tuple, may give different records. This lemma is the
 direction needed to bound the number of strong types by the number
 of possible records. The manuscript's Lemma~3.6 establishes a
 uniform bound on \emph{full model-automorphism orbits}; the present
-strong types are orbits under the subgroup induced from the index
+EM-induced types are orbits under the subgroup induced from the index
 order, and the same record bound applies when
 $\operatorname{cf}(\delta)>\theta$.
 \end{remark}
 
+
 \begin{definition}[The arrow relation]
-For $p,q\in\strS^\delta$, write
+For $p,q\in S^{\mathrm{EM,aut}}_\delta$, write
 \[
 p\longrightarrow q
 \quad\Longleftrightarrow\quad
@@ -234,17 +315,18 @@ symmetry is the eventual reversal phenomenon discussed below.
 Here the arrow notation is also used for the related but
 \emph{different} orbit space of an AEC model; this does not
 identify fixed-skeleton strong types with all model orbits.
-At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $\strS^\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
+At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $S^{\mathrm{EM,aut}}_\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
 \[
 p\longrightarrow r
 \]
 if a strong self-embedding of $C_\kappa$ sends a representative of $p$ to a representative of $r$. This relation is reflexive and transitive, but symmetry is not automatic.
 
-The paper names the boundedly many orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
+The paper names the boundedly many full automorphism orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
 
 Lemmas 3.7, 3.8, and 3.10 provide order/ordinal bookkeeping; Proposition 3.9 is the important alignment statement allowing small and large presentations to have matching profile data.
 
-\subsection{Eventual reversal}
+
+\subsubsection*{Eventual reversal}
 \begin{theorem}[Eventual reversal {\cite[Theorem 3.11]{oai-ecc}}]\label{thm:reversal}
 For every infinite cardinal $\theta$ there is a cardinal $b_\K(\theta)$ such that, whenever $\kappa\geq b_\K(\theta)$ is a categoricity cardinal, $M\in\K$ has size $\kappa$, $f:M\to M$ is strong, and $\bar a$ has length at most $\theta$, there is a strong $g:M\to M$ satisfying
 \[
@@ -260,9 +342,155 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
 \end{remark}
 
-\section{Section 4.1: Canonical diagrams and Galois types}
-\subsection{Strong-map equivalence and the sets $S^\gamma_\kappa$}
-Fix an infinite $\theta$ and a categoricity cardinal $\kappa\geq\theta+\LS(\K)$ sufficiently large that Theorem~\ref{thm:reversal} applies to $\theta$-tuples.
+
+\subsection{Arrow types}\label{subsec:arrow}
+Fix an infinite tuple-length bound $\theta$ and a categoricity
+cardinal $\kappa\geq\lambda_0+\theta$ above the reversal
+threshold $b_\K(\theta)$ in the definitions below.
+The existence of a strong embedding carrying one tuple
+to another is initially directed. The eventual reversal
+theorem makes it an equivalence relation at sufficiently
+large categoricity sizes. Its classes are \emph{arrow types}.
+The stabilized arrow type is precisely what the source
+calls a \emph{canonical comparison diagram}.
+
+\begin{definition}[Comparison at size $\kappa$]
+For $M,N\in\K_\kappa$ and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, write
+\[
+(\ba;M)\equiv^{*,\theta}_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+\exists f:M\longrightarrow N\text{ strong with }f(\ba)=\bb.
+\]
+Under the stated hypotheses this is an equivalence relation: reflexivity and transitivity are immediate. For symmetry, use categoricity to identify $M$ and $N$ with the same $\kappa$-sized model and apply Theorem~\ref{thm:reversal} to the resulting strong self-embedding and the given tuple.
+\end{definition}
+
+\begin{definition}[Comparison in larger models and arrow types]
+For $M,N\in\K_{\geq\kappa}$ and $\theta$-tuples $\ba\in M$, $\bb\in N$, write
+\[
+(\ba;M)\equiv^\theta_\kappa(\bb;N)
+\]
+if there exist $M_0\preccurlyeq_\K M$, $N_0\preccurlyeq_\K N$ of cardinality $\kappa$, with $\ba\in M_0^\theta$ and $\bb\in N_0^\theta$, such that
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\bb;N_0).
+\]
+\par
+For a tuple $\ba\in M^\gamma$, define its
+\emph{arrow type at $\kappa$} by
+\[
+\atp_\kappa(\ba;M):=[(\ba;M)]_{\equiv_\kappa^\gamma}.
+\]
+The parameter $\kappa$ refers to the size of the strong
+submodels used for comparison, not necessarily $|M|$.
+\end{definition}
+
+\begin{lemma}[Independence of small submodel {\cite[Lemma 4.1]{oai-ecc}}]\label{lem:small}
+If $M_0,M_1\preccurlyeq_\K M$ have cardinality $\kappa$ and both contain $\ba$, then
+\[
+(\ba;M_0)\equiv^{*,\theta}_\kappa(\ba;M_1).
+\]
+Indeed, by downward L\"owenheim--Skolem choose a $\kappa$-sized $M_*\preccurlyeq_\K M$ containing $M_0\cup M_1$. Coherence yields $M_i\preccurlyeq_\K M_*$ for $i=0,1$. The inclusions witness
+$(\ba;M_i)\equiv^{*,\theta}_\kappa(\ba;M_*)$; symmetry and transitivity give the claim.
+\end{lemma}
+
+\begin{corollary}
+The relation $\equiv^\theta_\kappa$ is an equivalence relation on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$, and it is independent of which $\kappa$-sized strong submodels containing the tuples are chosen. For transitivity, replace the two intermediate $\kappa$-submodels inside the middle model by equivalent ones using the lemma, then compose the resulting strong maps at size $\kappa$. The relation is preserved by strong embeddings of the ambient models.
+\end{corollary}
+
+\begin{definition}[Type sets]
+For $\gamma\leq\theta$, set
+\[
+S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ \ba\in M^\gamma\bigr\},
+\qquad
+S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
+\]
+By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
+\end{definition}
+
+\begin{remark}[AEC interpretation of the stabilized classes]
+The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
+strong submodels, even when its ambient models are larger.
+At a sufficiently large categoricity size, its restriction
+to $\K_\kappa$ is exactly equality of Galois types over
+$\emptyset$, where equality is defined through the
+transitive closure of direct amalgamation equivalence.
+This makes $S_\kappa^\gamma$ a \emph{local Galois-type
+space}, not in general the space of Galois types computed
+in arbitrary ambient models. Stabilization of these
+spaces is distinct from the AEC stability property
+bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\end{remark}
+
+\subsubsection*{Stabilization of arrow types}
+\begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
+For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
+\[
+\pi^{\gamma}_{\lambda\kappa}:S^\gamma_\lambda
+\longrightarrow S^\gamma_\kappa,
+\qquad
+[(M,\bar a)]\longmapsto[(M_0,\bar a)],
+\]
+where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref{lem:small} makes this independent of the choice of $M_0$. Taking the disjoint union gives
+$\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
+These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
+
+More precisely, there is a categoricity cardinal $c_\sigma$ above the
+$\sigma$-tuple reversal threshold such that for every pair of categoricity
+cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
+$\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
+\emph{stabilization of the comparison classes}, not model-theoretic
+stability. 
+\end{proposition}
+
+\begin{proof}[Proof sketch]
+Suppose that noninjective projections occur
+arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
+common categoricity cardinal above them. Each refinement produces a pair
+of classes in the final model agreeing at an earlier stage but distinct
+at a later one. Pairs arising at different stages are distinct, because
+separation persists under further projection. Yet the final class set has
+size at most the infinite cardinal $B_\sigma$, and hence has at most
+$B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
+
+
+\end{proof}
+\begin{definition}[Stabilized arrow type (canonical diagram); extracted from
+{\cite[Proposition 4.2]{oai-ecc}}]
+Fix an infinite cardinal $\sigma$ and a categoricity cardinal
+$c_\sigma$ beyond the stabilization and reversal thresholds for
+tuples of length at most $\sigma$. For $M\in\K_{\geq c_\sigma}$
+and $\bar a\in M^\gamma$, $\gamma\leq\sigma$, define
+\[
+\atp(\bar a;M)
+ :=[(M_0,\bar a)]_{\equiv^{\gamma}_{c_\sigma}},
+\]
+where $M_0\leq_\K M$ has size $c_\sigma$ and contains $\bar a$.
+Lemma~\ref{lem:small} makes the definition independent of $M_0$.
+Stabilization makes equality of these diagrams independent of the
+chosen sufficiently large categoricity cardinal. We also write $D_\sigma(\bar a;M)$ or $D(\bar a;M)$
+when quoting the source. Thus the stabilized arrow type
+$\atp$ is precisely its canonical comparison diagram.
+\end{definition}
+
+Proposition~4.2 of the source manuscript further establishes:
+\begin{enumerate}[label=(\arabic*)]
+\item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
+\item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
+\item At categoricity cardinals at least the paper's nondecreasing threshold $t(\sigma)$, equality of diagrams is implemented by a strong map.
+\item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
+\end{enumerate}
+The paper chooses $t(\sigma)$ above the stabilization thresholds
+$c_\tau$ for every infinite $\tau\leq\sigma$; no explicit numerical
+formula for $c_\sigma$ is supplied.
+
+The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
+
+
+\subsection{Galois types and EM-lifted comparisons}\label{subsec:galois}
+The standard AEC Galois type is obtained from joint
+embedding of tuples, not directly from the choice
+of a particular EM presentation. Without amalgamation,
+we use the equivalence relation generated by direct
+joint-embedding comparisons.
 
 \begin{definition}[Galois types over the empty set]
 For pairs $(\ba;M)$ and $(\bb;N)$ of equal tuple length, say
@@ -274,6 +502,23 @@ $\operatorname{gtp}(\bb/\emptyset;N)$ as the equivalence relation
 generated by direct equivalence (its transitive closure).
 This is distinct from the atomic diagram of a tuple and
 makes sense without assuming the amalgamation property.
+\end{definition}
+
+\begin{definition}[Galois types over a model]
+More generally, for $A\leq_\K M$ and $\ba\in M^\gamma$,
+the \emph{Galois type of $\ba$ over $A$ in $M$},
+$\gtp(\ba/A;M)$, is the equivalence class generated by
+direct identifications of tuples in strong amalgams
+\emph{over the same copy of $A$}. Thus
+$(\ba;M)$ and $(\bb;N)$ are directly equivalent
+over $A$ if $A\leq_\K M,N$ and there are
+$\K$-embeddings $f:M\to P$ and $g:N\to P$ with
+$f\!\restriction A=g\!\restriction A$ and
+$f(\ba)=g(\bb)$. Without amalgamation, we take
+the transitive closure to obtain equivalence.
+We abbreviate $\gtp(\ba;M):=\gtp(\ba/\emptyset;M)$
+when the parameter base is empty; this is the
+meaning of $\gtp(\ba;M)$ in the comparisons here.
 \end{definition}
 
 \begin{lemma}[Galois-type characterization at a categoricity size]
@@ -320,131 +565,109 @@ $S^\gamma_*$ for their eventual common value, understood
 up to the canonical bijections.
 \end{remark}
 
-\begin{definition}[Comparison at size $\kappa$]
-For $M,N\in\K_\kappa$ and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, write
+\begin{definition}[EM-lifted Galois comparison]
+Fix the EM template $\Phi$. A \emph{direct EM-lifted
+comparison} between tuples $(\ba;\EM(I,\Phi))$ and
+$(\bb;\EM(J,\Phi))$ consists of presentation records
+$r=(\bar f,\bi)$ of $\ba$ and
+$s=(\bar f,\bj)$ of $\bb$ with the same term sequence
+and
 \[
-(\ba;M)\equiv^{*,\theta}_\kappa(\bb;N)
-\quad\Longleftrightarrow\quad
-\exists f:M\longrightarrow N\text{ strong with }f(\ba)=\bb.
+\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J).
 \]
-Under the stated hypotheses this is an equivalence relation: reflexivity and transitivity are immediate. For symmetry, use categoricity to identify $M$ and $N$ with the same $\kappa$-sized model and apply Theorem~\ref{thm:reversal} to the resulting strong self-embedding and the given tuple.
+Equivalently, the two index tuples have the same
+Galois type over the empty set in $\Kord$:
+there is a joint order extension identifying them.
+The lifted order embeddings yield strong embeddings
+of EM models identifying the evaluated tuples.
+
+Write
+\[
+\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
+=\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
+\]
+if the two tuples are equivalent under the
+\emph{equivalence relation generated by direct
+EM-lifted comparisons}. This is an invariant
+of \emph{EM-presented tuples}, rather than the
+usual AEC Galois type on all $\K$-models.
+The use of transitive closure ensures that the
+notation really denotes an equivalence class
+even when a tuple has several presentation records.
 \end{definition}
 
-\begin{definition}[Comparison in larger models]
-For $M,N\in\K_{\geq\kappa}$ and $\theta$-tuples $\ba\in M$, $\bb\in N$, write
+\begin{proposition}[Lifting quantifier-free order types]
+\label{prop:order-gtpem}
+Suppose $\ba$ and $\bb$ admit records
+$(\bar f,\bi)$ and $(\bar f,\bj)$ with
+$\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J)$.
+Then
 \[
-(\ba;M)\equiv^\theta_\kappa(\bb;N)
+\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
+=\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi)),
 \]
-if there exist $M_0\preccurlyeq_\K M$, $N_0\preccurlyeq_\K N$ of cardinality $\kappa$, with $\ba\in M_0^\theta$ and $\bb\in N_0^\theta$, such that
-\[
-(\ba;M_0)\equiv^{*,\theta}_\kappa(\bb;N_0).
-\]
-\end{definition}
+and their natural diagrams coincide.
+\end{proposition}
+\begin{proof}
+Amalgamate $I$ and $J$ over the labeled support
+isomorphism $\bi\mapsto\bj$, obtaining order
+embeddings into a common linear order $L$.
+By EM functoriality, the induced $\K$-embeddings
+of the reducts into $\EM(L,\Phi)$ identify
+the tuples. This is a direct EM-lifted comparison.
+Extending $L$ to a sufficiently large
+categoricity-order presentation and using
+preservation of stabilized arrow types proves
+equality of natural diagrams.
+\end{proof}
 
-\begin{lemma}[Independence of small submodel {\cite[Lemma 4.1]{oai-ecc}}]\label{lem:small}
-If $M_0,M_1\preccurlyeq_\K M$ have cardinality $\kappa$ and both contain $\ba$, then
-\[
-(\ba;M_0)\equiv^{*,\theta}_\kappa(\ba;M_1).
-\]
-Indeed, by downward L\"owenheim--Skolem choose a $\kappa$-sized $M_*\preccurlyeq_\K M$ containing $M_0\cup M_1$. Coherence yields $M_i\preccurlyeq_\K M_*$ for $i=0,1$. The inclusions witness
-$(\ba;M_i)\equiv^{*,\theta}_\kappa(\ba;M_*)$; symmetry and transitivity give the claim.
-\end{lemma}
-
-\begin{corollary}
-The relation $\equiv^\theta_\kappa$ is an equivalence relation on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$, and it is independent of which $\kappa$-sized strong submodels containing the tuples are chosen. For transitivity, replace the two intermediate $\kappa$-submodels inside the middle model by equivalent ones using the lemma, then compose the resulting strong maps at size $\kappa$. The relation is preserved by strong embeddings of the ambient models.
-\end{corollary}
-
-\begin{definition}[Type sets]
-For $\gamma\leq\theta$, set
-\[
-S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ \ba\in M^\gamma\bigr\},
-\qquad
-S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
-\]
-By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
-\end{definition}
-
-\begin{remark}[AEC interpretation of the stabilized classes]
-The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
-strong submodels, even when its ambient models are larger.
-At a sufficiently large categoricity size, its restriction
-to $\K_\kappa$ is exactly equality of Galois types over
-$\emptyset$, where equality is defined through the
-transitive closure of direct amalgamation equivalence.
-This makes $S_\kappa^\gamma$ a \emph{local Galois-type
-space}, not in general the space of Galois types computed
-in arbitrary ambient models. Stabilization of these
-spaces is distinct from the AEC stability property
-bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\begin{remark}[Why the natural diagram is not defined as an EM Galois type]
+The notation $\gtp^{\mathrm{EM}}$ above makes the
+proposed lifting construction precise, but it
+is a \emph{new definition in these notes}, not
+terminology from the manuscript. The source's
+natural diagram is instead the intrinsic
+stabilized arrow comparison of the evaluated
+tuple, computed in a sufficiently large EM
+extension. An EM-lifted comparison implies
+equality of natural diagrams. The converse
+is not proved and should not be assumed:
+equality of the semantic comparison need
+not recover isomorphic chosen support patterns.
+Thus $\gtp^{\mathrm{EM}}$ is not yet shown
+to be the same invariant as $D_{\mathrm{nat}}$.
 \end{remark}
 
-\subsection{Stabilization}
-\begin{proposition}[Stabilization {\cite[Proposition 4.2]{oai-ecc}}]
-For categoricity cardinals $\lambda\geq\kappa$ above the reversal thresholds, restriction to $\kappa$-sized strong submodels gives projections, for each fixed tuple length $\gamma\leq\sigma$,
+\begin{remark}[Question for review: $\gtp^{\mathrm{EM}}$ versus natural diagrams]
+\label{rem:gtpem-review-question}
+\textbf{Question.} Is the intended notion
+$\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))$
+the equivalence relation generated by joint identifications
+obtained by lifting order embeddings of EM presentations,
+as defined above, or should it be identified with the
+source's natural diagram $D_{\mathrm{nat}}(\ba)$?
+
+We have proved only
 \[
-\pi^{\gamma}_{\lambda\kappa}:S^\gamma_\lambda
-\longrightarrow S^\gamma_\kappa,
-\qquad
-[(M,\bar a)]\longmapsto[(M_0,\bar a)],
+\gtp^{\mathrm{EM}}(\ba)=\gtp^{\mathrm{EM}}(\bb)
+\quad\Longrightarrow\quad
+D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
 \]
-where $M_0\leq_\K M$ has cardinality $\kappa$ and contains the tuple. Lemma~\ref{lem:small} makes this independent of the choice of $M_0$. Taking the disjoint union gives
-$\pi^{\leq\sigma}_{\lambda\kappa}:S^{\leq\sigma}_\lambda\to S^{\leq\sigma}_\kappa$.
-These maps compose and are surjective: an EM presentation $\EM(I,\Phi)$ at size $\kappa$ can be extended, by extending $I$, to a presentation $\EM(J,\Phi)$ at size $\lambda$ (with the AEC reduct understood).
+The converse would assert that equality of stabilized
+arrow comparisons can always be witnessed by a chain
+of such order-lifted identifications, even if the
+chosen labeled support patterns differ. That converse
+has not been established here.
 
-More precisely, there is a categoricity cardinal $c_\sigma$ above the
-$\sigma$-tuple reversal threshold such that for every pair of categoricity
-cardinals $c_\sigma\leq\kappa\leq\lambda$, the projection
-$\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
-\emph{stabilization of the comparison classes}, not model-theoretic
-stability. 
-\end{proposition}
+\emph{Decision for the next revision:}
+retain two separate invariants, prove a converse under
+additional hypotheses, or instead \emph{define}
+$\gtp^{\mathrm{EM}}$ to mean the natural diagram?
+The last choice would be a change of definition,
+not a consequence of the lifting argument.
+\end{remark}
 
-\begin{proof}[Proof sketch]
-Suppose that noninjective projections occur
-arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
-common categoricity cardinal above them. Each refinement produces a pair
-of classes in the final model agreeing at an earlier stage but distinct
-at a later one. Pairs arising at different stages are distinct, because
-separation persists under further projection. Yet the final class set has
-size at most the infinite cardinal $B_\sigma$, and hence has at most
-$B_\sigma^2=B_\sigma$ ordered pairs, a contradiction.
-
-
-\end{proof}
-\begin{definition}[Canonical comparison diagram; extracted from
-{\cite[Proposition 4.2]{oai-ecc}}]
-Fix an infinite cardinal $\sigma$ and a categoricity cardinal
-$c_\sigma$ beyond the stabilization and reversal thresholds for
-tuples of length at most $\sigma$. For $M\in\K_{\geq c_\sigma}$
-and $\bar a\in M^\gamma$, $\gamma\leq\sigma$, define
-\[
-D_\sigma(\bar a;M)
- :=[(M_0,\bar a)]_{\equiv^{\leq\sigma}_{c_\sigma}},
-\]
-where $M_0\leq_\K M$ has size $c_\sigma$ and contains $\bar a$.
-Lemma~\ref{lem:small} makes the definition independent of $M_0$.
-Stabilization makes equality of these diagrams independent of the
-chosen sufficiently large categoricity cardinal. Write $D(\bar a;M)$
-when the length bound is understood.
-\end{definition}
-
-Proposition~4.2 of the source manuscript further establishes:
-\begin{enumerate}[label=(\arabic*)]
-\item Equality of diagrams is preserved by strong embeddings; there are at most $B_\sigma$ diagrams of the prescribed bounded lengths.
-\item Diagrams contain atomic information and respect restriction, reindexing, and enlargement of the tuple bound.
-\item At categoricity cardinals at least the paper's nondecreasing threshold $t(\sigma)$, equality of diagrams is implemented by a strong map.
-\item Compatible joint diagrams can be transported over any realization of the relevant initial diagram in a sufficiently large categoricity model.
-\end{enumerate}
-The paper chooses $t(\sigma)$ above the stabilization thresholds
-$c_\tau$ for every infinite $\tau\leq\sigma$; no explicit numerical
-formula for $c_\sigma$ is supplied.
-
-The canonical diagram is \emph{not} simply a presentation record from the order classification (Theorem~\ref{thm:order-orbits}). Records depend on chosen EM coordinates and give sufficient conditions for orbit equivalence; stabilized strong-map classes are intrinsic to the AEC.
-
-\section{Section 4.2--4.4: Placement, locality, and amalgamation}
-\textbf{Proposition 4.3.} At sufficiently closed cardinals $\zeta$ of countable cofinality, the diagram calculus yields categoricity. A back-and-forth uses matching bounded diagrams to extend partial matches through strong maps, with countable exhaustions of the models.
-
-\subsection{Natural and placed diagrams (source Definition 4.4)}
+\subsubsection*{Natural and placed canonical diagrams}
 \begin{definition}[Natural diagram; {\cite[Definition 4.4]{oai-ecc}}]
 Let $I$ be a linear order and let
 $r=((f_j,\bi_j):j\in J)$ be a set-sized labeled term representation,
@@ -456,7 +679,7 @@ Choose an order extension $I\subseteq I'$ of sufficiently large
 categoricity size for the canonical diagram of a tuple of length
 $|J|$ to be defined. Set
 \[
-D_{\mathrm{nat}}(r):=D(\ba_r^{I'};\EM(I',\Phi)).
+D_{\mathrm{nat}}(r):=\atp(\ba_r^{I'};\EM(I',\Phi)).
 \]
 The source asserts that this is independent of the sufficiently
 large order extension.
@@ -491,7 +714,8 @@ Proposition~4.2. This is why the natural diagram is a
 presentation-independent comparison invariant even though it is
 computed from a chosen EM term representation.
 
-The distinction from Section~3 is also important: classification
+The distinction from automorphism types in Section~\ref{subsec:auto}
+is also important: classification
 under automorphisms of one fixed $H(\delta)$ requires occupied-slot
 data, whereas here arbitrary order extensions and strong EM
 embeddings suffice, so only the labeled support order pattern is
@@ -528,7 +752,7 @@ not necessarily cuts of the underlying structure $A$.
 
 Thus a placement resembles a presentation record with parameters,
 but its \emph{placed diagram} is a \emph{natural diagram with
-parameters}, not a Section~3 strong-orbit presentation record.
+parameters}, not an EM-automorphism orbit presentation record.
 Matching relative labeled order records implies matching placed
 diagrams; the converse is not asserted. Nor do we identify
 placed diagrams with Galois types over arbitrary bases before
@@ -549,6 +773,42 @@ of placed diagrams need not imply that the two chosen
 presentations have isomorphic labeled support orders.
 \end{remark}
 
+
+\begin{remark}[Comparisons between the type notions]
+For tuples represented by a common term list $\bar f$,
+the implications proved here can be summarized as
+\[
+\tpstar(\bi;H(\delta))=\tpstar(\bj;H(\delta))
+\Longrightarrow
+\EMauttp(\ba;M_\delta)=\EMauttp(\bb;M_\delta)
+\Longrightarrow
+\auttp(\ba;M_\delta)=\auttp(\bb;M_\delta).
+\]
+The first implication assumes the usual bound
+$\ell(\bi)<\operatorname{cf}(\delta)$.
+For possibly distinct index orders we have
+\[
+\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J)
+\Longrightarrow
+\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
+=\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
+\Longrightarrow
+D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
+\]
+These implications do not assert converses.
+
+At a sufficiently large categoricity cardinal,
+$\atp_\kappa$ on $\kappa$-sized models agrees with
+$\gtp(-/\emptyset;-)$ by Lemma~\ref{lem:gtp-reversal}.
+On larger ambient models, $\atp_\kappa$ compares
+types in small strong submodels and is not automatically
+the ambient Galois type. Similarly, a placed diagram
+over $A=\EM(I,\Phi)$ is an arrow comparison with an
+enumeration of $A$ included as parameters; it is not
+declared to equal a Galois type over arbitrary $A$.
+\end{remark}
+
+\section{Consequences: order symmetry, locality, and amalgamation}
 \subsection{Back-and-forth and block transpositions}
 \begin{remark}[Source Proposition 4.3: back-and-forth]
 At a closure point $\zeta$ of countable cofinality, write both
@@ -681,7 +941,7 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
-\subsection{Locality and compactness for placed comparisons}
+\subsection{Locality and compactness for placed comparisons}\label{sec:locality}
 The source's Proposition~4.8 gives a uniform function
 $g(\sigma)$ with the following \emph{separation} property:
 for a well-ordered EM base $A=\EM(I,\Phi)$, two different
@@ -695,11 +955,14 @@ tameness for all Galois types.
 Proposition~4.9 gives a complementary \emph{existence}
 principle: a coherent family of possible joint diagrams
 over all $X\in[A]^{\leq\chi}$, for
-$\chi>\ell+\sigma$ with $\chi^\sigma=\chi$,
+$\chi>\lambda_0+\sigma$ with $\chi^\sigma=\chi$,
 is realized by a placement. Together they imply
 uniqueness of the full \emph{diagram} once
 $\chi\geq g(\sigma)$, as recorded next.
-The proof of Proposition~4.9 uses the finite supports
+In this notation the placed comparison is
+$D_{\mathrm{pl}}(\bd;A)=\atp(\bd,\ba_A)$,
+computed in a sufficiently large EM presentation. The
+proof of Proposition~4.9 uses the finite supports
 of EM terms, clusters of support positions within
 cuts, and the block symmetry of Lemma~4.6.
 These are properties of the presentation calculus,
@@ -711,10 +974,10 @@ consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 Let $I$ be an infinite well-order and $A=\EM(I,\Phi)$.
 Fix an infinite cardinal $\sigma$ and choose $\chi$ with
 \[
-\chi>\ell+\sigma,\qquad \chi^\sigma=\chi,
+\chi>\lambda_0+\sigma,\qquad \chi^\sigma=\chi,
 \qquad \chi\geq g(\sigma),
 \]
-where $\ell$ is the fixed presentation bound and $g$ is
+where $\lambda_0=\LS(\K)$ is the presentation bound and $g$ is
 the uniform testing function of Proposition~4.8.
 For each $X\subseteq A$ of cardinality at most $\chi$,
 suppose a \emph{possible} joint comparison diagram
@@ -774,15 +1037,22 @@ for Lemma~4.10 alone have not been established as a
 separate source theorem.
 \end{remark}
 
-\textbf{Theorem 4.11.} There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
+\begin{theorem}[Amalgamation at selected levels; {\cite[Theorem 4.11]{oai-ecc}}]\label{thm:amalgamation-closed}
+There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinality such that:
 \begin{enumerate}[label=(\arabic*)]
 \item $\K$ is categorical in $\mu$, and two $\mu$-sized strong extensions of a $\mu$-model admit a strong amalgam of size $\mu$.
 \item For bounded tuples $\bar d_i\in B_i$ over a common $\mu$-sized base $A$, an amalgam identifying the tuples exists exactly when their relative diagrams agree on all $X\subseteq A$ of size at most $g(\sigma)$, for the relevant tuple-length bound $\sigma$.
 \item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
 \end{enumerate}
-This is an amalgamation conclusion at selected cardinals, \emph{not} a claim of eventual amalgamation at all sufficiently large cardinals. We have not yet analyzed all the technical steps of Sections 4.2--4.4 in the same depth as Sections 3--4.1.
+\end{theorem}
+\begin{remark}[Scope of amalgamation]
+This is amalgamation at selected cardinals, not an assertion
+of eventual amalgamation throughout a tail. The first conclusion
+is distinct from the uniform tameness and compactness of
+placed diagrams established earlier.
+\end{remark}
 
-\section{Section 5: Working schemes for finite systems}
+\section{Finite systems and working schemes}
 \subsection{Systems and their morphisms}
 We make the systems of \cite[Section 5.1]{oai-ecc} precise. Requiring
 internal edge maps to be strong is our explicit convention;
