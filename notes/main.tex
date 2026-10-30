@@ -1601,13 +1601,75 @@ uses additional closed-cardinal hypotheses;
 it does not state arbitrary countable-chain
 continuity for abstract type prescriptions.
 
-If the intended notation were literally
-$p_n\in S^\sigma_{\natatp}(A;A)$ for every
-$n$, then there would be no growing
-parameter domain: these are already
-complete types over $A$. The interesting
-question is for $p_n$ over the successive
-$A_n$.
+If $p_n$ are instead all types \emph{over
+the same base $A$}, there may be a different
+issue: their \emph{tuple lengths} could be
+growing. This is distinct from the chain
+of parameter sets considered here; see
+the next remark. If the base and tuple
+length are both fixed, an increasing
+sequence in the sense of restriction is
+simply a constant type.
+\end{remark}
+
+\begin{remark}[Countable unions in the tuple coordinates]
+\label{rem:long-tuple-union}
+Fix the same EM base $A$ and ordinals
+$\gamma_n$ with $\gamma_n\leq\gamma_{n+1}$,
+$\gamma=\sup_{n<\omega}\gamma_n$.
+Suppose
+\[
+p_n\in S^{\gamma_n}_{\natatp}(A;A),
+\qquad
+p_{n+1}\restriction\gamma_n=p_n,
+\]
+where the restriction now discards \emph{tuple
+coordinates}, not parameters. Does there
+exist a unique
+$p\in S^\gamma_{\natatp}(A;A)$
+with $p\restriction\gamma_n=p_n$?
+
+This is a different continuity question.
+Our compact-placement Lemma~\ref{lem:unique-placed-compactness}
+works at a \emph{fixed} upper bound on
+the entire added tuple length. To use it
+here, one would first need, for every
+$X\in[A]^{\leq\chi}$, a \emph{possible}
+joint diagram $q_X$ for the entire
+$\gamma$-tuple with parameters $X$,
+whose restrictions agree with
+$p_n\restriction X$ for all $n$ and
+whose parameter restrictions are coherent.
+If such $q_X$ are supplied and
+$\gamma\leq\sigma$ with the stated
+conditions on $\chi$, the lemma gives
+a unique resulting \emph{full} type.
+But existence of these $q_X$ is not
+a consequence proved here of the
+coherence of the $p_n$ alone.
+
+Even assuming existence, to show uniqueness
+\emph{from the $p_n$ alone} one would need
+a continuity principle saying that
+two natural arrow types of a long tuple
+which agree on every initial
+$\gamma_n$-subtuple are equal.
+The uniform testing theorem is about
+\emph{parameter subsets} of bounded size,
+not continuity in the number of
+distinguished tuple coordinates.
+
+The countable exhaustion in the proof of
+source Theorem~4.11 uses \emph{actual
+compatible enumerations} of strong
+submodels and their already determined
+bounded diagrams. Its construction
+extends realizations stage by stage.
+It does not assert this unrestricted
+inverse-limit property for arbitrary
+abstract types of growing tuple length.
+This distinction is worth revisiting
+when auditing that construction.
 \end{remark}
 
 \begin{remark}[Scope of compactness and uniqueness]
