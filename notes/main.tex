@@ -1385,70 +1385,195 @@ Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
 \end{remark}
 
-\subsection{Locality and compactness for placed comparisons}\label{sec:locality}
-The source's Proposition~4.8 gives a uniform function
-$g(\sigma)$ with the following \emph{separation} property:
-for a well-ordered EM base $A=\EM(I,\Phi)$, two different
-placed comparisons of a tuple of length at most $\sigma$
-are already distinguished over some
-$X\subseteq A$ of size at most $g(\sigma)$.
-This is tameness-like locality for a specific kind of
-base and a specific comparison invariant, not
-tameness for all Galois types.
+\subsection{Locality and compactness for placed comparisons}
+\label{sec:locality}
+\paragraph{Natural arrow types over parameter sets.}
+Fix a well-ordered EM presentation
+$A=\EM(I,\Phi)$ and a tuple-length bound $\sigma$.
+For any set $X\subseteq A$, let
+\[
+S^\sigma_{\natatp}(X;A)
+:=
+\bigl\{\natatp((\bd,\bar x);\EM(J,\Phi)):
+ I\hookrightarrow J,\ \bd\in\EM(J,\Phi)^\sigma\bigr\},
+\]
+where $\bar x$ is an enumeration of $X$,
+transported along the order-induced embedding.
+The comparison identifies the parameter coordinates
+according to their fixed names; its equality does
+not depend on the choice of enumeration.
+For $Y\subseteq X$, restriction of the parameter list
+gives a well-defined map
+\[
+\restriction Y:
+S^\sigma_{\natatp}(X;A)\longrightarrow
+S^\sigma_{\natatp}(Y;A).
+\]
+We suppress the ambient presentation $A$ when it
+is fixed, writing $S^\sigma_{\natatp}(X)$.
+The same construction works for \emph{any subset}
+$X$ of an EM base, whether or not $X$ is the
+universe of a strong submodel. It does not
+automatically define a natural arrow type
+over an arbitrary non-EM base.
 
-Proposition~4.9 gives a complementary \emph{existence}
-principle: a coherent family of possible joint diagrams
-over all $X\in[A]^{\leq\chi}$, for
-$\chi>\lambda_0+\sigma$ with $\chi^\sigma=\chi$,
-is realized by a placement. Together they imply
-uniqueness of the full \emph{diagram} once
-$\chi\geq g(\sigma)$, as recorded next.
-In this notation the placed comparison is
-$D_{\mathrm{pl}}(\bd;A)=\atp(\bd,\ba_A)$,
-computed in a sufficiently large EM presentation. The
-proof of Proposition~4.9 uses the finite supports
-of EM terms, clusters of support positions within
-cuts, and the block symmetry of Lemma~4.6.
-These are properties of the presentation calculus,
-not an instance of first-order compactness.
+The source's Proposition~4.8 gives a definable
+nondecreasing cardinal function $g(\sigma)$
+with the following \emph{separation property}:
+two distinct placed natural arrow types over
+$A$ are distinguished by their restrictions
+to some $X\subseteq A$ with $|X|\leq g(\sigma)$.
+This is tameness-like locality for
+the \emph{placed comparison} invariant,
+not a general tameness statement for
+ordinary Galois types.
 
-\begin{lemma}[Unique compactness for placed comparisons;
+\begin{lemma}[Unique compactness for natural arrow types over an EM base;
 consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 \label{lem:unique-placed-compactness}
-Let $I$ be an infinite well-order and $A=\EM(I,\Phi)$.
-Fix an infinite cardinal $\sigma$ and choose $\chi$ with
+Let $I$ be an infinite well-order,
+$A=\EM(I,\Phi)$, and let $\sigma$ be infinite.
+Choose an infinite cardinal $\chi$ satisfying
 \[
-\chi>\lambda_0+\sigma,\qquad \chi^\sigma=\chi,
-\qquad \chi\geq g(\sigma),
+\chi>\lambda_0+\sigma,\qquad
+\chi^\sigma=\chi,\qquad
+\chi\geq g(\sigma).
 \]
-where $\lambda_0=\LS(\K)$ is the presentation bound and $g$ is
-the uniform testing function of Proposition~4.8.
-For each $X\subseteq A$ of cardinality at most $\chi$,
-suppose a \emph{possible} joint comparison diagram
-$q_X(\bd,X)$ is prescribed for a tuple $\bd$ of length
-at most $\sigma$. Assume that the prescriptions are
-coherent under restriction and that their diagrams
-on the parameter tuples $X$ are the natural diagrams
-of those parameters in $A$.
-
-Then there exists a placement of $\bd$ over the
-fixed skeleton $I$ whose placed comparison restricts
-to $q_X$ for every such $X$. Moreover, \emph{any two}
-placements satisfying all these prescriptions have
-the same full placed comparison over $A$.
-Thus the coherent family has exactly one
-\emph{extension as a comparison diagram}; neither
-the placement nor its realizing tuple is asserted
-to be unique.
+For each $X\in[A]^{\leq\chi}$, suppose we
+have specified a \emph{possible} type
+\[
+p_X\in S^\sigma_{\natatp}(X;A)
+\]
+such that
+\[
+X\subseteq Y,\quad |Y|\leq\chi
+\quad\Longrightarrow\quad
+p_Y\restriction X=p_X.
+\]
+Then there exists exactly one
+\[
+p\in S^\sigma_{\natatp}(A;A)
+\]
+satisfying $p\restriction X=p_X$
+for all $X\in[A]^{\leq\chi}$.
+Uniqueness is of the \emph{type}, not of
+a realizing tuple or an order extension.
 \end{lemma}
-\begin{proof}\itshape 
-Existence is Proposition~4.9. If two realizing
-placements had different full comparisons,
-Proposition~4.8 would find some $X\subseteq A$
-with $|X|\leq g(\sigma)\leq\chi$ on which their
-joint diagrams differ. Both restrictions equal
-$q_X$, a contradiction.
+\begin{proof}\itshape
+Choose an enumeration for every parameter set,
+with the identifications made explicit when
+taking restrictions. Each $p_X$ is, by definition,
+a possible joint canonical diagram of an added
+tuple with the parameters $X$. Its parameter
+restriction is the natural diagram of $X$,
+and the assumed coherence is exactly the
+compatibility hypothesis of source
+Proposition~4.9. That proposition produces
+a placement of $\bd$ over $I$ realizing all
+the prescribed diagrams, hence a type
+$p\in S^\sigma_{\natatp}(A;A)$ with
+$p\restriction X=p_X$.
+
+If $p,p'$ are two such types, source
+Proposition~4.8 finds, whenever $p\ne p'$,
+a subset $X\subseteq A$ of size at most
+$g(\sigma)\leq\chi$ on which they differ.
+Both restrictions equal $p_X$,
+contradicting the choice of $X$.
 \end{proof}
+
+\begin{remark}[The quantifier over parameter subsets]
+The statement concerns $X\in[A]^{\leq\chi}$.
+Asking for $p_X$ for \emph{all} subsets
+$X\subseteq A$, including $X=A$, would
+already supply the desired conclusion
+as $p_A$. If $|A|\leq\chi$, the theorem
+is correspondingly tautological; its
+interest is when $|A|>\chi$.
+The hypothesis that each $p_X$ is
+\emph{possible} is essential.
+\end{remark}
+
+\begin{proposition}[Gluing types along a $\chi$-covering chain]
+\label{prop:covering-chain-gluing}
+Keep the hypotheses on $A,\sigma,\chi$
+from Lemma~\ref{lem:unique-placed-compactness}.
+Suppose $A=\bigcup_{i<\delta}A_i$ for an
+increasing family of parameter subsets
+(not necessarily submodels), and
+each $X\in[A]^{\leq\chi}$ is contained
+in some $A_i$.
+If
+\[
+p_i\in S^\sigma_{\natatp}(A_i;A)
+\qquad(i<\delta)
+\]
+satisfy $p_j\restriction A_i=p_i$
+whenever $i<j$, then there is a unique
+$p\in S^\sigma_{\natatp}(A;A)$
+extending all the $p_i$.
+In particular, the covering assumption holds
+whenever $\operatorname{cf}(\delta)>\chi$.
+\end{proposition}
+\begin{proof}\itshape
+For each $X\in[A]^{\leq\chi}$, choose $i$
+with $X\subseteq A_i$ and put
+$p_X=p_i\restriction X$.
+This is independent of the chosen $i$:
+any two indices have a common later index,
+and the chain is coherent. The $p_X$
+are possible and satisfy the compatibility
+conditions of Lemma~\ref{lem:unique-placed-compactness},
+which gives existence and uniqueness of $p$.
+For the last assertion, if $|X|\leq\chi$,
+choose for each $x\in X$ an index $i_x$
+with $x\in A_{i_x}$. Since
+$\operatorname{cf}(\delta)>\chi$,
+the supremum of those indices is below
+$\delta$, so $X$ lies in some $A_i$.
+\end{proof}
+
+\begin{remark}[The countable-union problem remains open here]
+\label{rem:countable-chain-natural-types}
+Suppose $A=\bigcup_{n<\omega}A_n$ and
+$p_n\in S^\sigma_{\natatp}(A_n;A)$
+are coherent under restriction.
+The assumption in
+Proposition~\ref{prop:covering-chain-gluing}
+usually fails: one can choose elements
+from cofinally many successive stages to
+obtain a countable set $X\subseteq A$
+which is contained in no $A_n$.
+Since $\chi$ is infinite, the $p_n$
+alone do not assign a diagram to this $X$.
+Thus Lemma~\ref{lem:unique-placed-compactness}
+does not prove that the $p_n$ have a unique
+common extension over $A$.
+
+One might seek a stronger \emph{countable-chain
+continuity} principle for placed natural
+arrow types. Its existence and uniqueness
+parts are distinct questions: even if a
+global extension exists, the uniform
+testing bound $g(\sigma)$ only separates
+different global types over a parameter
+set of size at most $g(\sigma)$, which
+need not lie in one $A_n$.
+For comparison, the source's Lemma~4.10
+handles \emph{bounded diagrams of an actual
+tuple in an ambient strong extension} and
+uses additional closed-cardinal hypotheses;
+it does not state arbitrary countable-chain
+continuity for abstract type prescriptions.
+
+If the intended notation were literally
+$p_n\in S^\sigma_{\natatp}(A;A)$ for every
+$n$, then there would be no growing
+parameter domain: these are already
+complete types over $A$. The interesting
+question is for $p_n$ over the successive
+$A_n$.
+\end{remark}
 
 \begin{remark}[Scope of compactness and uniqueness]
 This is a compactness-and-separation principle for
