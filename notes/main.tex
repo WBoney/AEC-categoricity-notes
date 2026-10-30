@@ -50,7 +50,7 @@ role of EM functoriality and carefully separate equalities that
 are proved, implications that are only one-way, and analogies
 with existing AEC technology. The final sections record locality,
 compactness, amalgamation at closed levels, and the first
-definitions for finite systems. This is not an independent
+definitions for finite diagram categories. This is not an independent
 verification of the manuscript.
 \end{abstract}
 \tableofcontents
@@ -65,7 +65,7 @@ to $\tau(\K)$.
 The argument moves from order types and EM records through
 automorphism orbits, arrow comparisons and Galois types,
 toward locality and compactness for placed comparisons,
-amalgamation at selected cardinals and finite-system geometry.
+amalgamation at selected cardinals and finite-diagram geometry.
 
 \[
 \begin{array}{c}
@@ -1832,172 +1832,360 @@ is distinct from the uniform tameness and compactness of
 placed diagrams established earlier.
 \end{remark}
 
-\section{Finite systems and working schemes}
-\subsection{Systems and their morphisms}
-We make the systems of \cite[Section 5.1]{oai-ecc} precise. Requiring
-internal edge maps to be strong is our explicit convention;
-the source initially says \emph{specified maps} without
-separately requiring their strongness.
+\section{Functor categories and working schemes}
+\subsection{Functor categories of AEC models}
+\label{subsec:functor-aec}
+We replace the graph-based language of systems in
+\cite[Section 5.1]{oai-ecc} with the category of
+diagrams of AEC models. This is a reformulation
+in our notes, not terminology used explicitly in the source.
 
-\begin{definition}[Model embeddings]
-Let $\tau=\tau(\K)$. A $\tau$-embedding $f:M\to N$ is an
-embedding of $\tau$-structures. A \emph{$\K$-embedding}, equivalently
-a \emph{strong embedding}, is a $\tau$-embedding satisfying
-$f[M]\leq_\K N$.
-\end{definition}
-
-\begin{definition}[Finite shape and system]\label{def:finite-system}
-Fix a finite directed multigraph $G=(V,E,s,t)$, where $s,t:E\to V$.
-A \emph{$G$-system} is
+\begin{definition}[The diagram category]
+Regard $\K$ as the category whose objects are
+models in the AEC and whose morphisms are
+$\K$-embeddings. Fix a small category
+$\mathcal I$; in applications we use a
+finite or finitely generated shape. Set
 \[
-\mathcal M=((M_v)_{v\in V},(f_e^\mathcal M)_{e\in E}),
+\K^{\mathcal I}:=\operatorname{Fun}(\mathcal I,\K).
 \]
-where each $M_v\in\K$ and each
-$f_e^\mathcal M:M_{s(e)}\to M_{t(e)}$ is a $\K$-embedding.
-The shape may carry distinguished named sorted lists.
-No intersection-of-images or path-commutativity axiom is implicit.
-\end{definition}
-
-\begin{definition}[System embeddings and isomorphisms]
-A \emph{$\tau$-embedding of systems} $h:\mathcal M\to\mathcal N$
-is a family $h_v:M_v\to N_v$ of $\tau$-embeddings such that
+An object is a functor $D:\mathcal I\to\K$:
+it assigns a model $D(v)$ to each object $v$
+and a strong embedding $D(\alpha):D(v)\to D(w)$
+to each arrow $\alpha:v\to w$.
+A morphism $\eta:D\Rightarrow E$ is a
+natural transformation whose components
+$\eta_v:D(v)\to E(v)$ are strong embeddings:
 \[
-h_{t(e)}\circ f_e^\mathcal M=f_e^\mathcal N\circ h_{s(e)}
-\quad(e\in E),
+E(\alpha)\circ\eta_v=\eta_w\circ D(\alpha)
+\qquad(\alpha:v\to w).
 \]
-preserving all distinguished named lists.
-It is a \emph{$\K$-embedding of systems} if every
-$h_v$ is a $\K$-embedding. An \emph{isomorphism of systems}
-is an invertible system embedding, equivalently a commuting
-family of component isomorphisms onto the whole target vertices.
+An isomorphism is a natural isomorphism,
+equivalently a commuting family of
+component isomorphisms.
 \end{definition}
 
-\begin{definition}[Working-scheme arrows]
-An \emph{arrow} is a designated $\K$-embedding of systems,
-possibly satisfying additional conditions on the whole diagram.
-System $\K$-embeddings form a category $\operatorname{Sys}_G(\K)$.
-The scheme arrows select a subcategory on designated objects;
-not every system $\K$-embedding is necessarily an arrow.
-The working package requires that all system isomorphisms
-are arrows and that arrows compose.
-\end{definition}
+\begin{remark}[From graphs to free categories]
+\label{rem:free-shape}
+For a directed multigraph $G$, let
+$\mathcal F(G)$ be its \emph{free category}.
+The morphisms are finite directed paths
+(including empty identity paths), and
+composition concatenates paths. Every
+choice of $\K$-models at the vertices
+and strong embeddings along the edges
+extends uniquely to a functor
+$\mathcal F(G)\to\K$.
+Graph-system embeddings become precisely
+the natural transformations.
+No commutativity is imposed on distinct
+paths. This is the \emph{free-category}
+construction, not the nerve of a category.
 
-\begin{definition}[Many-sorted coding and sorted tuples]
-For each $v\in V$, introduce a separate sort $S_v$
-with a copy of the language $\tau$. For each $e:v\to w$,
-include a function symbol $F_e:S_v\to S_w$ interpreted by
-$f_e^\mathcal M$; name distinguished data in their own sorts.
-A \emph{sorted tuple} is $\ba=(a_i)_{i<\gamma}$
-with a specified sort $v_i\in V$ and $a_i\in M_{v_i}$
-for each $i<\gamma$. Its atomic diagram is computed
-in the resulting many-sorted language.
-Coincident underlying elements in different vertices
-are distinct sorted occurrences.
-\end{definition}
-
-\begin{remark}[Structural versus strong information]
-An embedding of many-sorted structures need not be
-a $\K$-embedding of systems: strongness is generally
-not expressible in their atomic structure.
-Even a componentwise strong system embedding need
-not be an arrow of a particular working scheme.
+The free category on a finite graph can
+have infinitely many arrows if the graph
+has a directed cycle. Conversely, an
+arbitrary finite category $\mathcal I$
+can impose equalities between paths;
+its functors must respect these
+relations. We use small $\mathcal I$
+with finite or finitely generated shapes
+where relevant.
 \end{remark}
 
-\subsection{Eligible levels, presentations, and comparisons}
-\begin{definition}[Eligible levels and bounded lists]
-Fix an unbounded definable class $\mathcal S$ of infinite
-cardinals, the \emph{eligible levels}. A system is at level
-$\mu\in\mathcal S$ if all vertices have size $\mu$.
-A sorted list is \emph{bounded at $\mu$} if its length
-is less than $\mu$. Strict closure under a bound
-$u$ means $u(\theta)<\mu$ for each infinite $\theta<\mu$.
-These conventions follow \cite[Convention 5.1]{oai-ecc}.
+\begin{definition}[Many-sorted coding and strong subfunctors]
+\label{def:functor-sorted-language}
+Use one sort $S_v$ per object
+$v\in\mathcal I$, a copy of $\tau(\K)$
+on that sort, and a function symbol
+$F_\alpha:S_v\to S_w$ for each
+$\alpha:v\to w$. Functoriality means
+\[
+F_{\operatorname{id}_v}=\operatorname{id}_{S_v},
+\qquad F_{\beta\alpha}=F_\beta F_\alpha.
+\]
+The sorted structures coding functors
+have carriers $S_v^D=D(v)$ and maps
+$F_\alpha^D=D(\alpha)$.
+For substructures $D\subseteq E$, set
+$D\leq_{\K^{\mathcal I}}E$ precisely
+when $D(v)\leq_\K E(v)$ in every sort.
+Strong embeddings of these sorted
+structures are the natural transformations
+in $\K^{\mathcal I}$.
 \end{definition}
 
-\begin{definition}[Finite-support presentation template]
-Fix a set of term labels, each of a fixed vertex sort
-and finite arity. A \emph{presentation template} $F$
-assigns a $G$-system $F(I)$ to each eligible well-order $I$.
-Each vertex occurrence has a representation
+\begin{proposition}[The functor category is an AEC]
+\label{prop:functor-aec}
+For any fixed small category $\mathcal I$,
+its sorted functor structures with the
+componentwise strong-subfunctor relation
+form an AEC, with
+\[
+\LS(\K^{\mathcal I})\leq
+\max\{\LS(\K),|\operatorname{Mor}(\mathcal I)|,
+\aleph_0\}.
+\]
+For a finite category or the free category
+on a finite graph, the bound is $\LS(\K)$.
+\end{proposition}
+\begin{proof}\itshape
+Invariance and coherence are componentwise.
+For an increasing chain of strong
+subfunctors, take unions in every sort.
+The component maps are unions of their
+restrictions; their images form increasing
+chains of strong submodels in the target
+unions. Hence the resulting maps remain
+strong. The chain and common-upper-bound
+axioms hold componentwise.
+
+For downward L\"owenheim--Skolem, choose
+an infinite $\kappa$ at least the displayed
+bound and a set of at most $\kappa$ sorted
+elements in $D$. Build small strong
+submodels of each $D(v)$ by iterating
+the following procedure countably often:
+enlarge each strong submodel to contain
+all images under every $D(\alpha)$ of
+elements previously selected in its
+source sort. Each stage has size at most
+$\kappa$, by the AEC LS axiom and the
+bound on the set of arrows. The unions
+are strong and closed under every diagram
+map. Since $D(\alpha)$ is strong,
+coherence makes its restrictions between
+the resulting submodels strong.
+These form a strong subfunctor of size
+at most $\kappa$ containing the given set.
+\end{proof}
+
+\begin{definition}[Sorted tuples and named data]
+A sorted tuple of sort pattern
+$\mathbf v=(v_i)_{i<\gamma}$ in
+$D:\mathcal I\to\K$ is a tuple
+$\ba=(a_i)_{i<\gamma}$ with
+$a_i\in D(v_i)$. Thus sorting just
+fixes the sort of each coordinate,
+as in ordinary many-sorted model theory.
+Equal underlying elements occurring in
+distinct vertex sorts remain distinct
+tagged occurrences; functor-map symbols
+record their specified relationships.
+Distinguished lists are named sorted tuples.
+\end{definition}
+
+\begin{definition}[Designated arrows in a working scheme]
+\label{def:designated-arrows}
+The ambient category is
+$\K^{\mathcal I}$, with all natural
+transformations of strong components.
+A working scheme may select certain
+eligible functors and designate
+\emph{fewer} natural transformations
+as its arrows, subject to additional
+global conditions. In particular,
+the category of such designated arrows
+need not itself be an AEC, even though
+$\K^{\mathcal I}$ is.
+
+\emph{Source convention.} Section 5.1
+of the manuscript initially mentions
+specified internal maps without expressly
+requiring all of them to be strong.
+Our use of $\K^{\mathcal I}$ is therefore
+an explicit strengthening of that
+general setup. If the intended internal
+maps are only structural embeddings,
+one needs the corresponding category
+of sorted diagrams with these allowed
+internal maps rather than literally
+$\operatorname{Fun}(\mathcal I,\K)$.
+\end{definition}
+
+\subsection{Eligible levels, EM presentations, and comparisons}
+\begin{definition}[Eligible levels and closure bounds]
+Fix an unbounded definable class $\mathcal S$
+of infinite cardinals, the \emph{eligible levels}.
+A functor $D:\mathcal I\to\K$ is at level
+$\mu\in\mathcal S$ when every component $D(v)$
+has cardinality $\mu$. This is a designated
+part of the diagram AEC, not an assertion
+that all $\mu$-sized objects of
+$\K^{\mathcal I}$ have equal-sized sorts.
+A sorted list is \emph{bounded at $\mu$}
+if its length is strictly less than $\mu$.
+
+In source Convention~5.1, $u$ is a
+\emph{placeholder for any specified
+cardinal-valued bound function},
+not an additional model-theoretic object.
+For such $u$ and a cardinal $\mu$, say
+that $\mu$ is \emph{strictly closed under $u$}
+when
+\[
+u(\theta)<\mu
+\quad\text{for every infinite cardinal }\theta<\mu.
+\]
+Examples of bounds to which this convention
+applies are the earlier stabilization and
+testing functions $t(\theta)$ and $g(\theta)$,
+as well as the coding bound $b_F(\theta)$
+of source Proposition~5.9.
+One may impose simultaneous strict closure
+under any specified set of such functions.
+This does not by itself imply $\mu\in\mathcal S$;
+eligible-level membership and the availability
+of cofinally many smaller eligible levels
+are additional questions (source Section~5.2).
+\end{definition}
+
+\begin{definition}[EM-style presentation of functor diagrams]
+\label{def:functor-em}
+Fix a set-sized collection of finite-arity
+term labels, each with an output sort
+$v\in\operatorname{Ob}(\mathcal I)$.
+An \emph{EM-style presentation template}
+$F$ associates to each eligible well-order
+$L$ a functor
+\[
+F(L):\mathcal I\longrightarrow\K,
+\qquad F(L)\in\K^{\mathcal I}.
+\]
+Every element of every component
+$F(L)(v)$ is represented by a label
+applied to a finite increasing tuple
+from the common indexing order $L$:
 \[
 a=t(i_0,\ldots,i_{n-1}),\qquad
-i_0<\cdots<i_{n-1}\text{ in }I,
+i_0<\cdots<i_{n-1}\text{ in }L.
 \]
-with label $t$ of the appropriate sort.
-Equality, vertex relations and operations, and edge maps
-are evaluated uniformly from term labels and the finite
-order/equality patterns of skeleton coordinates.
-Distinct term representations may yield the same occurrence.
-We separate this presentation data from the functoriality
-and representation axioms imposed below.
+Equality, vertex relations and functions,
+and the maps $F(L)(\alpha)$ are all
+computed uniformly from the label data
+and finite order/equality patterns of
+the supporting positions. Different
+labeled expressions may represent the
+same sorted element.
+
+This is a many-sorted EM construction
+with one \emph{external common skeleton}
+$L$. One can make it a literal EM
+blueprint by adjoining a skeleton sort
+and symbols for evaluating the labels
+into their respective vertex sorts.
+The working package separately requires
+order embeddings between eligible orders
+to induce \emph{strong natural transformations}
+$F(L)\Rightarrow F(L')$ and requires
+every eligible diagram to be isomorphic
+to one of these presentations at its level.
+These stronger assertions are not
+automatic for every diagram AEC. For example,
+even when $\K$ is the AEC of pure sets,
+the functor AEC for the walking-arrow category
+$v\to w$ is not categorical in infinite
+cardinality $\mu$ among diagrams with both
+vertices of size $\mu$: one can use a
+surjective map or a proper injection.
+The two diagrams are not naturally isomorphic.
+
+In the source, $F(L)$ is initially assumed
+to be an eligible diagram only for
+eligible well-orders $L$; extending
+the presentation to padded or arbitrary
+orders is a later construction
+(source Lemma~5.4), not part of this
+initial definition.
 \end{definition}
 
 \begin{definition}[Diagram comparisons]
-For each sorted index sequence
-$\mathbf v=(v_i)_{i<\gamma}$ of length bounded
-at the levels considered, a \emph{diagram comparison}
-is an equivalence relation $\equiv_D^{\mathbf v}$
-on pairs $(\ba;\mathcal M)$, where $\mathcal M$ is
-an eligible system and $\ba$ is a list of those sorts.
-We use the diagram-class notation
+For each sort pattern
+$\mathbf v=(v_i)_{i<\gamma}$, with
+$\gamma$ bounded at the relevant levels,
+a \emph{diagram comparison} is an
+equivalence relation $\equiv_D^{\mathbf v}$
+on pairs $(\ba;\mathcal D)$ where
+$\mathcal D:\mathcal I\to\K$ is
+an eligible functor and $\ba$ is
+a sorted tuple of pattern $\mathbf v$.
+Write
 \[
-D(\ba;\mathcal M)=D(\bb;\mathcal N)
-\iff
-(\ba;\mathcal M)\equiv_D^{\mathbf v}(\bb;\mathcal N).
+D(\ba;\mathcal D)=D(\bb;\mathcal E)
+\quad\Longleftrightarrow\quad
+(\ba;\mathcal D)\equiv_D^{\mathbf v}
+(\bb;\mathcal E).
 \]
-No preassigned set of diagram codes is required.
-Invariance under arrows, realization, and characterization
-by isomorphisms are separate working-package axioms.
+As in source Definition~5.2, the
+equivalence relations are data of a
+working scheme. Their invariance under
+designated arrows, realization properties,
+and equivalence with isomorphism orbits
+are substantive separate hypotheses,
+not consequences of the existence
+of $\K^{\mathcal I}$.
 \end{definition}
 
 \begin{definition}[Possible joint diagram]
-For a bounded actual sorted list $\ba$ in $\mathcal M$,
-a diagram $q(\bd,\ba)$ is \emph{possible over $\ba$}
-if some eligible system $\mathcal N$ has a joint
-list $(\bd',\ba')$ of bounded length satisfying
+For a bounded sorted tuple $\ba$ in
+an eligible functor $\mathcal D$,
+a diagram $q(\bd,\ba)$ is
+\emph{possible over $\ba$} if
+there exist an eligible functor
+$\mathcal E$ and a sorted tuple
+$(\bd',\ba')$ of bounded total length
+such that
 \[
-D(\bd',\ba';\mathcal N)=q,\qquad
-D(\ba';\mathcal N)=D(\ba;\mathcal M).
+D(\bd',\ba';\mathcal E)=q,\qquad
+D(\ba';\mathcal E)=D(\ba;\mathcal D).
 \]
-It need not initially be realized with the
-actual parameters $\ba$ fixed in $\mathcal M$.
+Possibility does not initially imply
+realizability over the actual tuple
+$\ba$ in $\mathcal D$; that is a
+homogeneity/saturation assertion
+of the working package.
 \end{definition}
 
 \subsection{Axioms of a working scheme}
 \begin{definition}[Working package;
 {\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
 A \emph{working scheme} consists of eligible
-classes $\mathcal C_\mu$ of level-$\mu$ systems,
-a finite-support template $F$, designated
-system arrows (including mixed-level arrows),
-and the diagram comparisons above, satisfying:
+classes $\mathcal C_\mu\subseteq\K^{\mathcal I}$
+of level-$\mu$ functors, a finite-support
+EM-style template $F$, designated natural
+transformations (including mixed-level
+transformations), and diagram comparisons
+on sorted tuples, satisfying:
 \begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
 \item \textbf{Structural closure.}
-Arrows include all system isomorphisms, compose,
+Designated arrows include all natural isomorphisms, compose,
 and are invariant under isomorphisms.
-If $\mathcal X\subseteq\mathcal Y\subseteq\mathcal Z$
-and both inclusions into $\mathcal Z$ are arrows,
-then $\mathcal X\to\mathcal Y$ is an arrow.
+If $\mathcal D\subseteq\mathcal E\subseteq\mathcal H$
+are eligible subfunctors and both inclusions into
+$\mathcal H$ are designated arrows, then
+$\mathcal D\to\mathcal E$ is a designated arrow.
 An increasing nonempty chain of level-$\mu$
-objects with componentwise union of total
-cardinality $\mu$ has its union as an object
+functors with componentwise union of
+cardinality $\mu$ at every vertex has its union
+as an eligible functor
 at level $\mu$, with inclusion arrows.
 The union also includes by an arrow into
 any common eligible upper object into which
 all chain members include by arrows.
 
 \item \textbf{Presentations and downward closure.}
-For every eligible well-order $I$ of size $\mu$,
-$F(I)\in\mathcal C_\mu$. Order embeddings
-between eligible well-orders induce arrows,
+For every eligible well-order $L$ of size $\mu$,
+$F(L)\in\mathcal C_\mu$. Order embeddings
+between eligible well-orders induce strong
+natural transformations that are designated arrows,
 including at mixed levels.
-Every level-$\mu$ object is isomorphic
-to some $F(I)$ with $|I|=\mu$.
+Every level-$\mu$ functor is naturally isomorphic
+to some $F(L)$ with $|L|=\mu$.
 For $\nu\leq\mu$ eligible, any set of
 at most $\nu$ vertex occurrences in a
 level-$\mu$ object, together with required
 distinguished data, lies in a level-$\nu$
-subobject whose inclusion is an arrow.
+subfunctor whose inclusion is a designated arrow.
 
 \item \textbf{Diagram invariance and homogeneity.}
 Diagrams include the atomic diagram of the
@@ -2007,7 +2195,7 @@ Every arrow, including mixed-level arrows,
 preserves diagrams. For two bounded lists
 at the same level, equality of diagrams
 is equivalent to the existence of a
-system isomorphism identifying the lists.
+natural isomorphism of functors identifying the lists.
 At each fixed sorted arity, the number
 of diagrams is bounded by a set independent
 of the eligible level.
@@ -2021,7 +2209,7 @@ of the skeleton positions, even at mixed levels.
 
 \item \textbf{Exhaustion criterion.}
 Compatible diagram matches on increasing
-bounded lists that exhaust the source system
+bounded sorted lists that exhaust the source functor
 define an arrow, provided each source
 vertex is exhausted by nested enumerations
 of strong submodels of size below the
@@ -2043,17 +2231,24 @@ rather than a definition of the equivalence relation.
 As in the source, the empty list has one diagram;
 combined with (W3) this makes all objects at
 a fixed eligible level isomorphic.
-The extra obligation on geometric arrows is
-not eliminated by checking componentwise strongness.
+The AEC axioms for $\K^{\mathcal I}$ give ordinary
+strong subfunctors and chain closure, but do not
+supply the designated eligible levels, the EM
+presentation property, the highly homogeneous
+diagram equivalences, or any additional geometric
+condition on the arrows. In particular, the
+extra obligation on geometric arrows is not
+eliminated by checking componentwise strongness.
 \end{remark}
 
 \begin{remark}[Relation of the working package to AEC machinery]
-A system arrow is a commuting family of $\K$-embeddings,
-possibly with additional global conditions. A many-sorted
-$\tau(\K)$-embedding is weaker: it need not be strong
-on each vertex. The template $F$ generalizes the
-functorial finite-support EM construction from one
-model to a finite diagram of models.
+An ordinary natural transformation in
+$\K^{\mathcal I}$ is a commuting family of
+componentwise strong embeddings. A structural
+many-sorted embedding is weaker, since its
+components need not be strong. The template
+$F$ is an EM-style construction for the diagram
+AEC, rather than a novel way to package diagrams.
 
 The equivalence relations called \emph{diagrams} in the
 working package are primitive comparison data; the
@@ -2064,7 +2259,7 @@ axiom plays a role analogous to realizing compatible
 Galois types over a fixed parameter list. These are
 \emph{analogies}: the package does not stipulate that
 its comparisons are Galois types, nor does it
-assume amalgamation for every constituent model.
+assume amalgamation in the diagram AEC.
 \end{remark}
 
 \section{Questions for the next reading session}
