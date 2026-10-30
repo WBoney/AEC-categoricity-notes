@@ -1312,12 +1312,12 @@ coordinate. Thus the first family still uses the
 $X_j$-coordinates and the second still uses the
 $Y_j$-coordinates; \emph{only their relative order
 changes}. Evaluate these same terms in an EM model
-over an order containing $S'$, obtaining tuples
+over an order $J$ containing $S'$, obtaining tuples
 $\bd'$ and $\be'$. Then
 \[
-\natatp(\bd,\be)
+\natatp((\bd,\be);\EM(I,\Phi))
 =
-\natatp(\bd',\be').
+\natatp((\bd',\be');\EM(J,\Phi)),
 \]
 The new tuples need not live in the original $M$;
 the statement compares their natural diagrams in
@@ -1508,6 +1508,25 @@ is correspondingly tautological; its
 interest is when $|A|>\chi$.
 The hypothesis that each $p_X$ is
 \emph{possible} is essential.
+
+If $A_0=\EM(I_0,\Phi)\leq_\K A$ for
+an infinite sub-well-order $I_0\subseteq I$,
+the same lemma applies directly with
+$A_0$ as the base. This covers EM submodels.
+For an arbitrary subset $Y\subseteq A$,
+the notation $S^\sigma_{\natatp}(Y;A)$ is
+still meaningful, but the stated theorem
+is over the \emph{whole EM base} $A$.
+A corresponding compactness theorem based
+only on prescriptions on $[Y]^{\leq\chi}$
+would require adapting the support-profile
+argument of source Proposition~4.9
+and the uniform testing bound of
+Proposition~4.8 to parameters restricted
+to $Y$. We do not assert that extension
+here. Likewise, arbitrary strong submodels
+of $A$ need not be EM submodels with the
+induced presentation.
 \end{remark}
 
 \begin{proposition}[Gluing types along a $\chi$-covering chain]
