@@ -113,7 +113,7 @@ $\approx_{\geq\kappa}$ & Galois equivalence restricted
 to intermediate models of size at least $\kappa$
 (Proposition~\ref{prop:arrow-galois}).\\
 $\natatp(I,r)$,
-$\natatp(\ba;M)$ & Natural diagram computed
+$\natatp(\ba;M)$ & Natural arrow type computed
 from a record, and its record-independent tuple notation
 (Proposition~\ref{prop:nat-record-independent}).\\
 $D_{\mathrm{pl}}$ & Placed diagram over an EM-presented
@@ -131,7 +131,10 @@ Galois type $\gtp$ can be strictly coarser than
 $\atp$ in the absence of amalgamation
 (Example~\ref{ex:stars-gtp-arrow}). The source's stable diagrams
 means \emph{stabilized} rather than stable in
-the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
+the AEC sense. Our $\natatp$ is precisely the
+source's natural diagram $D_{\mathrm{nat}}$;
+we change the name to emphasize that it is
+computed from stabilized arrow types. We use $\gtp^{\mathrm{EM}}$ only after
 defining it, not as an automatic synonym for $\natatp$.
 \end{remark}
 
@@ -731,10 +734,10 @@ saying that $x$ is terminal, and of $R_i(x,y)$
 as an outgoing edge of color $i$. Let
 $\K_{\mathrm{col}}$ consist of structures satisfying:
 \begin{enumerate}[label=\textup{(\roman*)}]
-\item $T(x)$ holds precisely when $x$ has
-no outgoing $R_i$-edge;
-\item every nonterminal vertex has at least
-one outgoing edge;
+\item a vertex satisfying $T$ has no
+outgoing $R_i$-edge;
+\item every vertex not satisfying $T$
+has at least one outgoing edge;
 \item whenever $R_i(x,y)$ and $R_j(x,z)$
 hold, $|i-j|\leq 1$.
 \end{enumerate}
@@ -889,7 +892,7 @@ the converse can fail.
 \end{remark}
 
 \subsubsection*{Natural and placed canonical diagrams}
-\begin{definition}[Natural diagram; {\cite[Definition 4.4]{oai-ecc}}]
+\begin{definition}[Natural arrow type (source: natural diagram); {\cite[Definition 4.4]{oai-ecc}}]
 \label{def:natural-diagram}
 Fix a linear order $I$, an output ordinal $\gamma$,
 and a presentation record
@@ -956,6 +959,38 @@ Finally, if the original reduct is already large
 enough to carry $\atp$, its strong embedding into
 any such extension preserves $\atp(\ba;-)$.
 \end{proof}
+
+\begin{remark}[Ambient invariance and the role of the EM presentation]
+\label{rem:nat-ambient}
+For any fixed large-enough categoricity cardinal $\kappa$,
+$\atp_\kappa(\ba;M)$ is already preserved by every
+strong embedding $M\to N$ of models of size at
+least $\kappa$; it does \emph{not} depend on which
+strong extension of such an $M$ is used.
+The potential difficulties are instead:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the arrow comparisons may refine as $\kappa$ increases,
+until their eventual stabilization; and
+\item a small model $M$ may admit \emph{incompatible}
+strong extensions whose images of $\ba$ have different
+stabilized arrow types. No-maximal-models alone does
+not provide a well-defined choice of type.
+\end{enumerate}
+The special advantage of an EM presentation
+$\EM(I,\Phi)$ is that \emph{order extensions}
+$I\hookrightarrow I'$ provide a compatible directed
+family of strong extensions. Since linear orders
+amalgamate over a common suborder, the stabilized
+arrow type calculated in this family is independent
+of the chosen sufficiently large $I'$.
+There is no distinguished canonical order $I'$:
+it is the \emph{resulting type}, not the extension,
+that is canonical relative to the fixed template
+and presentation. For models already above the
+stabilization threshold, it coincides with
+the intrinsic $\atp$.
+This is what $\natatp$ formalizes.
+\end{remark}
 
 \begin{proposition}[Order-pattern sufficiency for natural diagrams]
 \label{prop:order-pattern-nat}
