@@ -407,18 +407,19 @@ S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
 By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $M_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $M_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
 \end{definition}
 
-\begin{remark}[AEC interpretation of the stabilized classes]
-The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
-strong submodels, even when its ambient models are larger.
-At a sufficiently large categoricity size, its restriction
-to $\K_\kappa$ is exactly equality of Galois types over
-$\emptyset$, where equality is defined through the
-transitive closure of direct amalgamation equivalence.
-This makes $S_\kappa^\gamma$ a \emph{local Galois-type
-space}, not in general the space of Galois types computed
-in arbitrary ambient models. Stabilization of these
-spaces is distinct from the AEC stability property
-bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\begin{remark}[Arrow types as relative Galois equivalence]
+The relation $\equiv_\kappa^\gamma$ compares
+tuples inside $\kappa$-sized strong submodels,
+even when ambient models are larger.
+It is the Galois-type equivalence relation
+\emph{restricted to chains through models of size
+at least $\kappa$}, as made precise in
+Proposition~\ref{prop:arrow-galois} below.
+It need not coincide with the usual unrestricted
+Galois equivalence in the absence of amalgamation.
+Stabilization of these restricted classes is
+distinct from AEC stability (a bound on types
+over a model).
 \end{remark}
 
 \subsubsection*{Stabilization of arrow types}
@@ -672,16 +673,24 @@ an injection on all the leaves.
 \end{example}
 
 \begin{remark}[Scope of the characterization]
-For $M,N$ larger than $\kappa$, equality of the
-$\kappa$-local comparison classes is equivalent to equality
-of the Galois types computed in \emph{any} $\kappa$-sized
-strong submodels containing the tuples (Lemma~\ref{lem:small}).
-It does not by itself identify the Galois types computed in
-the full ambient models: a small amalgam need not extend to
-an amalgam of larger models. We use $S^\gamma_\kappa$ for
-these local classes and, after the projections stabilize,
-$S^\gamma_*$ for their eventual common value, understood
-up to the canonical bijections.
+For ambient $M,N$ of size at least $\kappa$,
+equality of $\kappa$-arrow types is equivalent
+to equality in the \emph{tail-restricted}
+equivalence $\approx_{\geq\kappa}$, not
+necessarily to equality of unrestricted
+Galois types. The latter always follows
+from arrow-type equality but may hold without it,
+as Example~\ref{ex:stars-gtp-arrow} shows.
+This is an issue even when $M,N$ themselves
+have cardinality $\kappa$: a global Galois-type
+chain may pass through smaller models.
+
+We write $S^\gamma_\kappa$ for the arrow-type
+classes and $S^\gamma_*$ for their eventual
+common value under the projections of
+Proposition~4.2, understood up to canonical
+bijections. These classes need not
+be all global Galois types.
 \end{remark}
 
 \begin{definition}[EM-lifted Galois comparison]
@@ -917,11 +926,12 @@ D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
 These implications do not assert converses.
 
 At a sufficiently large categoricity cardinal,
-$\atp_\kappa$ on $\kappa$-sized models agrees with
-$\gtp(-/\emptyset;-)$ by Lemma~\ref{lem:direct-amalgamation-reversal}.
-On larger ambient models, $\atp_\kappa$ compares
-types in small strong submodels and is not automatically
-the ambient Galois type. Similarly, a placed diagram
+$\atp_\kappa$ is exactly tail-restricted Galois
+equivalence by Proposition~\ref{prop:arrow-galois}.
+It implies ordinary Galois-type equality over
+$\emptyset$, but the converse can fail without
+amalgamation, even at cardinality $\kappa$.
+Similarly, a placed diagram
 over $A=\EM(I,\Phi)$ is an arrow comparison with an
 enumeration of $A$ included as parameters; it is not
 declared to equal a Galois type over arbitrary $A$.
