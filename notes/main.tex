@@ -2003,64 +2003,140 @@ internal maps rather than literally
 $\operatorname{Fun}(\mathcal I,\K)$.
 \end{definition}
 
-\subsection{Eligible levels, presentations, and comparisons}
-\begin{definition}[Eligible levels and bounded lists]
-Fix an unbounded definable class $\mathcal S$ of infinite
-cardinals, the \emph{eligible levels}. A system is at level
-$\mu\in\mathcal S$ if all vertices have size $\mu$.
-A sorted list is \emph{bounded at $\mu$} if its length
-is less than $\mu$. Strict closure under a bound
-$u$ means $u(\theta)<\mu$ for each infinite $\theta<\mu$.
-These conventions follow \cite[Convention 5.1]{oai-ecc}.
+\subsection{Eligible levels, EM presentations, and comparisons}
+\begin{definition}[Eligible levels and closure bounds]
+Fix an unbounded definable class $\mathcal S$
+of infinite cardinals, the \emph{eligible levels}.
+A functor $D:\mathcal I\to\K$ is at level
+$\mu\in\mathcal S$ when every component $D(v)$
+has cardinality $\mu$. This is a designated
+part of the diagram AEC, not an assertion
+that all $\mu$-sized objects of
+$\K^{\mathcal I}$ have equal-sized sorts.
+A sorted list is \emph{bounded at $\mu$}
+if its length is strictly less than $\mu$.
+
+In source Convention~5.1, $u$ is a
+\emph{placeholder for any specified
+cardinal-valued bound function},
+not an additional model-theoretic object.
+For such $u$ and a cardinal $\mu$, say
+that $\mu$ is \emph{strictly closed under $u$}
+when
+\[
+u(\theta)<\mu
+\quad\text{for every infinite cardinal }\theta<\mu.
+\]
+Examples of bounds to which this convention
+applies are the earlier stabilization and
+testing functions $t(\theta)$ and $g(\theta)$,
+as well as the coding bound $b_F(\theta)$
+of source Proposition~5.9.
+One may impose simultaneous strict closure
+under any specified set of such functions.
+This does not by itself imply $\mu\in\mathcal S$;
+eligible-level membership and the availability
+of cofinally many smaller eligible levels
+are additional questions (source Section~5.2).
 \end{definition}
 
-\begin{definition}[Finite-support presentation template]
-Fix a set of term labels, each of a fixed vertex sort
-and finite arity. A \emph{presentation template} $F$
-assigns a $G$-system $F(I)$ to each eligible well-order $I$.
-Each vertex occurrence has a representation
+\begin{definition}[EM-style presentation of functor diagrams]
+\label{def:functor-em}
+Fix a set-sized collection of finite-arity
+term labels, each with an output sort
+$v\in\operatorname{Ob}(\mathcal I)$.
+An \emph{EM-style presentation template}
+$F$ associates to each eligible well-order
+$L$ a functor
+\[
+F(L):\mathcal I\longrightarrow\K,
+\qquad F(L)\in\K^{\mathcal I}.
+\]
+Every element of every component
+$F(L)(v)$ is represented by a label
+applied to a finite increasing tuple
+from the common indexing order $L$:
 \[
 a=t(i_0,\ldots,i_{n-1}),\qquad
-i_0<\cdots<i_{n-1}\text{ in }I,
+i_0<\cdots<i_{n-1}\text{ in }L.
 \]
-with label $t$ of the appropriate sort.
-Equality, vertex relations and operations, and edge maps
-are evaluated uniformly from term labels and the finite
-order/equality patterns of skeleton coordinates.
-Distinct term representations may yield the same occurrence.
-We separate this presentation data from the functoriality
-and representation axioms imposed below.
+Equality, vertex relations and functions,
+and the maps $F(L)(\alpha)$ are all
+computed uniformly from the label data
+and finite order/equality patterns of
+the supporting positions. Different
+labeled expressions may represent the
+same sorted element.
+
+This is a many-sorted EM construction
+with one \emph{external common skeleton}
+$L$. One can make it a literal EM
+blueprint by adjoining a skeleton sort
+and symbols for evaluating the labels
+into their respective vertex sorts.
+The working package separately requires
+order embeddings between eligible orders
+to induce \emph{strong natural transformations}
+$F(L)\Rightarrow F(L')$ and requires
+every eligible diagram to be isomorphic
+to one of these presentations at its level.
+These stronger assertions are not
+automatic for every diagram AEC.
+
+In the source, $F(L)$ is initially assumed
+to be an eligible diagram only for
+eligible well-orders $L$; extending
+the presentation to padded or arbitrary
+orders is a later construction
+(source Lemma~5.4), not part of this
+initial definition.
 \end{definition}
 
 \begin{definition}[Diagram comparisons]
-For each sorted index sequence
-$\mathbf v=(v_i)_{i<\gamma}$ of length bounded
-at the levels considered, a \emph{diagram comparison}
-is an equivalence relation $\equiv_D^{\mathbf v}$
-on pairs $(\ba;\mathcal M)$, where $\mathcal M$ is
-an eligible system and $\ba$ is a list of those sorts.
-We use the diagram-class notation
+For each sort pattern
+$\mathbf v=(v_i)_{i<\gamma}$, with
+$\gamma$ bounded at the relevant levels,
+a \emph{diagram comparison} is an
+equivalence relation $\equiv_D^{\mathbf v}$
+on pairs $(\ba;\mathcal D)$ where
+$\mathcal D:\mathcal I\to\K$ is
+an eligible functor and $\ba$ is
+a sorted tuple of pattern $\mathbf v$.
+Write
 \[
-D(\ba;\mathcal M)=D(\bb;\mathcal N)
-\iff
-(\ba;\mathcal M)\equiv_D^{\mathbf v}(\bb;\mathcal N).
+D(\ba;\mathcal D)=D(\bb;\mathcal E)
+\quad\Longleftrightarrow\quad
+(\ba;\mathcal D)\equiv_D^{\mathbf v}
+(\bb;\mathcal E).
 \]
-No preassigned set of diagram codes is required.
-Invariance under arrows, realization, and characterization
-by isomorphisms are separate working-package axioms.
+As in source Definition~5.2, the
+equivalence relations are data of a
+working scheme. Their invariance under
+designated arrows, realization properties,
+and equivalence with isomorphism orbits
+are substantive separate hypotheses,
+not consequences of the existence
+of $\K^{\mathcal I}$.
 \end{definition}
 
 \begin{definition}[Possible joint diagram]
-For a bounded actual sorted list $\ba$ in $\mathcal M$,
-a diagram $q(\bd,\ba)$ is \emph{possible over $\ba$}
-if some eligible system $\mathcal N$ has a joint
-list $(\bd',\ba')$ of bounded length satisfying
+For a bounded sorted tuple $\ba$ in
+an eligible functor $\mathcal D$,
+a diagram $q(\bd,\ba)$ is
+\emph{possible over $\ba$} if
+there exist an eligible functor
+$\mathcal E$ and a sorted tuple
+$(\bd',\ba')$ of bounded total length
+such that
 \[
-D(\bd',\ba';\mathcal N)=q,\qquad
-D(\ba';\mathcal N)=D(\ba;\mathcal M).
+D(\bd',\ba';\mathcal E)=q,\qquad
+D(\ba';\mathcal E)=D(\ba;\mathcal D).
 \]
-It need not initially be realized with the
-actual parameters $\ba$ fixed in $\mathcal M$.
+Possibility does not initially imply
+realizability over the actual tuple
+$\ba$ in $\mathcal D$; that is a
+homogeneity/saturation assertion
+of the working package.
 \end{definition}
 
 \subsection{Axioms of a working scheme}
