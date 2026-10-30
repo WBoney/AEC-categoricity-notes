@@ -1614,6 +1614,112 @@ There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinal
 \item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
 \end{enumerate}
 \end{theorem}
+\begin{proposition}[Placed natural arrow types are Galois types at closed levels]
+\label{prop:closed-level-gtp-characterization}
+Let $\mu$ be a cardinal to which source
+Lemma~4.10 and Theorem~4.11 apply.
+Suppose $A\leq_\K B_0,B_1$ are all of
+cardinality $\mu$ and $\bd_i\in B_i^\gamma$
+for the same $\gamma\leq\sigma<\mu$.
+Fix an isomorphism $A\cong\EM(I,\Phi)$
+for a well-order $I$ of size $\mu$.
+Let $p_i\in S^\gamma_{\natatp}(A;A)$
+be the \emph{unique placed lift} of the
+bounded diagrams
+\[
+\atp((\bd_i,\bar x);B_i),
+\qquad X\subseteq A,\quad
+|X|<\mu,
+\]
+where $\bar x$ enumerates $X$,
+and the arrow type is computed at a
+stabilization level below $\mu$
+appropriate to the tuple length.
+Then the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $p_0=p_1$;
+\item the bounded diagrams of
+$(\bd_0,X;B_0)$ and
+$(\bd_1,X;B_1)$ agree for every
+$X\subseteq A$ with $|X|\leq g(\sigma)$;
+\item there exists a strong amalgam
+of $B_0,B_1$ over $A$ identifying
+$\bd_0,\bd_1$;
+\item $\gtp(\bd_0/A;B_0)=\gtp(\bd_1/A;B_1)$,
+with Galois types defined by unrestricted
+transitive closure over $A$.
+\end{enumerate}
+In particular, at such levels the equality
+relation on placed natural arrow types
+of tuples in $\mu$-sized extensions
+\emph{coincides with} equality of
+ordinary Galois types over the $\mu$-base.
+\end{proposition}
+\begin{proof}\itshape
+The existence and uniqueness of $p_i$
+is source Lemma~4.10. Source Proposition~4.8
+shows that two placed lifts agree if and
+only if their restrictions to parameter
+sets of size at most $g(\sigma)$ agree;
+this gives (i)$\Leftrightarrow$(ii).
+The equivalence of (ii) and (iii) is
+exactly source Theorem~4.11(2).
+
+An amalgam identifying the tuples immediately
+gives equality of Galois types. Conversely,
+a chain witnessing equality of Galois types
+\emph{over the fixed base $A$} cannot pass
+through models smaller than $\mu$, since
+every intermediate model contains a strong
+copy of $A$. Downward L\"owenheim--Skolem
+and coherence shrink each direct comparison
+to a comparison among $\mu$-sized strong
+extensions of $A$ (and $\mu$-sized amalgams).
+The amalgamation property for such models,
+asserted in Theorem~4.11(1), makes direct
+equivalence over $A$ transitive.
+Consequently the entire finite chain
+collapses to a single identifying
+$\mu$-amalgam. This proves
+(iv)$\Rightarrow$(iii).
+\end{proof}
+
+\begin{remark}[Not simply a new name for Galois types]
+\label{rem:arrow-novelty}
+The preceding proposition provides a
+\emph{Galois-type characterization after
+amalgamation has been proved}, at the
+special closed levels of Theorem~4.11.
+Before that theorem, stabilized arrow
+types and their placed lifts are available
+without assuming amalgamation, and they
+supply the comparison machinery used to
+\emph{establish} amalgamation. This is
+the distinctive role of the construction
+in the manuscript. On arbitrary smaller
+parameter subsets of $A$, the placed
+invariant is defined, but it need not
+already coincide with ordinary Galois
+types over that subset.
+
+Both eventual reversal (source Theorem~3.11)
+and stabilization (source Proposition~4.2)
+use unbounded categoricity essentially
+in their stated proofs. In an AEC with
+amalgamation and a monster model,
+Galois types already admit an automorphism-orbit
+description, whereas the directed strong-map
+comparison between arbitrary models of size
+$\kappa$ need not be symmetric without
+additional universality or homogeneity.
+It is an open question for these notes
+whether an appropriate version of the
+arrow-type machinery can be useful in
+superstable AECs without the unbounded
+categoricity hypothesis; no such general
+theorem is being claimed here.
+\end{remark}
+
 \begin{remark}[Scope of amalgamation]
 This is amalgamation at selected cardinals, not an assertion
 of eventual amalgamation throughout a tail. The first conclusion
