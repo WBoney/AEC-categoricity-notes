@@ -3,13 +3,14 @@
 \usepackage{lmodern}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{enumitem,booktabs,longtable,hyperref,microtype}
+\usepackage{enumitem,booktabs,longtable,hyperref,microtype,tikz}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parskip}{0.35em}
 \setlength{\parindent}{0pt}
 \newcommand{\K}{\mathbf K}
 \newcommand{\LS}{\operatorname{LS}}
 \newcommand{\atp}{\operatorname{atp}}
+\newcommand{\natatp}{\operatorname{atp}_{\mathrm{nat}}}
 \newcommand{\gtp}{\operatorname{gtp}}
 \newcommand{\auttp}{\operatorname{tp}_{\mathrm{aut}}}
 \newcommand{\EMauttp}{\operatorname{tp}^{\mathrm{EM}}_{\mathrm{aut}}}
@@ -25,15 +26,15 @@
 \newcommand{\bd}{\mathbf{d}}
 \newcommand{\be}{\mathbf{e}}
 \newcommand{\bc}{\mathbf{c}}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}[section]
 \theoremstyle{plain}
+\newtheorem{definition}{Definition}[section]
 \newtheorem{theorem}[definition]{Theorem}
 \newtheorem{lemma}[definition]{Lemma}
 \newtheorem{proposition}[definition]{Proposition}
 \newtheorem{corollary}[definition]{Corollary}
-\theoremstyle{remark}
 \newtheorem{remark}[definition]{Remark}
+\newtheorem{example}[definition]{Example}
+% All theorem-like environments use the italic plain style.
 
 \title{Types of Types in the Eventual Categoricity Proof\\large AEC and EM Reading Notes}
 \author{Reading notes}
@@ -108,8 +109,18 @@ $c_\sigma,t(\sigma)$ & Stabilization and diagram thresholds
 (source Proposition 4.2).\\
 $\gtp,\gtp^{\mathrm{EM}}$ & Ordinary and EM-lifted
 Galois comparisons (Section~\ref{subsec:galois}).\\
-$D_{\mathrm{nat}},D_{\mathrm{pl}}$ & Natural and placed diagrams
-(source Definition 4.4).\\
+$\approx_{\geq\kappa}$ & Galois equivalence restricted
+to intermediate models of size at least $\kappa$
+(Proposition~\ref{prop:arrow-galois}).\\
+$\natatp(I,r)$,
+$\natatp(\ba;M)$ & Natural arrow type computed
+from a record, and its record-independent tuple notation
+(Proposition~\ref{prop:nat-record-independent}).\\
+$D_{\mathrm{pl}}$ & Placed diagram over an EM-presented
+base (source Definition 4.4).\\
+$S^\sigma_{\natatp}(X;A)$ & Natural arrow types of $\sigma$-tuples
+over a parameter subset $X\subseteq A=\EM(I,\Phi)$
+(Section~\ref{sec:locality}).\\
 $g(\sigma)$ & Uniform testing threshold
 (Section~\ref{sec:locality}; source Proposition 4.8).\\
 \bottomrule
@@ -118,10 +129,16 @@ $g(\sigma)$ & Uniform testing threshold
 \begin{remark}[Notation crosswalk]
 The earlier strong type under skeleton-induced automorphisms
 becomes $\EMauttp$. The earlier canonical diagram is the
-stabilized arrow type $\atp$. The source's stable diagrams
+stabilized arrow type $\atp$. The ordinary unrestricted
+Galois type $\gtp$ can be strictly coarser than
+$\atp$ in the absence of amalgamation
+(Example~\ref{ex:stars-gtp-arrow}). The source's stable diagrams
 means \emph{stabilized} rather than stable in
-the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
-defining it, not as an automatic synonym for $D_{\mathrm{nat}}$.
+the AEC sense. Our $\natatp$ is precisely the
+source's natural diagram $D_{\mathrm{nat}}$;
+we change the name to emphasize that it is
+computed from stabilized arrow types. We use $\gtp^{\mathrm{EM}}$ only after
+defining it, not as an automatic synonym for $\natatp$.
 \end{remark}
 
 \section{Types of types}\label{sec:types}
@@ -256,11 +273,11 @@ In particular, this equivalence can be finer than the full
 automorphism-orbit equivalence of $M_\delta$.
 \end{definition}
 
-\begin{lemma}[Common presentation record implies equal strong type]
+\begin{lemma}[Equal occupied-slot records imply equal EM-automorphism type]
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
 Then $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 
-\begin{proof}
+\begin{proof}\itshape 
 Choose presentations
 \[
 \ba=(f_k(\bi):k<\theta),\qquad
@@ -285,7 +302,7 @@ Thus $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 \begin{remark}[Records and orbit bounds]
 The converse is not asserted: different term presentations, even of
 the same tuple, may give different records. This lemma is the
-direction needed to bound the number of strong types by the number
+direction needed to bound the number of EM-induced automorphism types by the number
 of possible records. The manuscript's Lemma~3.6 establishes a
 uniform bound on \emph{full model-automorphism orbits}; the present
 EM-induced types are orbits under the subgroup induced from the index
@@ -305,7 +322,7 @@ p\longrightarrow q
 \text{$f$ a strong embedding of the AEC reduct and }f(\ba)=\bb.
 \end{gathered}
 \]
-This relation is well-defined on the strong types: changes of
+This relation is well-defined on the EM-induced automorphism types: changes of
 representatives are effected by induced automorphisms, which are
 strong automorphisms of the reduct. It is reflexive and transitive;
 symmetry is the eventual reversal phenomenon discussed below.
@@ -315,11 +332,11 @@ symmetry is the eventual reversal phenomenon discussed below.
 Here the arrow notation is also used for the related but
 \emph{different} orbit space of an AEC model; this does not
 identify fixed-skeleton strong types with all model orbits.
-At a categoricity cardinal $\kappa$, fix a model $C_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $S^{\mathrm{EM,aut}}_\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
+At a categoricity cardinal $\kappa$, fix a model $M_\kappa$ of size $\kappa$. Distinct from the induced-order-automorphism types $S^{\mathrm{EM,aut}}_\delta$ just defined, for automorphism orbits $p,r$ of tuples of length at most $\theta$, write
 \[
 p\longrightarrow r
 \]
-if a strong self-embedding of $C_\kappa$ sends a representative of $p$ to a representative of $r$. This relation is reflexive and transitive, but symmetry is not automatic.
+if a strong self-embedding of $M_\kappa$ sends a representative of $p$ to a representative of $r$. This relation is reflexive and transitive, but symmetry is not automatic.
 
 The paper names the boundedly many full automorphism orbits via maps $G_\kappa$ and assigns orbit names to presentation records via $F_{\kappa,\delta}$. A presentation \emph{profile} records (i) which records realize which orbit names and (ii) the arrow relation between named orbits. There are boundedly many such profiles.
 
@@ -335,7 +352,7 @@ g(f(a_i))=a_i\qquad\text{for every coordinate }i.
 Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at sufficiently large categoricity cardinals.
 \end{theorem}
 
-\begin{proof}[Proof sketch] If asymmetry persisted unboundedly, one could choose repeated profiles at separated categoricity sizes, align small submodels with large presentations, and carry out an elimination construction. The resulting categoricity model would omit the ability to reach a chosen orbit, contradicting the presence of that orbit in the unique model.
+\begin{proof}[Proof sketch]\itshape  If asymmetry persisted unboundedly, one could choose repeated profiles at separated categoricity sizes, align small submodels with large presentations, and carry out an elimination construction. The resulting categoricity model would omit the ability to reach a chosen orbit, contradicting the presence of that orbit in the unique model.
 \end{proof}
 
 \begin{remark}
@@ -403,21 +420,22 @@ S^\gamma_\kappa:=\bigl\{[(\ba;M)]_{\equiv^\gamma_\kappa}: M\in\K_{\geq\kappa},\ 
 \qquad
 S^{\leq\theta}_\kappa:=\coprod_{\gamma\leq\theta}S^\gamma_\kappa.
 \]
-By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $C_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $C_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
+By the small-submodel lemma every class has a representative in a $\kappa$-sized model. Categoricity identifies these with the quotient of $M_\kappa^\gamma$ by $\equiv^{*,\gamma}_\kappa$, for any fixed $M_\kappa\in\K_\kappa$, so these are sets (up to the usual coding of representatives). The uniform orbit bound controls their cardinalities at sufficiently large categoricity cardinals. The superscript $\gamma$ denotes the \emph{exact} tuple length.
 \end{definition}
 
-\begin{remark}[AEC interpretation of the stabilized classes]
-The comparison $\equiv_\kappa^\gamma$ uses $\kappa$-sized
-strong submodels, even when its ambient models are larger.
-At a sufficiently large categoricity size, its restriction
-to $\K_\kappa$ is exactly equality of Galois types over
-$\emptyset$, where equality is defined through the
-transitive closure of direct amalgamation equivalence.
-This makes $S_\kappa^\gamma$ a \emph{local Galois-type
-space}, not in general the space of Galois types computed
-in arbitrary ambient models. Stabilization of these
-spaces is distinct from the AEC stability property
-bounding $|\operatorname{gS}(M)|$ over a base model $M$.
+\begin{remark}[Arrow types as relative Galois equivalence]
+The relation $\equiv_\kappa^\gamma$ compares
+tuples inside $\kappa$-sized strong submodels,
+even when ambient models are larger.
+It is the Galois-type equivalence relation
+\emph{restricted to chains through models of size
+at least $\kappa$}, as made precise in
+Proposition~\ref{prop:arrow-galois} below.
+It need not coincide with the usual unrestricted
+Galois equivalence in the absence of amalgamation.
+Stabilization of these restricted classes is
+distinct from AEC stability (a bound on types
+over a model).
 \end{remark}
 
 \subsubsection*{Stabilization of arrow types}
@@ -441,7 +459,7 @@ $\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
 stability. 
 \end{proposition}
 
-\begin{proof}[Proof sketch]
+\begin{proof}[Proof sketch]\itshape 
 Suppose that noninjective projections occur
 arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
 common categoricity cardinal above them. Each refinement produces a pair
@@ -521,48 +539,308 @@ when the parameter base is empty; this is the
 meaning of $\gtp(\ba;M)$ in the comparisons here.
 \end{definition}
 
-\begin{lemma}[Galois-type characterization at a categoricity size]
-\label{lem:gtp-reversal}
-Suppose $\kappa\geq b_\K(\theta)$ is a categoricity cardinal,
-with $\kappa\geq\LS(\K)+\theta$. For $M,N\in\K_\kappa$
-and tuples $\ba\in M^\theta$, $\bb\in N^\theta$, the following
-are equivalent:
-\[
-\operatorname{gtp}(\ba/\emptyset;M)
-=\operatorname{gtp}(\bb/\emptyset;N)
-\quad\Longleftrightarrow\quad
-\exists f:M\to N\text{ strong with }f(\ba)=\bb.
-\]
+\begin{lemma}[Direct amalgamation versus strong maps at a categoricity size]
+\label{lem:direct-amalgamation-reversal}
+Suppose $\kappa\geq b_\K(\theta)$ is a categoricity
+cardinal with $\kappa\geq\lambda_0+\theta$.
+For $M,N\in\K_\kappa$ and tuples
+$\ba\in M^\gamma$, $\bb\in N^\gamma$
+of length $\gamma\leq\theta$, the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item There is a $\K$-embedding $f:M\to N$ with $f(\ba)=\bb$.
+\item There are $\K$-embeddings $f_0:M\to P$ and
+$f_1:N\to P$ with $f_0(\ba)=f_1(\bb)$.
+\end{enumerate}
+Here (ii) is \emph{direct amalgamation equivalence},
+not the unrestricted transitive-closure definition of
+$\gtp(-/\emptyset;-)$.
 \end{lemma}
-\begin{proof}
-A strong map gives direct equivalence using the identity of its
-codomain. Conversely, first suppose that strong maps
-$f_0:M\to P$ and $f_1:N\to P$ identify the tuples.
-Downward L\"owenheim--Skolem and coherence give a strong
-$P_0\preccurlyeq_\K P$ of size $\kappa$ containing
-$f_0[M]\cup f_1[N]$; both maps factor strongly through $P_0$.
-By categoricity choose an isomorphism $h:P_0\cong N$.
-Apply Theorem~\ref{thm:reversal} to the self-embedding
-$h\circ f_1:N\to N$ and $\bb$, obtaining a strong
-$g':N\to N$ with $g'hf_1(\bb)=\bb$.
-Then $g'hf_0:M\to N$ identifies the tuples.
-This proves the claim for direct equivalence. The strong-map
-relation is an equivalence relation at this categoricity size
-(by the same reversal argument), so it also contains the
-transitive closure of direct equivalence.
+\begin{proof}\itshape 
+The first condition implies the second by using
+$P=N$, $f_0=f$, and $f_1=\operatorname{id}_N$.
+For the converse, downward L\"owenheim--Skolem
+and coherence give $P_0\leq_\K P$ of size $\kappa$
+containing $f_0[M]\cup f_1[N]$, through which
+both embeddings factor strongly. By categoricity,
+choose $h:P_0\cong N$. Then $h f_1:N\to N$
+is a $\K$-embedding. Apply eventual reversal to
+$h f_1$ and $\bb$, obtaining $g:N\to N$ strong
+with $g h f_1(\bb)=\bb$. Therefore
+$g h f_0:M\to N$ carries $\ba$ to $\bb$.
 \end{proof}
 
+\begin{proposition}[Arrow types and tail-restricted Galois equivalence]
+\label{prop:arrow-galois}
+Under the hypotheses of Lemma~\ref{lem:direct-amalgamation-reversal},
+let $\approx_{\geq\kappa}$ be the equivalence relation
+on pairs $(\ba;M)$ with $M\in\K_{\geq\kappa}$
+generated by direct amalgamation identifications
+\emph{using only ambient and intermediate models
+of size at least $\kappa$}.
+For $M,N\in\K_{\geq\kappa}$ and tuples of
+the same length $\gamma\leq\theta$,
+\[
+\atp_\kappa(\ba;M)=\atp_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+(\ba;M)\approx_{\geq\kappa}(\bb;N).
+\]
+Consequently,
+\[
+\atp_\kappa(\ba;M)=\atp_\kappa(\bb;N)
+\quad\Longrightarrow\quad
+\gtp(\ba/\emptyset;M)=\gtp(\bb/\emptyset;N).
+\]
+The converse to the last implication is not
+asserted without further hypotheses.
+\end{proposition}
+\begin{proof}\itshape 
+If the arrow types agree, choose $\kappa$-sized
+strong submodels $M_0\leq_\K M$ and
+$N_0\leq_\K N$ containing the tuples,
+and a strong embedding $f:M_0\to N_0$
+carrying $\ba$ to $\bb$. The inclusions
+and $f$ give a three-step chain of direct
+identifications through $M_0,N_0$, all
+of size at least $\kappa$.
+
+Conversely, consider one direct identification
+between $(\ba;M)$ and $(\bb;N)$ at sizes
+at least $\kappa$, witnessed in $P$.
+Choose $\kappa$-sized strong submodels
+$M_0\leq_\K M$ and $N_0\leq_\K N$
+containing the tuples. Their images in $P$
+lie in a $\kappa$-sized strong submodel
+$P_0\leq_\K P$ by downward
+L\"owenheim--Skolem and coherence.
+Lemma~\ref{lem:direct-amalgamation-reversal}
+yields a strong map $M_0\to N_0$
+identifying the tuples, hence equal
+$\kappa$-arrow types. Transitivity of
+arrow-type equality handles a finite
+chain of direct identifications.
+The implication to ordinary Galois types
+follows because every allowed
+$\approx_{\geq\kappa}$ comparison is also
+allowed in the unrestricted relation.
+\end{proof}
+
+\begin{corollary}[Earlier stabilization if amalgamation is assumed]
+\label{cor:ap-lowers-stabilization}
+If $\K$ has the amalgamation property, then at every
+categoricity cardinal $\kappa\geq b_\K(\theta)$
+with $\kappa\geq\lambda_0+\theta$,
+\[
+\atp_\kappa(\ba;M)=\atp_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+\gtp(\ba/\emptyset;M)=\gtp(\bb/\emptyset;N)
+\]
+for models $M,N$ of size at least $\kappa$ and
+tuples of length at most $\theta$.
+Hence the comparison projections between any two
+such categoricity cardinals are already bijective.
+This conditional conclusion cannot be used in the
+manuscript before amalgamation has been established.
+\end{corollary}
+\begin{proof}\itshape 
+Amalgamation makes direct amalgamation equivalence
+transitive, so unrestricted Galois-type equality
+has a direct witness. Restricting that witness to
+$\kappa$-sized strong submodels as in the proof of
+Proposition~\ref{prop:arrow-galois} gives equal
+arrow types. The converse is the same proposition.
+For $\lambda\geq\kappa$ as in the statement,
+both arrow comparisons compute the same unrestricted
+Galois type, proving injectivity of the projection.
+Surjectivity follows from the order-presented
+extensions supplied by the EM functor.
+\end{proof}
+
+\begin{remark}[Why the reversal threshold is not a stabilization threshold]
+\label{rem:gtp-not-stabilization}
+Ordinary Galois equivalence over $\emptyset$,
+as defined above without amalgamation, allows
+the intermediate models in its transitive
+closure to have \emph{any} cardinality.
+It can therefore be strictly coarser than
+$\approx_{\geq\kappa}$, even for $\kappa$-sized
+endpoints. The final sentence of the
+previous version of Lemma~\ref{lem:direct-amalgamation-reversal}
+incorrectly inferred equality for the
+unrestricted transitive closure.
+
+Neither \emph{no maximal models} nor the
+L\"owenheim--Skolem property repairs this gap.
+Consider two direct identifications
+\[
+M\longrightarrow P\longleftarrow A,
+\qquad
+A\longrightarrow Q\longleftarrow N
+\]
+through a small intermediate model $A$.
+No maximal models lets us enlarge all three
+witness models, and L\"owenheim--Skolem lets
+us extract submodels of a prescribed sufficiently
+large size. But these principles do not produce
+\emph{one extension of $A$} which embeds
+compatibly into both $P$ and $Q$.
+That is an amalgamation requirement.
+The star example below has no maximal models
+and joint embedding, yet exhibits precisely
+this obstruction.
+
+As the cutoff $\kappa$ increases, the relations
+$\approx_{\geq\kappa}$ can refine one another;
+Proposition~4.2 of the source proves that
+the associated arrow classes eventually stabilize
+by a uniform counting argument. Invariance of
+unrestricted Galois types under strong embeddings
+does not by itself lower the stabilization threshold
+to $b_\K(\theta)$. If $\K$ has amalgamation,
+direct amalgamation equivalence is transitive
+and the distinction disappears.
+\end{remark}
+
+\begin{example}[Stars: a counterexample to unrestricted equivalence]
+\label{ex:stars-gtp-arrow}
+Let $\K$ have a binary relation $R$.
+Its models are singletons and stars with a
+distinguished center $c$ satisfying
+$R(c,x)$ for every leaf $x$, and no other
+instances of $R$. Declare every singleton
+substructure strong, while a nonsingleton
+substructure is strong precisely when it
+contains the center of its ambient star.
+This is an AEC with $\LS(\K)=\aleph_0$,
+categorical in every infinite cardinal
+(a model of size $\kappa$ is a star with
+$\kappa$ leaves). It admits the usual
+EM presentation with one constant for
+the center and order-indexed leaves.
+
+In a $\kappa$-sized star $M$, take its
+center $c$ and a leaf $d$. Strong
+self-embeddings preserve the center, so
+\[
+\atp_\kappa(c;M)\ne\atp_\kappa(d;M).
+\]
+Yet the unique element $x$ of a singleton
+strong model $X$ can be embedded into $M$
+as either $c$ or $d$. Hence
+$(c;M)$ is directly equivalent to $(x;X)$
+and $(x;X)$ directly equivalent to $(d;M)$,
+giving
+\[
+\gtp(c/\emptyset;M)=\gtp(d/\emptyset;M).
+\]
+This AEC has \emph{no maximal models}: every
+singleton extends strongly to arbitrarily large stars,
+and every star can be extended by adding more leaves.
+It also has joint embedding, since two stars can
+be embedded into a larger star with their centers
+identified. Neither property prevents the
+singleton $X$ from serving as an intermediate
+model in a Galois-equivalence chain that joins
+distinct arrow types.
+
+The reversal conclusion still holds for
+tuples shorter than $\kappa$: a partial
+inverse of a strong self-embedding on
+fewer than $\kappa$ leaves extends to
+an injection on all the leaves.
+\end{example}
+
+\begin{example}[Colored arrows: arbitrarily long Galois zigzags]
+\label{ex:colored-arrows-zigzags}
+Consider the language with unary $T$ and binary
+relations $(R_i)_{i<\omega}$. Think of $T(x)$ as
+saying that $x$ is terminal, and of $R_i(x,y)$
+as an outgoing edge of color $i$. Let
+$\K_{\mathrm{col}}$ consist of structures satisfying:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item a vertex satisfying $T$ has no
+outgoing $R_i$-edge;
+\item every vertex not satisfying $T$
+has at least one outgoing edge;
+\item whenever $R_i(x,y)$ and $R_j(x,z)$
+hold, $|i-j|\leq 1$.
+\end{enumerate}
+Take the strong-submodel relation to be
+induced substructure inclusion between models
+of $\K_{\mathrm{col}}$. Directed unions
+preserve these conditions, and the
+L\"owenheim--Skolem number is $\aleph_0$:
+from any set of elements, iteratively add
+witnesses for outgoing edges of nonterminal
+vertices, in countably many steps.
+
+Fix a terminal singleton $M=\{m\}$. For each
+$i<\omega$, take a three-element model
+$N_i=\{m,a_i,b_i\}$ with $m,b_i$ terminal
+and $R_i(a_i,b_i)$ the unique edge. Write
+$p_i=\gtp(a_i/M;N_i)$, using unrestricted
+Galois equivalence as in our definitions.
+More precisely, denote by
+$q_i=(a_i,M,N_i)$ the \emph{pointed triple}
+before taking its equivalence class.
+
+The triples $q_i,q_{i+1}$ are directly
+equivalent: identify $a_i$ with $a_{i+1}$
+in a common model over $M$, retaining
+their outgoing edges of adjacent colors.
+But $q_i$ and $q_j$ are not directly
+equivalent when $|i-j|\geq 2$: the
+identified vertex would have outgoing
+edges of colors differing by at least two.
+Thus all the $q_i$ have the same \emph{Galois
+type}, since direct equivalence is connected
+by a finite chain, even though a direct
+amalgam of the original endpoints need
+not exist.
+
+In fact, the shortest chain of direct
+equivalences from $q_0$ to $q_n$
+has length $n$. For a pointed triple
+with nonterminal distinguished element,
+let $m(q)$ be the minimum color of
+an outgoing edge at that element.
+A direct equivalence implies
+$|m(q)-m(q')|\leq 1$, since both colors
+must occur at the identified vertex
+of an amalgam. Therefore a chain from
+$m(q_0)=0$ to $m(q_n)=n$ requires
+at least $n$ steps; the adjacent-color
+chain attains this bound.
+
+\emph{Comparison with stars.} The star
+example shows that allowing \emph{small}
+intermediate models can identify two
+different arrow types, even with no
+maximal models. This colored-arrow example
+illustrates a separate phenomenon:
+the transitive closure in the definition
+of Galois type can require arbitrarily
+long finite chains of direct amalgamations.
+\end{example}
+
 \begin{remark}[Scope of the characterization]
-For $M,N$ larger than $\kappa$, equality of the
-$\kappa$-local comparison classes is equivalent to equality
-of the Galois types computed in \emph{any} $\kappa$-sized
-strong submodels containing the tuples (Lemma~\ref{lem:small}).
-It does not by itself identify the Galois types computed in
-the full ambient models: a small amalgam need not extend to
-an amalgam of larger models. We use $S^\gamma_\kappa$ for
-these local classes and, after the projections stabilize,
-$S^\gamma_*$ for their eventual common value, understood
-up to the canonical bijections.
+For ambient $M,N$ of size at least $\kappa$,
+equality of $\kappa$-arrow types is equivalent
+to equality in the \emph{tail-restricted}
+equivalence $\approx_{\geq\kappa}$, not
+necessarily to equality of unrestricted
+Galois types. The latter always follows
+from arrow-type equality but may hold without it,
+as Example~\ref{ex:stars-gtp-arrow} shows.
+This is an issue even when $M,N$ themselves
+have cardinality $\kappa$: a global Galois-type
+chain may pass through smaller models.
+
+We write $S^\gamma_\kappa$ for the arrow-type
+classes and $S^\gamma_*$ for their eventual
+common value under the projections of
+Proposition~4.2, understood up to canonical
+bijections. These classes need not
+be all global Galois types.
 \end{remark}
 
 \begin{definition}[EM-lifted Galois comparison]
@@ -608,7 +886,7 @@ Then
 \]
 and their natural diagrams coincide.
 \end{proposition}
-\begin{proof}
+\begin{proof}\itshape 
 Amalgamate $I$ and $J$ over the labeled support
 isomorphism $\bi\mapsto\bj$, obtaining order
 embeddings into a common linear order $L$.
@@ -621,105 +899,233 @@ preservation of stabilized arrow types proves
 equality of natural diagrams.
 \end{proof}
 
-\begin{remark}[Why the natural diagram is not defined as an EM Galois type]
-The notation $\gtp^{\mathrm{EM}}$ above makes the
-proposed lifting construction precise, but it
-is a \emph{new definition in these notes}, not
-terminology from the manuscript. The source's
-natural diagram is instead the intrinsic
-stabilized arrow comparison of the evaluated
-tuple, computed in a sufficiently large EM
-extension. An EM-lifted comparison implies
-equality of natural diagrams. The converse
-is not proved and should not be assumed:
-equality of the semantic comparison need
-not recover isomorphic chosen support patterns.
-Thus $\gtp^{\mathrm{EM}}$ is not yet shown
-to be the same invariant as $D_{\mathrm{nat}}$.
-\end{remark}
-
-\begin{remark}[Question for review: $\gtp^{\mathrm{EM}}$ versus natural diagrams]
-\label{rem:gtpem-review-question}
-\textbf{Question.} Is the intended notion
-$\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))$
-the equivalence relation generated by joint identifications
-obtained by lifting order embeddings of EM presentations,
-as defined above, or should it be identified with the
-source's natural diagram $D_{\mathrm{nat}}(\ba)$?
-
-We have proved only
-\[
-\gtp^{\mathrm{EM}}(\ba)=\gtp^{\mathrm{EM}}(\bb)
-\quad\Longrightarrow\quad
-D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
-\]
-The converse would assert that equality of stabilized
-arrow comparisons can always be witnessed by a chain
-of such order-lifted identifications, even if the
-chosen labeled support patterns differ. That converse
-has not been established here.
-
-\emph{Decision for the next revision:}
-retain two separate invariants, prove a converse under
-additional hypotheses, or instead \emph{define}
-$\gtp^{\mathrm{EM}}$ to mean the natural diagram?
-The last choice would be a change of definition,
-not a consequence of the lifting argument.
+\begin{remark}[The comparison under investigation]
+The notation $\gtp^{\mathrm{EM}}$ in these notes
+is a relation on \emph{tuples in EM models}, generated
+by comparisons induced from order embeddings.
+The natural diagram is also ultimately an invariant
+of the evaluated tuple, although a record is used
+to compute it. The genuine difference is the
+\emph{class of morphisms permitted}: order-induced
+EM embeddings for $\gtp^{\mathrm{EM}}$, but
+arbitrary strong maps in the stabilized arrow type.
+The former implies equality of natural diagrams.
+Example~\ref{ex:pure-sets-order} below shows that
+the converse can fail. We retain $\gtp^{\mathrm{EM}}$
+primarily to exhibit the distinction between the
+order-induced and the full AEC comparisons;
+it is a useful auxiliary invariant, but is not
+expected to play a central role in the subsequent
+arguments. The working calculus is based on
+$\atp$ and its EM-based extension $\natatp$.
 \end{remark}
 
 \subsubsection*{Natural and placed canonical diagrams}
-\begin{definition}[Natural diagram; {\cite[Definition 4.4]{oai-ecc}}]
-Let $I$ be a linear order and let
-$r=((f_j,\bi_j):j\in J)$ be a set-sized labeled term representation,
-where each $f_j$ is a term in the expanded EM language and
-$\bi_j$ is an increasing finite tuple from $I$ of the appropriate
-arity. Write $\ba_r^I=(f_j(\bi_j):j\in J)$ for the corresponding tuple
-in $\EM(I,\Phi)$ (with skeleton elements suppressed from notation).
-Choose an order extension $I\subseteq I'$ of sufficiently large
-categoricity size for the canonical diagram of a tuple of length
-$|J|$ to be defined. Set
+\begin{definition}[Natural arrow type (source: natural diagram); {\cite[Definition 4.4]{oai-ecc}}]
+\label{def:natural-diagram}
+Fix a linear order $I$, an output ordinal $\gamma$,
+and a presentation record
+$r=(\bar f,\bi)\in\Rec_\tau^\gamma(I,\Phi)$.
+Choose an order extension $j:I\hookrightarrow I'$
+whose cardinality is a sufficiently large
+categoricity cardinal for the stabilized arrow
+type of a $\gamma$-tuple. Write
+$j_*r=(\bar f,j(\bi))$ for the induced record.
+Define
 \[
-D_{\mathrm{nat}}(r):=\atp(\ba_r^{I'};\EM(I',\Phi)).
+\natatp(I,r)
+:=
+\atp\bigl(\operatorname{ev}_{I'}^\gamma(j_*r);
+          \EM(I',\Phi)\bigr).
 \]
-The source asserts that this is independent of the sufficiently
-large order extension.
+This is the \emph{natural diagram computed from
+$(I,r)$}. The purpose of $I'$ is to evaluate the
+record at a sufficiently large categoricity cardinal
+where $\atp$ is defined and stabilized, not to
+introduce a new type invariant. Neither its choice
+nor the chosen record affects the result, as proved below.
 \end{definition}
 
-\begin{proposition}[Order-pattern sufficiency for natural diagrams]
-The natural diagram of $r$ depends only on the term labels $f_j$
-and the joint order/equality pattern of all support coordinates
-$\bi_j$. In particular, ambient \emph{slot occupancies} are not
-part of these defining data.
+\begin{proposition}[Natural diagrams descend from records to tuples]
+\label{prop:nat-record-independent}
+Let $I$ be a linear order and
+$r,s\in\Rec_\tau^\gamma(I,\Phi)$ be records with
+\[
+\operatorname{ev}_I^\gamma(r)
+=\operatorname{ev}_I^\gamma(s)=\ba.
+\]
+Then
+$\natatp(I,r)=\natatp(I,s)$.
+Furthermore, the result of Definition~\ref{def:natural-diagram}
+is independent of the sufficiently large extension $I'$.
+Thus it is well-defined to write
+\[
+\natatp(\ba;\EM(I,\Phi))
+:=\natatp(I,r)
+\]
+for \emph{any} presentation record $r$ of $\ba$.
+If $|\EM(I,\Phi)|$ is already above the relevant
+stabilization threshold, this equals
+$\atp(\ba;\EM(I,\Phi))$.
 \end{proposition}
-\begin{proof}
-If two labeled supports have the same joint order/equality pattern,
-their support orders are isomorphic respecting all term coordinates.
-Amalgamate the two ambient linear orders over this isomorphism.
-The resulting order embeddings induce strong EM embeddings and
-identify the evaluated tuples. Extend the amalgam to a sufficiently
-large categoricity order and apply preservation of canonical
-diagrams under strong embeddings.
+\begin{proof}\itshape 
+For a common order extension $j:I\hookrightarrow I'$,
+functoriality of the expanded EM presentation gives
+\[
+\operatorname{ev}_{I'}^\gamma(j_*r)
+=\operatorname{EM}_{\tau}(j,\Phi)(\ba)
+=\operatorname{ev}_{I'}^\gamma(j_*s).
+\]
+They therefore have the same stabilized arrow type.
+For two different sufficiently large extensions
+$I'_0,I'_1$, amalgamate the linear orders over
+the common copy of $I$, and extend the resulting
+order if necessary to another sufficiently large
+categoricity cardinal. The induced strong EM maps
+identify the evaluated tuple, so preservation of
+stabilized arrow types makes the two values equal.
+Finally, if the original reduct is already large
+enough to carry $\atp$, its strong embedding into
+any such extension preserves $\atp(\ba;-)$.
 \end{proof}
 
-\begin{remark}[Presentation witnesses versus diagrams]
-The preceding construction gives a concrete common strong EM
-extension identifying two tuples when their \emph{chosen labeled
-term presentations} have the same support order pattern.
-Equality of their natural diagrams alone does \emph{not} imply
-that those chosen presentations have isomorphic supports: distinct
-presentation patterns may determine the same canonical diagram.
-At sufficiently large categoricity sizes, equality of canonical
-diagrams is instead implemented by the strong maps of source
-Proposition~4.2. This is why the natural diagram is a
-presentation-independent comparison invariant even though it is
-computed from a chosen EM term representation.
+\begin{remark}[Ambient invariance and the role of the EM presentation]
+\label{rem:nat-ambient}
+For any fixed large-enough categoricity cardinal $\kappa$,
+$\atp_\kappa(\ba;M)$ is already preserved by every
+strong embedding $M\to N$ of models of size at
+least $\kappa$; it does \emph{not} depend on which
+strong extension of such an $M$ is used.
+The potential difficulties are instead:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item the arrow comparisons may refine as $\kappa$ increases,
+until their eventual stabilization; and
+\item a small model $M$ may admit \emph{incompatible}
+strong extensions whose images of $\ba$ have different
+stabilized arrow types. No-maximal-models alone does
+not provide a well-defined choice of type.
+\end{enumerate}
+The special advantage of an EM presentation
+$\EM(I,\Phi)$ is that \emph{order extensions}
+$I\hookrightarrow I'$ provide a compatible directed
+family of strong extensions. Since linear orders
+amalgamate over a common suborder, the stabilized
+arrow type calculated in this family is independent
+of the chosen sufficiently large $I'$.
+There is no distinguished canonical order $I'$,
+and the extension itself is neither canonical nor
+natural in a categorical sense. Instead, the
+\emph{value of the type} is independent of every
+permitted choice of $I'$, relative to the fixed
+template and EM presentation. In this precise
+sense $\natatp$ gives a canonical extension of
+the \emph{stabilized arrow-type invariant} to
+tuples in smaller EM-presented models, rather
+than a canonical extension of the models themselves.
+For models already above the stabilization
+threshold, it coincides with the intrinsic $\atp$.
+\end{remark}
 
-The distinction from automorphism types in Section~\ref{subsec:auto}
-is also important: classification
-under automorphisms of one fixed $H(\delta)$ requires occupied-slot
-data, whereas here arbitrary order extensions and strong EM
-embeddings suffice, so only the labeled support order pattern is
-needed as a \emph{sufficient input} to compute the natural diagram.
+\begin{proposition}[Order-pattern sufficiency for natural diagrams]
+\label{prop:order-pattern-nat}
+Suppose records $r=(\bar f,\bi)$ over $I$ and
+$s=(\bar f,\bj)$ over $J$ have the same term list
+and satisfy
+$\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J)$.
+Then
+\[
+\natatp(I,r)=\natatp(J,s).
+\]
+No occupancy information about the ambient orders
+is required. This is a \emph{sufficient} criterion,
+not a characterization of diagram equality.
+\end{proposition}
+\begin{proof}\itshape 
+The supports are isomorphic as ordered lists.
+Amalgamate $I$ and $J$ over that support isomorphism
+and lift the order embeddings through the EM functor.
+The resulting strong embeddings identify
+the evaluated tuples; extend to a sufficiently
+large categoricity order and use preservation
+of stabilized arrow types. Equivalently,
+apply Proposition~\ref{prop:order-gtpem}.
+\end{proof}
+
+\begin{corollary}[EM-lifted comparison implies natural-diagram equality]
+\label{cor:gtpem-to-nat}
+For tuples $\ba,\bb$ in EM-presented models,
+\[
+\gtp^{\mathrm{EM}}(\ba)=\gtp^{\mathrm{EM}}(\bb)
+\quad\Longrightarrow\quad
+\natatp(\ba)=\natatp(\bb),
+\]
+where the right side abbreviates the record-independent
+tuple notation of Proposition~\ref{prop:nat-record-independent}.
+\end{corollary}
+\begin{proof}\itshape 
+Each generating direct EM-lifted comparison is induced
+by common records and the same quantifier-free order
+type, so Proposition~\ref{prop:order-pattern-nat}
+gives equality of natural diagrams. This equality
+persists along a finite chain of generating comparisons.
+\end{proof}
+
+\begin{example}[The converse fails even for pure sets]
+\label{ex:pure-sets-order}
+Let $\K$ be the AEC of pure sets with strong
+embeddings the injections, categorical in
+every infinite cardinal. Take an EM template
+whose expanded structure $\operatorname{EM}_{\tau}(I,\Phi)$
+has underlying set $I$, remembers its linear
+order $<$, and has no functions other than
+variables as terms. Its reduct is the pure set $I$.
+
+Choose $i<j$ in $I$ and let
+$\ba=(i,j)$ and $\bb=(j,i)$.
+In the pure-set reduct, an automorphism
+interchanges $i$ and $j$, hence
+\[
+\natatp(\ba;\EM(I,\Phi))
+=\natatp(\bb;\EM(I,\Phi)).
+\]
+But every order-induced embedding preserves
+whether the first tuple coordinate precedes
+the second in the skeleton. This property
+is preserved under finite chains of
+EM-lifted comparisons, so
+\[
+\gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
+\ne
+\gtp^{\mathrm{EM}}(\bb;\EM(I,\Phi)).
+\]
+One can present $\ba$ using the term sequence
+$(x_0,x_1)$ and $\bb$ using $(x_1,x_0)$
+over the same increasing support $(i,j)$;
+there are no alternative term presentations
+that remove the reversal in this template.
+Thus even the \emph{existence} of records
+with equal natural diagrams does not imply
+equality of the EM-lifted type.
+\end{example}
+
+\begin{remark}[Resolution of the earlier review question]
+The tuple-invariant interpretation of
+$\natatp$ is legitimate by
+Proposition~\ref{prop:nat-record-independent}.
+The distinction from $\gtp^{\mathrm{EM}}$
+is not dependence on a chosen record:
+both assign equivalence classes to tuples in their
+respective EM presentations. However,
+$\gtp^{\mathrm{EM}}$ remembers the chosen order
+presentation in its permitted witnesses, whereas
+$\natatp$ is intrinsic to the evaluated
+AEC tuple once sufficiently large.
+The EM-lifted relation uses a more restrictive
+family of witnesses. Example~\ref{ex:pure-sets-order}
+shows that equality of natural diagrams is
+strictly weaker in general. Accordingly we
+retain two distinct names rather than define
+$\gtp^{\mathrm{EM}}:=\natatp$.
 \end{remark}
 
 \begin{definition}[Placement and placed diagram over a base;
@@ -733,7 +1139,7 @@ representations of all parameters in $\ba_A$. The
 \emph{placed comparison diagram} of this placement is
 \[
 D_{\mathrm{pl}}(\bd;\,A,\text{placement})
-:=D_{\mathrm{nat}}(\bd,\ba_A),
+:=\natatp((\bd,\ba_A);\EM(J,\Phi)),
 \]
 where the right side uses the combined labeled term representation.
 It is computed in a sufficiently large EM extension, which need
@@ -762,7 +1168,7 @@ the relevant amalgamation results have been proved.
 \begin{remark}[Relation to types over models]
 For $A=\EM(I,\Phi)$ and a tuple $\bd$ in an EM extension,
 the placed comparison is
-$D_{\mathrm{nat}}(\bd,\ba_A)$, with the enumeration
+$\natatp((\bd,\ba_A);\EM(J,\Phi))$, with the enumeration
 of $A$ fixed on both sides. This resembles the usual
 AEC notion $\operatorname{gtp}(\bd/A;N)$, but the
 definition requires neither a monster model nor
@@ -793,16 +1199,18 @@ For possibly distinct index orders we have
 \gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
 =\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
 \Longrightarrow
-D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
+\natatp(\ba;\EM(I,\Phi))
+=\natatp(\bb;\EM(J,\Phi)).
 \]
 These implications do not assert converses.
 
 At a sufficiently large categoricity cardinal,
-$\atp_\kappa$ on $\kappa$-sized models agrees with
-$\gtp(-/\emptyset;-)$ by Lemma~\ref{lem:gtp-reversal}.
-On larger ambient models, $\atp_\kappa$ compares
-types in small strong submodels and is not automatically
-the ambient Galois type. Similarly, a placed diagram
+$\atp_\kappa$ is exactly tail-restricted Galois
+equivalence by Proposition~\ref{prop:arrow-galois}.
+It implies ordinary Galois-type equality over
+$\emptyset$, but the converse can fail without
+amalgamation, even at cardinality $\kappa$.
+Similarly, a placed diagram
 over $A=\EM(I,\Phi)$ is an arrow comparison with an
 enumeration of $A$ included as parameters; it is not
 declared to equal a Galois type over arbitrary $A$.
@@ -854,6 +1262,45 @@ In particular no skeleton coordinate used by both
 families lies in a transposed region. No assumption
 that $X_j$ and $Y_j$ are order-isomorphic is needed.
 
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  block/.style={draw,rounded corners=1pt,minimum width=1.02cm,
+                minimum height=0.60cm,font=\small},
+  shared/.style={block,fill=black!5},
+  dblock/.style={block,fill=blue!13},
+  eblock/.style={block,fill=orange!19}]
+\node[font=\small,anchor=east] at (-0.80,0) {Before:};
+\node[shared] at (0,0) {$U_0$};
+\node[dblock] at (1.45,0) {$X_1$};
+\node[eblock] at (2.70,0) {$Y_1$};
+\node[shared] at (4.15,0) {$U_1$};
+\node[eblock] at (5.60,0) {$Y_2$};
+\node[dblock] at (6.85,0) {$X_2$};
+\node[shared] at (8.30,0) {$U_2$};
+\node[font=\small,anchor=east] at (-0.80,-1.55) {After:};
+\node[shared] at (0,-1.55) {$U_0$};
+\node[eblock] at (1.45,-1.55) {$Y_1$};
+\node[dblock] at (2.70,-1.55) {$X_1$};
+\node[shared] at (4.15,-1.55) {$U_1$};
+\node[dblock] at (5.60,-1.55) {$X_2$};
+\node[eblock] at (6.85,-1.55) {$Y_2$};
+\node[shared] at (8.30,-1.55) {$U_2$};
+\draw[dashed,rounded corners] (0.76,0.48) rectangle (3.40,-0.48);
+\draw[dashed,rounded corners] (4.90,0.48) rectangle (7.53,-0.48);
+\draw[dashed,rounded corners] (0.76,-1.07) rectangle (3.40,-2.03);
+\draw[dashed,rounded corners] (4.90,-1.07) rectangle (7.53,-2.03);
+\node[font=\scriptsize] at (2.08,-0.78) {$X_1\leftrightarrow Y_1$};
+\node[font=\scriptsize] at (6.23,-0.78) {$Y_2\leftrightarrow X_2$};
+\end{tikzpicture}
+
+{\small Schematic: $X_j$ uses only coordinates of $\bd$,
+$Y_j$ only coordinates of $\be$, while the $U_j$ denote
+untouched support (possibly shared). Each dashed region is
+convex in the \emph{joint support order}; only its two exclusive
+blocks are transposed. Internal block orders and term labels
+remain unchanged.}
+\end{center}
+
 Construct a new ordered support $S'$ by replacing
 $X_j+Y_j$ with $Y_j+X_j$ (or conversely) for each $j$,
 retaining the internal order of every block and the
@@ -865,18 +1312,18 @@ coordinate. Thus the first family still uses the
 $X_j$-coordinates and the second still uses the
 $Y_j$-coordinates; \emph{only their relative order
 changes}. Evaluate these same terms in an EM model
-over an order containing $S'$, obtaining tuples
+over an order $J$ containing $S'$, obtaining tuples
 $\bd'$ and $\be'$. Then
 \[
-D_{\mathrm{nat}}(\bd,\be)
+\natatp((\bd,\be);\EM(I,\Phi))
 =
-D_{\mathrm{nat}}(\bd',\be').
+\natatp((\bd',\be');\EM(J,\Phi)),
 \]
 The new tuples need not live in the original $M$;
 the statement compares their natural diagrams in
 (possibly different) EM presentations.
 \end{lemma}
-\begin{proof}[Proof sketch]
+\begin{proof}[Proof sketch]\itshape 
 Suppose the original and transposed diagrams differ.
 Choose $\sigma$ bounding the two term families and supports,
 and $\chi$ sufficiently large with $\chi^\sigma=\chi$ for
@@ -939,72 +1386,299 @@ has not yet been established. A cardinal-parameterized
 no-canonical-diagram-order-property principle might subsume
 Lemma~4.6, but the exact formulation and its relation to
 Lemma~4.5 remain to be checked.
+
+\textbf{Problem for later.} Formulate a parameterized
+\emph{no-order-property for natural arrow types}
+which implies disjoint block transposition.
+Compare it first to the first-order stable-theory
+argument that indiscernible sequences are
+indiscernible sets, and then ask whether an
+appropriate stability or superstability
+hypothesis for AECs with a monster model
+implies that principle. The present proof
+uses unbounded categoricity to obtain the
+uniform orbit bounds, so it does not
+immediately provide such a result.
 \end{remark}
 
-\subsection{Locality and compactness for placed comparisons}\label{sec:locality}
-The source's Proposition~4.8 gives a uniform function
-$g(\sigma)$ with the following \emph{separation} property:
-for a well-ordered EM base $A=\EM(I,\Phi)$, two different
-placed comparisons of a tuple of length at most $\sigma$
-are already distinguished over some
-$X\subseteq A$ of size at most $g(\sigma)$.
-This is tameness-like locality for a specific kind of
-base and a specific comparison invariant, not
-tameness for all Galois types.
+\subsection{Locality and compactness for placed comparisons}
+\label{sec:locality}
+\paragraph{Natural arrow types over parameter sets.}
+Fix a well-ordered EM presentation
+$A=\EM(I,\Phi)$ and a tuple-length bound $\sigma$.
+For any set $X\subseteq A$, let
+\[
+S^\sigma_{\natatp}(X;A)
+:=
+\bigl\{\natatp((\bd,\bar x);\EM(J,\Phi)):
+ I\hookrightarrow J,\ \bd\in\EM(J,\Phi)^\sigma\bigr\},
+\]
+where $\bar x$ is an enumeration of $X$,
+transported along the order-induced embedding.
+The comparison identifies the parameter coordinates
+according to their fixed names; its equality does
+not depend on the choice of enumeration.
+For $Y\subseteq X$, restriction of the parameter list
+gives a well-defined map
+\[
+\restriction Y:
+S^\sigma_{\natatp}(X;A)\longrightarrow
+S^\sigma_{\natatp}(Y;A).
+\]
+We suppress the ambient presentation $A$ when it
+is fixed, writing $S^\sigma_{\natatp}(X)$.
+The same construction works for \emph{any subset}
+$X$ of an EM base, whether or not $X$ is the
+universe of a strong submodel. It does not
+automatically define a natural arrow type
+over an arbitrary non-EM base.
 
-Proposition~4.9 gives a complementary \emph{existence}
-principle: a coherent family of possible joint diagrams
-over all $X\in[A]^{\leq\chi}$, for
-$\chi>\lambda_0+\sigma$ with $\chi^\sigma=\chi$,
-is realized by a placement. Together they imply
-uniqueness of the full \emph{diagram} once
-$\chi\geq g(\sigma)$, as recorded next.
-In this notation the placed comparison is
-$D_{\mathrm{pl}}(\bd;A)=\atp(\bd,\ba_A)$,
-computed in a sufficiently large EM presentation. The
-proof of Proposition~4.9 uses the finite supports
-of EM terms, clusters of support positions within
-cuts, and the block symmetry of Lemma~4.6.
-These are properties of the presentation calculus,
-not an instance of first-order compactness.
+The source's Proposition~4.8 gives a definable
+nondecreasing cardinal function $g(\sigma)$
+with the following \emph{separation property}:
+two distinct placed natural arrow types over
+$A$ are distinguished by their restrictions
+to some $X\subseteq A$ with $|X|\leq g(\sigma)$.
+This is tameness-like locality for
+the \emph{placed comparison} invariant,
+not a general tameness statement for
+ordinary Galois types.
 
-\begin{lemma}[Unique compactness for placed comparisons;
+\begin{lemma}[Unique compactness for natural arrow types over an EM base;
 consequence of {\cite[Propositions 4.8--4.9]{oai-ecc}}]
 \label{lem:unique-placed-compactness}
-Let $I$ be an infinite well-order and $A=\EM(I,\Phi)$.
-Fix an infinite cardinal $\sigma$ and choose $\chi$ with
+Let $I$ be an infinite well-order,
+$A=\EM(I,\Phi)$, and let $\sigma$ be infinite.
+Choose an infinite cardinal $\chi$ satisfying
 \[
-\chi>\lambda_0+\sigma,\qquad \chi^\sigma=\chi,
-\qquad \chi\geq g(\sigma),
+\chi>\lambda_0+\sigma,\qquad
+\chi^\sigma=\chi,\qquad
+\chi\geq g(\sigma).
 \]
-where $\lambda_0=\LS(\K)$ is the presentation bound and $g$ is
-the uniform testing function of Proposition~4.8.
-For each $X\subseteq A$ of cardinality at most $\chi$,
-suppose a \emph{possible} joint comparison diagram
-$q_X(\bd,X)$ is prescribed for a tuple $\bd$ of length
-at most $\sigma$. Assume that the prescriptions are
-coherent under restriction and that their diagrams
-on the parameter tuples $X$ are the natural diagrams
-of those parameters in $A$.
-
-Then there exists a placement of $\bd$ over the
-fixed skeleton $I$ whose placed comparison restricts
-to $q_X$ for every such $X$. Moreover, \emph{any two}
-placements satisfying all these prescriptions have
-the same full placed comparison over $A$.
-Thus the coherent family has exactly one
-\emph{extension as a comparison diagram}; neither
-the placement nor its realizing tuple is asserted
-to be unique.
+For each $X\in[A]^{\leq\chi}$, suppose we
+have specified a \emph{possible} type
+\[
+p_X\in S^\sigma_{\natatp}(X;A)
+\]
+such that
+\[
+X\subseteq Y,\quad |Y|\leq\chi
+\quad\Longrightarrow\quad
+p_Y\restriction X=p_X.
+\]
+Then there exists exactly one
+\[
+p\in S^\sigma_{\natatp}(A;A)
+\]
+satisfying $p\restriction X=p_X$
+for all $X\in[A]^{\leq\chi}$.
+Uniqueness is of the \emph{type}, not of
+a realizing tuple or an order extension.
 \end{lemma}
-\begin{proof}
-Existence is Proposition~4.9. If two realizing
-placements had different full comparisons,
-Proposition~4.8 would find some $X\subseteq A$
-with $|X|\leq g(\sigma)\leq\chi$ on which their
-joint diagrams differ. Both restrictions equal
-$q_X$, a contradiction.
+\begin{proof}\itshape
+Choose an enumeration for every parameter set,
+with the identifications made explicit when
+taking restrictions. Each $p_X$ is, by definition,
+a possible joint canonical diagram of an added
+tuple with the parameters $X$. Its parameter
+restriction is the natural diagram of $X$,
+and the assumed coherence is exactly the
+compatibility hypothesis of source
+Proposition~4.9. That proposition produces
+a placement of $\bd$ over $I$ realizing all
+the prescribed diagrams, hence a type
+$p\in S^\sigma_{\natatp}(A;A)$ with
+$p\restriction X=p_X$.
+
+If $p,p'$ are two such types, source
+Proposition~4.8 finds, whenever $p\ne p'$,
+a subset $X\subseteq A$ of size at most
+$g(\sigma)\leq\chi$ on which they differ.
+Both restrictions equal $p_X$,
+contradicting the choice of $X$.
 \end{proof}
+
+\begin{remark}[The quantifier over parameter subsets]
+The statement concerns $X\in[A]^{\leq\chi}$.
+Asking for $p_X$ for \emph{all} subsets
+$X\subseteq A$, including $X=A$, would
+already supply the desired conclusion
+as $p_A$. If $|A|\leq\chi$, the theorem
+is correspondingly tautological; its
+interest is when $|A|>\chi$.
+The hypothesis that each $p_X$ is
+\emph{possible} is essential.
+
+If $A_0=\EM(I_0,\Phi)\leq_\K A$ for
+an infinite sub-well-order $I_0\subseteq I$,
+the same lemma applies directly with
+$A_0$ as the base. This covers EM submodels.
+For an arbitrary subset $Y\subseteq A$,
+the notation $S^\sigma_{\natatp}(Y;A)$ is
+still meaningful, but the stated theorem
+is over the \emph{whole EM base} $A$.
+A corresponding compactness theorem based
+only on prescriptions on $[Y]^{\leq\chi}$
+would require adapting the support-profile
+argument of source Proposition~4.9
+and the uniform testing bound of
+Proposition~4.8 to parameters restricted
+to $Y$. We do not assert that extension
+here. Likewise, arbitrary strong submodels
+of $A$ need not be EM submodels with the
+induced presentation.
+\end{remark}
+
+\begin{proposition}[Gluing types along a $\chi$-covering chain]
+\label{prop:covering-chain-gluing}
+Keep the hypotheses on $A,\sigma,\chi$
+from Lemma~\ref{lem:unique-placed-compactness}.
+Suppose $A=\bigcup_{i<\delta}A_i$ for an
+increasing family of parameter subsets
+(not necessarily submodels), and
+each $X\in[A]^{\leq\chi}$ is contained
+in some $A_i$.
+If
+\[
+p_i\in S^\sigma_{\natatp}(A_i;A)
+\qquad(i<\delta)
+\]
+satisfy $p_j\restriction A_i=p_i$
+whenever $i<j$, then there is a unique
+$p\in S^\sigma_{\natatp}(A;A)$
+extending all the $p_i$.
+In particular, the covering assumption holds
+whenever $\operatorname{cf}(\delta)>\chi$.
+\end{proposition}
+\begin{proof}\itshape
+For each $X\in[A]^{\leq\chi}$, choose $i$
+with $X\subseteq A_i$ and put
+$p_X=p_i\restriction X$.
+This is independent of the chosen $i$:
+any two indices have a common later index,
+and the chain is coherent. The $p_X$
+are possible and satisfy the compatibility
+conditions of Lemma~\ref{lem:unique-placed-compactness},
+which gives existence and uniqueness of $p$.
+For the last assertion, if $|X|\leq\chi$,
+choose for each $x\in X$ an index $i_x$
+with $x\in A_{i_x}$. Since
+$\operatorname{cf}(\delta)>\chi$,
+the supremum of those indices is below
+$\delta$, so $X$ lies in some $A_i$.
+\end{proof}
+
+\begin{remark}[The countable-union problem remains open here]
+\label{rem:countable-chain-natural-types}
+Suppose $A=\bigcup_{n<\omega}A_n$ and
+$p_n\in S^\sigma_{\natatp}(A_n;A)$
+are coherent under restriction.
+The assumption in
+Proposition~\ref{prop:covering-chain-gluing}
+usually fails: one can choose elements
+from cofinally many successive stages to
+obtain a countable set $X\subseteq A$
+which is contained in no $A_n$.
+Since $\chi$ is infinite, the $p_n$
+alone do not assign a diagram to this $X$.
+Thus Lemma~\ref{lem:unique-placed-compactness}
+does not prove that the $p_n$ have a unique
+common extension over $A$.
+
+One might seek a stronger \emph{countable-chain
+continuity} principle for placed natural
+arrow types. Its existence and uniqueness
+parts are distinct questions: even if a
+global extension exists, the uniform
+testing bound $g(\sigma)$ only separates
+different global types over a parameter
+set of size at most $g(\sigma)$, which
+need not lie in one $A_n$.
+For comparison, the source's Lemma~4.10
+handles \emph{bounded diagrams of an actual
+tuple in an ambient strong extension} and
+uses additional closed-cardinal hypotheses;
+it does not state arbitrary countable-chain
+continuity for abstract type prescriptions.
+
+If $p_n$ are instead all types \emph{over
+the same base $A$}, there may be a different
+issue: their \emph{tuple lengths} could be
+growing. This is distinct from the chain
+of parameter sets considered here; see
+the next remark. If the base and tuple
+length are both fixed, an increasing
+sequence in the sense of restriction is
+simply a constant type.
+\end{remark}
+
+\begin{remark}[Countable unions in the tuple coordinates]
+\label{rem:long-tuple-union}
+Fix the same EM base $A$ and ordinals
+$\gamma_n$ with $\gamma_n\leq\gamma_{n+1}$,
+$\gamma=\sup_{n<\omega}\gamma_n$.
+Suppose
+\[
+p_n\in S^{\gamma_n}_{\natatp}(A;A),
+\qquad
+p_{n+1}\restriction\gamma_n=p_n,
+\]
+where the restriction now discards \emph{tuple
+coordinates}, not parameters. Does there
+exist a unique
+$p\in S^\gamma_{\natatp}(A;A)$
+with $p\restriction\gamma_n=p_n$?
+
+This is a different continuity question.
+Our compact-placement Lemma~\ref{lem:unique-placed-compactness}
+works at a \emph{fixed} upper bound on
+the entire added tuple length. To use it
+here, one would first need, for every
+$X\in[A]^{\leq\chi}$, a \emph{possible}
+joint diagram $q_X$ for the entire
+$\gamma$-tuple with parameters $X$,
+whose restrictions agree with
+$p_n\restriction X$ for all $n$ and
+whose parameter restrictions are coherent.
+If such $q_X$ are supplied and
+$\gamma\leq\sigma$ with the stated
+conditions on $\chi$, the lemma gives
+a unique resulting \emph{full} type.
+But existence of these $q_X$ is not
+a consequence proved here of the
+coherence of the $p_n$ alone.
+
+Even assuming existence, to show uniqueness
+\emph{from the $p_n$ alone} one would need
+a continuity principle saying that
+two natural arrow types of a long tuple
+which agree on every initial
+$\gamma_n$-subtuple are equal.
+The uniform testing theorem is about
+\emph{parameter subsets} of bounded size,
+not continuity in the number of
+distinguished tuple coordinates.
+This is precisely the distinction between
+a \emph{tameness-like} principle (small
+parameter sets detect unequal types)
+and a \emph{type-shortness-like} principle
+(small coordinate subtuples detect
+unequal long types). The source proves
+the former for placed comparisons, but
+the latter is not a stated consequence.
+
+The countable exhaustion in the proof of
+source Theorem~4.11 uses \emph{actual
+compatible enumerations} of strong
+submodels and their already determined
+bounded diagrams. Its construction
+extends realizations stage by stage.
+It does not assert this unrestricted
+inverse-limit property for arbitrary
+abstract types of growing tuple length.
+This distinction is worth revisiting
+when auditing that construction.
+\end{remark}
 
 \begin{remark}[Scope of compactness and uniqueness]
 This is a compactness-and-separation principle for
@@ -1045,6 +1719,112 @@ There is an unbounded class of strong-limit cardinals $\mu$ of countable cofinal
 \item There are at most $\mu$ singleton types over each $\mu$-model, where ``type'' is identification in an amalgam over the model.
 \end{enumerate}
 \end{theorem}
+\begin{proposition}[Placed natural arrow types are Galois types at closed levels]
+\label{prop:closed-level-gtp-characterization}
+Let $\mu$ be a cardinal to which source
+Lemma~4.10 and Theorem~4.11 apply.
+Suppose $A\leq_\K B_0,B_1$ are all of
+cardinality $\mu$ and $\bd_i\in B_i^\gamma$
+for the same $\gamma\leq\sigma<\mu$.
+Fix an isomorphism $A\cong\EM(I,\Phi)$
+for a well-order $I$ of size $\mu$.
+Let $p_i\in S^\gamma_{\natatp}(A;A)$
+be the \emph{unique placed lift} of the
+bounded diagrams
+\[
+\atp((\bd_i,\bar x);B_i),
+\qquad X\subseteq A,\quad
+|X|<\mu,
+\]
+where $\bar x$ enumerates $X$,
+and the arrow type is computed at a
+stabilization level below $\mu$
+appropriate to the tuple length.
+Then the following are equivalent:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $p_0=p_1$;
+\item the bounded diagrams of
+$(\bd_0,X;B_0)$ and
+$(\bd_1,X;B_1)$ agree for every
+$X\subseteq A$ with $|X|\leq g(\sigma)$;
+\item there exists a strong amalgam
+of $B_0,B_1$ over $A$ identifying
+$\bd_0,\bd_1$;
+\item $\gtp(\bd_0/A;B_0)=\gtp(\bd_1/A;B_1)$,
+with Galois types defined by unrestricted
+transitive closure over $A$.
+\end{enumerate}
+In particular, at such levels the equality
+relation on placed natural arrow types
+of tuples in $\mu$-sized extensions
+\emph{coincides with} equality of
+ordinary Galois types over the $\mu$-base.
+\end{proposition}
+\begin{proof}\itshape
+The existence and uniqueness of $p_i$
+is source Lemma~4.10. Source Proposition~4.8
+shows that two placed lifts agree if and
+only if their restrictions to parameter
+sets of size at most $g(\sigma)$ agree;
+this gives (i)$\Leftrightarrow$(ii).
+The equivalence of (ii) and (iii) is
+exactly source Theorem~4.11(2).
+
+An amalgam identifying the tuples immediately
+gives equality of Galois types. Conversely,
+a chain witnessing equality of Galois types
+\emph{over the fixed base $A$} cannot pass
+through models smaller than $\mu$, since
+every intermediate model contains a strong
+copy of $A$. Downward L\"owenheim--Skolem
+and coherence shrink each direct comparison
+to a comparison among $\mu$-sized strong
+extensions of $A$ (and $\mu$-sized amalgams).
+The amalgamation property for such models,
+asserted in Theorem~4.11(1), makes direct
+equivalence over $A$ transitive.
+Consequently the entire finite chain
+collapses to a single identifying
+$\mu$-amalgam. This proves
+(iv)$\Rightarrow$(iii).
+\end{proof}
+
+\begin{remark}[Not simply a new name for Galois types]
+\label{rem:arrow-novelty}
+The preceding proposition provides a
+\emph{Galois-type characterization after
+amalgamation has been proved}, at the
+special closed levels of Theorem~4.11.
+Before that theorem, stabilized arrow
+types and their placed lifts are available
+without assuming amalgamation, and they
+supply the comparison machinery used to
+\emph{establish} amalgamation. This is
+the distinctive role of the construction
+in the manuscript. On arbitrary smaller
+parameter subsets of $A$, the placed
+invariant is defined, but it need not
+already coincide with ordinary Galois
+types over that subset.
+
+Both eventual reversal (source Theorem~3.11)
+and stabilization (source Proposition~4.2)
+use unbounded categoricity essentially
+in their stated proofs. In an AEC with
+amalgamation and a monster model,
+Galois types already admit an automorphism-orbit
+description, whereas the directed strong-map
+comparison between arbitrary models of size
+$\kappa$ need not be symmetric without
+additional universality or homogeneity.
+It is an open question for these notes
+whether an appropriate version of the
+arrow-type machinery can be useful in
+superstable AECs without the unbounded
+categoricity hypothesis; no such general
+theorem is being claimed here.
+\end{remark}
+
 \begin{remark}[Scope of amalgamation]
 This is amalgamation at selected cardinals, not an assertion
 of eventual amalgamation throughout a tail. The first conclusion
