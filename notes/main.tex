@@ -608,6 +608,37 @@ $\approx_{\geq\kappa}$ comparison is also
 allowed in the unrestricted relation.
 \end{proof}
 
+\begin{corollary}[Earlier stabilization if amalgamation is assumed]
+\label{cor:ap-lowers-stabilization}
+If $\K$ has the amalgamation property, then at every
+categoricity cardinal $\kappa\geq b_\K(\theta)$
+with $\kappa\geq\lambda_0+\theta$,
+\[
+\atp_\kappa(\ba;M)=\atp_\kappa(\bb;N)
+\quad\Longleftrightarrow\quad
+\gtp(\ba/\emptyset;M)=\gtp(\bb/\emptyset;N)
+\]
+for models $M,N$ of size at least $\kappa$ and
+tuples of length at most $\theta$.
+Hence the comparison projections between any two
+such categoricity cardinals are already bijective.
+This conditional conclusion cannot be used in the
+manuscript before amalgamation has been established.
+\end{corollary}
+\begin{proof}
+Amalgamation makes direct amalgamation equivalence
+transitive, so unrestricted Galois-type equality
+has a direct witness. Restricting that witness to
+$\kappa$-sized strong submodels as in the proof of
+Proposition~\ref{prop:arrow-galois} gives equal
+arrow types. The converse is the same proposition.
+For $\lambda\geq\kappa$ as in the statement,
+both arrow comparisons compute the same unrestricted
+Galois type, proving injectivity of the projection.
+Surjectivity follows from the order-presented
+extensions supplied by the EM functor.
+\end{proof}
+
 \begin{remark}[Why the reversal threshold is not a stabilization threshold]
 \label{rem:gtp-not-stabilization}
 Ordinary Galois equivalence over $\emptyset$,
@@ -817,7 +848,7 @@ For a common order extension $j:I\hookrightarrow I'$,
 functoriality of the expanded EM presentation gives
 \[
 \operatorname{ev}_{I'}^\gamma(j_*r)
-=\EM_\tau(j,\Phi)(\ba)
+=\operatorname{EM}_{\tau}(j,\Phi)(\ba)
 =\operatorname{ev}_{I'}^\gamma(j_*s).
 \]
 They therefore have the same stabilized arrow type.
@@ -921,7 +952,12 @@ $D_{\mathrm{nat}}$ is legitimate by
 Proposition~\ref{prop:nat-record-independent}.
 The distinction from $\gtp^{\mathrm{EM}}$
 is not dependence on a chosen record:
-both are tuple invariants on EM-presented models.
+both assign equivalence classes to tuples in their
+respective EM presentations. However,
+$\gtp^{\mathrm{EM}}$ remembers the chosen order
+presentation in its permitted witnesses, whereas
+$D_{\mathrm{nat}}$ is intrinsic to the evaluated
+AEC tuple once sufficiently large.
 The EM-lifted relation uses a more restrictive
 family of witnesses. Example~\ref{ex:pure-sets-order}
 shows that equality of natural diagrams is
