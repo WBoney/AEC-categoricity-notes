@@ -814,11 +814,11 @@ D_{\mathrm{nat}}(I,r)
           \EM(I',\Phi)\bigr).
 \]
 This is the \emph{natural diagram computed from
-$(I,r)$}. The order $I'$ is an auxiliary
-sufficiently large presentation and need not
-have the size of $I$. We prove below that neither
-its choice nor the chosen record of an actual tuple
-affects the value.
+$(I,r)$}. The purpose of $I'$ is to evaluate the
+record at a sufficiently large categoricity cardinal
+where $\atp$ is defined and stabilized, not to
+introduce a new type invariant. Neither its choice
+nor the chosen record affects the result, as proved below.
 \end{definition}
 
 \begin{proposition}[Natural diagrams descend from records to tuples]
@@ -1037,7 +1037,8 @@ For possibly distinct index orders we have
 \gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
 =\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
 \Longrightarrow
-D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb).
+D_{\mathrm{nat}}(\ba;\EM(I,\Phi))
+=D_{\mathrm{nat}}(\bb;\EM(J,\Phi)).
 \]
 These implications do not assert converses.
 
