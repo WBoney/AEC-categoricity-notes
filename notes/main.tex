@@ -3,7 +3,7 @@
 \usepackage{lmodern}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{enumitem,booktabs,longtable,hyperref,microtype,etoolbox}
+\usepackage{enumitem,booktabs,longtable,hyperref,microtype}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parskip}{0.35em}
 \setlength{\parindent}{0pt}
@@ -33,8 +33,7 @@
 \newtheorem{corollary}[definition]{Corollary}
 \newtheorem{remark}[definition]{Remark}
 \newtheorem{example}[definition]{Example}
-% Use italic body text in all theorem-like environments and proofs.
-\AtBeginEnvironment{proof}{\itshape}
+% All theorem-like environments use the italic plain style.
 
 \title{Types of Types in the Eventual Categoricity Proof\\large AEC and EM Reading Notes}
 \author{Reading notes}
@@ -261,7 +260,7 @@ automorphism-orbit equivalence of $M_\delta$.
 Suppose $\ba,\bb\in M_\delta^\theta$ admit presentation records in common.
 Then $\ba\equiv^{\mathrm{EM}}_{\mathrm{aut}}\bb$.
 
-\begin{proof}
+\begin{proof}\itshape 
 Choose presentations
 \[
 \ba=(f_k(\bi):k<\theta),\qquad
@@ -336,7 +335,7 @@ g(f(a_i))=a_i\qquad\text{for every coordinate }i.
 Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at sufficiently large categoricity cardinals.
 \end{theorem}
 
-\begin{proof}[Proof sketch] If asymmetry persisted unboundedly, one could choose repeated profiles at separated categoricity sizes, align small submodels with large presentations, and carry out an elimination construction. The resulting categoricity model would omit the ability to reach a chosen orbit, contradicting the presence of that orbit in the unique model.
+\begin{proof}[Proof sketch]\itshape  If asymmetry persisted unboundedly, one could choose repeated profiles at separated categoricity sizes, align small submodels with large presentations, and carry out an elimination construction. The resulting categoricity model would omit the ability to reach a chosen orbit, contradicting the presence of that orbit in the unique model.
 \end{proof}
 
 \begin{remark}
@@ -443,7 +442,7 @@ $\pi^{\leq\sigma}_{\lambda\kappa}$ is bijective. This is
 stability. 
 \end{proposition}
 
-\begin{proof}[Proof sketch]
+\begin{proof}[Proof sketch]\itshape 
 Suppose that noninjective projections occur
 arbitrarily late. Choose $B_\sigma^+$ successive refinement stages and a
 common categoricity cardinal above them. Each refinement produces a pair
@@ -539,7 +538,7 @@ Here (ii) is \emph{direct amalgamation equivalence},
 not the unrestricted transitive-closure definition of
 $\gtp(-/\emptyset;-)$.
 \end{lemma}
-\begin{proof}
+\begin{proof}\itshape 
 The first condition implies the second by using
 $P=N$, $f_0=f$, and $f_1=\operatorname{id}_N$.
 For the converse, downward L\"owenheim--Skolem
@@ -577,7 +576,7 @@ Consequently,
 The converse to the last implication is not
 asserted without further hypotheses.
 \end{proposition}
-\begin{proof}
+\begin{proof}\itshape 
 If the arrow types agree, choose $\kappa$-sized
 strong submodels $M_0\leq_\K M$ and
 $N_0\leq_\K N$ containing the tuples,
@@ -625,7 +624,7 @@ such categoricity cardinals are already bijective.
 This conditional conclusion cannot be used in the
 manuscript before amalgamation has been established.
 \end{corollary}
-\begin{proof}
+\begin{proof}\itshape 
 Amalgamation makes direct amalgamation equivalence
 transitive, so unrestricted Galois-type equality
 has a direct witness. Restricting that witness to
@@ -767,7 +766,7 @@ Then
 \]
 and their natural diagrams coincide.
 \end{proposition}
-\begin{proof}
+\begin{proof}\itshape 
 Amalgamate $I$ and $J$ over the labeled support
 isomorphism $\bi\mapsto\bj$, obtaining order
 embeddings into a common linear order $L$.
@@ -843,7 +842,7 @@ If $|\EM(I,\Phi)|$ is already above the relevant
 stabilization threshold, this equals
 $\atp(\ba;\EM(I,\Phi))$.
 \end{proposition}
-\begin{proof}
+\begin{proof}\itshape 
 For a common order extension $j:I\hookrightarrow I'$,
 functoriality of the expanded EM presentation gives
 \[
@@ -878,7 +877,7 @@ No occupancy information about the ambient orders
 is required. This is a \emph{sufficient} criterion,
 not a characterization of diagram equality.
 \end{proposition}
-\begin{proof}
+\begin{proof}\itshape 
 The supports are isomorphic as ordered lists.
 Amalgamate $I$ and $J$ over that support isomorphism
 and lift the order embeddings through the EM functor.
@@ -900,7 +899,7 @@ D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb),
 where the right side abbreviates the record-independent
 tuple notation of Proposition~\ref{prop:nat-record-independent}.
 \end{corollary}
-\begin{proof}
+\begin{proof}\itshape 
 Each generating direct EM-lifted comparison is induced
 by common records and the same quantifier-free order
 type, so Proposition~\ref{prop:order-pattern-nat}
@@ -1122,7 +1121,7 @@ The new tuples need not live in the original $M$;
 the statement compares their natural diagrams in
 (possibly different) EM presentations.
 \end{lemma}
-\begin{proof}[Proof sketch]
+\begin{proof}[Proof sketch]\itshape 
 Suppose the original and transposed diagrams differ.
 Choose $\sigma$ bounding the two term families and supports,
 and $\chi$ sufficiently large with $\chi^\sigma=\chi$ for
@@ -1243,7 +1242,7 @@ Thus the coherent family has exactly one
 the placement nor its realizing tuple is asserted
 to be unique.
 \end{lemma}
-\begin{proof}
+\begin{proof}\itshape 
 Existence is Proposition~4.9. If two realizing
 placements had different full comparisons,
 Proposition~4.8 would find some $X\subseteq A$
