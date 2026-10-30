@@ -10,6 +10,7 @@
 \newcommand{\K}{\mathbf K}
 \newcommand{\LS}{\operatorname{LS}}
 \newcommand{\atp}{\operatorname{atp}}
+\newcommand{\natatp}{\operatorname{atp}_{\mathrm{nat}}}
 \newcommand{\gtp}{\operatorname{gtp}}
 \newcommand{\auttp}{\operatorname{tp}_{\mathrm{aut}}}
 \newcommand{\EMauttp}{\operatorname{tp}^{\mathrm{EM}}_{\mathrm{aut}}}
@@ -111,8 +112,8 @@ Galois comparisons (Section~\ref{subsec:galois}).\\
 $\approx_{\geq\kappa}$ & Galois equivalence restricted
 to intermediate models of size at least $\kappa$
 (Proposition~\ref{prop:arrow-galois}).\\
-$D_{\mathrm{nat}}(I,r)$,
-$D_{\mathrm{nat}}(\ba;M)$ & Natural diagram computed
+$\natatp(I,r)$,
+$\natatp(\ba;M)$ & Natural diagram computed
 from a record, and its record-independent tuple notation
 (Proposition~\ref{prop:nat-record-independent}).\\
 $D_{\mathrm{pl}}$ & Placed diagram over an EM-presented
@@ -131,7 +132,7 @@ $\atp$ in the absence of amalgamation
 (Example~\ref{ex:stars-gtp-arrow}). The source's stable diagrams
 means \emph{stabilized} rather than stable in
 the AEC sense. We use $\gtp^{\mathrm{EM}}$ only after
-defining it, not as an automatic synonym for $D_{\mathrm{nat}}$.
+defining it, not as an automatic synonym for $\natatp$.
 \end{remark}
 
 \section{Types of types}\label{sec:types}
@@ -900,7 +901,7 @@ type of a $\gamma$-tuple. Write
 $j_*r=(\bar f,j(\bi))$ for the induced record.
 Define
 \[
-D_{\mathrm{nat}}(I,r)
+\natatp(I,r)
 :=
 \atp\bigl(\operatorname{ev}_{I'}^\gamma(j_*r);
           \EM(I',\Phi)\bigr).
@@ -922,13 +923,13 @@ $r,s\in\Rec_\tau^\gamma(I,\Phi)$ be records with
 =\operatorname{ev}_I^\gamma(s)=\ba.
 \]
 Then
-$D_{\mathrm{nat}}(I,r)=D_{\mathrm{nat}}(I,s)$.
+$\natatp(I,r)=\natatp(I,s)$.
 Furthermore, the result of Definition~\ref{def:natural-diagram}
 is independent of the sufficiently large extension $I'$.
 Thus it is well-defined to write
 \[
-D_{\mathrm{nat}}(\ba;\EM(I,\Phi))
-:=D_{\mathrm{nat}}(I,r)
+\natatp(\ba;\EM(I,\Phi))
+:=\natatp(I,r)
 \]
 for \emph{any} presentation record $r$ of $\ba$.
 If $|\EM(I,\Phi)|$ is already above the relevant
@@ -964,7 +965,7 @@ and satisfy
 $\operatorname{tp}(\bi;I)=\operatorname{tp}(\bj;J)$.
 Then
 \[
-D_{\mathrm{nat}}(I,r)=D_{\mathrm{nat}}(J,s).
+\natatp(I,r)=\natatp(J,s).
 \]
 No occupancy information about the ambient orders
 is required. This is a \emph{sufficient} criterion,
@@ -987,7 +988,7 @@ For tuples $\ba,\bb$ in EM-presented models,
 \[
 \gtp^{\mathrm{EM}}(\ba)=\gtp^{\mathrm{EM}}(\bb)
 \quad\Longrightarrow\quad
-D_{\mathrm{nat}}(\ba)=D_{\mathrm{nat}}(\bb),
+\natatp(\ba)=\natatp(\bb),
 \]
 where the right side abbreviates the record-independent
 tuple notation of Proposition~\ref{prop:nat-record-independent}.
@@ -1015,8 +1016,8 @@ $\ba=(i,j)$ and $\bb=(j,i)$.
 In the pure-set reduct, an automorphism
 interchanges $i$ and $j$, hence
 \[
-D_{\mathrm{nat}}(\ba;\EM(I,\Phi))
-=D_{\mathrm{nat}}(\bb;\EM(I,\Phi)).
+\natatp(\ba;\EM(I,\Phi))
+=\natatp(\bb;\EM(I,\Phi)).
 \]
 But every order-induced embedding preserves
 whether the first tuple coordinate precedes
@@ -1040,7 +1041,7 @@ equality of the EM-lifted type.
 
 \begin{remark}[Resolution of the earlier review question]
 The tuple-invariant interpretation of
-$D_{\mathrm{nat}}$ is legitimate by
+$\natatp$ is legitimate by
 Proposition~\ref{prop:nat-record-independent}.
 The distinction from $\gtp^{\mathrm{EM}}$
 is not dependence on a chosen record:
@@ -1048,14 +1049,14 @@ both assign equivalence classes to tuples in their
 respective EM presentations. However,
 $\gtp^{\mathrm{EM}}$ remembers the chosen order
 presentation in its permitted witnesses, whereas
-$D_{\mathrm{nat}}$ is intrinsic to the evaluated
+$\natatp$ is intrinsic to the evaluated
 AEC tuple once sufficiently large.
 The EM-lifted relation uses a more restrictive
 family of witnesses. Example~\ref{ex:pure-sets-order}
 shows that equality of natural diagrams is
 strictly weaker in general. Accordingly we
 retain two distinct names rather than define
-$\gtp^{\mathrm{EM}}:=D_{\mathrm{nat}}$.
+$\gtp^{\mathrm{EM}}:=\natatp$.
 \end{remark}
 
 \begin{definition}[Placement and placed diagram over a base;
@@ -1069,7 +1070,7 @@ representations of all parameters in $\ba_A$. The
 \emph{placed comparison diagram} of this placement is
 \[
 D_{\mathrm{pl}}(\bd;\,A,\text{placement})
-:=D_{\mathrm{nat}}((\bd,\ba_A);\EM(J,\Phi)),
+:=\natatp((\bd,\ba_A);\EM(J,\Phi)),
 \]
 where the right side uses the combined labeled term representation.
 It is computed in a sufficiently large EM extension, which need
@@ -1098,7 +1099,7 @@ the relevant amalgamation results have been proved.
 \begin{remark}[Relation to types over models]
 For $A=\EM(I,\Phi)$ and a tuple $\bd$ in an EM extension,
 the placed comparison is
-$D_{\mathrm{nat}}((\bd,\ba_A);\EM(J,\Phi))$, with the enumeration
+$\natatp((\bd,\ba_A);\EM(J,\Phi))$, with the enumeration
 of $A$ fixed on both sides. This resembles the usual
 AEC notion $\operatorname{gtp}(\bd/A;N)$, but the
 definition requires neither a monster model nor
@@ -1129,8 +1130,8 @@ For possibly distinct index orders we have
 \gtp^{\mathrm{EM}}(\ba;\EM(I,\Phi))
 =\gtp^{\mathrm{EM}}(\bb;\EM(J,\Phi))
 \Longrightarrow
-D_{\mathrm{nat}}(\ba;\EM(I,\Phi))
-=D_{\mathrm{nat}}(\bb;\EM(J,\Phi)).
+\natatp(\ba;\EM(I,\Phi))
+=\natatp(\bb;\EM(J,\Phi)).
 \]
 These implications do not assert converses.
 
@@ -1206,9 +1207,9 @@ changes}. Evaluate these same terms in an EM model
 over an order containing $S'$, obtaining tuples
 $\bd'$ and $\be'$. Then
 \[
-D_{\mathrm{nat}}(\bd,\be)
+\natatp(\bd,\be)
 =
-D_{\mathrm{nat}}(\bd',\be').
+\natatp(\bd',\be').
 \]
 The new tuples need not live in the original $M$;
 the statement compares their natural diagrams in
