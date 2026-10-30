@@ -908,8 +908,14 @@ EM embeddings for $\gtp^{\mathrm{EM}}$, but
 arbitrary strong maps in the stabilized arrow type.
 The former implies equality of natural diagrams.
 Example~\ref{ex:pure-sets-order} below shows that
-the converse can fail.
-\end{remark}
+the converse can fail. We retain $\gtp^{\mathrm{EM}}$
+primarily to exhibit the distinction between the
+order-induced and the full AEC comparisons;
+it is a useful auxiliary invariant, but is not
+expected to play a central role in the subsequent
+arguments. The working calculus is based on
+$\atp$ and its EM-based extension $\natatp$.
+\end{remark>
 
 \subsubsection*{Natural and placed canonical diagrams}
 \begin{definition}[Natural arrow type (source: natural diagram); {\cite[Definition 4.4]{oai-ecc}}]
@@ -1003,13 +1009,18 @@ family of strong extensions. Since linear orders
 amalgamate over a common suborder, the stabilized
 arrow type calculated in this family is independent
 of the chosen sufficiently large $I'$.
-There is no distinguished canonical order $I'$:
-it is the \emph{resulting type}, not the extension,
-that is canonical relative to the fixed template
-and presentation. For models already above the
-stabilization threshold, it coincides with
-the intrinsic $\atp$.
-This is what $\natatp$ formalizes.
+There is no distinguished canonical order $I'$,
+and the extension itself is neither canonical nor
+natural in a categorical sense. Instead, the
+\emph{value of the type} is independent of every
+permitted choice of $I'$, relative to the fixed
+template and EM presentation. In this precise
+sense $\natatp$ gives a canonical extension of
+the \emph{stabilized arrow-type invariant} to
+tuples in smaller EM-presented models, rather
+than a canonical extension of the models themselves.
+For models already above the stabilization
+threshold, it coincides with the intrinsic $\atp$.
 \end{remark}
 
 \begin{proposition}[Order-pattern sufficiency for natural diagrams]
