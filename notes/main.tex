@@ -2151,31 +2151,34 @@ transformations), and diagram comparisons
 on sorted tuples, satisfying:
 \begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
 \item \textbf{Structural closure.}
-Arrows include all system isomorphisms, compose,
+Designated arrows include all natural isomorphisms, compose,
 and are invariant under isomorphisms.
-If $\mathcal X\subseteq\mathcal Y\subseteq\mathcal Z$
-and both inclusions into $\mathcal Z$ are arrows,
-then $\mathcal X\to\mathcal Y$ is an arrow.
+If $\mathcal D\subseteq\mathcal E\subseteq\mathcal H$
+are eligible subfunctors and both inclusions into
+$\mathcal H$ are designated arrows, then
+$\mathcal D\to\mathcal E$ is a designated arrow.
 An increasing nonempty chain of level-$\mu$
-objects with componentwise union of total
-cardinality $\mu$ has its union as an object
+functors with componentwise union of
+cardinality $\mu$ at every vertex has its union
+as an eligible functor
 at level $\mu$, with inclusion arrows.
 The union also includes by an arrow into
 any common eligible upper object into which
 all chain members include by arrows.
 
 \item \textbf{Presentations and downward closure.}
-For every eligible well-order $I$ of size $\mu$,
-$F(I)\in\mathcal C_\mu$. Order embeddings
-between eligible well-orders induce arrows,
+For every eligible well-order $L$ of size $\mu$,
+$F(L)\in\mathcal C_\mu$. Order embeddings
+between eligible well-orders induce strong
+natural transformations that are designated arrows,
 including at mixed levels.
-Every level-$\mu$ object is isomorphic
-to some $F(I)$ with $|I|=\mu$.
+Every level-$\mu$ functor is naturally isomorphic
+to some $F(L)$ with $|L|=\mu$.
 For $\nu\leq\mu$ eligible, any set of
 at most $\nu$ vertex occurrences in a
 level-$\mu$ object, together with required
 distinguished data, lies in a level-$\nu$
-subobject whose inclusion is an arrow.
+subfunctor whose inclusion is a designated arrow.
 
 \item \textbf{Diagram invariance and homogeneity.}
 Diagrams include the atomic diagram of the
@@ -2185,7 +2188,7 @@ Every arrow, including mixed-level arrows,
 preserves diagrams. For two bounded lists
 at the same level, equality of diagrams
 is equivalent to the existence of a
-system isomorphism identifying the lists.
+natural isomorphism of functors identifying the lists.
 At each fixed sorted arity, the number
 of diagrams is bounded by a set independent
 of the eligible level.
@@ -2199,7 +2202,7 @@ of the skeleton positions, even at mixed levels.
 
 \item \textbf{Exhaustion criterion.}
 Compatible diagram matches on increasing
-bounded lists that exhaust the source system
+bounded sorted lists that exhaust the source functor
 define an arrow, provided each source
 vertex is exhausted by nested enumerations
 of strong submodels of size below the
@@ -2221,17 +2224,24 @@ rather than a definition of the equivalence relation.
 As in the source, the empty list has one diagram;
 combined with (W3) this makes all objects at
 a fixed eligible level isomorphic.
-The extra obligation on geometric arrows is
-not eliminated by checking componentwise strongness.
+The AEC axioms for $\K^{\mathcal I}$ give ordinary
+strong subfunctors and chain closure, but do not
+supply the designated eligible levels, the EM
+presentation property, the highly homogeneous
+diagram equivalences, or any additional geometric
+condition on the arrows. In particular, the
+extra obligation on geometric arrows is not
+eliminated by checking componentwise strongness.
 \end{remark}
 
 \begin{remark}[Relation of the working package to AEC machinery]
-A system arrow is a commuting family of $\K$-embeddings,
-possibly with additional global conditions. A many-sorted
-$\tau(\K)$-embedding is weaker: it need not be strong
-on each vertex. The template $F$ generalizes the
-functorial finite-support EM construction from one
-model to a finite diagram of models.
+An ordinary natural transformation in
+$\K^{\mathcal I}$ is a commuting family of
+componentwise strong embeddings. A structural
+many-sorted embedding is weaker, since its
+components need not be strong. The template
+$F$ is an EM-style construction for the diagram
+AEC, rather than a novel way to package diagrams.
 
 The equivalence relations called \emph{diagrams} in the
 working package are primitive comparison data; the
@@ -2242,7 +2252,7 @@ axiom plays a role analogous to realizing compatible
 Galois types over a fixed parameter list. These are
 \emph{analogies}: the package does not stipulate that
 its comparisons are Galois types, nor does it
-assume amalgamation for every constituent model.
+assume amalgamation in the diagram AEC.
 \end{remark}
 
 \section{Questions for the next reading session}
