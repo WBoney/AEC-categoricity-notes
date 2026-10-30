@@ -1833,75 +1833,175 @@ placed diagrams established earlier.
 \end{remark}
 
 \section{Finite systems and working schemes}
-\subsection{Systems and their morphisms}
-We make the systems of \cite[Section 5.1]{oai-ecc} precise. Requiring
-internal edge maps to be strong is our explicit convention;
-the source initially says \emph{specified maps} without
-separately requiring their strongness.
+\subsection{Functor categories of AEC models}
+\label{subsec:functor-aec}
+We replace the graph-based language of systems in
+\cite[Section 5.1]{oai-ecc} with the category of
+diagrams of AEC models. This is a reformulation
+in our notes, not terminology used explicitly in the source.
 
-\begin{definition}[Model embeddings]
-Let $\tau=\tau(\K)$. A $\tau$-embedding $f:M\to N$ is an
-embedding of $\tau$-structures. A \emph{$\K$-embedding}, equivalently
-a \emph{strong embedding}, is a $\tau$-embedding satisfying
-$f[M]\leq_\K N$.
-\end{definition}
-
-\begin{definition}[Finite shape and system]\label{def:finite-system}
-Fix a finite directed multigraph $G=(V,E,s,t)$, where $s,t:E\to V$.
-A \emph{$G$-system} is
+\begin{definition}[The diagram category]
+Regard $\K$ as the category whose objects are
+models in the AEC and whose morphisms are
+$\K$-embeddings. Fix a small category
+$\mathcal I$; in applications we use a
+finite or finitely generated shape. Set
 \[
-\mathcal M=((M_v)_{v\in V},(f_e^\mathcal M)_{e\in E}),
+\K^{\mathcal I}:=\operatorname{Fun}(\mathcal I,\K).
 \]
-where each $M_v\in\K$ and each
-$f_e^\mathcal M:M_{s(e)}\to M_{t(e)}$ is a $\K$-embedding.
-The shape may carry distinguished named sorted lists.
-No intersection-of-images or path-commutativity axiom is implicit.
-\end{definition}
-
-\begin{definition}[System embeddings and isomorphisms]
-A \emph{$\tau$-embedding of systems} $h:\mathcal M\to\mathcal N$
-is a family $h_v:M_v\to N_v$ of $\tau$-embeddings such that
+An object is a functor $D:\mathcal I\to\K$:
+it assigns a model $D(v)$ to each object $v$
+and a strong embedding $D(\alpha):D(v)\to D(w)$
+to each arrow $\alpha:v\to w$.
+A morphism $\eta:D\Rightarrow E$ is a
+natural transformation whose components
+$\eta_v:D(v)\to E(v)$ are strong embeddings:
 \[
-h_{t(e)}\circ f_e^\mathcal M=f_e^\mathcal N\circ h_{s(e)}
-\quad(e\in E),
+E(\alpha)\circ\eta_v=\eta_w\circ D(\alpha)
+\qquad(\alpha:v\to w).
 \]
-preserving all distinguished named lists.
-It is a \emph{$\K$-embedding of systems} if every
-$h_v$ is a $\K$-embedding. An \emph{isomorphism of systems}
-is an invertible system embedding, equivalently a commuting
-family of component isomorphisms onto the whole target vertices.
+An isomorphism is a natural isomorphism,
+equivalently a commuting family of
+component isomorphisms.
 \end{definition}
 
-\begin{definition}[Working-scheme arrows]
-An \emph{arrow} is a designated $\K$-embedding of systems,
-possibly satisfying additional conditions on the whole diagram.
-System $\K$-embeddings form a category $\operatorname{Sys}_G(\K)$.
-The scheme arrows select a subcategory on designated objects;
-not every system $\K$-embedding is necessarily an arrow.
-The working package requires that all system isomorphisms
-are arrows and that arrows compose.
-\end{definition}
+\begin{remark}[From graphs to free categories]
+\label{rem:free-shape}
+For a directed multigraph $G$, let
+$\mathcal F(G)$ be its \emph{free category}.
+The morphisms are finite directed paths
+(including empty identity paths), and
+composition concatenates paths. Every
+choice of $\K$-models at the vertices
+and strong embeddings along the edges
+extends uniquely to a functor
+$\mathcal F(G)\to\K$.
+Graph-system embeddings become precisely
+the natural transformations.
+No commutativity is imposed on distinct
+paths. This is the \emph{free-category}
+construction, not the nerve of a category.
 
-\begin{definition}[Many-sorted coding and sorted tuples]
-For each $v\in V$, introduce a separate sort $S_v$
-with a copy of the language $\tau$. For each $e:v\to w$,
-include a function symbol $F_e:S_v\to S_w$ interpreted by
-$f_e^\mathcal M$; name distinguished data in their own sorts.
-A \emph{sorted tuple} is $\ba=(a_i)_{i<\gamma}$
-with a specified sort $v_i\in V$ and $a_i\in M_{v_i}$
-for each $i<\gamma$. Its atomic diagram is computed
-in the resulting many-sorted language.
-Coincident underlying elements in different vertices
-are distinct sorted occurrences.
-\end{definition}
-
-\begin{remark}[Structural versus strong information]
-An embedding of many-sorted structures need not be
-a $\K$-embedding of systems: strongness is generally
-not expressible in their atomic structure.
-Even a componentwise strong system embedding need
-not be an arrow of a particular working scheme.
+The free category on a finite graph can
+have infinitely many arrows if the graph
+has a directed cycle. Conversely, an
+arbitrary finite category $\mathcal I$
+can impose equalities between paths;
+its functors must respect these
+relations. We use small $\mathcal I$
+with finite or finitely generated shapes
+where relevant.
 \end{remark}
+
+\begin{definition}[Many-sorted coding and strong subfunctors]
+\label{def:functor-sorted-language}
+Use one sort $S_v$ per object
+$v\in\mathcal I$, a copy of $\tau(\K)$
+on that sort, and a function symbol
+$F_\alpha:S_v\to S_w$ for each
+$\alpha:v\to w$. Functoriality means
+\[
+F_{\operatorname{id}_v}=\operatorname{id}_{S_v},
+\qquad F_{\beta\alpha}=F_\beta F_\alpha.
+\]
+The sorted structures coding functors
+have carriers $S_v^D=D(v)$ and maps
+$F_\alpha^D=D(\alpha)$.
+For substructures $D\subseteq E$, set
+$D\leq_{\K^{\mathcal I}}E$ precisely
+when $D(v)\leq_\K E(v)$ in every sort.
+Strong embeddings of these sorted
+structures are the natural transformations
+in $\K^{\mathcal I}$.
+\end{definition}
+
+\begin{proposition}[The functor category is an AEC]
+\label{prop:functor-aec}
+For any fixed small category $\mathcal I$,
+its sorted functor structures with the
+componentwise strong-subfunctor relation
+form an AEC, with
+\[
+\LS(\K^{\mathcal I})\leq
+\max\{\LS(\K),|\operatorname{Mor}(\mathcal I)|,
+\aleph_0\}.
+\]
+For a finite category or the free category
+on a finite graph, the bound is $\LS(\K)$.
+\end{proposition}
+\begin{proof}\itshape
+Invariance and coherence are componentwise.
+For an increasing chain of strong
+subfunctors, take unions in every sort.
+The component maps are unions of their
+restrictions; their images form increasing
+chains of strong submodels in the target
+unions. Hence the resulting maps remain
+strong. The chain and common-upper-bound
+axioms hold componentwise.
+
+For downward L\"owenheim--Skolem, choose
+an infinite $\kappa$ above the displayed
+bound and a set of at most $\kappa$ sorted
+elements in $D$. Build small strong
+submodels of each $D(v)$ by iterating
+the following procedure countably often:
+enlarge each strong submodel to contain
+all images under every $D(\alpha)$ of
+elements previously selected in its
+source sort. Each stage has size at most
+$\kappa$, by the AEC LS axiom and the
+bound on the set of arrows. The unions
+are strong and closed under every diagram
+map. Since $D(\alpha)$ is strong,
+coherence makes its restrictions between
+the resulting submodels strong.
+These form a strong subfunctor of size
+at most $\kappa$ containing the given set.
+\end{proof}
+
+\begin{definition}[Sorted tuples and named data]
+A sorted tuple of sort pattern
+$\mathbf v=(v_i)_{i<\gamma}$ in
+$D:\mathcal I\to\K$ is a tuple
+$\ba=(a_i)_{i<\gamma}$ with
+$a_i\in D(v_i)$. Thus sorting just
+fixes the sort of each coordinate,
+as in ordinary many-sorted model theory.
+Equal underlying elements occurring in
+distinct vertex sorts remain distinct
+tagged occurrences; functor-map symbols
+record their specified relationships.
+Distinguished lists are named sorted tuples.
+\end{definition}
+
+\begin{definition}[Designated arrows in a working scheme]
+\label{def:designated-arrows}
+The ambient category is
+$\K^{\mathcal I}$, with all natural
+transformations of strong components.
+A working scheme may select certain
+eligible functors and designate
+\emph{fewer} natural transformations
+as its arrows, subject to additional
+global conditions. In particular,
+the category of such designated arrows
+need not itself be an AEC, even though
+$\K^{\mathcal I}$ is.
+
+\emph{Source convention.} Section 5.1
+of the manuscript initially mentions
+specified internal maps without expressly
+requiring all of them to be strong.
+Our use of $\K^{\mathcal I}$ is therefore
+an explicit strengthening of that
+general setup. If the intended internal
+maps are only structural embeddings,
+one needs the corresponding category
+of sorted diagrams with these allowed
+internal maps rather than literally
+$\operatorname{Fun}(\mathcal I,\K)$.
+\end{definition}
 
 \subsection{Eligible levels, presentations, and comparisons}
 \begin{definition}[Eligible levels and bounded lists]
