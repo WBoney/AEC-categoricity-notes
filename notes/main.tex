@@ -3,7 +3,7 @@
 \usepackage{lmodern}
 \usepackage[margin=1in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,mathtools}
-\usepackage{enumitem,booktabs,longtable,hyperref,microtype}
+\usepackage{enumitem,booktabs,longtable,hyperref,microtype,tikz}
 \hypersetup{colorlinks=true,linkcolor=blue,urlcolor=blue}
 \setlength{\parskip}{0.35em}
 \setlength{\parindent}{0pt}
@@ -1258,6 +1258,45 @@ Y_j\cap S_d=\varnothing.
 In particular no skeleton coordinate used by both
 families lies in a transposed region. No assumption
 that $X_j$ and $Y_j$ are order-isomorphic is needed.
+
+\begin{center}
+\begin{tikzpicture}[x=1cm,y=1cm,
+  block/.style={draw,rounded corners=1pt,minimum width=1.02cm,
+                minimum height=0.60cm,font=\small},
+  shared/.style={block,fill=black!5},
+  dblock/.style={block,fill=blue!13},
+  eblock/.style={block,fill=orange!19}]
+\node[font=\small,anchor=east] at (-0.80,0) {Before:};
+\node[shared] at (0,0) {$U_0$};
+\node[dblock] at (1.45,0) {$X_1$};
+\node[eblock] at (2.70,0) {$Y_1$};
+\node[shared] at (4.15,0) {$U_1$};
+\node[eblock] at (5.60,0) {$Y_2$};
+\node[dblock] at (6.85,0) {$X_2$};
+\node[shared] at (8.30,0) {$U_2$};
+\node[font=\small,anchor=east] at (-0.80,-1.55) {After:};
+\node[shared] at (0,-1.55) {$U_0$};
+\node[eblock] at (1.45,-1.55) {$Y_1$};
+\node[dblock] at (2.70,-1.55) {$X_1$};
+\node[shared] at (4.15,-1.55) {$U_1$};
+\node[dblock] at (5.60,-1.55) {$X_2$};
+\node[eblock] at (6.85,-1.55) {$Y_2$};
+\node[shared] at (8.30,-1.55) {$U_2$};
+\draw[dashed,rounded corners] (0.76,0.48) rectangle (3.40,-0.48);
+\draw[dashed,rounded corners] (4.90,0.48) rectangle (7.53,-0.48);
+\draw[dashed,rounded corners] (0.76,-1.07) rectangle (3.40,-2.03);
+\draw[dashed,rounded corners] (4.90,-1.07) rectangle (7.53,-2.03);
+\node[font=\scriptsize] at (2.08,-0.78) {$X_1\leftrightarrow Y_1$};
+\node[font=\scriptsize] at (6.23,-0.78) {$Y_2\leftrightarrow X_2$};
+\end{tikzpicture}
+
+{\small Schematic: $X_j$ uses only coordinates of $\bd$,
+$Y_j$ only coordinates of $\be$, while the $U_j$ denote
+untouched support (possibly shared). Each dashed region is
+convex in the \emph{joint support order}; only its two exclusive
+blocks are transposed. Internal block orders and term labels
+remain unchanged.}
+\end{center}
 
 Construct a new ordered support $S'$ by replacing
 $X_j+Y_j$ with $Y_j+X_j$ (or conversely) for each $j$,
