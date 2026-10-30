@@ -705,11 +705,94 @@ giving
 \[
 \gtp(c/\emptyset;M)=\gtp(d/\emptyset;M).
 \]
+This AEC has \emph{no maximal models}: every
+singleton extends strongly to arbitrarily large stars,
+and every star can be extended by adding more leaves.
+It also has joint embedding, since two stars can
+be embedded into a larger star with their centers
+identified. Neither property prevents the
+singleton $X$ from serving as an intermediate
+model in a Galois-equivalence chain that joins
+distinct arrow types.
+
 The reversal conclusion still holds for
 tuples shorter than $\kappa$: a partial
 inverse of a strong self-embedding on
 fewer than $\kappa$ leaves extends to
 an injection on all the leaves.
+\end{example}
+
+\begin{example}[Colored arrows: arbitrarily long Galois zigzags]
+\label{ex:colored-arrows-zigzags}
+Consider the language with unary $T$ and binary
+relations $(R_i)_{i<\omega}$. Think of $T(x)$ as
+saying that $x$ is terminal, and of $R_i(x,y)$
+as an outgoing edge of color $i$. Let
+$\K_{\mathrm{col}}$ consist of structures satisfying:
+\begin{enumerate}[label=\textup{(\roman*)}]
+\item $T(x)$ holds precisely when $x$ has
+no outgoing $R_i$-edge;
+\item every nonterminal vertex has at least
+one outgoing edge;
+\item whenever $R_i(x,y)$ and $R_j(x,z)$
+hold, $|i-j|\leq 1$.
+\end{enumerate}
+Take the strong-submodel relation to be
+induced substructure inclusion between models
+of $\K_{\mathrm{col}}$. Directed unions
+preserve these conditions, and the
+L\"owenheim--Skolem number is $\aleph_0$:
+from any set of elements, iteratively add
+witnesses for outgoing edges of nonterminal
+vertices, in countably many steps.
+
+Fix a terminal singleton $M=\{m\}$. For each
+$i<\omega$, take a three-element model
+$N_i=\{m,a_i,b_i\}$ with $m,b_i$ terminal
+and $R_i(a_i,b_i)$ the unique edge. Write
+$p_i=\gtp(a_i/M;N_i)$, using unrestricted
+Galois equivalence as in our definitions.
+More precisely, denote by
+$q_i=(a_i,M,N_i)$ the \emph{pointed triple}
+before taking its equivalence class.
+
+The triples $q_i,q_{i+1}$ are directly
+equivalent: identify $a_i$ with $a_{i+1}$
+in a common model over $M$, retaining
+their outgoing edges of adjacent colors.
+But $q_i$ and $q_j$ are not directly
+equivalent when $|i-j|\geq 2$: the
+identified vertex would have outgoing
+edges of colors differing by at least two.
+Thus all the $q_i$ have the same \emph{Galois
+type}, since direct equivalence is connected
+by a finite chain, even though a direct
+amalgam of the original endpoints need
+not exist.
+
+In fact, the shortest chain of direct
+equivalences from $q_0$ to $q_n$
+has length $n$. For a pointed triple
+with nonterminal distinguished element,
+let $m(q)$ be the minimum color of
+an outgoing edge at that element.
+A direct equivalence implies
+$|m(q)-m(q')|\leq 1$, since both colors
+must occur at the identified vertex
+of an amalgam. Therefore a chain from
+$m(q_0)=0$ to $m(q_n)=n$ requires
+at least $n$ steps; the adjacent-color
+chain attains this bound.
+
+\emph{Comparison with stars.} The star
+example shows that allowing \emph{small}
+intermediate models can identify two
+different arrow types, even with no
+maximal models. This colored-arrow example
+illustrates a separate phenomenon:
+the transitive closure in the definition
+of Galois type can require arbitrarily
+long finite chains of direct amalgamations.
 \end{example}
 
 \begin{remark}[Scope of the characterization]
