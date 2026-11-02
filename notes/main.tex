@@ -2382,6 +2382,154 @@ for the resulting map.
 \end{enumerate}
 \end{definition}
 
+\subsubsection*{Reading guide: the data, Condition (1), and (2a)}
+These notes record the categorical reading
+of \cite[Definition 5.2(1)--(2)]{oai-ecc}.
+We stop at the presentation part of (2);
+mixed downward closure in (2b) will be
+analyzed separately.
+
+\begin{remark}[Eligible objects, arrows, and the forgetful functor]
+\label{rem:working-underlying-category}
+Fix the shape $\mathcal I$ and eligible
+cardinals $\mathcal S$. The eligible
+objects of the working category
+$\mathcal C$ comprise the classes
+$\mathcal C_\mu$ for $\mu\in\mathcal S$.
+For an undecorated scheme we may take
+\[
+\mathcal C_\mu\subseteq
+\mu\text{-}\operatorname{Diag}_{\mathcal I}(\K),
+\]
+where the right side consists of diagrams
+whose vertex models all have size $\mu$.
+In a marked scheme, eligible objects may
+carry data not recorded by the underlying
+functor.
+
+The \emph{arrows} of
+Definition~\ref{def:working-scheme}
+are selected morphisms of $\mathcal C$.
+Each has an underlying componentwise
+strong natural transformation, given by
+the faithful forgetful functor
+\[
+U:\mathcal C\longrightarrow
+\operatorname{Diag}_{\mathcal I}(\K).
+\]
+Not every componentwise strong natural
+transformation between eligible underlying
+diagrams need be an arrow in $\mathcal C$.
+
+Condition (1) says that these arrows
+include every structural isomorphism
+of eligible systems, compose, and are
+invariant under isomorphisms. In the
+\emph{undecorated} case, $U$ is therefore
+full on isomorphisms between eligible
+objects. In the \emph{marked} case,
+a structural isomorphism means an
+isomorphism preserving the marks.
+An isomorphism between the underlying
+diagrams that fails to preserve them
+need not lift through $U$.
+
+The coherence clause states that
+if $X\subseteq Y\subseteq Z$ are
+eligible structured subdiagrams and both
+$X\hookrightarrow Z$ and
+$Y\hookrightarrow Z$ are arrows, then
+$X\hookrightarrow Y$ is an arrow.
+It follows componentwise from AEC
+coherence when all strong natural
+transformations are designated arrows;
+additional arrow conditions require
+their own coherence verification.
+\end{remark}
+
+\begin{remark}[Fixed-level Tarski--Vaught, not a whole AEC]
+\label{rem:working-unions-level}
+The chain-union requirement in (1)
+applies to a nonempty increasing chain
+of \emph{inclusion arrows} all at the
+\emph{same eligible cardinal $\mu$},
+\[
+X_0\hookrightarrow X_1
+\hookrightarrow\cdots,\qquad
+X_i\in\mathcal C_\mu,
+\]
+when the total union of the sorted
+carriers still has cardinality $\mu$.
+It then asserts that the componentwise
+union $X=\bigcup_i X_i$ belongs to
+$\mathcal C_\mu$, and every
+$X_i\hookrightarrow X$ is an arrow.
+If the stages also include by arrows
+into a common eligible
+$Z\in\mathcal C_\nu$, $\nu\geq\mu$,
+the union $X\hookrightarrow Z$
+must be an arrow as well.
+
+Thus the \emph{appropriate} unions
+are precisely the fixed-level ones
+whose total size remains $\mu$,
+including the common-upper-bound clause.
+This is an AEC-like coherence and
+Tarski--Vaught principle
+\emph{at $\mu$}, but does not make
+$\mathcal C_\mu$ an AEC in the
+usual sense: arbitrary increasing
+unions can have cardinality above
+$\mu$, while (1) asserts neither
+unrestricted chain closure nor a
+L\"owenheim--Skolem property.
+The latter is addressed in a
+restricted, eligible-level form by
+Condition (2b), considered separately.
+\end{remark}
+
+\begin{remark}[Template values at other linear orders]
+\label{rem:working-template-arbitrary-orders}
+The initial condition (2a) supplies
+a fixed finite-support EM-style
+template $F$ such that
+\[
+F(L)\in\mathcal C_\mu
+\quad\text{when }L\text{ is a well-order
+of eligible size }\mu.
+\]
+It also requires order embeddings of
+eligible well-orders to induce arrows
+(including across eligible levels)
+and requires every object at level
+$\mu$ to be isomorphic to such an
+$F(L)$.
+
+The finite-support \emph{term recipe}
+can be evaluated on more general
+linear orders. Indeed, the coherent
+code in \cite[Section 5.6]{oai-ecc}
+constructs a many-sorted structure
+$F(L)$ for \emph{any} set-sized
+linear order $L$. However, this
+formal structure need not have been
+shown to be an object of
+$\operatorname{Diag}_{\mathcal I}(\K)$:
+its vertices must be models of
+$\K$ and its internal maps must
+have the required properties.
+Even then, eligibility at a chosen
+level is an additional assertion.
+Source Lemma~5.4 proves that
+certain non-well-orders of eligible
+size do produce eligible objects,
+namely the \emph{padded orders}
+containing a well-ordered subset
+of that cardinality. This
+extension should not be conflated
+with the initial assertion (2a).
+\end{remark}
+
 \begin{remark}[Definitions versus hypotheses]
 The presentation and comparison structures above
 are data. Conditions (W1)--(W4) are substantive
