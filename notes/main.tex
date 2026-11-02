@@ -1994,59 +1994,84 @@ F_{\operatorname{id}_v}=\operatorname{id}_{S_v},
 \qquad F_{\beta\alpha}=F_\beta F_\alpha.
 \]
 The sorted structures coding functors
+$D:\mathcal I\to\K^{*\tau}$
 have carriers $S_v^D=D(v)$ and maps
-$F_\alpha^D=D(\alpha)$.
-For substructures $D\subseteq E$, set
-$D\leq_{\K^{\mathcal I}}E$ precisely
-when $D(v)\leq_\K E(v)$ in every sort.
-Strong embeddings of these sorted
-structures are the natural transformations
-in $\K^{\mathcal I}$.
+$F_\alpha^D=D(\alpha)$, which are
+$\tau$-embeddings. For sorted
+substructures $D\subseteq E$, set
+\[
+D\leq_{\operatorname{Diag}_{\mathcal I}(\K)}E
+\quad\Longleftrightarrow\quad
+D(v)\leq_\K E(v)\quad\text{for every }v.
+\]
+Thus the strong embeddings of the
+sorted structures are precisely the
+\emph{componentwise strong} natural
+transformations. The class of diagrams
+with all internal arrows strong
+recovers $\operatorname{Fun}(\mathcal I,\K)$
+as a full subcategory.
 \end{definition}
 
-\begin{proposition}[The functor category is an AEC]
+\begin{proposition}[The strong diagram categories are AECs]
 \label{prop:functor-aec}
 For any fixed small category $\mathcal I$,
-its sorted functor structures with the
-componentwise strong-subfunctor relation
-form an AEC, with
+the sorted diagrams represented by
+$\operatorname{Diag}_{\mathcal I}(\K)$,
+with componentwise strong-subfunctor
+relation, form an AEC with
 \[
-\LS(\K^{\mathcal I})\leq
+\LS(\operatorname{Diag}_{\mathcal I}(\K))
+\leq
 \max\{\LS(\K),|\operatorname{Mor}(\mathcal I)|,
 \aleph_0\}.
 \]
-For a finite category or the free category
-on a finite graph, the bound is $\LS(\K)$.
+The full subcategory
+$\operatorname{Fun}(\mathcal I,\K)$,
+where all \emph{internal} arrows are
+also strong, likewise forms an AEC.
+In particular, for any finitely generated
+shape $\mathcal I$, both LS numbers
+are at most $\LS(\K)$.
 \end{proposition}
 \begin{proof}\itshape
-Invariance and coherence are componentwise.
-For an increasing chain of strong
-subfunctors, take unions in every sort.
-The component maps are unions of their
-restrictions; their images form increasing
-chains of strong submodels in the target
-unions. Hence the resulting maps remain
-strong. The chain and common-upper-bound
-axioms hold componentwise.
+Isomorphism invariance and coherence
+follow componentwise. For an increasing
+chain of strong subfunctors, take unions
+of vertex models and diagram maps in
+each sort. Each component union is
+strong by the AEC chain axioms, and
+the maps on the union remain structural
+embeddings and preserve functoriality.
+In the full subcategory of diagrams
+with strong internal maps, they remain
+strong by the same chain axiom.
 
-For downward L\"owenheim--Skolem, choose
-an infinite $\kappa$ at least the displayed
-bound and a set of at most $\kappa$ sorted
-elements in $D$. Build small strong
-submodels of each $D(v)$ by iterating
-the following procedure countably often:
-enlarge each strong submodel to contain
-all images under every $D(\alpha)$ of
-elements previously selected in its
-source sort. Each stage has size at most
-$\kappa$, by the AEC LS axiom and the
-bound on the set of arrows. The unions
-are strong and closed under every diagram
-map. Since $D(\alpha)$ is strong,
-coherence makes its restrictions between
-the resulting submodels strong.
-These form a strong subfunctor of size
-at most $\kappa$ containing the given set.
+For downward L\"owenheim--Skolem,
+fix an infinite $\kappa$ at least the
+displayed bound and a set of at most
+$\kappa$ sorted elements of a diagram
+$D:\mathcal I\to\K^{*\tau}$.
+Iteratively construct strong submodels
+$M_v^n\leq_\K D(v)$ of size at most
+$\kappa$ for every vertex $v$,
+enlarging them at stage $n+1$ to
+contain the images $D(\alpha)[M_v^n]$
+for every arrow $\alpha:v\to w$.
+There are at most $\kappa$ such
+elements at each stage. For each
+$v$, take the countable union
+$M_v=\bigcup_{n<\omega}M_v^n$.
+Then $M_v\leq_\K D(v)$ and
+$D(\alpha)[M_v]\subseteq M_w$.
+The restricted maps are
+$\tau$-embeddings, so these vertex
+models form a strong subfunctor.
+If the original $D(\alpha)$ were
+strong, the restrictions remain
+strong by coherence, proving
+the result for $\operatorname{Fun}(\mathcal I,\K)$
+as well.
 \end{proof}
 
 \begin{definition}[Sorted tuples and named data]
