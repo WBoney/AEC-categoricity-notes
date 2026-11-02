@@ -2302,17 +2302,20 @@ of the working package.
 \subsection{Axioms of a working scheme}
 \begin{definition}[Working package;
 {\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
-A \emph{working scheme} consists of eligible
-classes $\mathcal C_\mu\subseteq
-\operatorname{Diag}_{\mathcal I}(\K)$
-of level-$\mu$ functors, a finite-support
-EM-style template $F$, designated natural
-transformations (including mixed-level
-transformations), and diagram comparisons
-on sorted tuples, satisfying:
+A \emph{working scheme} consists of
+a category $\mathcal C$ with faithful
+forgetful functor
+$U:\mathcal C\to\operatorname{Diag}_{\mathcal I}(\K)$,
+eligible classes $\mathcal C_\mu$ of objects
+whose underlying functors have all vertex
+models of size $\mu$, a finite-support
+EM-style presentation $F$ in $\mathcal C$,
+and diagram comparisons on sorted
+tuples of the underlying functors
+(with any specified marks), satisfying:
 \begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
 \item \textbf{Structural closure.}
-Designated arrows include all natural isomorphisms, compose,
+Arrows include all isomorphisms of the structured diagrams, compose,
 and are invariant under isomorphisms.
 If $\mathcal D\subseteq\mathcal E\subseteq\mathcal H$
 are eligible subfunctors and both inclusions into
@@ -2333,13 +2336,13 @@ $F(L)\in\mathcal C_\mu$. Order embeddings
 between eligible well-orders induce strong
 natural transformations that are designated arrows,
 including at mixed levels.
-Every level-$\mu$ functor is naturally isomorphic
-to some $F(L)$ with $|L|=\mu$.
+Every level-$\mu$ object is isomorphic
+in $\mathcal C$ to some $F(L)$ with $|L|=\mu$.
 For $\nu\leq\mu$ eligible, any set of
 at most $\nu$ vertex occurrences in a
 level-$\mu$ object, together with required
 distinguished data, lies in a level-$\nu$
-subfunctor whose inclusion is a designated arrow.
+structured subdiagram whose inclusion is a designated arrow.
 
 \item \textbf{Diagram invariance and homogeneity.}
 Diagrams include the atomic diagram of the
@@ -2349,7 +2352,8 @@ Every arrow, including mixed-level arrows,
 preserves diagrams. For two bounded lists
 at the same level, equality of diagrams
 is equivalent to the existence of a
-natural isomorphism of functors identifying the lists.
+isomorphism in $\mathcal C$ identifying the lists
+(and preserving all fixed named data).
 At each fixed sorted arity, the number
 of diagrams is bounded by a set independent
 of the eligible level.
@@ -2363,15 +2367,18 @@ of the skeleton positions, even at mixed levels.
 
 \item \textbf{Exhaustion criterion.}
 Compatible diagram matches on increasing
-bounded sorted lists that exhaust the source functor
+bounded sorted lists that exhaust the
+underlying source functor
 define an arrow, provided each source
 vertex is exhausted by nested enumerations
 of strong submodels of size below the
 source level, and the image of each such
 enumeration is a strong submodel of the
 corresponding target vertex.
-Any further scheme-specific arrow condition
-must be proved independently in that construction.
+Any further scheme-specific arrow condition,
+including preservation of named data or
+geometric independence, must be proved
+for the resulting map.
 \end{enumerate}
 \end{definition}
 
