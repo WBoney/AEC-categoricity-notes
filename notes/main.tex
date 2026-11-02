@@ -1908,6 +1908,80 @@ relations, we must still check its
 particular presentation and arrow axioms.
 \end{remark}
 
+\begin{definition}[The auxiliary category of structural embeddings]
+\label{def:star-tau}
+Let $\K^{*\tau}$ have exactly the models of
+$\K$ as objects, but take
+\[
+\operatorname{Hom}_{\K^{*\tau}}(M,N)
+:=\operatorname{Emb}_{\tau(\K)}(M,N),
+\]
+the \emph{structural} embeddings, which need
+not have strong image. Then $\K$ is a
+subcategory of $\K^{*\tau}$, and we have
+a faithful inclusion
+\[
+\operatorname{Fun}(\mathcal I,\K)
+\longrightarrow
+\operatorname{Fun}(\mathcal I,\K^{*\tau}).
+\]
+The source objects on the left have strong
+internal maps, whereas diagrams on the right
+have merely structural internal maps.
+This is \emph{not a full inclusion},
+because the right-hand category also
+allows natural transformations whose
+components are not strong.
+
+Define $\operatorname{Diag}_{\mathcal I}(\K)$
+to have all objects of
+$\operatorname{Fun}(\mathcal I,\K^{*\tau})$
+but only natural transformations
+$\eta:D\Rightarrow E$ whose components
+$\eta_v:D(v)\to E(v)$ are \emph{strong}.
+Composition and identities preserve
+componentwise strongness.
+The category $\operatorname{Fun}(\mathcal I,\K)$
+is a full subcategory of
+$\operatorname{Diag}_{\mathcal I}(\K)$
+on the diagrams whose \emph{internal}
+arrows are all strong. Thus
+\[
+\operatorname{Fun}(\mathcal I,\K)
+\ \subseteq\
+\operatorname{Diag}_{\mathcal I}(\K)
+\ \subseteq\
+\operatorname{Fun}(\mathcal I,\K^{*\tau}),
+\]
+where only the first inclusion is full.
+\end{definition}
+
+\begin{remark}[What the manuscript requires of internal maps]
+In source Section~5.1 the maps \emph{between
+vertices inside a system} are called
+\emph{specified maps}. The arrows \emph{between
+systems}, by contrast, are explicitly
+componentwise strong, possibly with additional
+conditions. The general wording does not
+explicitly say that every specified internal
+map is strong. If those maps are $\tau$-embeddings,
+$\operatorname{Diag}_{\mathcal I}(\K)$ is a
+faithful categorical reformulation.
+
+If some permitted internal map is not even
+a structural embedding, then neither
+functor category above describes that
+generality without further modification.
+The later marked-increment and finite
+systems constructions use specified
+strong internal maps, so they fit
+$\operatorname{Fun}(\mathcal I,\K)$.
+We retain the broader structural-embedding
+case here as a clarification of the general
+working-package setup rather than asserting
+that the manuscript needs it in every application.
+\end{remark}
+
 \begin{definition}[Many-sorted coding and strong subfunctors]
 \label{def:functor-sorted-language}
 Use one sort $S_v$ per object
