@@ -2089,42 +2089,66 @@ record their specified relationships.
 Distinguished lists are named sorted tuples.
 \end{definition}
 
-\begin{definition}[Working schemes as selected diagram categories]
+\begin{definition}[Working schemes over the diagram category]
 \label{def:designated-arrows}
 The ambient category of \emph{structural
 internal diagrams with strong external
 morphisms} is
 $\operatorname{Diag}_{\mathcal I}(\K)$.
-A working scheme chooses eligible objects
-from this category and designates some
-of its strong natural transformations
-as arrows, possibly subject to
-extra diagram-wide conditions.
-Thus the working-scheme category is a
-\emph{not necessarily full subcategory}
-of $\operatorname{Diag}_{\mathcal I}(\K)$.
+A working scheme is most naturally
+regarded as a category $\mathcal C$
+equipped with a \emph{faithful forgetful
+functor}
+\[
+U:\mathcal C\longrightarrow
+\operatorname{Diag}_{\mathcal I}(\K).
+\]
+Its objects are eligible diagrams,
+possibly equipped with \emph{named
+elements, distinguished submodels,
+or other additional data}.
+Its morphisms become componentwise
+strong natural transformations under
+$U$, subject to any further
+scheme-specific conditions.
 
-When every internal arrow is strong, as
-in the ordinary finite marked systems,
-the working scheme lies in the full
-subcategory $\operatorname{Fun}(\mathcal I,\K)$.
-These are subcategories of \emph{diagram
-objects}, rather than categories of
-subobjects of a single fixed diagram.
-The working package subsequently
-requires suitable closure under
-strong subfunctors, but does not
-assert that the eligible subcategory
-itself is an AEC.
+For an \emph{undecorated} working
+scheme, $\mathcal C$ may be identified
+with a not necessarily full subcategory
+of $\operatorname{Diag}_{\mathcal I}(\K)$.
+When marked data are included, distinct
+objects of $\mathcal C$ can have the
+same underlying diagram $U(D)$ but
+different marks. Then $\mathcal C$
+is \emph{not literally} a subcategory
+of the category of unmarked diagrams.
+For example, a named-tuple scheme
+has objects $(D,\ba)$ and arrows
+$\eta:D\Rightarrow E$ satisfying
+$\eta(\ba)=\bb$.
+These are categories of structured
+\emph{diagram objects}, not categories
+of subobjects of one fixed functor.
+
+When every internal arrow is strong,
+the underlying diagrams lie in the
+full subcategory
+$\operatorname{Fun}(\mathcal I,\K)$.
+The working package later imposes
+suitable strong-subdiagram closure,
+homogeneity and presentation
+properties. It does not assert that
+every such eligible working category
+is itself an AEC.
 
 \emph{Scope of the source.} The manuscript's
 general phrase \emph{specified maps} does
-not force those maps to be strong;
-our broader category permits structural
-embeddings internally. We have not
-established that the manuscript requires
-strictly non-strong internal maps in
-any particular later construction.
+not force internal maps to be strong;
+our broader diagram category permits
+structural embeddings internally.
+We have not established that a later
+application requires strictly non-strong
+internal maps.
 \end{definition}
 
 \subsection{Eligible levels, EM presentations, and comparisons}
