@@ -2077,7 +2077,7 @@ as well.
 \begin{definition}[Sorted tuples and named data]
 A sorted tuple of sort pattern
 $\mathbf v=(v_i)_{i<\gamma}$ in
-$D:\mathcal I\to\K$ is a tuple
+$D:\mathcal I\to\K^{*\tau}$ is a tuple
 $\ba=(a_i)_{i<\gamma}$ with
 $a_i\in D(v_i)$. Thus sorting just
 fixes the sort of each coordinate,
@@ -2089,32 +2089,42 @@ record their specified relationships.
 Distinguished lists are named sorted tuples.
 \end{definition}
 
-\begin{definition}[Designated arrows in a working scheme]
+\begin{definition}[Working schemes as selected diagram categories]
 \label{def:designated-arrows}
-The ambient category is
-$\K^{\mathcal I}$, with all natural
-transformations of strong components.
-A working scheme may select certain
-eligible functors and designate
-\emph{fewer} natural transformations
-as its arrows, subject to additional
-global conditions. In particular,
-the category of such designated arrows
-need not itself be an AEC, even though
-$\K^{\mathcal I}$ is.
+The ambient category of \emph{structural
+internal diagrams with strong external
+morphisms} is
+$\operatorname{Diag}_{\mathcal I}(\K)$.
+A working scheme chooses eligible objects
+from this category and designates some
+of its strong natural transformations
+as arrows, possibly subject to
+extra diagram-wide conditions.
+Thus the working-scheme category is a
+\emph{not necessarily full subcategory}
+of $\operatorname{Diag}_{\mathcal I}(\K)$.
 
-\emph{Source convention.} Section 5.1
-of the manuscript initially mentions
-specified internal maps without expressly
-requiring all of them to be strong.
-Our use of $\K^{\mathcal I}$ is therefore
-an explicit strengthening of that
-general setup. If the intended internal
-maps are only structural embeddings,
-one needs the corresponding category
-of sorted diagrams with these allowed
-internal maps rather than literally
-$\operatorname{Fun}(\mathcal I,\K)$.
+When every internal arrow is strong, as
+in the ordinary finite marked systems,
+the working scheme lies in the full
+subcategory $\operatorname{Fun}(\mathcal I,\K)$.
+These are subcategories of \emph{diagram
+objects}, rather than categories of
+subobjects of a single fixed diagram.
+The working package subsequently
+requires suitable closure under
+strong subfunctors, but does not
+assert that the eligible subcategory
+itself is an AEC.
+
+\emph{Scope of the source.} The manuscript's
+general phrase \emph{specified maps} does
+not force those maps to be strong;
+our broader category permits structural
+embeddings internally. We have not
+established that the manuscript requires
+strictly non-strong internal maps in
+any particular later construction.
 \end{definition}
 
 \subsection{Eligible levels, EM presentations, and comparisons}
