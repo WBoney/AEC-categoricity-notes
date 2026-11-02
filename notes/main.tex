@@ -2131,12 +2131,13 @@ any particular later construction.
 \begin{definition}[Eligible levels and closure bounds]
 Fix an unbounded definable class $\mathcal S$
 of infinite cardinals, the \emph{eligible levels}.
-A functor $D:\mathcal I\to\K$ is at level
+A functor $D:\mathcal I\to\K^{*\tau}$ is at level
 $\mu\in\mathcal S$ when every component $D(v)$
 has cardinality $\mu$. This is a designated
 part of the diagram AEC, not an assertion
 that all $\mu$-sized objects of
-$\K^{\mathcal I}$ have equal-sized sorts.
+$\operatorname{Diag}_{\mathcal I}(\K)$ have
+all vertex sorts of size $\mu$.
 A sorted list is \emph{bounded at $\mu$}
 if its length is strictly less than $\mu$.
 
@@ -2171,11 +2172,15 @@ term labels, each with an output sort
 $v\in\operatorname{Ob}(\mathcal I)$.
 An \emph{EM-style presentation template}
 $F$ associates to each eligible well-order
-$L$ a functor
+$L$ a diagram object
 \[
-F(L):\mathcal I\longrightarrow\K,
-\qquad F(L)\in\K^{\mathcal I}.
+F(L):\mathcal I\longrightarrow\K^{*\tau},
+\qquad
+F(L)\in\operatorname{Diag}_{\mathcal I}(\K).
 \]
+Order embeddings of eligible well-orders
+are required to induce strong natural
+transformations between these diagrams.
 Every element of every component
 $F(L)(v)$ is represented by a label
 applied to a finite increasing tuple
@@ -2207,7 +2212,7 @@ to one of these presentations at its level.
 These stronger assertions are not
 automatic for every diagram AEC. For example,
 even when $\K$ is the AEC of pure sets,
-the functor AEC for the walking-arrow category
+the strong-diagram AEC for the walking-arrow category
 $v\to w$ is not categorical in infinite
 cardinality $\mu$ among diagrams with both
 vertices of size $\mu$: one can use a
@@ -2230,7 +2235,7 @@ $\gamma$ bounded at the relevant levels,
 a \emph{diagram comparison} is an
 equivalence relation $\equiv_D^{\mathbf v}$
 on pairs $(\ba;\mathcal D)$ where
-$\mathcal D:\mathcal I\to\K$ is
+$\mathcal D:\mathcal I\to\K^{*\tau}$ is
 an eligible functor and $\ba$ is
 a sorted tuple of pattern $\mathbf v$.
 Write
@@ -2274,7 +2279,8 @@ of the working package.
 \begin{definition}[Working package;
 {\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
 A \emph{working scheme} consists of eligible
-classes $\mathcal C_\mu\subseteq\K^{\mathcal I}$
+classes $\mathcal C_\mu\subseteq
+\operatorname{Diag}_{\mathcal I}(\K)$
 of level-$\mu$ functors, a finite-support
 EM-style template $F$, designated natural
 transformations (including mixed-level
@@ -2355,7 +2361,8 @@ rather than a definition of the equivalence relation.
 As in the source, the empty list has one diagram;
 combined with (W3) this makes all objects at
 a fixed eligible level isomorphic.
-The AEC axioms for $\K^{\mathcal I}$ give ordinary
+The AEC axioms for $\operatorname{Diag}_{\mathcal I}(\K)$
+give ordinary
 strong subfunctors and chain closure, but do not
 supply the designated eligible levels, the EM
 presentation property, the highly homogeneous
@@ -2367,12 +2374,14 @@ eliminated by checking componentwise strongness.
 
 \begin{remark}[Relation of the working package to AEC machinery]
 An ordinary natural transformation in
-$\K^{\mathcal I}$ is a commuting family of
-componentwise strong embeddings. A structural
-many-sorted embedding is weaker, since its
-components need not be strong. The template
-$F$ is an EM-style construction for the diagram
-AEC, rather than a novel way to package diagrams.
+$\operatorname{Fun}(\mathcal I,\K^{*\tau})$
+may have non-strong components. The arrows
+in $\operatorname{Diag}_{\mathcal I}(\K)$
+are the componentwise strong ones; the
+working scheme may impose further conditions.
+The template $F$ is an EM-style construction
+for this diagram AEC, rather than a novel
+way to package the diagrams.
 
 The equivalence relations called \emph{diagrams} in the
 working package are primitive comparison data; the
