@@ -2628,6 +2628,225 @@ the working scheme itself does not
 need that intermediate construction.
 \end{remark}
 
+\subsubsection*{Condition (3): orbit types and naturality}
+\begin{remark}[At one level the diagrams are automorphism orbits]
+\label{rem:working-types-orbits}
+For every bounded sorted arity $\mathbf v$,
+Condition (3) \emph{provides} an equivalence
+relation $\equiv_D^{\mathbf v}$ on tuples in
+eligible objects, including across distinct
+eligible cardinalities. At a \emph{fixed}
+eligible level $\mu$, (3b) identifies it
+with the isomorphism-orbit relation:
+\[
+D(\ba;X)=D(\bb;Y)
+\quad\Longleftrightarrow\quad
+\exists f:X\cong Y\text{ in }\mathcal C,\
+f(\ba)=\bb
+\quad(X,Y\in\mathcal C_\mu).
+\]
+Thus the comparison is \emph{not freely
+chosen at one level}: after identifying
+all objects at that level, it is the
+automorphism-orbit relation. The
+\emph{cross-level} identification of
+those orbits still has to be specified
+and shown to satisfy the remaining
+conditions, notably invariance under
+mixed-level arrows.
+
+The source explicitly makes the empty
+tuple have \emph{one} diagram. Applying
+the preceding equivalence to empty
+tuples shows
+\[
+X,Y\in\mathcal C_\mu
+\quad\Longrightarrow\quad X\cong Y.
+\]
+So each eligible level is \emph{categorical}
+as a category of structured diagrams.
+This is an important extra assumption,
+not a consequence of the ambient AEC
+or of (2a) alone. Condition (2a) only
+says that each object is isomorphic
+to \emph{some} $F(L)$; without (3b)
+it need not say that $F(L)$ and $F(L')$
+are isomorphic when $|L|=|L'|$.
+\end{remark}
+
+\begin{remark}[Arrow invariance is stronger than the orbit definition]
+\label{rem:working-orbit-invariance}
+Condition (3a) separately demands
+\[
+D(\ba;X)=D(h(\ba);Y)
+\qquad(h:X\to Y\text{ any designated arrow}),
+\]
+including non-surjective and mixed-level
+arrows. At one level this means:
+for each $h:X\to Y$ and bounded $\ba$
+there exists an \emph{isomorphism}
+$f:X\cong Y$ with $f(\ba)=h(\ba)$.
+In particular, every strong
+self-embedding $h:X\to X$ must carry
+each bounded tuple into its
+$\operatorname{Aut}_{\mathcal C}(X)$-orbit.
+This does \emph{not} follow from
+the mere definition of orbit equality.
+For example, the ordered structure
+$(\mathbb Z,<)$ has a proper structural
+self-embedding $n\mapsto 2n$:
+it sends $(0,1)$ to $(0,2)$, but
+the two pairs are not automorphism
+conjugate, because automorphisms of
+$(\mathbb Z,<)$ are translations.
+This is only an illustration of the
+logical distinction, not a working scheme.
+
+This is where the source's \emph{eventual
+reversal and stabilization} matter:
+for the original single-model scheme,
+source Proposition~4.2 proves
+arrow preservation of the stabilized
+comparison, and Proposition~4.3
+identifies it with automorphism orbits
+at suitable closed levels. For a new
+scheme neither conclusion follows
+from its ambient diagram AEC;
+see the two separate routes in
+source Proposition~5.8.
+\end{remark}
+
+\begin{remark}[Uniformly bounded empty-base types]
+\label{rem:working-type-count}
+Condition (3c) requires, for each
+fixed bounded sorted tuple arity,
+a \emph{set-sized bound independent
+of the eligible cardinal} on the
+number of diagram types. At one level
+these are exactly automorphism
+orbits of tuples, with no parameters
+other than any data already named
+in the working scheme. The dependence
+of the bound on tuple length, sort
+pattern, and fixed scheme descriptor
+is permitted.
+\end{remark}
+
+\begin{remark}[Realizing possible joint diagrams]
+\label{rem:working-saturation-from-orbits}
+Condition (3d) is a relative
+homogeneity or saturation statement:
+a joint diagram witnessed over a
+tuple of the same type elsewhere
+must be realizable over the
+\emph{actual} tuple at the
+receiving eligible level, provided
+the total tuple length is bounded
+there.
+
+Under the full strength of (2a),
+(2b), and (3a)--(3b), this property
+can also be recovered by a short
+argument. Let $\ba\in X\in\mathcal C_\mu$
+and let $(\bb,\bc)$ in an eligible
+$Y$ witness a possible joint diagram
+with $D(\bb;Y)=D(\ba;X)$.
+If $Y$ is at a level larger than
+$\mu$, use mixed downward closure
+(2b) to put $(\bb,\bc)$ in a
+$\mu$-subobject. If its level is
+smaller than $\mu$, use a chart
+and an order embedding (2a) to
+place it in an eligible object at
+level $\mu$. The invariance
+in (3a) preserves the diagrams.
+We now have a witness $(\bb',\bc')$
+in $Y'\in\mathcal C_\mu$ with
+$D(\bb';Y')=D(\ba;X)$.
+The isomorphism-orbit clause (3b)
+gives an isomorphism
+$f:Y'\cong X$ taking $\bb'$
+to $\ba$. Then $f(\bc')$
+realizes the specified joint
+diagram over the actual $\ba$.
+This explains the strength and
+role of (3d), though the source
+lists it as an explicit
+working-package requirement.
+\end{remark}
+
+\begin{proposition}[Basic term naturality from order amalgamation]
+\label{prop:working-naturality-from-arrows}
+Assume the finite-support presentation
+and order-embedding arrows of (2a),
+and diagram invariance under arrows
+in (3a). Let $L_1,L_2$ be eligible
+well-orders. Suppose sorted tuples
+in $F(L_1)$ and $F(L_2)$ have
+term records with the same labels
+and isomorphic \emph{joint ordered
+support patterns}, including any
+supports for fixed named data.
+Then their diagrams agree,
+even if $|L_1|\ne|L_2|$.
+\end{proposition}
+\begin{proof}\itshape
+Identify the two joint support sets
+by their order isomorphism.
+Amalgamate the well-orders $L_1$
+and $L_2$ over this common
+suborder: within each cut of
+the support set, concatenate the
+two remaining well-ordered pieces.
+The resulting order is again
+a well-order. If necessary,
+append a sufficiently long
+well-order to obtain one of
+eligible cardinality, say $H$.
+The induced order embeddings
+$L_i\hookrightarrow H$ agree
+on the identified supports.
+Their arrows $F(L_i)\to F(H)$
+therefore carry the two given
+term records to \emph{literally
+the same evaluated sorted tuple}
+in $F(H)$. By (3a) both input
+tuples have the diagram of
+this common image.
+\end{proof}
+
+\begin{remark}[Rigid index orders do not prevent naturality]
+\label{rem:working-rigid-orders}
+The well-orders $L_i$ can have
+trivial automorphism groups.
+This does not imply that
+the \emph{many-sorted reducts}
+$F(L_i)$ have trivial automorphism
+groups: automorphisms of an EM
+model need not come from
+automorphisms of its indexing order.
+For instance, a pure-set
+EM model can have an ordinal-indexed
+skeleton while its reduct admits
+all permutations.
+
+More importantly, the preceding
+proposition establishes the
+\emph{sufficiency} of equal
+term-support patterns using order
+embeddings into a \emph{common larger
+presentation}, not automorphisms of
+the original indices. This is why
+(3e) is compatible with (3b).
+The manuscript invokes precisely
+order arrows and order amalgamation
+in its proofs of naturality.
+The authors list naturality
+explicitly in (3), even though
+this basic term-pattern form
+follows from (2a) and (3a).
+\end{remark}
+
 \begin{remark}[Definitions versus hypotheses]
 The presentation and comparison structures above
 are data. Conditions (W1)--(W4) are substantive
