@@ -1,0 +1,35 @@
+# Instructions for research assistants (including ChatGPT Work)
+
+This repository contains research-level notes on the OpenAI manuscript proving Shelah's eventual categoricity theorem. The notes are not an independently verified proof of the manuscript. The maintainer is a researcher in abstract elementary classes, model theory, set theory, and category theory.
+
+## First actions in a new session
+
+1. Read **[WORK_HANDOFF.md](WORK_HANDOFF.md)** for current decisions, open issues, and source numbering.
+2. Read the current **[notes/main.tex](notes/main.tex)** directly from the repository (not a cached PDF), and check the relevant part of the original OpenAI manuscript supplied as `paper.pdf` in the **Abstract Elementary Classes** ChatGPT Project. If this Project file is not accessible in Work, request it or use an authorized copy; do not substitute another manuscript silently.
+3. Inspect open pull requests, the main-branch HEAD, and recent GitHub Actions runs before editing. In particular, PR #14 was merged on 2026-11-04; PR #13 was still open at the last review. Verify current states rather than relying on this historical note.
+4. Current reading target: source **Definition 5.2, Condition (4)** (exhaustion criterion for arrows). Conditions (1)--(3) have been discussed extensively.
+
+## Mathematical standards
+
+- Distinguish in the notes and in conversation: **structural data/definitions**, **additional hypotheses**, **consequences proved from those hypotheses**, **results actually established in the manuscript**, and **our proposed reconstructions/generalizations**.
+- Respect the manuscript's notation and result numbering; distinguish the source Section 5 from Section 4 of these notes.
+- Never infer categoricity of a category of diagrams from categoricity of the underlying vertex AEC alone. Show where a diagram-level result is assumed or proved.
+- Do not conflate an automorphism orbit at one eligible cardinal with a cross-cardinal diagram comparison. Preservation of orbit types under non-surjective designated arrows is a substantial requirement.
+- Do not assume that any class closed under directed colimits with all ambient strong natural transformations is the intended `generated AEC`. Our proposed completion is based on coherent systems of **designated smallest-level arrows**, and its AEC properties and presentation independence have not been verified.
+- A finite-support term recipe can evaluate on arbitrary orders without proving the resulting structures are models in the AEC or eligible systems. Source Lemma 5.4 proves eligibility for padded orders under the package axioms.
+- The general source calls maps *inside* a system "specified maps"; these need not explicitly be strong or even structural embeddings. Our functor-category account of `Diag_I(K)` is a categorical reformulation only where internal maps are structural embeddings. The later marked applications use strong internal maps.
+- If a proof step is only suggested, call it a proposal/lemma to prove; do not turn it into an established statement.
+- Check LaTeX theorem labels, cross-references, and syntax. Use `notes/references.bib`, preserving the source citations and numbering.
+
+## Editing and publication
+
+- Use the GitHub connector in Work for repository reads and writes. Create a topic branch and PR for substantive mathematical changes, then make commits scoped to specific changes. Do not overwrite or merge other PRs incidentally.
+- The workflow compiles `notes/main.tex` on PRs, but **only main-branch pushes publish** to https://wboney.github.io/AEC-categoricity-notes/main.pdf. Verify the main build and deploy job succeeded before calling a PDF published.
+- Avoid relying on ephemeral Actions artifact links as stable PDF URLs; direct artifact links have returned 404 in prior sessions.
+- Do not silently merge a mathematical PR without the maintainer's authorization, except when the instruction to land the work is explicit. If edits are not merged, clearly say the published PDF does not contain them.
+- Keep **WORK_HANDOFF.md** current when a milestone ends: math decisions, remaining questions, commit/PR status, next source location, and any unresolved verification.
+- For exploratory mathematical discussion, avoid changing the notes without a request, but keep a concise proposal ready to incorporate when directed.
+
+## Work-mode first message
+
+"Continue the AEC categoricity reading project. Read AGENTS.md and WORK_HANDOFF.md in WBoney/AEC-categoricity-notes, inspect notes/main.tex and the original OpenAI manuscript paper.pdf in the Abstract Elementary Classes Project, verify PR/build status, and summarize current progress. We have finished discussing Definition 5.2(1)--(3); discuss Definition 5.2(4) next. Distinguish structural data, new axioms, and derived results. Do not start editing until the relevant mathematical question has been discussed unless I ask for edits."
