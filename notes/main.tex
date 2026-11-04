@@ -2300,19 +2300,68 @@ of the working package.
 \end{definition}
 
 \subsection{Axioms of a working scheme}
-\begin{definition}[Working package;
-{\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
-A \emph{working scheme} consists of
-a category $\mathcal C$ with faithful
+\begin{definition}[Structural data for a working scheme]
+\label{def:working-scheme-data}
+Fix the AEC $\K$, a finitely generated
+shape category $\mathcal I$, and an
+unbounded definable class $\mathcal S$
+of eligible cardinals. The \emph{raw data}
+for a working scheme consist of:
+\begin{enumerate}[label=\textup{(D\arabic*)},leftmargin=*]
+\item A category $\mathcal C$, with objects
+partitioned into classes $\mathcal C_\mu$
+for $\mu\in\mathcal S$, and a faithful
 forgetful functor
-$U:\mathcal C\to\operatorname{Diag}_{\mathcal I}(\K)$,
-eligible classes $\mathcal C_\mu$ of objects
-whose underlying functors have all vertex
-models of size $\mu$, a finite-support
-EM-style presentation $F$ in $\mathcal C$,
-and diagram comparisons on sorted
-tuples of the underlying functors
-(with any specified marks), satisfying:
+\[
+U:\mathcal C\longrightarrow
+\operatorname{Diag}_{\mathcal I}(\K).
+\]
+For $X\in\mathcal C_\mu$, every vertex
+model of $U(X)$ has cardinality $\mu$.
+Morphisms in $\mathcal C$ are the
+\emph{designated arrows}; their images
+under $U$ are componentwise strong
+natural transformations. With no named
+or marked data, $\mathcal C$ is simply
+a not necessarily full subcategory of
+the ambient diagram category.
+\item A set-sized finite-support
+\emph{presentation recipe} $F$ on orders,
+with term labels of prescribed sorts.
+At this stage the recipe is just
+presentation data, not the assertion
+that every evaluated structure is
+eligible or even belongs to $\K$.
+\item For every index set of a given
+sort pattern whose length is bounded
+at the levels under consideration,
+an equivalence relation on pairs
+$(\ba;X)$, denoted by equality of
+their \emph{working diagrams}
+$D(\ba;X)$.
+These equivalence relations are
+initial data and need not yet be
+identified with isomorphism orbits
+or with Galois types.
+\end{enumerate}
+Neither $\operatorname{Diag}_{\mathcal I}(\K)$
+nor this list of raw data entails
+the working-package axioms below.
+\end{definition}
+
+\begin{definition}[Working-package axioms;
+{\cite[Definition 5.2]{oai-ecc}}]\label{def:working-scheme}
+The raw data of
+Definition~\ref{def:working-scheme-data}
+form a \emph{working scheme} only
+when they satisfy the following
+\emph{additional hypotheses}.
+The distinction is important: the
+ambient diagram AEC does not itself
+imply these properties, and even
+the axioms with AEC-like names
+need verification for the
+designated-arrow category $\mathcal C$.
 \begin{enumerate}[label=\textup{(W\arabic*)},leftmargin=*]
 \item \textbf{Structural closure.}
 Arrows include all isomorphisms of the structured diagrams, compose,
