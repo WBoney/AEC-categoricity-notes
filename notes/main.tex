@@ -2382,12 +2382,13 @@ for the resulting map.
 \end{enumerate}
 \end{definition}
 
-\subsubsection*{Reading guide: the data, Condition (1), and (2a)}
-These notes record the categorical reading
-of \cite[Definition 5.2(1)--(2)]{oai-ecc}.
-We stop at the presentation part of (2);
-mixed downward closure in (2b) will be
-analyzed separately.
+\subsubsection*{Reading guide to Conditions (1)--(3)}
+These notes record our categorical reading
+of \cite[Definition 5.2(1)--(3)]{oai-ecc}.
+We discuss the initial data, the fixed-level
+AEC-style properties, eligible EM presentations,
+and diagram types. Condition (4), concerning
+exhaustive diagram matches, is reserved for later.
 
 \begin{remark}[Eligible objects, arrows, and the forgetful functor]
 \label{rem:working-underlying-category}
@@ -2447,7 +2448,7 @@ additional arrow conditions require
 their own coherence verification.
 \end{remark}
 
-\begin{remark}[Fixed-level Tarski--Vaught, not a whole AEC]
+\begin{remark}[The AEC-at-$\mu$ viewpoint]
 \label{rem:working-unions-level}
 The chain-union requirement in (1)
 applies to a nonempty increasing chain
@@ -2474,18 +2475,20 @@ Thus the \emph{appropriate} unions
 are precisely the fixed-level ones
 whose total size remains $\mu$,
 including the common-upper-bound clause.
-This is an AEC-like coherence and
-Tarski--Vaught principle
-\emph{at $\mu$}, but does not make
+This is precisely the sort of relative-cardinal
+axiomatization often called an
+\emph{AEC at $\mu$} in Shelah's terminology;
+we are not comparing the exact axiom lists
+here. It does not make
 $\mathcal C_\mu$ an AEC in the
-usual sense: arbitrary increasing
+usual all-cardinalities sense: arbitrary increasing
 unions can have cardinality above
 $\mu$, while (1) asserts neither
 unrestricted chain closure nor a
 L\"owenheim--Skolem property.
 The latter is addressed in a
 restricted, eligible-level form by
-Condition (2b), considered separately.
+Condition (2b), discussed next.
 \end{remark}
 
 \begin{remark}[Template values at other linear orders]
@@ -2528,6 +2531,101 @@ containing a well-ordered subset
 of that cardinality. This
 extension should not be conflated
 with the initial assertion (2a).
+\end{remark}
+
+\subsubsection*{Condition (2b): small eligible subobjects}
+\begin{proposition}[Every eligible object is a directed union of smallest-level objects]
+\label{prop:eligible-mu0-union}
+Let $\mu_0=\min\mathcal S$ and assume
+Conditions (1) and (2) of the working package.
+For every eligible $X\in\mathcal C_\mu$,
+the collection
+\[
+\mathcal P_{\mu_0}(X)=
+\{A\in\mathcal C_{\mu_0}:
+A\hookrightarrow X\text{ is an inclusion arrow}\}
+\]
+is directed by inclusion, and its componentwise
+union is $U(X)$. Consequently, $U(X)$ is the
+directed colimit, in the ambient diagram AEC,
+of the underlying diagrams $U(A)$ for
+$A\in\mathcal P_{\mu_0}(X)$.
+The same assertion includes any fixed named data,
+since (2b) requires it to be retained in the
+small subobjects.
+\end{proposition}
+\begin{proof}\itshape
+Apply (2b) with $\nu=\mu_0$ to each sorted
+element of $X$; this shows that the union
+of the indicated subobjects exhausts
+every vertex of $X$.
+
+Given two such $A,B$, the union of their
+sorted carriers has size at most $\mu_0$,
+because the shape has only finitely many
+vertex sorts and $\mu_0$ is infinite.
+Apply (2b) again to obtain a subobject
+$C\in\mathcal C_{\mu_0}$ included by an
+arrow into $X$ and containing $A$ and $B$.
+Coherence in (1) gives inclusion arrows
+$A\hookrightarrow C$ and $B\hookrightarrow C$.
+Thus the system of small subobjects is
+directed. Its union is the underlying
+diagram of $X$, and the usual directed
+union construction in the ambient diagram
+AEC is its colimit.
+\end{proof}
+
+\begin{remark}[A possible background AEC]
+\label{rem:background-aec-generated}
+The preceding proposition suggests forming
+the closure of $\mathcal C_{\mu_0}$ under
+directed colimits \emph{inside the ambient
+diagram AEC}:
+\[
+\mathcal K_{\mathrm{gen}}
+:=
+\left\langle U(\mathcal C_{\mu_0})
+\right\rangle_{\mathrm{dir}}.
+\]
+Every eligible underlying diagram $U(X)$
+belongs to this generated class (up to
+isomorphism). One can attempt to regard
+$\mathcal K_{\mathrm{gen}}$, with its
+inherited strong natural transformations,
+as a \emph{background AEC}.
+This is a natural reconstruction, but
+the manuscript does not define this class:
+one must check the precise strong-subobject
+notion, coherence, full chain closure,
+and a suitable L\"owenheim--Skolem axiom
+before invoking it as an AEC. For marked
+schemes, the colimit category must also
+account for preservation of the marks.
+Moreover, the generated class can have
+models at noneligible sizes, or models
+at eligible sizes which are \emph{not}
+objects of the selected working scheme.
+
+By (2a), each eligible $X\in\mathcal C_\mu$
+is isomorphic to $F(L)$ for some
+well-order $L$ of cardinality $\mu$;
+conversely, each such $F(L)$ is eligible.
+Thus the eligible objects are, up to
+isomorphism, precisely the \emph{selected
+EM-style models} for eligible well-orders,
+rather than all diagrams of size $\mu$
+in any possible background AEC.
+
+The finite-support construction also
+suggests viewing $F$ as an ordinary
+EM blueprint for a suitable expansion
+of a generated AEC. Formalizing that
+expanded AEC and showing that the
+recipe defines models and strong maps
+at all orders are additional tasks;
+the working scheme itself does not
+need that intermediate construction.
 \end{remark}
 
 \begin{remark}[Definitions versus hypotheses]
