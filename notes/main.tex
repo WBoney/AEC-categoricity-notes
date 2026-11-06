@@ -359,6 +359,76 @@ Equivalently, $\longrightarrow$ becomes symmetric on bounded tuple orbits at suf
 \emph{Interpretation.} Strong self-embeddings become reversible \emph{on prescribed bounded tuples}; the theorem does not say that every strong self-embedding is an automorphism. This is the first major new structural theorem in our reading.
 \end{remark}
 
+\begin{remark}[Eventual reversal as a substitute for homogeneity]
+\label{rem:reversal-homogeneity}
+One of the striking features of Theorem~\ref{thm:reversal}
+is that it provides a \emph{local substitute for homogeneity
+before amalgamation is known}. Fix a bound $\theta$ on tuple
+length, and let $M$ be the unique model at a sufficiently
+large categoricity cardinal. A strong self-embedding
+$f:M\longrightarrow M$ need not be onto, and the theorem
+does not extend $f^{-1}$ to an automorphism. Nevertheless,
+for every $\ba\in M^{\leq\theta}$ there is another strong
+self-embedding $g:M\longrightarrow M$ with
+\[
+g(f(\ba))=\ba.
+\]
+Thus the directed preorder on the \emph{full automorphism
+orbits} of short tuples, induced by strong self-embeddings,
+becomes symmetric at those cardinals. This supplies
+an equivalence relation of arrow types without assuming
+the amalgamation property or first constructing a
+monster model.
+
+For comparison, in an AEC with amalgamation and a suitably
+homogeneous monster model $\mathfrak C$, equality of Galois
+types can be described by automorphism orbits in
+$\mathfrak C$. The resulting automorphism of the
+\emph{monster}, however, need not restrict to a strong
+self-embedding of a specified smaller model $M$.
+Likewise, amalgamation by itself does not guarantee
+reversal inside that $M$. Theorem~\ref{thm:reversal}
+is a statement about the categoricity model itself,
+not simply the familiar monster-model interpretation
+of Galois types.
+
+The proof then uses a uniform bound on these orbit
+comparisons to establish stabilization
+(source Proposition~4.2). Schematically,
+\[
+\begin{gathered}
+\text{unbounded categoricity}\\
+\Downarrow\\
+\text{local reversal of strong embeddings}\\
+\Downarrow\\
+\text{stabilized arrow types}\\
+\Downarrow\\
+\text{placed comparisons and locality/compactness}\\
+\Downarrow\\
+\text{amalgamation at selected cardinals}.
+\end{gathered}
+\]
+The unusual direction is important: rather than
+assuming amalgamation to obtain a useful type
+calculus, the manuscript builds the type calculus
+\emph{in order to establish amalgamation}. Even
+after reversal, unrestricted Galois-type equality
+need not coincide with equality of arrow types:
+the star example (Example~\ref{ex:stars-gtp-arrow})
+shows that Galois-equivalence chains can pass through
+smaller intermediate models.
+
+\emph{Question for later.} Can a model-theoretic
+hypothesis weaker than unbounded categoricity,
+perhaps an appropriate superstability or homogeneity
+condition, imply bounded-tuple reversal of strong
+embeddings in a useful class of models? If so,
+might one recover a stabilized arrow-type calculus
+without requiring a monster model as an initial
+hypothesis? This is a proposed direction for
+investigation, not a theorem of the source.
+\end{remark}
+
 
 \subsection{Arrow types}\label{subsec:arrow}
 Fix an infinite tuple-length bound $\theta$ and a categoricity
@@ -1801,7 +1871,10 @@ without assuming amalgamation, and they
 supply the comparison machinery used to
 \emph{establish} amalgamation. This is
 the distinctive role of the construction
-in the manuscript. On arbitrary smaller
+in the manuscript; see also
+Remark~\ref{rem:reversal-homogeneity}
+on eventual reversal as a local substitute
+for homogeneity. On arbitrary smaller
 parameter subsets of $A$, the placed
 invariant is defined, but it need not
 already coincide with ordinary Galois
