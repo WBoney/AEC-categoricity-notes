@@ -7,7 +7,7 @@ This repository contains research-level notes on the OpenAI manuscript proving S
 1. Read **[WORK_HANDOFF.md](WORK_HANDOFF.md)** for current decisions, open issues, and source numbering.
 2. Read the current **[notes/main.tex](notes/main.tex)** directly from the repository (not a cached PDF), and check the relevant part of the original OpenAI manuscript supplied as `paper.pdf` in the **Abstract Elementary Classes** ChatGPT Project. If this Project file is not accessible in Work, request it or use an authorized copy; do not substitute another manuscript silently.
 3. Inspect open pull requests, the main-branch HEAD, and recent GitHub Actions runs before editing. In particular, PR #14 was merged on 2026-11-04; PR #13 was still open at the last review. Verify current states rather than relying on this historical note.
-4. Current reading target: source **Definition 5.2, Condition (4)** (exhaustion criterion for arrows). Conditions (1)--(3) have been discussed extensively.
+4. Current milestone: review the alternate working-scheme definition in `notes/working-scheme.tex` and its equivalence appendix in `notes/appendix-working-scheme.tex`. Read `review/working-scheme-changes.md` for changes, proof scope, and unresolved questions.
 
 ## Mathematical standards
 
@@ -15,7 +15,7 @@ This repository contains research-level notes on the OpenAI manuscript proving S
 - Respect the manuscript's notation and result numbering; distinguish the source Section 5 from Section 4 of these notes.
 - Never infer categoricity of a category of diagrams from categoricity of the underlying vertex AEC alone. Show where a diagram-level result is assumed or proved.
 - Do not conflate an automorphism orbit at one eligible cardinal with a cross-cardinal diagram comparison. Preservation of orbit types under non-surjective designated arrows is a substantial requirement.
-- Do not assume that any class closed under directed colimits with all ambient strong natural transformations is the intended `generated AEC`. Our proposed completion is based on coherent systems of **designated smallest-level arrows**, and its AEC properties and presentation independence have not been verified.
+- Do not assume that any class closed under directed colimits with all ambient strong natural transformations is the intended `generated AEC`. The completion uses coherent systems of **designated smallest-level arrows**. The standard upward-completion theorem for an AEC in μ₀ supplies its AEC properties and recovers the small slice. The outstanding question is fullness of higher-level eligible arrows, not existence of that completion. Preserve the concrete coding and vocabulary-size hypotheses in the appendix.
 - A finite-support term recipe can evaluate on arbitrary orders without proving the resulting structures are models in the AEC or eligible systems. Source Lemma 5.4 proves eligibility for padded orders under the package axioms.
 - The general source calls maps *inside* a system "specified maps"; these need not explicitly be strong or even structural embeddings. Our functor-category account of `Diag_I(K)` is a categorical reformulation only where internal maps are structural embeddings. The later marked applications use strong internal maps.
 - If a proof step is only suggested, call it a proposal/lemma to prove; do not turn it into an established statement.
@@ -32,4 +32,4 @@ This repository contains research-level notes on the OpenAI manuscript proving S
 
 ## Work-mode first message
 
-"Continue the AEC categoricity reading project. Read AGENTS.md and WORK_HANDOFF.md in WBoney/AEC-categoricity-notes, inspect notes/main.tex and the original OpenAI manuscript paper.pdf in the Abstract Elementary Classes Project, verify PR/build status, and summarize current progress. We have finished discussing Definition 5.2(1)--(3); discuss Definition 5.2(4) next. Distinguish structural data, new axioms, and derived results. Do not start editing until the relevant mathematical question has been discussed unless I ask for edits."
+"Continue the AEC categoricity reading project. Read AGENTS.md and WORK_HANDOFF.md in WBoney/AEC-categoricity-notes, inspect notes/main.tex and the original OpenAI manuscript paper.pdf in the Abstract Elementary Classes Project, verify PR/build status, and summarize current progress. Read the current alternate working-scheme definition and the equivalence appendix; preserve their explicit scope restrictions and the open higher-level fullness question. Distinguish structural data, new axioms, and derived results. Do not start editing until the relevant mathematical question has been discussed unless I ask for edits."

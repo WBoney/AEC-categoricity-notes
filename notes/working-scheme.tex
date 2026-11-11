@@ -1,0 +1,290 @@
+\subsection{Working schemes via generated AECs and lifted types}
+\label{subsec:alternate-working}
+We now use Boney's alternate presentation as our definition. The source's
+four-clause package is restated in Appendix~\ref{app:working-equivalence},
+where we prove the comparison, with its precise scope restrictions.
+This is a reorganization of the package, not a new verification of any
+of the manuscript's applications.
+
+\begin{definition}[Concrete coding convention]\label{def:working-coding}
+Fix a nonempty finitely generated shape $\mathcal I$, an AEC $\K$, and
+an unbounded definable class $\mathcal S$ of infinite cardinals with minimum
+$\mu_0\geq\LS(\K)$. Use a fixed finitary many-sorted language
+$\tau^{\mathrm{gen}}$, of size at most $\mu_0$, coding the vertex
+structures, specified internal maps, and all fixed named data.
+Its universe is the disjoint union of the vertex occurrences; no indexing
+skeleton is added to this universe. Structural embeddings and isomorphisms
+always refer to this entire code, including the names. Write $\|X\|$ for
+its total cardinality and $|X|$ for its sorted universe.
+
+An AEC $\K^{\mathrm{gen}}$ \emph{over}
+$\operatorname{Diag}_{\mathcal I}(\K_{\geq\mu_0})$ means an AEC of these
+codes, with no models below $\mu_0$, together with the concrete faithful
+forgetful functor $U$ which drops the named data. Its strong embeddings
+have underlying structural embeddings with strong vertex maps; the
+converse is not required.
+Sorted universes and maps are retained by $U$, and directed colimits are
+computed on them, so $U$ preserves directed colimits. We do not require
+$U$ to be full or injective on objects.
+
+In this diagram version, the internal maps are structural embeddings.
+For the source's more general specified maps, replace the target by the
+category of finite systems of $\K$-models with arbitrary specified
+functions and componentwise strong commuting embeddings. The same
+sorted-code convention and the arguments below apply to that version.
+This change of ambient category is necessary for a claim covering that
+full generality of the source.
+\end{definition}
+
+\begin{definition}[Structural data and lifted automorphism comparison]
+\label{def:working-scheme-data}
+In the convention above, the data are:
+\begin{enumerate}[label=\textup{(D\arabic*)},leftmargin=*]
+\item An AEC $\K^{\mathrm{gen}}$ over the diagram category with
+$\LS(\K^{\mathrm{gen}})=\mu_0$.
+\item A set-sized finite-support term recipe $\Psi$ with values denoted
+$F(L)=\operatorname{EM}_{\tau^{\mathrm{gen}}}(L,\Psi)$.
+Here this notation denotes the \emph{system code}, not a structure
+with an additional named skeleton. Elements have sorted labels on finite
+increasing supports; equality and all symbols of the code are evaluated
+uniformly from labels and finite order/equality patterns. This includes
+fixed named data and compatibility with substitution of positions.
+We require $F(\alpha)\in\K^{\mathrm{gen}}$ with every vertex of size
+$\mu$ whenever $\mu\leq\alpha<\mu^+$ and $\mu\in\mathcal S$.
+No membership assertion for arbitrary linear orders is included.
+\item Let $\mathcal C_\mu$ be the structured-isomorphism closure of
+these $F(\alpha)$, and put $\mathcal C=\bigcup_{\mu\in\mathcal S}\mathcal C_\mu$.
+Specify
+\[
+ H(X,Y)\subseteq\operatorname{Emb}_{\K^{\mathrm{gen}}}(X,Y)
+ \qquad(X,Y\in\mathcal C).
+\]
+Write $H_\mu$ for the same-level arrows, and require equality of both
+objects and arrows
+\[
+ (\mathcal C_{\mu_0},H_{\mu_0})=\K^{\mathrm{gen}}_{\mu_0}.
+\]
+\end{enumerate}
+For tuples of one fixed sorted index pattern, bounded in both containing
+objects, define the relation $E$ as follows: $E((\ba;X),(\bb;Y))$ holds
+if there exist an eligible $Z$, $f\in H(X,Z)$, $g\in H(Y,Z)$, and
+$h\in\operatorname{Aut}(Z)$ such that $hf(\ba)=g(\bb)$.
+Once $E$ is an equivalence relation, its classes are denoted
+$\operatorname{tp}_{\mathrm{la}}(\ba;X)$.
+All witnesses here are \emph{eligible} and all maps belong to $H$;
+arbitrary $\K^{\mathrm{gen}}$-amalgams are not being used.
+\end{definition}
+
+\begin{definition}[Working scheme: alternate axioms]\label{def:working-scheme}
+The preceding data form a working scheme if the following hold.
+\begin{enumerate}[label=\textup{(A\arabic*)},leftmargin=*]
+\item\label{ax:la-equivalence} \textbf{Equivalence.} For every bounded sorted index
+pattern, $E$ is an equivalence relation across the eligible objects large
+enough for that pattern. In particular, transitivity is a requirement,
+not an automatic property of common-target comparisons.
+\item\label{ax:order-lifts} \textbf{Presentation arrows.} Every order embedding
+between well-orders of eligible, possibly different, cardinalities
+induces an arrow in $H$.
+\item\label{ax:structural-closure} \textbf{Structural and fixed-level closure.}
+$H$ contains all structured isomorphisms and is closed under composition.
+If $X\subseteq Y\subseteq Z$ are eligible and both inclusions into $Z$
+belong to $H$, then $X\hookrightarrow Y$ belongs to $H$.
+For each $\mu$, $(\mathcal C_\mu,H_\mu)$ is an AEC in $\mu$:
+the induced strong-substructure relation is coherent, invariant under
+isomorphism, and satisfies chain unions and smoothness at that size.
+Explicitly, for a nonempty increasing chain of inclusion arrows of length
+$0<\delta<\mu^+$, its union $X$ lies in $\mathcal C_\mu$, and every stage
+includes into $X$ by an arrow. If the stages include by arrows into
+\emph{any eligible} $Y$, their union includes into $Y$ by an arrow as well.
+The larger-target clause is part of the axiom, not just same-level smoothness.
+\item\label{ax:orbit} \textbf{Same-level orbit characterization.} For
+$X,Y\in\mathcal C_\mu$ and tuples of the same sorted pattern of length
+strictly below $\mu$,
+\[
+ \operatorname{tp}_{\mathrm{la}}(\ba;X)=
+ \operatorname{tp}_{\mathrm{la}}(\bb;Y)
+ \quad\Longleftrightarrow\quad
+ \exists h:X\cong Y\ (h(\ba)=\bb).
+\]
+The isomorphism is of the whole structured system. Include the empty tuple.
+\item\label{ax:exhaustion} \textbf{Countable exhaustion.} Let
+$X\in\mathcal C_\mu$, $Y\in\mathcal C_\nu$, and let $p:X\to Y$ be a
+structural embedding of codes, not initially assumed strong or in $H$.
+Suppose there are increasing subsets $A_n\subseteq|X|$, $n<\omega$,
+of size $<\mu$, with union $|X|$. For every vertex $v$, suppose also that
+\[
+ B^v_n\leq_\K B^v_{n+1}\leq_\K X(v),\qquad
+ |B^v_n|<\mu,\qquad \bigcup_{n<\omega}B^v_n=X(v),\qquad
+ |B^v_n|\subseteq A_n.
+\]
+Choose a sorted enumeration $\ba_n$ of $A_n$ and use its image enumeration
+$p(\ba_n)$, with coordinate identifications consistent under inclusion.
+If, for every $n$ and $v$,
+\[
+ \operatorname{tp}_{\mathrm{la}}(\ba_n;X)=
+ \operatorname{tp}_{\mathrm{la}}(p(\ba_n);Y),\qquad
+ p[B^v_n]\leq_\K Y(v),
+\]
+then $p\in H(X,Y)$. The sets $A_n$ need not be substructures.
+The $B^v_n$ are additional witnesses contained in those sets; they need
+not equal $A_n\cap X(v)$. Any extra geometric arrow condition must be
+verified when establishing this axiom for a particular scheme.
+\end{enumerate}
+For comparison with the main regime of source Convention~5.1, take
+eligible levels to be strong limits of countable cofinality. We keep
+the countable exhaustion formulation explicit. At preliminary levels
+of other cofinalities, equivalence with a more broadly indexed exhaustion
+axiom is not asserted.
+\end{definition}
+
+\begin{remark}[Which clauses of the alternate draft became consequences?]
+The draft separately lists mixed-arrow factorization, categoricity,
+term naturality, and realization over actual tuples. We retain all four
+as proved consequences below and in the appendix, rather than repeat
+them as independent axioms. Their deletion from the axiom list does not
+weaken the package. This also strengthens the draft's same-chart
+naturality statement to the source's cross-level formulation.
+\end{remark}
+
+\begin{proposition}[Derived package]\label{prop:alternate-derived}
+Under the alternate axioms:
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item There are common eligible targets. Lifted types include atomic
+information, respect restrictions and reindexing, and are preserved by
+every $H$-arrow. There is one empty type, so $\mathcal C_\mu$ is categorical
+as a class of \emph{systems} at each eligible $\mu$.
+\item Mixed downward closure holds: if $\nu\leq\mu$ are eligible,
+every set of $\leq\nu$ sorted occurrences in $X\in\mathcal C_\mu$ lies
+in an $H$-subobject in $\mathcal C_\nu$, retaining all fixed names.
+\item For each fixed sorted arity $\theta$, the number of lifted types
+has a set bound independent of level. A possible joint type is realized
+over an actual tuple at a receiving level whenever the joint length is
+bounded in both the witness and receiver.
+\item Term tuples with the same labels and the same \emph{joint}
+order/equality pattern of supports have equal lifted types, including
+across eligible levels.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+See Lemmas~\ref{lem:la-basic}--\ref{lem:la-realization} in the appendix.
+\end{proof}
+
+\begin{proposition}[Mixed arrows from the family of level arrows]
+\label{prop:mixed-factorization}
+Let $X\in\mathcal C_\mu$, $Y\in\mathcal C_\nu$, $\mu<\nu$.
+Every $f\in H(X,Y)$ factors as $j f_0$, where
+$f_0\in H_\mu(X,Y_0)$ and $j:Y_0\to Y$ is, up to chart
+isomorphisms, induced by inclusion of a suborder of size $\mu$ in a
+chart for $Y$. Conversely, every such composite is in $H(X,Y)$.
+Thus the \emph{family} $(H_\mu)_{\mu\in\mathcal S}$ and the presentation
+arrows determine all mixed arrows of a working scheme.
+\end{proposition}
+\begin{proof}
+Choose a chart for $Y$ and supports for all occurrences in $f[X]$.
+Their union has size at most $\mu$; enlarge it to a suborder $J$ of size
+$\mu$. Its presentation has image $Y_0$ containing $f[X]$, and its
+inclusion $j$ is an arrow. The inclusion $f[X]\hookrightarrow Y$
+is an arrow by isomorphism invariance. Coherence gives
+$f[X]\hookrightarrow Y_0$ in $H$, hence $f_0\in H_\mu$.
+The converse follows by composition. Fixed names are preserved by the
+presentation arrows. This argument proves the factorization inside an
+existing package; declaring this formula for arbitrary level data would
+still require checking coherence and composition.
+\end{proof}
+
+\begin{remark}[The small-level completion and its remaining fullness question]
+\label{rem:background-aec-generated}
+The standard upward-completion theorem for an AEC in $\mu_0$ supplies
+\[
+ \K^{\mathrm{gen}}=(\mathcal C_{\mu_0},H_{\mu_0})^{\uparrow},
+ \qquad \LS(\K^{\mathrm{gen}})=\mu_0.
+\]
+It recovers \emph{both objects and arrows} at $\mu_0$; see
+Appendix~\ref{app:completion}. Earlier versions of these notes incorrectly
+left all the AEC axioms of this completion as outstanding. The actual
+unresolved issue here is higher-level fullness:
+\[
+ H(X,Y)\stackrel{?}{=}
+ \operatorname{Emb}_{\K^{\mathrm{gen}}}(X,Y)
+ \quad\text{for eligible }X,Y.
+\]
+Every designated arrow has a coherent small-arrow decomposition, but so
+does every generated strong embedding. That observation alone does not
+identify them. No counterexample to fullness under the \emph{entire}
+working package is claimed. The designated small subobjects give a
+colimit in $\K^{\mathrm{gen}}$ and in the ambient diagram category;
+their colimit property for all cocones in $\mathcal C$ is not established.
+Mixed-arrow factorization uses all the $H_\mu$, not just $H_{\mu_0}$.
+\end{remark}
+
+\begin{remark}[Type compatibility, formerly condition $(*)$]
+\label{rem:working-orbit-invariance}
+For $X,Y\in\mathcal C_\mu$, $Z\in\mathcal C_\nu$, $\mu\leq\nu$,
+any $f\in H(X,Z)$, $g\in H(Y,Z)$, and bounded $\ba,\bb$,
+\[
+ \exists s:X\cong Y\ (s\ba=\bb)
+ \quad\Longleftrightarrow\quad
+ \exists u\in\operatorname{Aut}(Z)\ (uf\ba=g\bb).
+\]
+Indeed, arrow preservation identifies the two outer lifted types with
+their respective images, and the orbit axiom applies at each level.
+Thus there is no need to add $(*)$ separately. The lifting relation is
+primary; its equivalence and orbit characterization remain substantive
+axioms. In particular, an $H$-arrow agrees on each bounded tuple with
+a system isomorphism at the same level. This is not automatic for
+arbitrary structural or strong embeddings.
+\end{remark}
+
+\begin{remark}[Exhaustion is not an assertion about arbitrary partial maps]
+Compatible diagram matches give partial maps $p_n:A_n\to Y$ with
+$p_n\subseteq p_{n+1}$. Equality and atomic information make their union
+a structural embedding once the $A_n$ exhaust $X$; fixed constants are
+preserved when they occur. The partial domains need not be models.
+The enumerated $B^v_n$ must occur \emph{within} the matched lists.
+An unrelated resolution of each vertex is insufficient to invoke the
+source criterion: a bounded set can meet all stages of a countable
+exhaustion without being contained in any one stage.
+
+The images $p[B^v_n]$ are nested strong submodels of $Y(v)$, and their
+inclusions are strong by coherence. The chain and common-upper-bound
+axioms of $\K$ show $p[X(v)]\leq_\K Y(v)$. This proves component
+strongness, not a possible extra condition on $H$. At the intended
+countable-cofinality levels, Lemma~\ref{lem:countable-exhaustion}
+also resolves the earlier ordinal-indexing concern for nested lists.
+
+In fact, a single bounded match from $X\in\mathcal C_\mu$ to
+$Y\in\mathcal C_\nu$, $\mu\leq\nu$, extends to a whole $H$-arrow:
+embed $X$ into some $Z\in\mathcal C_\nu$ by a presentation arrow,
+use type invariance, and then use the orbit axiom to map $Z$ isomorphically
+to $Y$ with the prescribed values. Thus the strong-image condition for
+an enumerated $B^v_n$ follows from the full other axioms in this situation.
+We retain it explicitly to match the source's criterion and its
+verification obligations. The whole arrows extending different partial
+matches need not agree outside their prescribed lists; their union is
+not what is being taken.
+\end{remark}
+
+\begin{remark}[Warnings retained from the reading discussion]
+\label{rem:working-template-arbitrary-orders}
+\begin{enumerate}[label=\textup{(\roman*)},leftmargin=*]
+\item Formal evaluation of $\Psi$ at an arbitrary linear order does not
+establish membership in $\K^{\mathrm{gen}}$ or eligibility. Source
+Lemma~5.4 concerns padded orders and uses additional arguments.
+No skeleton or term-label expansion is silently named in the
+structured-isomorphism relation.
+\item System categoricity is stronger than vertex categoricity. For the
+walking-arrow shape and pure sets, a bijective internal map and a proper
+injection are nonisomorphic systems even with all vertices of size $\mu$.
+The source verifies suitable system packages in Proposition~5.6 and
+Theorems~8.6 and~9.3; Proposition~11.7 assumes the needed geometric-system
+categoricity, and Proposition~5.8 takes categorical systems as input.
+\item Rigid indexing well-orders do not prevent automorphisms of the
+system reduct. Matching support patterns are compared through order
+arrows into a common presentation, not automorphisms of the index order.
+At one level the orbit axiom then gives a system automorphism.
+\item These lifted types are not identified here with Galois types in
+the entire generated AEC. No general amalgamation assumption for that
+AEC is implicit. The comparison with placed diagrams after selected-level
+amalgamation remains a separate reading question.
+\end{enumerate}
+\end{remark}
