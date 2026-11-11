@@ -61,3 +61,7 @@ Remaining questions are not hidden inside “equivalence”:
 - Review snapshot: `review/working-scheme-review.pdf`. The alternate definition begins on p. 25; the appendix starts on p. 30; the equivalence theorem is Theorem A.12 on p. 34.
 - This PDF is a branch review snapshot, not the deployed main PDF. GitHub CI status is available on the review PR.
 - The local TeX installation lacked its generated format and font-map caches; those were reconstructed in temporary storage. No environment workaround was added to the repository or its CI configuration.
+
+## Follow-up formatting change
+
+At the maintainer's request, removed all 15 explicit italic proof-body overrides from `notes/main.tex`. Proof bodies now use the standard upright amsthm style, as the new appendix already did. Mathematical emphasis and theorem statements are unchanged. Rebuilt the 35-page review PDF without warnings; pagination is unchanged.

@@ -69,3 +69,5 @@ For a fixed scheme, choose eligible cardinals `S`, classes `C_mu` of structured 
 ## Publication workflow
 
 Use the GitHub connector for writes, a topic branch, scoped commits, and a review PR. Do not merge until explicitly requested. Verify LaTeX CI. Only main pushes deploy the published PDF; PR artifacts are not durable main-PDF links. Update this handoff at each substantive milestone, preserving uncertainties rather than turning proposals into theorems.
+
+Latest formatting update: proof bodies are upright throughout; removed 15 explicit italic overrides and rebuilt the review PDF successfully. No mathematical content changed.
