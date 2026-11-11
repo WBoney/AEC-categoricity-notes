@@ -1,6 +1,6 @@
 # AEC Categoricity Reading Notes — Work Handoff
 
-**Updated:** 2026-11-11. **Status:** branch `working-scheme-alternate-definition`; not merged.
+**Updated:** 2026-11-11. **Status:** draft [PR #17](https://github.com/WBoney/AEC-categoricity-notes/pull/17), branch `working-scheme-alternate-definition`; not merged.
 
 Local validation: 35-page PDF compiled with no warnings or missing references; new pages visually inspected. Review snapshot: `review/working-scheme-review.pdf`. Definition pp. 25–28; Appendix A pp. 30–35; equivalence Theorem A.12 p. 34.
 
