@@ -1,0 +1,377 @@
+\clearpage
+\appendix
+\section{The source working package and the equivalence proof}
+\label{app:working-equivalence}
+\subsection{Source formulation and comparison conventions}
+The following is a mathematical restatement, in our notation, of
+\cite[Convention 5.1 and Definition 5.2, pp.~29--30]{oai-ecc}; it is
+not a verbatim transcription. The original PDF was checked directly.
+Its four numbered clauses are preserved here as (S1)--(S4).
+
+\begin{definition}[Source working package]\label{def:source-working}
+Fix an unbounded definable eligible class $\mathcal S$, a finite system
+shape, and a set-sized finite-support recipe $F$. For each
+$\mu\in\mathcal S$, specify a class $\mathcal C_\mu$ of systems with
+each vertex a $\K$-model of size $\mu$. Specify arrows and comparisons
+$D$ on bounded sorted tuples. Systems have their full code of internal
+maps and fixed named data. Arrows are commuting structural embeddings
+with strong vertex maps, possibly subject to a further condition.
+\begin{enumerate}[label=\textup{(S\arabic*)},leftmargin=*]
+\item \textbf{Structural arrows and unions.}
+All structured isomorphisms are arrows; arrows compose and are invariant
+under isomorphism. If $X\subseteq Y\subseteq Z$ are eligible and both
+inclusions into $Z$ are arrows, so is $X\hookrightarrow Y$.
+A nonempty increasing chain of inclusion arrows in $\mathcal C_\mu$
+whose union has total size $\mu$ has an eligible union and inclusion
+arrows. If its stages include by arrows into one eligible object of
+level at least $\mu$, so does its union.
+\item \textbf{Presentations and mixed downward closure.}
+For every well-order $L$ of eligible size $\mu$, $F(L)\in\mathcal C_\mu$.
+Every eligible object is isomorphic to such a presentation at its level.
+Elements are labels on finite increasing supports; equality, functions,
+relations, and internal maps are evaluated uniformly from labels and
+finite order/equality patterns. Substitution along order embeddings gives
+arrows, including between different eligible levels. If $\nu\leq\mu$
+are eligible, every set of at most $\nu$ vertex occurrences in a
+$\mu$-object is contained in a $\nu$-object included by an arrow,
+retaining the fixed distinguished data.
+\item \textbf{Diagram comparisons.}
+For each sorted index pattern, $D$ is an equivalence relation on tuples
+at the eligible levels where that pattern has length strictly below the
+level. It preserves the atomic information of the whole system code,
+is compatible with restriction and reindexing, and is invariant under
+all arrows. At any one level, equality is exactly equivalence under an
+isomorphism of the containing systems. There is a set bound on the
+number of diagrams of each arity, independent of level. A joint diagram
+extending the diagram of an actual tuple is realizable over that tuple
+when the joint length is bounded at the receiving level; witnesses may
+come from larger eligible levels. On term tuples, the comparison depends
+only on the labels and joint order/equality pattern of supports, also
+across levels. The empty tuple has one diagram.
+\item \textbf{Exhaustion.}
+Compatible matches of increasing bounded sorted lists, exhausting a
+source object, assemble to an arrow when the lists include nested
+enumerations of small strong submodels of each source vertex, exhausting
+that vertex, and each image enumeration is a strong target submodel.
+The source writes these vertex submodels as $V_n$.
+AEC unions and the common-upper-bound axiom establish component
+strongness; any extra scheme-specific arrow requirement must be checked
+for this construction when proving the package for that scheme.
+\end{enumerate}
+The source's main convention uses strong-limit levels of countable
+cofinality, apart from explicitly preliminary levels. It does not
+explicitly quantify an ordinal indexing the opening lists of (S4).
+Our comparison below handles the written countable interpretation, and
+also arbitrary \emph{ordinal-indexed nested} lists at countable-cofinality
+source levels. It does not replace chains by arbitrary directed families.
+\end{definition}
+
+\begin{remark}[Scope of the equivalence claim]\label{rem:equivalence-scope}
+For the comparison, use the \emph{same} concrete system code on both
+sides for a nonempty finite system shape, with $|\tau^{\mathrm{gen}}|\leq\mu_0$ and
+$\mu_0\geq\LS(\K)$. These bounds normalize the usual AEC convention
+that its LS number bounds its vocabulary. They are explicit hypotheses
+of our comparison, not inequalities stated in source Definition~5.2.
+One can restrict to an eligible tail above these fixed bounds, but doing
+so changes the minimum and discards preliminary levels; it is not an
+equivalence preserving the original class of levels.
+
+For $\operatorname{Diag}_{\mathcal I}(\K)$, assume the source's specified
+internal maps are structural embeddings. Alternatively use the general
+system category of Definition~\ref{def:working-coding}, where this
+restriction is unnecessary. A graph is represented by its free category;
+relations between paths are retained if they are part of the chosen
+shape. Neither a new commutativity condition nor additional named
+skeleton data may be imposed during translation.
+\end{remark}
+
+\subsection{Consequences of lifted comparison}
+\begin{lemma}[Common targets and basic type properties]\label{lem:la-basic}
+Under (A1)--(A4), every two eligible objects have an eligible common
+target. Lifted types have atomic information, restriction and reindexing,
+and invariance under $H$. The empty type is unique, and every eligible
+level is categorical as a class of systems.
+\end{lemma}
+\begin{proof}
+Present $X,Y$ by well-orders $L,M$. Embed both into a well-order obtained
+by concatenating them and appending a well-order of sufficiently large
+eligible size. The induced arrows, transported through the charts, give
+a common target. For the empty tuple these arrows witness $E$ with the
+identity automorphism, so its type is unique. The orbit axiom then gives
+same-level system categoricity.
+
+In a witness $hf\ba=g\bb$, the maps $hf$ and $g$ are structural
+embeddings of the full codes. They preserve and reflect atomic formulas,
+including equalities, sorts, internal maps, and named constants. Thus
+the tuples have the same atomic information. Restricting or reindexing
+the tuple keeps the same witness, as long as the resulting arity is
+bounded. For $f\in H(X,Y)$, the maps $f,\operatorname{id}_Y$ and
+$\operatorname{id}_Y$ witness
+$E((\ba;X),(f\ba;Y))$. Equivalence then gives invariance of all
+comparisons under applying arrows. Notice that the direct witness is
+automatic, whereas transitivity and the orbit characterization are not.
+\end{proof}
+
+\begin{lemma}[Mixed downward closure and transport]\label{lem:la-transport}
+Every set $A$ of at most $\nu$ occurrences in $X\in\mathcal C_\mu$,
+where $\nu\leq\mu$ are eligible, is contained in the image of an arrow
+from a $\mathcal C_\nu$-object. Every eligible $X$ has an arrow into
+some object at any prescribed larger eligible level.
+\end{lemma}
+\begin{proof}
+In a well-ordered chart for $X$, choose finite supports for the elements
+of $A$ and, if needed, for the fixed named data. There are at most $\nu$
+positions, since the code has at most $\mu_0\leq\nu$ names. Extend them
+to a suborder $J$ of size $\nu$. Its presentation maps by an arrow into
+the chart; transporting and taking its image gives the required
+inclusion. A well-order of cardinality $\nu$ has order type in
+$[\nu,\nu^+)$, as required by the definition of $\mathcal C_\nu$.
+For upward transport append an order of the desired larger cardinality
+to the chart for $X$ and use its inclusion arrow.
+\end{proof}
+
+\begin{lemma}[Uniform bound, realization, and term naturality]
+\label{lem:la-realization}
+Lifted types satisfy the bound, realization, and naturality clauses of
+(S3).
+\end{lemma}
+\begin{proof}
+Fix a sorted arity of cardinality $\theta$, choose eligible $\kappa>\theta$,
+and fix $M\in\mathcal C_\kappa$. Any tuple of that arity can be
+transported to level $\kappa$: use the preceding lemma to shrink its
+containing object if larger, or to embed it upward if smaller. Arrow
+invariance preserves its type, and categoricity takes it into $M$.
+Thus there are at most $\kappa^\theta$ types of that sorted arity.
+This is a bound on equivalence classes, not a claim that a class of
+all realizations is literally a set.
+
+For realization let $\ba\in X\in\mathcal C_\mu$ and
+$(\bb,\bc)\in Y$ have total length bounded at both levels, with
+$\operatorname{tp}_{\mathrm{la}}(\ba;X)=
+\operatorname{tp}_{\mathrm{la}}(\bb;Y)$.
+Transport the entire joint tuple into $Y'\in\mathcal C_\mu$ by the
+preceding lemma. Its image $(\bb',\bc')$ retains its type.
+The orbit axiom supplies $s:Y'\cong X$ with $s\bb'=\ba$.
+Then $\bd=s\bc'$ realizes the requested joint type over $\ba$.
+The phrase ``possible at a larger level'' in (S3) is included in this
+argument; a comparison is only defined where its arity is bounded.
+
+For naturality, identify the joint supports of the two term records
+by the specified order isomorphism. Amalgamate their two indexing
+well-orders over those supports: in each cut concatenate the two
+remaining well-ordered intervals, retaining each common support point.
+This is again a well-order. Append positions if necessary to give it
+eligible size. The two induced arrows carry equal labels with their
+matched supports to literally the same tuple. They witness $E$ with
+the identity automorphism. This works across different levels and
+includes supports for named data. It uses the \emph{joint} pattern,
+not merely separate order types of individual supports.
+\end{proof}
+
+\subsection{The generated AEC}\label{app:completion}
+\begin{lemma}[Small designated decompositions]\label{prop:eligible-mu0-union}
+Under (S1)--(S2), or under the corresponding alternate axioms, the poset
+\[
+ P_{\mu_0}(X)=\{A\in\mathcal C_{\mu_0}:A\hookrightarrow X\text{ is an arrow}\}
+\]
+is $\mu_0^+$-directed and has union $X$. Its transition inclusions are
+designated arrows.
+\end{lemma}
+\begin{proof}
+Each occurrence belongs to some member by mixed downward closure.
+For any family of at most $\mu_0$ members, their total sorted universe
+has size at most $\mu_0$. Mixed downward closure gives a small designated
+subobject containing this union. Coherence makes all the inclusions
+from the original members arrows. This proves $\mu_0^+$-directedness,
+not merely pairwise directedness, and also the assertion about the union.
+\end{proof}
+
+\begin{theorem}[Standard upward completion, applied to the small slice]
+\label{thm:small-completion}
+Under (S1)--(S2) and the coding bounds of
+Remark~\ref{rem:equivalence-scope}, the AEC in $\mu_0$
+$(\mathcal C_{\mu_0},H_{\mu_0})$ has an upward completion
+$\K^{\mathrm{gen}}$ with LS number $\mu_0$, and
+\[
+ \K^{\mathrm{gen}}_{\mu_0}=(\mathcal C_{\mu_0},H_{\mu_0})
+\]
+on both objects and embeddings. Every eligible object belongs to this
+AEC, and every designated arrow is a strong embedding in it. Its concrete
+forgetful functor to the ambient system category is faithful and preserves
+directed colimits.
+\end{theorem}
+\begin{proof}
+Let $A\leq_0 B$ mean that $A\subseteq B$ and this inclusion belongs to
+$H_{\mu_0}$. Isomorphism invariance, reflexivity, transitivity, coherence,
+and unions and smoothness at size $\mu_0$ follow from (S1). Thus this is
+an AEC in $\mu_0$. Apply the standard upward-completion theorem
+\cite[Definition 1.0.16 and Fact 1.0.18]{jarden-shelah-frames}, citing
+Shelah's Chapter II, Lemma 1.23. It forms directed unions of the small
+models with coherent small-arrow witnesses for the strong relation;
+it does not inherit all ambient morphisms. The theorem gives the AEC
+axioms, LS number, and exact recovery of the small slice. We invoke this
+established completion theorem rather than claim to reprove it here.
+
+The preceding lemma expresses each eligible $X$ as such a directed union,
+so $X\in\K^{\mathrm{gen}}$. For an arrow $f:X\to Y$, identify $X$
+with $f[X]\subseteq Y$. For every $A\in P_{\mu_0}(X)$ its inclusion
+into $Y$ is an arrow by composition. Whenever such $A$ is contained in
+$B\in P_{\mu_0}(Y)$, coherence gives $A\leq_0 B$.
+Consequently the two small-subobject presentations fit together as the
+coherent presentations defining $X\leq_{\mathrm{gen}}Y$: one may use
+$P_{\mu_0}(X)$ inside $P_{\mu_0}(Y)$, with the inherited small-arrow order.
+This also gives, equivalently, directed pairs of small source and target
+pieces covering the whole arrow.
+
+Every small map is componentwise strong. Directed unions and the
+common-upper-bound property in $\K$ therefore make all the induced
+vertex maps strong in the completion; internal symbols and fixed names
+are retained on the sorted unions. Colimits in this AEC and in the
+ambient system category are computed on the same carriers. Thus the
+forgetful functor is well-defined, concrete, faithful, and preserves
+directed colimits. In the diagram version, unions also retain the
+internal structural-embedding property.
+\end{proof}
+
+\begin{remark}[What an arbitrary ambient completion does not give]
+The completion theorem has no conclusion that all generated embeddings
+between eligible objects satisfy their original geometric conditions.
+The inclusion $H(X,Y)\subseteq\operatorname{Emb}_{\K^{\mathrm{gen}}}(X,Y)$
+is all the translation needs. Conversely, any AEC as in (D1) with the
+prescribed small slice is recovered from that slice by upward completion:
+its small strong submodels cover every model by LS and coherence, and
+coherent small-map unions are strong by the directed-union theorem for
+AECs. Thus the completion is an auxiliary presentation, not a freely
+chosen source of additional eligible arrows.
+\end{remark}
+
+\subsection{The two translations}
+\begin{lemma}[The source relation is forced]\label{lem:source-la}
+For a source working package, $D$-equality is exactly lifted automorphism
+comparison $E$ formed from its eligible objects and designated arrows.
+In particular, there is no additional choice of cross-level equivalence
+once those objects and arrows are fixed and the package axioms hold.
+\end{lemma}
+\begin{proof}
+If $hf\ba=g\bb$ witnesses $E$, invariance under the arrows $f,g,h$
+and transitivity of $D$ give $D(\ba;X)=D(\bb;Y)$.
+Conversely, choose any common eligible target $Z$ for $X,Y$, with arrows
+$f,g$, using their well-ordered presentations. Arrow invariance gives
+$D(f\ba;Z)=D(g\bb;Z)$. The same-level orbit clause supplies
+$h\in\operatorname{Aut}(Z)$ with $hf\ba=g\bb$, witnessing $E$.
+The arity is bounded in $Z$ because it was bounded in the source
+objects. Since $D$ is an equivalence relation, so is $E$.
+\end{proof}
+
+\begin{lemma}[Short and arbitrary size-preserving fixed-level chains]
+\label{lem:long-fixed-chains}
+The chain clauses in (A3) imply those in (S1).
+\end{lemma}
+\begin{proof}
+Let $(X_i)_{i<\delta}$ be a nonempty inclusion chain at level $\mu$
+whose union has size $\mu$. If it has a final stage, that is the union.
+If $\operatorname{cf}(\delta)\leq\mu$, use a cofinal subchain of length
+at most $\mu$, apply (A3), and use composition for omitted stages.
+If $\operatorname{cf}(\delta)>\mu$, choose a stage containing each
+occurrence of the union. Those at most $\mu$ stage indices have a common
+bound below $\delta$, so the chain has already stabilized to its union.
+The common-upper-bound conclusion follows by the same argument.
+The converse follows immediately by taking chains of length $<\mu^+$.
+\end{proof}
+
+\begin{lemma}[Countable reduction of nested exhaustion]
+\label{lem:countable-exhaustion}
+Suppose $\operatorname{cf}(\mu)=\omega$, $|X|=\mu$, and
+$(A_\alpha)_{\alpha<\delta}$ is an increasing family of sets of size
+$<\mu$ with union $X$. Then $\delta$ has countable cofinality, and a
+cofinal countable subchain still exhausts $X$. Any simultaneously nested
+vertex resolutions and compatible matches restrict to this subchain.
+\end{lemma}
+\begin{proof}
+There can be no final stage. Put $\kappa=\operatorname{cf}(\delta)$
+and pass to a cofinal subchain. If $\kappa>\mu$, the indices of the
+first occurrences of all elements have a bound below $\delta$,
+contradicting boundedness of a stage. Thus $\kappa\leq\mu$.
+If $\mu=\aleph_0$, it follows that $\kappa=\omega$.
+Otherwise $\mu$ is singular, so the regular cardinal $\kappa$ is $<\mu$.
+The union has size $\mu$, hence the cardinalities of the stages are
+unbounded below $\mu$; a bound $\lambda<\mu$ would give union size at
+most $\kappa\cdot\lambda<\mu$ (enlarge $\lambda$ to be infinite).
+Choose countably many stages whose sizes are cofinal in $\mu$.
+If $\kappa>\omega$, their indices have a bound below $\delta$, forcing
+one stage to have size at least $\mu$, a contradiction. Hence
+$\kappa=\omega$. Cofinal restriction retains all the required
+containments, matches, strong images, and unions.
+\end{proof}
+
+\begin{theorem}[Equivalence on the specified scope]\label{thm:working-equivalence}
+Fix the concrete coding and cardinal bounds of
+Remark~\ref{rem:equivalence-scope}. At eligible levels of countable
+cofinality, the source package of Definition~\ref{def:source-working}
+and the alternate definition of Definition~\ref{def:working-scheme}
+are equivalent, preserving the eligible objects, designated arrows,
+presentation recipe, and all tuple comparisons. Use the diagram version
+when internal maps are structural embeddings, or the general system
+version otherwise. Interpret (S4) for countable or, equivalently here,
+ordinal-indexed nested exhaustion with the corresponding nested
+vertex witnesses.
+\end{theorem}
+\begin{proof}
+\emph{Source to alternate.} Theorem~\ref{thm:small-completion} constructs
+$\K^{\mathrm{gen}}$ and embeds all the eligible data in it, recovering
+the small slice exactly. Use $F$ as the finite-support system-code
+recipe $\Psi$; no all-order AEC blueprint theorem is required. By (S2)
+the eligible objects are exactly the isomorphism closures in (D3).
+Retain the original $H$. Lemma~\ref{lem:source-la} identifies $D$ with
+$E$, proving (A1) and (A4). Presentation arrows give (A2).
+Structural closure gives (A3), and (S4) gives (A5) upon taking the
+shared enumerations and their partial maps $p\restriction A_n$.
+
+\emph{Alternate to source.} Forget the auxiliary completion, retain
+$\mathcal C,H,F$, and define $D$-equality to be equality of lifted types.
+The structural assertions of (S1) follow from (A3) and
+Lemma~\ref{lem:long-fixed-chains}. The presentation assertions of (S2)
+are (D2)--(D3) and (A2); its mixed downward part is
+Lemma~\ref{lem:la-transport}. Lemmas~\ref{lem:la-basic} and
+\ref{lem:la-realization}, together with (A1) and (A4), prove every
+clause of (S3), including the empty type and the uniform bound.
+
+For (S4), compatible matches define well-defined sorted partial
+injections because they preserve equality. Their union is total on
+$X$. Every finite list of arguments of a function or relation eventually
+lies in one stage; atomic agreement there shows preservation and
+reflection in the union. Function values also eventually occur, and
+names are preserved. Thus the union is a structural embedding of the
+whole system code. Its vertex witnesses and their strong images are
+exactly those in (A5), so it is in $H$. If the exhaustion is indexed by
+an arbitrary ordinal, apply Lemma~\ref{lem:countable-exhaustion} first.
+Conversely countable exhaustion is a particular such exhaustion.
+
+The translations leave objects and $H$ unchanged, and
+Lemma~\ref{lem:source-la} shows that they recover the original $D$.
+The completion is canonical in the sense explained after
+Theorem~\ref{thm:small-completion}. This proves equivalence of the
+packages, not higher-level fullness of $H$ in the completion.
+\end{proof}
+
+\subsection{What remains open or outside this equivalence}
+\begin{enumerate}[leftmargin=*]
+\item The exact diagram formulation does not cover non-embedding
+internal maps without the stated ambient-category change. This is a
+scope difference, not an unproved implication that we silently assume.
+\item The language and LS bounds at the original minimum are explicit
+normalizations. If they fail for a source descriptor, the theorem applies
+to a suitable eligible tail, not to all its preliminary levels unchanged.
+\item Countable reduction resolves the indexing issue for nested
+ordinal chains at countable-cofinality levels. It says nothing about
+arbitrary directed matches or preliminary source levels of other
+cofinalities; a stronger exhaustion convention there must be added
+on both sides to obtain the same comparison.
+\item Whether the full package forces all eligible generated strong
+embeddings to lie in $H$ remains open in these notes. It is neither
+assumed nor needed in the equivalence proof.
+\item Formal arbitrary-order evaluations remain distinct from actual
+AEC membership. Also, changing the eligible class by later closure
+refinements requires the source's separate supply-of-levels hypotheses;
+mere unboundedness is not closedness under those refinements.
+\end{enumerate}
