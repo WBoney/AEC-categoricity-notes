@@ -6,8 +6,8 @@ This repository contains research-level notes on the OpenAI manuscript proving S
 
 1. Read **[WORK_HANDOFF.md](WORK_HANDOFF.md)** for current decisions, open issues, and source numbering.
 2. Read the current **[notes/main.tex](notes/main.tex)** directly from the repository (not a cached PDF), and check the relevant part of the original OpenAI manuscript supplied as `paper.pdf` in the **Abstract Elementary Classes** ChatGPT Project. If this Project file is not accessible in Work, request it or use an authorized copy; do not substitute another manuscript silently.
-3. Inspect open pull requests, the main-branch HEAD, and recent GitHub Actions runs before editing. In particular, PR #14 was merged on 2026-11-04; PR #13 was still open at the last review. Verify current states rather than relying on this historical note.
-4. Current milestone: review the alternate working-scheme definition in `notes/working-scheme.tex` and its equivalence appendix in `notes/appendix-working-scheme.tex`. Read `review/working-scheme-changes.md` for changes, proof scope, and unresolved questions.
+3. Inspect open pull requests, the main-branch HEAD, and recent GitHub Actions runs before editing. The November 12 consolidation includes the working-scheme revision, manuscript archive, reversal discussion, and descriptive PDF filename. Verify current states rather than relying on historical PR statuses.
+4. Current reading material: the alternate working-scheme definition in `notes/working-scheme.tex` and its equivalence appendix in `notes/appendix-working-scheme.tex`. Read `review/working-scheme-changes.md` for changes, proof scope, and unresolved questions.
 
 ## Mathematical standards
 

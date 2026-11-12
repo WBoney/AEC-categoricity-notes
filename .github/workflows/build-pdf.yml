@@ -21,14 +21,15 @@ jobs:
       - name: Upload downloadable PDF
         uses: actions/upload-artifact@v4
         with:
-          name: categoricity-notes-pdf
+          name: AEC-Categoricity-Notes
           path: notes/main.pdf
       - name: Prepare Pages site
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
           mkdir -p _site
+          cp notes/main.pdf _site/AEC-Categoricity-Notes.pdf
           cp notes/main.pdf _site/main.pdf
-          printf '<!doctype html><html><head><meta charset="utf-8"><title>AEC categoricity notes</title></head><body><p><a href="main.pdf">Open the latest PDF</a></p></body></html>' > _site/index.html
+          printf '<!doctype html><html><head><meta charset="utf-8"><title>AEC categoricity notes</title></head><body><p><a href="AEC-Categoricity-Notes.pdf">Open the latest PDF</a></p></body></html>' > _site/index.html
       - name: Upload Pages artifact
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3

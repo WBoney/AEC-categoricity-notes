@@ -1,18 +1,20 @@
 # AEC Categoricity Reading Notes — Work Handoff
 
-**Updated:** 2026-11-11. **Status:** draft [PR #17](https://github.com/WBoney/AEC-categoricity-notes/pull/17), branch `working-scheme-alternate-definition`; not merged.
+**Updated:** 2026-11-12. **Milestone:** consolidation of the notes and all outstanding PR changes into main, explicitly authorized by the maintainer.
 
-Local validation: 35-page PDF compiled with no warnings or missing references; new pages visually inspected. Review snapshot: `review/working-scheme-review.pdf`. Definition pp. 25–28; Appendix A pp. 30–35; equivalence Theorem A.12 p. 34.
+## Current authoritative files and publication
 
-## Current task and authoritative files
+- `notes/main.tex` and its inputs `notes/working-scheme.tex` and `notes/appendix-working-scheme.tex` contain the mathematical notes. PR #17 introduced the alternate working-scheme definition and equivalence appendix; proof bodies are upright throughout.
+- PR #13 adds the discussion of eventual reversal as a local substitute for homogeneity, with its cross-reference. It preserves the newer working-scheme material.
+- PR #10 publishes the descriptive filename https://wboney.github.io/AEC-categoricity-notes/AEC-Categoricity-Notes.pdf while retaining https://wboney.github.io/AEC-categoricity-notes/main.pdf for compatibility. Both are copies of the same build.
+- PR #16 added `sources/paper.pdf` and its provenance README to main. The manuscript is unchanged: Git blob `f743110d3c1faeca9a28b8f741e401cef319ca68`.
+- `review/working-scheme-review.pdf` and `review/working-scheme-changes.md` remain historical review records for PR #17. Their 35-page pagination predates PR #13. Use the published main PDF for the current complete document.
 
-The user requested incorporation of the alternate definition from `WBoney/ReworkingOpenAI`, an appendix restating source Definition 5.2 and proving equivalence, and a complete review record of fixes and problems. This authorizes the topic branch and PR; it does **not** authorize merging.
+The integrated document compiled locally to 37 pages without warnings, missing citations/references, or overfull boxes. The alternate definition starts on p. 26, Appendix A on p. 32, and Theorem A.12 is on p. 36. The working-scheme inputs and archived manuscript were checked byte-for-byte unchanged during integration. GitHub Actions must also pass compilation and Pages deployment; recheck live status rather than treating this checkpoint as a permanent build assertion.
 
-Read `AGENTS.md`, `notes/main.tex`, its new inputs `notes/working-scheme.tex` and `notes/appendix-working-scheme.tex`, and `review/working-scheme-changes.md`. The latter records input SHAs, changes, scope, and validation. Source Section 5 remains distinct from notes Section 4 and Appendix A.
+The maintainer explicitly authorized merging all remaining PRs for this consolidation. No blanket authorization for future mathematical edits or merges is implied. Future sessions should inspect live PRs and current main. Read `AGENTS.md` and the sources rather than relying on the older review snapshot.
 
-Original manuscript: https://github.com/openai/math/blob/main/preprints/Eventual-Categoricity-for-Abstract-Elementary-Classes-September-24-2026/paper.pdf . Read the original directly; shell raw download works if the connector cannot return a binary. Its Git blob is `f743110d3c1faeca9a28b8f741e401cef319ca68`. PR #16 archives the same bytes and is still open.
-
-Before this edit, main was `b640a66dd3a3c8957aa3df84308aee83cbdd6f2c`, PRs #10/#13/#16 were open, and latest main run 41932160564 succeeded. These are historical checks: recheck when needed. The published main PDF at https://wboney.github.io/AEC-categoricity-notes/main.pdf does not contain this unmerged review.
+Original upstream manuscript: https://github.com/openai/math/blob/main/preprints/Eventual-Categoricity-for-Abstract-Elementary-Classes-September-24-2026/paper.pdf . The repository's `sources/paper.pdf` is the identical primary source. Source Section 5 remains distinct from notes Section 4 and Appendix A.
 
 ## Mathematical decisions now reflected in the review
 
