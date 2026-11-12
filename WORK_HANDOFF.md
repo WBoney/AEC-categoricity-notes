@@ -1,19 +1,36 @@
 # AEC Categoricity Reading Notes — Work Handoff
 
-**Updated:** 2026-11-04  
-**Next mathematical stopping point:** OpenAI manuscript Definition 5.2(4), the exhaustion criterion for arrows.
+**Updated:** 2026-11-11. **Status:** draft [PR #17](https://github.com/WBoney/AEC-categoricity-notes/pull/17), branch `working-scheme-alternate-definition`; not merged.
 
-This file is a portable research-state record. New assistants should also read [AGENTS.md](AGENTS.md), the actual [notes/main.tex](notes/main.tex), the original **`paper.pdf`** attached to the **Abstract Elementary Classes** ChatGPT Project, and live GitHub PR/build status. Treat this as a summary of decisions, not a substitute for primary sources.
+Local validation: 35-page PDF compiled with no warnings or missing references; new pages visually inspected. Review snapshot: `review/working-scheme-review.pdf`. Definition pp. 25–28; Appendix A pp. 30–35; equivalence Theorem A.12 p. 34.
 
-## Project scope and status
+## Current task and authoritative files
 
-- Main aim: research-level reading of OpenAI's manuscript proving Shelah's Eventual Categoricity Conjecture, organized around different notions of type and the mechanisms used to compare them.
-- This repository: https://github.com/WBoney/AEC-categoricity-notes
-- Permanent PDF of **merged** main: https://wboney.github.io/AEC-categoricity-notes/main.pdf
-- The detailed study of source Section 5, including Definition 5.2(1)--(3), is in **Section 4** of our `notes/main.tex`. The source's numbering and the notes' numbering are different.
-- PR #14 (`functor-category-working-schemes`) merged on 2026-11-04: https://github.com/WBoney/AEC-categoricity-notes/pull/14 . This introduced the categorical reformulation and the first working-package notes. Additional clarifications to the mathematical notes are being incorporated with this handoff.
-- PR #13 (a separate remark after source Theorem 3.11 about reversal/homogeneity): https://github.com/WBoney/AEC-categoricity-notes/pull/13 ; last observed open. Recheck before making assumptions.
-- Main branch is authoritative after commits have been merged and the PDF deployment verified. Do not mistake an Actions PR artifact for a persistent main-branch PDF.
+The user requested incorporation of the alternate definition from `WBoney/ReworkingOpenAI`, an appendix restating source Definition 5.2 and proving equivalence, and a complete review record of fixes and problems. This authorizes the topic branch and PR; it does **not** authorize merging.
+
+Read `AGENTS.md`, `notes/main.tex`, its new inputs `notes/working-scheme.tex` and `notes/appendix-working-scheme.tex`, and `review/working-scheme-changes.md`. The latter records input SHAs, changes, scope, and validation. Source Section 5 remains distinct from notes Section 4 and Appendix A.
+
+Original manuscript: https://github.com/openai/math/blob/main/preprints/Eventual-Categoricity-for-Abstract-Elementary-Classes-September-24-2026/paper.pdf . Read the original directly; shell raw download works if the connector cannot return a binary. Its Git blob is `f743110d3c1faeca9a28b8f741e401cef319ca68`. PR #16 archives the same bytes and is still open.
+
+Before this edit, main was `b640a66dd3a3c8957aa3df84308aee83cbdd6f2c`, PRs #10/#13/#16 were open, and latest main run 41932160564 succeeded. These are historical checks: recheck when needed. The published main PDF at https://wboney.github.io/AEC-categoricity-notes/main.pdf does not contain this unmerged review.
+
+## Mathematical decisions now reflected in the review
+
+- Lifted automorphism comparison is primary: eligible common target, designated maps, structured automorphism. Its equivalence and full same-level orbit biconditional are axioms. It is proved to equal source D, so D is not a free choice once a package exists.
+- Mixed downward closure, categoricity, uniform type bound, joint realization, term naturality, and factorization of mixed arrows are proved consequences. Condition (*) follows for any chosen common-target arrows.
+- The generated AEC is the standard upward completion of the AEC in μ₀ with its designated arrows. Jarden–Shelah Definition 1.0.16 and Fact 1.0.18 cite Shelah II Lemma 1.23. This corrects the old handoff: the completion's AEC axioms are not all unresolved.
+- Small designated subobjects form a μ₀⁺-directed cover of every eligible object. Original arrows belong to the completion. Equality of higher-level H with all generated strong embeddings remains unresolved; it is neither needed nor claimed in the equivalence.
+- All fixed-level H_μ, together with order-presentation arrows, determine the mixed arrows. This is not a claim that H_{μ₀} alone recovers all higher H_μ.
+- Exhaustion uses actual compatible bounded sorted matches. Vertex resolutions are additional nested strong-model witnesses **inside** the matched lists. Component strongness follows by AEC unions; a geometric condition still needs its own verification when proving exhaustion for a scheme.
+- New proved observation: at cf(μ)=ω, every ordinal-indexed nested exhaustion by sets of size <μ has a countable cofinal subchain. The prior indexing concern is resolved in this scope, not for directed families or preliminary levels of other cofinalities.
+
+## Equivalence theorem: precise scope and remaining questions
+
+The appendix proves both directions for the same concrete sorted system code, vocabulary size ≤μ₀, μ₀≥LS(K), and the countable-cofinality exhaustion regime. The AEC-over convention preserves carriers, maps and unions, not just abstract faithfulness.
+
+The diagram version presupposes internal structural embeddings. The source's potentially arbitrary specified maps require the explicitly described general system category. The source does not explicitly state all minimum-language bounds; restricting to a suitable tail changes preliminary levels and is not silently an exact equivalence there.
+
+The finite-support recipe is not an all-order AEC blueprint. No skeleton is silently added to the structured automorphism language. Formal arbitrary-order structures need not belong to K^gen or be eligible. The other continuing themes are reversal beyond unbounded categoricity, placed diagrams and Galois types after selected-level amalgamation, multidimensional independence/excellence, and translation of the later geometry.
 
 ## Established organization of earlier reading
 
@@ -44,56 +61,13 @@ A global class `Diag(K)` can be regarded as pairs `(I,D)` ranging over finitely 
 
 A many-sorted language `tau_I` has one sort for each **object of I** (not for the possibly overlapping image sets), a copy of `tau(K)` on each sort, and names for internal maps. Sorted tuples record their sort patterns.
 
-For a fixed scheme, choose eligible cardinals `S`, classes `C_mu` of structured diagrams (possibly marked) at each `mu in S`, designated arrows, a finite-support term recipe `F`, and proposed equivalence relations on bounded sorted tuples. In the unmarked case `C` may be seen as a non-full subcategory of `Diag_I(K)`. For marked objects `(D,a)`, use the faithful forgetful functor `U:C -> Diag_I(K)`; it need not be injective on objects or full.
+For a fixed scheme, choose eligible cardinals `S`, classes `C_mu` of structured diagrams (possibly marked) at each `mu in S`, designated arrows, a finite-support term recipe `F`, and lifted automorphism comparisons on bounded sorted tuples. In the unmarked case `C` may be seen as a non-full subcategory of `Diag_I(K)`. For marked objects `(D,a)`, use the faithful forgetful functor `U:C -> Diag_I(K)`; it need not be injective on objects or full.
 
-**Distinguish raw data from additional axioms.** Existence of `U`, `F`, and comparison relations is data; satisfaction of source Definition 5.2(1)--(4) must be proved.
+**Distinguish raw data from additional axioms.** The concrete `U`, finite-support recipe, and selected arrows are data; equivalence, the orbit axiom, and exhaustion must be established. See the new definition and appendix for the complete axioms.
 
-## Definition 5.2: conclusions from our discussion
 
-### (1) Structural arrows and unions
+## Publication workflow
 
-- Arrows mean morphisms of `C`, not morphisms inside the index category. Each is componentwise strong after applying `U`, but additional arrow requirements can apply.
-- All **isomorphisms of the structured systems** are arrows. For unmarked systems the forgetful functor is full on isomorphisms between eligible objects; marked systems must preserve marks.
-- Coherence: if `X ⊆ Y ⊆ Z` and both inclusions into `Z` are designated arrows, so is `X -> Y`.
-- Fixed-level Tarski–Vaught: nonempty increasing chains of `C_mu` inclusions whose total union has size `mu` have an eligible union with inclusion arrows; there is an additional common-upper-bound clause into an eligible object at `nu >= mu`.
-- This is naturally compared with **Shelah's “AEC at mu”** terminology. It is not an ordinary all-cardinality AEC by itself. Chain closure for designated arrows, not merely the ambient diagram AEC, is what matters.
+Use the GitHub connector for writes, a topic branch, scoped commits, and a review PR. Do not merge until explicitly requested. Verify LaTeX CI. Only main pushes deploy the published PDF; PR artifacts are not durable main-PDF links. Update this handoff at each substantive milestone, preserving uncertainties rather than turning proposals into theorems.
 
-### (2a) Term template and presentations
-
-- A well-order of **eligible size** is simply a well-order `L` with `|L|=mu in S`; "eligible well-order" is not a separate predicate.
-- Every such `L` evaluates to `F(L) in C_mu`; embeddings between eligible well-orders give designated arrows (including mixed levels).
-- Every eligible system at level `mu` is isomorphic, as a **structured** system, to **some** `F(L)` with `|L|=mu`. Thus eligible objects are precisely these EM-style presentations **up to isomorphism**, not necessarily all size-`mu` models of a larger background category.
-- Finite-support terms can be evaluated for arbitrary orders as formal many-sorted structures, but that alone does not show the vertex structures lie in `K` or that the system is eligible. Source Lemma 5.4 proves eligibility of padded orders using union arguments. An expanded AEC with an honest all-order EM blueprint is a plausible alternative reconstruction, **not an established result from the stated working-package data**.
-
-### (2b) Mixed downward Löwenheim–Skolem
-
-If `nu <= mu` are eligible, every set of at most `nu` sorted occurrences in `X in C_mu` sits in an eligible `nu`-object included in `X` by a designated arrow (retaining any fixed marks).
-
-Set `mu_0=min S` (the minimum exists for nonempty classes of cardinals). Combining (2b) with coherence shows that each eligible `X` is the directed union, in the **ambient diagram AEC**, of its designated `C_{mu_0}`-subobjects. Directedness: a pair of such subobjects has a union of size at most `mu_0`; apply (2b) and coherence to place them into a third.
-
-**Background-AEC proposal (user's insight):** one could generate a class from `C_{mu_0}` by directed colimits of designated small-object arrows, then define strong embeddings using compatible/coherent decompositions into those arrows. Do **not** automatically inherit every ambient componentwise strong natural transformation—this forgets possible scheme-specific arrow conditions. This resembles an Ind-completion, but well-definedness with respect to chosen presentations, full AEC coherence, chain axioms, and LS remain to be checked. The manuscript does not assert this construction. The selected eligible EM objects need not exhaust all models at eligible sizes of any such generated AEC.
-
-### (3) Types/diagrams
-
-For each bounded sorted arity, the working scheme proposes an equivalence relation on tuples in eligible objects (possibly at different levels).
-
-- **(3a) Invariance and type-like behavior:** respects atomic diagrams, restrictions, reindexings; **every designated arrow preserves comparisons**, including mixed-level arrows. This is a substantial extra axiom, not automatic for automorphism-orbit types.
-- **(3b) Orbit characterization:** at any **fixed eligible level**, two tuples have equal working diagrams iff some structured isomorphism between their containing systems maps one to the other. Thus the same-level relation is exactly isomorphism-orbit equality. Cross-level comparisons remain extra data/hypotheses.
-- The **empty tuple has exactly one diagram**. By (3b), this makes **all objects in `C_mu` isomorphic** at each eligible `mu`. This is *categoricity of the entire system*, much stronger than categoricity of the individual vertex AEC. Example: for pure sets and the walking-arrow shape, a bijective internal arrow and a proper inclusion give non-isomorphic diagrams even when all four vertices have the same size. In particular (2a) alone does **not** establish categoricity of the collection of `F(L)` for all well-orders of a given cardinality.
-- Where this stronger system categoricity is actually established: source Proposition 5.6 single-model scheme; Theorem 8.6 marked increments; Theorem 9.3 finite marked iterations. Source Proposition 11.7 is **conditional on geometric-system categoricity**. Source Proposition 5.8 starts from categorical system schemes in reconstructing the diagram/type clause.
-- **(3c) Uniform bound:** for each fixed bounded sorted arity, the number of types is bounded by a set independently of the eligible level. At fixed level these are empty-base automorphism orbits (apart from any named scheme data).
-- **(3d) Realization/saturation:** a possible bounded joint diagram extending the diagram of an actual tuple must be realized over that actual tuple at the receiving level. With (2a), (2b), (3a), and (3b), a proof can be given by transporting a witness to the receiving level, using arrow preservation, then an isomorphism matching the base tuple. The source lists it explicitly.
-- **(3e) Naturality on term tuples:** tuples whose term records have matching labels and **joint** order/equality patterns of supports have the same working diagram, even across levels. Proof for well-ordered charts: amalgamate index well-orders over the finite/bounded support pattern, enlarge to an eligible well-order, and use the induced **arrows** to carry both tuples to literally the same tuple. No nontrivial automorphism of the index well-order is needed. **At one eligible level**, (3b) then gives an automorphism of the entire eligible structured system mapping one such tuple to the other. That automorphism generally does **not** come from an automorphism of its indexing well-order. This is a consequence of the package axioms, not a new independent assumption for the simple well-order term-pattern form.
-
-For a non-surjective arrow `h:X->Y` at a fixed eligible level, (3a)+(3b) imply that for every bounded tuple `a` there exists an **isomorphism** `f:X ~= Y` agreeing with `h` on `a`. This strong local homogeneity must be proved for the scheme. Do not silently assume any automorphism of `X` extends to `Y`.
-
-## Next topic: Definition 5.2(4)
-
-**Not yet discussed in depth.** Source (4) is an exhaustion criterion: compatible matches of bounded sorted lists, exhausting a source diagram, yield a designated arrow provided each vertex's nested small strong-submodel enumerations have strong images; additional scheme-specific arrow conditions must be proved separately. Do not treat this brief orientation as an agreed proof audit. The user wants to resume here.
-
-## Publications and collaboration
-
-- Work within the existing Abstract Elementary Classes ChatGPT Project if Work can access it, or attach the primary manuscript to a Work conversation if not.
-- GitHub connector has worked in ordinary ChatGPT conversations; in Work, check it is connected/available, and read current source and PRs.
-- Editing: topic branch -> scoped commits -> PR and LaTeX CI -> merge when explicitly authorized -> verify main PDF deployment. Do not suggest that PR artifacts are stable URLs: they have returned 404 before.
-- At each session's end update the durable handoff with substantive decisions and outstanding proof obligations, so future assistant sessions do not need to reconstruct context from chat history alone.
+Latest formatting update: proof bodies are upright throughout; removed 15 explicit italic overrides and rebuilt the review PDF successfully. No mathematical content changed.
